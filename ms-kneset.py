@@ -98,13 +98,13 @@ class BasicBot(
             'summary': None,  # your own bot summary
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
-            'outpage': u'User:mastiBot/test', #default output page
+            'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
         })
 
         # call constructor of the super class
-        #super(BasicBot, self).__init__(site=True, **kwargs)
-        super(SingleSiteBot, self).__init__(site=True, **kwargs)
+        super(BasicBot, self).__init__(site=True, **kwargs)
+        #super(SingleSiteBot, self).__init__(site=True, **kwargs)
 
         # handle old -dry paramter
         self._handle_dry_param(**kwargs)
@@ -173,7 +173,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        maxlines = self.getOption('maxlines')
+        maxlines = int(self.getOption('maxlines'))
         finalpage = header
         #res = sorted(redirlist, key=redirlist.__getitem__, reverse=False)
         res = sorted(redirlist)
@@ -206,6 +206,9 @@ class BasicBot(
         success = True
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         outpage.text = finalpage
+
+        pywikibot.output(outpage.title())
+        
         outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
         #   pywikibot.output(u'Page %s not saved.' % outpage.title(asLink=True))
@@ -315,7 +318,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text'):
+        if option in ('summary', 'text', 'outpage', 'maxlines'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
