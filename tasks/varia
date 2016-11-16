@@ -1,0 +1,19 @@
+Wywołania różne
+
+This is a bot to remove {{Martwy link dyskusja}} templates from discussion pages if the link reported no longer exists in the article.
+Call:
+   python basicremovedeadlinktemplates.py -catr:"Niezweryfikowane martwe linki" -ns:1 -summary:"Bot usuwa zbędne szablony martwego linku"
+   python basicremovedeadlinktemplates.py -start:'Dyskusja:!' -ns:1 -summary:"Bot usuwa zbędne szablony martwego linku"
+
+This script creates a list of featured/good/lists articles on various wikis which do not have corresponding article on pl.wiki
+~/pw/compat/python test-featured.py -fromall -nocache
+~/pw/compat/python test-featured.py -fromall -good -nocache
+~/pw/compat/python test-featured.py -fromall -lists -nocache
+
+python replace.py "{{Dziennik Ustaw|rok=1964|numer=16|pozycja=93}}" "{{Dziennik Ustaw|2016|380}}" "{{Dziennik Ustaw|1964|16|93}}" "{{Dziennik Ustaw|2016|380}}" -transcludes:"Dziennik Ustaw" -pt:0 -summary:"Bot poprawia odwołania do aktu prawnego"
+
+python basicdeadlinkslist.py -cat:"Niezweryfikowane martwe linki" -ns:1 -outpage:"Wikipedysta:MastiBot/Statystyka martwych linków" -summary:"Bot uaktualnia stronę" -maxlines:3000
+python basicdeadlinkslist.py -domains -cat:"Niezweryfikowane martwe linki" -ns:1 -outpage:"Wikipedysta:MastiBot/Statystyka martwych linków/ogólne" -summary:"Bot uaktualnia stronę" -maxlines:3000
+
+python basicdisambrefslist.py -catr:"Strony ujednoznaczniające" -summary:"Bot uaktualnie astronę"
+

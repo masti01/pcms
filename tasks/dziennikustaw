@@ -1,0 +1,30 @@
+python replace.py "{{Dziennik Ustaw|rok=1994|numer=89|pozycja=414}}" "{{Dziennik Ustaw|2016|290}}" "{{Dziennik Ustaw|1994|89|414}}" "{{Dziennik Ustaw|2016|290}}" "{{Dziennik Ustaw|2015|1549}}" "{{Dziennik Ustaw|2016|290}}" -ns:0 -pt:0 -transcludes:"Dziennik ustaw" -summary:"Bot poprawia odwołania do ustawy"
+python replace.py "{{Dziennik Ustaw|2005|179|1485}}" "{{Dziennik Ustaw|2016|224}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy"
+
+{{Dziennik Ustaw|rok=1994|numer=89|pozycja=414}}
+{{Dziennik Ustaw|2016|290}}
+
+{{Dziennik Ustaw|rok = 1994|numer = 24|pozycja = 83}}
+{{Dziennik Ustaw|2016|666}}
+
+python replace.py "{{Dziennik Ustaw|rok=1994|numer=24|pozycja=83}}" "{{Dziennik Ustaw|2016|666}}" "{{Dziennik Ustaw|rok = 1994|numer = 24|pozycja = 83}}" "{{Dziennik Ustaw|2016|666}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy"
+
+http://isap.sejm.gov.pl/DetailsServlet?id=WDU20160000666
+
+{{PD-Polishsymbol/layout
+|text = This image is in the '''[[w:public domain|public domain]]''' according to Article 4, case 2 of the Polish Copyright Law Act of February 4, 1994 ([http://isap.sejm.gov.pl/DetailsServlet?id=WDU20160000666 Dz. U. z 2016 r. poz. 666] with later changes) ''"normative acts and drafts thereof as well as official documents, materials, signs and symbols are not subject to copyrights"''. Hence it is assumed that this image has been released into public domain. However in some instances the use of this image in Poland might be regulated by other laws.
+|lang = en
+}}<noinclude>
+{{translated tag|license}}
+</noinclude>
+
+([http://isip.sejm.gov.pl/DetailsServlet?id=WDU20060900631 Dz. U. z 2006 r. Nr 90 poz. 631] with later changes)
+([http://isap.sejm.gov.pl/DetailsServlet?id=WDU20160000666 Dz. U. z 2016 r. poz. 666] with later changes)
+
+{{Dziennik Ustaw|2012|572}}
+{{Dziennik Ustaw|2016|1842}}
+python pwb.py replace.py "{{Dziennik Ustaw|2012|572}}" "{{Dziennik Ustaw|2016|1842}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Prawo o szkolnictwie wyższym"
+
+{{Dziennik Ustaw|1997|88|553}}
+{{Dziennik Ustaw|2016|1137}}
+python pwb.py replace.py "{{Dziennik Ustaw|1997|88|553}}" "{{Dziennik Ustaw|2016|1137}}" "{{Dziennik Ustaw|rok=1997|numer=88|pozycja=553}}" "{{Dziennik Ustaw|2016|1137}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Kodeks karny (1997)"
