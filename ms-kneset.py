@@ -50,6 +50,9 @@ from pywikibot import pagegenerators
 from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
+import re
+import urllib2
+import datetime
 
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
@@ -100,7 +103,8 @@ class BasicBot(
         })
 
         # call constructor of the super class
-        super(BasicBot, self).__init__(site=True, **kwargs)
+        #super(BasicBot, self).__init__(site=True, **kwargs)
+        super(SingleSiteBot, self).__init__(site=True, **kwargs)
 
         # handle old -dry paramter
         self._handle_dry_param(**kwargs)
@@ -148,10 +152,10 @@ class BasicBot(
 
         reflinks = [] #initiate list
         licznik = 0
-        for page in self.generator:
+        for tpage in self.generator:
 	    licznik += 1
-            pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
-            refs = self.treat(page) # get (name, id, creator, lastedit)
+            pywikibot.output(u'Treating #%i: %s' % (licznik, tpage.title()))
+            refs = self.treat(tpage) # get (name, id, creator, lastedit)
             pywikibot.output(refs)
             reflinks.append(refs)
 
@@ -161,6 +165,7 @@ class BasicBot(
         outputpage = self.getOption('outpage')
 
         result = self.generateresultspage(reflinks,outputpage,header,footer)
+        
 
     def generateresultspage(self, redirlist, pagename, header, footer):
         """
@@ -168,6 +173,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
+        maxlines = self.getOption('maxlines')
         finalpage = header
         #res = sorted(redirlist, key=redirlist.__getitem__, reverse=False)
         res = sorted(redirlist)
@@ -185,9 +191,10 @@ class BasicBot(
                     finalpage += name
                 else:
                     finalpage += title
-                finalpage += u'}} || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(datetime.datetime.strptime(str(lastedit), "%Y%m%d%H%M%S"))
+                #finalpage += u'}} || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(datetime.datetime.strptime(str(lastedit), "%Y%m%d%H%M%S"))
+                finalpage += u'}} || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(lastedit)
 
-                if itemcount > self.maxlines-1:
+                if itemcount > maxlines-1:
                     pywikibot.output(u'*** Breaking output loop ***')
                     break
             else:
@@ -197,13 +204,57 @@ class BasicBot(
 
         #pywikibot.output(finalpage)
         success = True
-        outpage = pywikibot.Page(pywikibot.getSite(), pagename)
-        if not self.save(finalpage, outpage, self.summary):
-           pywikibot.output(u'Page %s not saved.' % outpage.title(asLink=True))
-           success = False
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        outpage.text = finalpage
+        outpage.save(summary=self.getOption('summary'))
+        #if not outpage.save(finalpage, outpage, self.summary):
+        #   pywikibot.output(u'Page %s not saved.' % outpage.title(asLink=True))
+        #   success = False
         return(success)
  
+    def treat(self, tpage):
+        """
+        Creates a tuple (title, id, name, creator, lastedit)
+        """
+        found = False
+        rowtext = u''
+	
+        # check for id & name(optional)
+        for t in tpage.templatesWithParams():
+            (tTitle,paramList) = t
+            #test
+            #pywikibot.output(u'Template:%s' % tTitle)
+            if u'Kneset' in tTitle.title():
+                name = None
+                for p in paramList:
+                    #pywikibot.output(u'param:%s' % p)
+                    if p.startswith(u'name'):
+                        nameR = re.compile(ur'=\s*?(?P<name>.*)')                     
+                        match = re.search(nameR,p)
+                        if match:
+                            name = match.group("name").strip()
+                            #pywikibot.output(u'name:%s' % name)
+                        else:
+                            name  = None
+                            #pywikibot.output(u'name not FOUND')
+                    else:
+                        ident = p
+                        #pywikibot.output(u'ident:%s' % ident)
 
+        # check for page creator
+        creator, timestamp = tpage.getCreator()
+        #test
+        pywikibot.output(u'Creator:%s<<Timestamp %s' % (creator, timestamp))
+
+        # check for last edit
+        lastedit = tpage.editTime()
+        #test
+        pywikibot.output(u'lastedit:%s' % lastedit)
+        pywikibot.output(u'ident:%s' % ident)
+         
+        return(tpage.title(),ident,name,creator,lastedit)
+
+    '''
     def treat_page(self):
         """Load the given page, do some changes, and save it."""
         text = self.current_page.text
@@ -233,8 +284,8 @@ class BasicBot(
 
         # if summary option is None, it takes the default i18n summary from
         # i18n subdirectory with summary_key as summary key.
-        self.put_current(text, summary=self.getOption('summary'))
-
+        self.put(text, summary=self.getOption('summary'))
+    '''
 
 def main(*args):
     """
