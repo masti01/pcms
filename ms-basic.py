@@ -92,6 +92,7 @@ class BasicBot(
             'top': False,  # append text on top of the page
             'outpage': u'User:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
+            'testprint': False, # print testoutput
         })
 
         # call constructor of the super class
@@ -164,6 +165,37 @@ class BasicBot(
         # i18n subdirectory with summary_key as summary key.
         self.put_current(text, summary=self.getOption('summary'))
 
+def templateWithNamedParams(self):
+        """
+        Iterate template as returned by templatesWithNames()
+
+        @return: a generator that yields a tuple for each param of a template
+            type: named, int
+            name: name of param
+            value: value of param
+        @rtype: generator
+        """
+        # TODO
+
+def templateArg(self, param)
+        """
+        return name,value for each template param
+
+        input text in form "name = value"
+        @return: a tuple for each param of a template
+            type: named, int
+            name: name of param or None if numbered
+            value: value of param
+        @rtype: tuple
+        """
+        # TODO
+
+def testprint(self,v)
+        """
+        printout only if -testprint used
+        """
+        if self.getOption('testprint'):
+            pywikibot.output(v)
 
 def main(*args):
     """
@@ -193,7 +225,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text'):
+        if option in ('summary', 'text', 'outpage', 'maxlines'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
