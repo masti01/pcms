@@ -245,7 +245,9 @@ class BasicBot(
                         #pywikibot.output(u'ident:%s' % ident)
 
         # check for page creator
-        creator, timestamp = tpage.getCreator()
+        #creator, timestamp = tpage.getCreator()
+        creator = tpage.oldest_revision.user
+        timestamp = unicode(tpage.oldest_revision.timestamp.isoformat())
         #test
         pywikibot.output(u'Creator:%s<<Timestamp %s' % (creator, timestamp))
 
