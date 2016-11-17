@@ -151,8 +151,11 @@ class BasicBot(
             pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
             refs = self.treat(page) # get (name)
             if refs:
-                pywikibot.output(refs)
-                reflinks.append(refs)
+                if not refs in reflinks:
+                    pywikibot.output(refs)
+                    reflinks.append(refs)
+                else:
+                    pywikibot.output(u'Already marked')
             else:
                 pywikibot.output(u'Text Found:%s' % self.getOption('contains'))
 
@@ -199,12 +202,13 @@ class BasicBot(
         #   success = False
         return(success)
  
-    def treat(self, tpage):
+    def treat(self, page):
         """
         Returns page title if param contains not in page
         """
         found = False
 
+        '''
         for t in tpage.templatesWithParams():
             (tTitle,paramList) = t
             #test
@@ -213,9 +217,10 @@ class BasicBot(
                 found = True
                 #pywikibot.output(found)
                 break
+        '''
 
-        if not found:
-            return(tpage.title())
+        if not self.getOption('contains') in page.text:
+            return(page.title())
         else:
            return None
 
