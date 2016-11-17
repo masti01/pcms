@@ -230,7 +230,7 @@ class BasicBot(
             if u'Kneset' in tTitle.title():
                 name = None
                 for p in paramList:
-                    #pywikibot.output(u'param:%s' % p)
+                    pywikibot.output(u'param:%s' % p)
                     if p.startswith(u'name'):
                         nameR = re.compile(ur'=\s*?(?P<name>.*)')                     
                         match = re.search(nameR,p)
