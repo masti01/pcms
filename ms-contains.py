@@ -35,6 +35,8 @@ The following parameters are supported:
 -summary:         Set the action summary message for the edit.
 
 -contains:        text in page
+
+-negative:        mark if text not in page
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -98,11 +100,12 @@ class BasicBot(
         self.availableOptions.update({
             'replace': False,  # delete old text and write the new text
             'summary': None,  # your own bot summary
-            'text': 'Test',  # add this text from option. 'Test' is default
+            'text': 'Test',  #default search string 'Test' is default
             'top': False,  # append text on top of the page
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
             'contains': '', #default search string
+            'negative': False, #if True mark pages that DO NOT contain search string
         })
 
         # call constructor of the super class
@@ -152,9 +155,11 @@ class BasicBot(
             refs = self.treat(page) # get (name)
             if refs:
                 if not refs in reflinks:
+                    #test
                     pywikibot.output(refs)
                     reflinks.append(refs)
                 else:
+                    #test
                     pywikibot.output(u'Already marked')
             else:
                 pywikibot.output(u'Text Found:%s' % self.getOption('contains'))
@@ -206,23 +211,24 @@ class BasicBot(
         """
         Returns page title if param contains not in page
         """
-        found = False
 
-        '''
-        for t in tpage.templatesWithParams():
-            (tTitle,paramList) = t
-            #test
-            #pywikibot.output(u'Template:%s' % tTitle)
-            if self.getOption('contains') in tTitle.title():
-                found = True
-                #pywikibot.output(found)
-                break
-        '''
-
-        if not self.getOption('contains') in page.text:
-            return(page.title())
+        if self.getOption('negative'):
+            # mark when DOES NOT contain
+            if not self.getOption('text') in page.text:
+                pywikibot.output('NEGATIVE:Text not found')
+                return(page.title())
+            else:
+                pywikibot.output('NEGATIVE:Text found')
+                return None
         else:
-           return None
+            # mark when DOES NOT contain
+            if self.getOption('text') in page.text:
+                pywikibot.output('POSITIVE:Text found')
+                return(page.title())
+            else:
+                pywikibot.output('POSITIVE:Text not found')
+                return None
+            
 
 def main(*args):
     """
@@ -252,7 +258,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage', 'maxlines', 'contains'):
+        if option in ('summary', 'text', 'outpage', 'maxlines'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
