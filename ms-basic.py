@@ -133,6 +133,8 @@ class BasicBot(
         pywikibot.output(u'THIS IS A RUN METHOD')
         outputpage = self.getOption('outpage')
         pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
+        for p in self.generator:
+            pywikibot.output(u'Treating: %s' % p.title())
 
     def treat_page(self):
         """Load the given page, do some changes, and save it."""
@@ -177,7 +179,7 @@ def templateWithNamedParams(self):
         """
         # TODO
 
-def templateArg(self, param)
+def templateArg(self, param):
         """
         return name,value for each template param
 
@@ -190,12 +192,6 @@ def templateArg(self, param)
         """
         # TODO
 
-def testprint(self,v)
-        """
-        printout only if -testprint used
-        """
-        if self.getOption('testprint'):
-            pywikibot.output(v)
 
 def main(*args):
     """
