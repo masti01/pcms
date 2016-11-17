@@ -229,19 +229,15 @@ class BasicBot(
             #pywikibot.output(u'Template:%s' % tTitle)
             if u'Kneset' in tTitle.title():
                 name = None
+                ident = None
                 for p in paramList:
                     pywikibot.output(u'param:%s' % p)
-                    if p.startswith(u'name'):
-                        nameR = re.compile(ur'=\s*?(?P<name>.*)')                     
-                        match = re.search(nameR,p)
-                        if match:
-                            name = match.group("name").strip()
-                            #pywikibot.output(u'name:%s' % name)
-                        else:
-                            name  = None
-                            #pywikibot.output(u'name not FOUND')
+                    pnamed, pname, pvalue = templateArg(p)
+                    if pnamed:
+                        if pname.startswith('name'):
+                            name = pvalue
                     else:
-                        ident = p
+                        ident = pvalue
                         #pywikibot.output(u'ident:%s' % ident)
 
         # check for page creator
@@ -259,6 +255,30 @@ class BasicBot(
          
         return(tpage.title(),ident,name,creator,lastedit)
 
+def templateArg(param):
+        """
+        return name,value for each template param
+
+        input text in form "name = value"
+        @return: a tuple for each param of a template
+            named: named (True) or int
+            name: name of param or None if numbered
+            value: value of param
+        @rtype: tuple
+        """
+        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        if '=' in param:
+            match = paramR.search(param)
+            named = True
+            name = match.group("name").strip()
+            value = match.group("value").strip()
+        else:
+           named = False
+           name = None
+           value = param
+        #test
+        pywikibot.output(u'name:%s:value:%s' % (name, value))
+        return named, name, value
 
 def main(*args):
     """

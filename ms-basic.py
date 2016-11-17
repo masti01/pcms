@@ -185,13 +185,25 @@ def templateArg(self, param):
 
         input text in form "name = value"
         @return: a tuple for each param of a template
-            type: named, int
+            named: named (True) or int
             name: name of param or None if numbered
             value: value of param
         @rtype: tuple
         """
         # TODO
-
+        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        if '=' in param:
+            match = paramR.search(param)
+            named = True
+            name = match.group("name").strip()
+            value = match.group("value").strip()
+        else:
+           named = False
+           name = None
+           value = param
+        #test
+        pywikibot.output(u'name:%s:value:%s' % (name, value))
+        return named, name, value
 
 def main(*args):
     """
