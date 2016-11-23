@@ -13,7 +13,7 @@ will be done.
 This bot creates a pages with links to tennis players.
 
 Call:
-	python pwb.py masti/ms-kneset.py -catr -outpage:"Wikipedysta:Andrzei111/Izrael/lista" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
+	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" -summary:"Bot uaktualnia tabelę" -
 
 The following parameters are supported:
 
@@ -104,7 +104,6 @@ class BasicBot(
             'top': False,  # append text on top of the page
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
-            'contains': '', #default search string
             'negative': False, #if True mark pages that DO NOT contain search string
         })
 

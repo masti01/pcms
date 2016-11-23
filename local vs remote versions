@@ -1,0 +1,34 @@
+************* LOCAL 
+$ python pwb.py version
+/home/mst/pw/core/pywikibot/config2.py:57: RuntimeWarning: Please update the "future" package to at least version 0.15.0 to use its count.
+  from pywikibot.tools import PY2
+Pywikibot: [https] r-pywikibot-core (900c325, g7602, 2016/11/14, 18:48:49, n/a)
+Release version: 3.0-dev
+requests version: 2.6.0
+  cacerts: /etc/pki/tls/certs/ca-bundle.crt
+    certificate test: ok
+Python: 2.6.6 (r266:84292, Aug  9 2016, 06:11:56) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-17)]
+PYWIKIBOT2_DIR: Not set
+PYWIKIBOT2_DIR_PWB: 
+PYWIKIBOT2_NO_USER_CONFIG: Not set
+Config base dir: /home/mst/pw/core
+Usernames for family "wikipedia":
+	pl: mastiBot (no sysop configured)
+
+************** REMOTE
+$ python pwb.py version
+Pywikibot: [https] r-pywikibot-core (900c325, g7602, 2016/11/14, 18:48:49, n/a)
+Release version: 3.0-dev
+requests version: 2.3.0
+  cacerts: /etc/ssl/certs/ca-certificates.crt
+    certificate test: ok
+Python: 2.7.7 (default, Dec  9 2014, 00:19:44) 
+[GCC 4.3.4]
+PYWIKIBOT2_DIR: Not set
+PYWIKIBOT2_DIR_PWB: 
+PYWIKIBOT2_NO_USER_CONFIG: Not set
+Config base dir: /usr/home/masti/pw/core
+Usernames for family "wikipedia":
+        pl: mastiBot (no sysop configured)
+
