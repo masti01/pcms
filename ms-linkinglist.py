@@ -151,11 +151,10 @@ class BasicBot(
             pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
             if (self.getOption('negative') and not page.exists()) or (not self.getOption('negative') and page.exists()):
                 refs = self.treat(page) # get list of links
-                pywikibot.output(refs)
                 reflinks[page.title()] = refs
                 pywikibot.output(u'%s - %i' % (page.title(),reflinks[page.title()]))
             else:
-                pywikibot.output(u'SIPPING Page :%s' % page.title() )
+                pywikibot.output(u'SKIPPING Page :%s' % page.title() )
 
 	footer = u'\n|}\n'
         footer += u'Przetworzono: ' + str(licznik) + u' stron' 
@@ -163,7 +162,7 @@ class BasicBot(
         result = self.generateresultspage(reflinks,self.getOption('outpage'),header,footer)
 
     def treat(self, page):
-        """Load the given page, return number of linkig pages"""
+        """Load the given page, return number of linking pages"""
 
         ################################################################
         # NOTE: Here you can modify the text in whatever way you want. #
@@ -177,14 +176,14 @@ class BasicBot(
             count +=1
 
         # test
-        pywikibot.output(count)
+        #pywikibot.output(count)
         return(count)
 
     def linknumber(self, t, i):
 
         if i == 1:
             suffix = u'linkująca'
-        elif i in (u'2',u'3',u'4') and (i<10 or i>20) :
+        elif i in (2,3,4) and (i<10 or i>20) :
             suffix = u'linkujące'
         else:
              suffix = u'linkujących'
