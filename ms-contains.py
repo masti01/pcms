@@ -13,7 +13,7 @@ will be done.
 This bot creates a pages with links to tennis players.
 
 Call:
-	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" -summary:"Bot uaktualnia tabelę" -
+	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" -summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
 
 The following parameters are supported:
 
