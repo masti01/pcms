@@ -202,8 +202,8 @@ class BasicBot(
         res = sorted(resdict, key=resdict.__getitem__, reverse=False)
         #res = sorted(redirlist)
         itemcount = 0
-        for t in res.keys():
-            finalpage += u'\n|-\n| ' + str(itemcount+1) + u' || [[' + t + u']] || ' + self.linknumber(t,res[t])
+        for t in res:
+            finalpage += u'\n|-\n| ' + str(itemcount+1) + u' || [[' + t + u']] || ' + self.linknumber(t,resdict[t])
             itemcount += 1
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
