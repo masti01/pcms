@@ -171,7 +171,7 @@ class BasicBot(
         # Example: This puts Text on a page.
 
         count = 0
-        for i in page.getReferences():
+        for i in page.getReferences(namespaces=0):
             count +=1
 
         # test
