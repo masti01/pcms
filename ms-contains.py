@@ -191,7 +191,7 @@ class BasicBot(
 
         # if no results found to be reported
         if not itemcount:
-            finalpage += u"\n\n '''Brak wyników'''\n\n"
+            finalpage += u"\n\n'''Brak wyników'''\n\n"
 
         finalpage += footer 
 
