@@ -34,8 +34,6 @@ The following parameters are supported:
 
 -summary:         Set the action summary message for the edit.
 
--contains:        text in page
-
 -negative:        mark if text not in page
 """
 #
@@ -161,7 +159,7 @@ class BasicBot(
                     #test
                     pywikibot.output(u'Already marked')
             else:
-                pywikibot.output(u'Text Found:%s' % self.getOption('contains'))
+                pywikibot.output(u'Text Found:%s' % self.getOption('text'))
 
         footer = u'\n'
         footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
@@ -208,7 +206,7 @@ class BasicBot(
  
     def treat(self, page):
         """
-        Returns page title if param contains not in page
+        Returns page title if param 'text' not in page
         """
 
         if self.getOption('negative'):
