@@ -184,10 +184,14 @@ class BasicBot(
 
             title = i
             finalpage += u'\n# [[' + title + u']]'
-
+            itemcount += 1
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
                 break
+
+        # if no results found to be reported
+        if not itemcount:
+            finalpage += u"\n\n '''Brak wyników'''\n\n"
 
         finalpage += footer 
 
