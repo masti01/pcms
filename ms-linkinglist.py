@@ -199,11 +199,11 @@ class BasicBot(
         """
         maxlines = int(self.getOption('maxlines'))
         finalpage = header
-        #res = sorted(redirlist, key=redirlist.__getitem__, reverse=False)
+        res = sorted(resdict, key=resdict.__getitem__, reverse=False)
         #res = sorted(redirlist)
         itemcount = 0
-        for t in resdict.keys():
-            finalpage += u'\n|-\n| ' + str(itemcount+1) + u' || [[' + t + u']] || ' + self.linknumber(t,resdict[t])
+        for t in res.keys():
+            finalpage += u'\n|-\n| ' + str(itemcount+1) + u' || [[' + t + u']] || ' + self.linknumber(t,res[t])
             itemcount += 1
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
