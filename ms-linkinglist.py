@@ -3,6 +3,8 @@
 """
 Script by masti for creating list of articles linking to pages referenced by a page
 
+Call: python pwb.py masti/ms-linkinglist.py -outpage:"Wikipedysta:Andrzei111/Izrael/linki" -links:"Wikipedysta:Andrzei111/Izrael" -summary:"Bot uaktualnia tabelę" -maxlines:10000
+
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
 
