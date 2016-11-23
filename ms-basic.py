@@ -28,6 +28,8 @@ The following parameters are supported:
 -top              Place additional text on top of the page
 
 -summary:         Set the action summary message for the edit.
+
+-negative:        mark if text not in page
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -93,6 +95,7 @@ class BasicBot(
             'outpage': u'User:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
             'testprint': False, # print testoutput
+            'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
         })
 
         # call constructor of the super class
