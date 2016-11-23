@@ -3,7 +3,7 @@
 """
 Script by masti for creating list of articles linking to pages referenced by a page
 
-Call: python pwb.py masti/ms-linkinglist.py -outpage:"Wikipedysta:Andrzei111/Izrael/linki" -links:"Wikipedysta:Andrzei111/Izrael" -summary:"Bot uaktualnia tabelę" -maxlines:10000
+Call: python pwb.py masti/ms-linkinglist.py -outpage:"Wikipedysta:Andrzei111/Izrael/linki" -links:"Wikipedysta:Andrzei111/Izrael" -summary:"Bot uaktualnia tabelę" -maxlines:10000 -ns:0 -ascending
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -28,6 +28,8 @@ The following parameters are supported:
 -summary:         Set the action summary message for the edit.
 
 -negative:        mark if page does not exist (redlinks processing)
+
+-ascending:       results sorting order
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -94,6 +96,7 @@ class BasicBot(
             'maxlines': 1000, #default number of entries per page
             'testprint': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
+            'ascending': False, #sort order
         })
 
         # call constructor of the super class
@@ -199,7 +202,10 @@ class BasicBot(
         """
         maxlines = int(self.getOption('maxlines'))
         finalpage = header
-        res = sorted(resdict, key=resdict.__getitem__, reverse=False)
+        if self.getOption('ascending'):
+            res = sorted(resdict, key=resdict.__getitem__, reverse=False)
+        else:
+            res = sorted(resdict, key=resdict.__getitem__, reverse=True)
         #res = sorted(redirlist)
         itemcount = 0
         for t in res:
