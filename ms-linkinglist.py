@@ -202,10 +202,7 @@ class BasicBot(
         """
         maxlines = int(self.getOption('maxlines'))
         finalpage = header
-        if self.getOption('ascending'):
-            res = sorted(resdict, key=resdict.__getitem__, reverse=False)
-        else:
-            res = sorted(resdict, key=resdict.__getitem__, reverse=True)
+        res = sorted(resdict, key=resdict.__getitem__, reverse=not self.getOption('ascending'))
         #res = sorted(redirlist)
         itemcount = 0
         for t in res:
