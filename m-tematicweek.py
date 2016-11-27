@@ -141,9 +141,7 @@ class BasicBot(
             if self.treat_page(page):
                 logpage.text += u'\n# [[' + page.title() + u']] --~~~~~'
 
-        #pywikibot.output(logpage.text)
         logpage.save(summary=u'Tygodnie Tematyczne: log')
-
 
     def treat_page(self, page):
         """Load the given page, retrieve links to updated pages. Add template to talkpage if necessary"""
@@ -207,6 +205,8 @@ class BasicBot(
             
             workpage.text = worktext
             workpage.save(summary=self.getOption('summary'))
+
+        return(True)
 
 
 def main(*args):
