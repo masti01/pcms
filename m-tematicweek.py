@@ -204,7 +204,7 @@ class BasicBot(
                 worktext = templatename
             
             workpage.text = worktext
-            workpage.save(summary=self.getOption('summary'))
+            workpage.save(summary=summary)
 
         return(True)
 
