@@ -22,6 +22,8 @@ The following parameters are supported:
 -top              Place additional text on top of the page
 
 -summary:         Set the action summary message for the edit.
+
+-test:            Switch on test prinouts
 """
 #
 # (C) Pywikibot team, 2006-2016
