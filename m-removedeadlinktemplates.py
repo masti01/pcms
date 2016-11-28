@@ -161,7 +161,8 @@ class BasicBot(
                 if self.getOption('test'):
                     pywikibot.output(u'Still there >>%s<<' % weblink)
                 if not self.removelinktemplate(weblink,articletext):
-                    pywikibot.output(u'Should stay >>%s<<' % weblink )
+                    if self.getOption('test'):
+                        pywikibot.output(u'Should stay >>%s<<' % weblink )
                 else:
                     pywikibot.output(u'Has to go >>%s<<' % weblink )
                     disctext = re.sub(re.escape(template), u'', disctext)
