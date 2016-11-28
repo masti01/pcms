@@ -86,6 +86,7 @@ class BasicBot(
             'summary': None,  # your own bot summary
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
+            'test': False, #switch on test functionality
         })
 
         # call constructor of the super class
@@ -172,7 +173,10 @@ class BasicBot(
             if len(disctext) < 4:
                 #pywikibot.output(u'Deleting {0}.'.format(page))
                 #disctext = u'{{ek|Pusta strona dyskusji - usunięte szablony martwych linków}}\n\n' + disctext
-                page.delete(reason=self.getOption('summary'), prompt=True, mark=True, quit=True)
+                if self.getOption('test'):
+                    page.delete(reason=self.getOption('summary'), prompt=True, mark=True, quit=True)
+                else:
+                    page.delete(reason=self.getOption('summary'), prompt=False)
             else:
                 #pywikibot.output(u'Removing template from {0}'.format(page))
                 page.text = disctext
