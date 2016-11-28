@@ -3,7 +3,7 @@
 """
 This is a bot to remove {{Martwy link dyskusja}} templates from discussion pages if the link reported no longer exists in the article.
 Call:
-   python pwb.py masti/m-removedeadlinktemplates.py -catr:"Kategoria:Niezweryfikowane martwe linki" -ns:1 -summary:"Bot usuwa zbędne szablony martwego linku" -pt:0
+   python pwb.py masti/m-removedeadlinktemplates.py -catr:"Kategoria:Niezweryfikowane martwe linki" -ns:1 -summary:"Nieaktualna informacja o martwym linku zewnętrznym" -pt:0
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
