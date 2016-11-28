@@ -142,7 +142,8 @@ class BasicBot(
             return
 
         #test printout
-        pywikibot.output(u'Page: %s' % articlepage.title(asLink=True))
+        if self.getOption('test'):
+                pywikibot.output(u'Page: %s' % articlepage.title(asLink=True))
         pywikibot.output(u'Discussion: %s' % page.title(asLink=True))
 
         #find dead link templates
@@ -157,7 +158,8 @@ class BasicBot(
 	    #pywikibot.output(template)
             weblink = re.search(weblinkR,template).group('weblink').strip()
             if weblink in articletext:
-                pywikibot.output(u'Still there >>%s<<' % weblink)
+                if self.getOption('test'):
+                    pywikibot.output(u'Still there >>%s<<' % weblink)
                 if not self.removelinktemplate(weblink,articletext):
                     pywikibot.output(u'Should stay >>%s<<' % weblink )
                 else:
@@ -165,7 +167,8 @@ class BasicBot(
                     disctext = re.sub(re.escape(template), u'', disctext)
                     changed = True
             else:
-                pywikibot.output(u'Uuups! 404 - link not found >>%s<<' % weblink)
+                if self.getOption('test'):
+                    pywikibot.output(u'Uuups! 404 - link not found >>%s<<' % weblink)
                 disctext = re.sub(re.escape(template), u'', disctext)
                 changed = True
  
@@ -197,7 +200,8 @@ class BasicBot(
         cites = citetempR.finditer(text)
         for c in cites:
             citetemplate = c.group('citetemplate').strip()
-            pywikibot.output(u'Cite:%s' % citetemplate)
+            if self.getOption('test'):
+                pywikibot.output(u'Cite:%s' % citetemplate)
             try:
                 urlfield = re.search(urlfieldR,citetemplate).group('url').strip()
             except AttributeError:
@@ -207,17 +211,22 @@ class BasicBot(
             try:
                 archfield = re.search(archfieldR,citetemplate).group('arch').strip()
             except AttributeError:
-                pywikibot.output(u'No ARCH field')
+                if self.getOption('test'):
+                    pywikibot.output(u'No ARCH field')
                 continue
-            pywikibot.output(u'URL2:%s' % urlfield)            
-            pywikibot.output(u'Arch2:%s' % archfield)
+            if self.getOption('test'):
+                pywikibot.output(u'URL2:%s' % urlfield)            
+                pywikibot.output(u'Arch2:%s' % archfield)
             if link in urlfield:
-                pywikibot.output(u'URL in URL field')            
+                if self.getOption('test'):
+                    pywikibot.output(u'URL in URL field')            
                 if (len(archfield) > 0):
-                    pywikibot.output(u'ARCHIVE field filled in')
+                    if self.getOption('test'):
+                        pywikibot.output(u'ARCHIVE field filled in')
                     result = True
             else:
-                pywikibot.output(u'URL not found in template')
+                if self.getOption('test'):
+                    pywikibot.output(u'URL not found in template')
 
         return(result)
 
