@@ -1040,7 +1040,8 @@ def main(*args):
     if gen:
         # fetch at least 240 pages simultaneously from the wiki, but more if
         # a high thread number is set.
-        pageNumber = max(240, config.max_external_links * 2)
+        # masti - lowered number of pages to 60
+        pageNumber = max(60, config.max_external_links * 2)
         gen = pagegenerators.PreloadingGenerator(gen, groupsize=pageNumber)
         gen = pagegenerators.RedirectFilterPageGenerator(gen)
         bot = WeblinkCheckerRobot(gen, HTTPignore, config.weblink_dead_days)
@@ -1049,7 +1050,8 @@ def main(*args):
         finally:
             waitTime = 0
             # Don't wait longer than 30 seconds for threads to finish.
-            while countLinkCheckThreads() > 0 and waitTime < 30:
+            #while countLinkCheckThreads() > 0 and waitTime < 30:
+            while countLinkCheckThreads() > 0 and waitTime < 15:
                 try:
                     pywikibot.output(u"Waiting for remaining %i threads to "
                                      u"finish, please wait..."
