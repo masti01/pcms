@@ -1040,8 +1040,8 @@ def main(*args):
     if gen:
         # fetch at least 240 pages simultaneously from the wiki, but more if
         # a high thread number is set.
-        # masti - lowered number of pages to 60
-        pageNumber = max(60, config.max_external_links * 2)
+        # masti - lowered number of pages to 10
+        pageNumber = max(10, config.max_external_links * 2)
         gen = pagegenerators.PreloadingGenerator(gen, groupsize=pageNumber)
         gen = pagegenerators.RedirectFilterPageGenerator(gen)
         bot = WeblinkCheckerRobot(gen, HTTPignore, config.weblink_dead_days)
