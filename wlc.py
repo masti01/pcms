@@ -750,21 +750,22 @@ class History(object):
                         'get_closest_memento_url({0}) failed: {1}'.format(
                             url, e))
                     archiveURL = None
-                try:
-                    if archiveURL is None:
+                if archiveURL is None:
+                    try:
                         archiveURL = weblib.getInternetArchiveURL(url)
-                except Exception as e:
-                     pywikibot.warning(
-                        'getInternetArchiveURL({0}) failed: {1}'.format(
-                            url, e))
-                    archiveURL = None
-                try:
-                    if archiveURL is None:
+                    except Exception as e:
+                        pywikibot.warning(
+                            'getInternetArchiveURL({0}) failed: {1}'.format(
+                                url, e))
+                        archiveURL = None
+                if archiveURL is None:
+                    try:
                         archiveURL = weblib.getWebCitationURL(url)
-                except Exception as e:
-                     pywikibot.warning(
-                        'getWebCitationURL({0}) failed: {1}'.format(
-                            url, e))
+                    except Exception as e:
+                        pywikibot.warning(
+                            'getWebCitationURL({0}) failed: {1}'.format(
+                                url, e))
+                        archiveURL = None
 
                 self.log(url, error, page, archiveURL)
         else:
