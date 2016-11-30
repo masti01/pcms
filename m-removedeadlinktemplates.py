@@ -180,9 +180,9 @@ class BasicBot(
                 #pywikibot.output(u'Deleting {0}.'.format(page))
                 #disctext = u'{{ek|Pusta strona dyskusji - usunięte szablony martwych linków}}\n\n' + disctext
                 if self.getOption('test'):
-                    page.delete(reason=self.getOption('summary'), prompt=True, mark=True, quit=True)
+                    page.delete(reason=self.getOption('summary'), prompt=True, mark=False, quit=True)
                 else:
-                    page.delete(reason=self.getOption('summary'), prompt=False)
+                    page.delete(reason=self.getOption('summary'), prompt=False, mark=True)
             else:
                 #pywikibot.output(u'Removing template from {0}'.format(page))
                 page.text = disctext
