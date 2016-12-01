@@ -147,7 +147,7 @@ class BasicBot(
 	header += u"\n</small>\n"
 	header += u'{| class="wikitable" style="font-size:85%;"\n|-\n!Lp.\n!Hasło\n!Ujednoznacznienia'
 
-        footer = u'\n|}\n'
+        footer = u'\n|}\n\n[[Kategoria:Wikiprojekt Strony ujednoznaczniające z linkami]]'
 
         results = {}
 
