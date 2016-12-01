@@ -187,11 +187,14 @@ class BasicBot(
                     page.delete(reason=self.getOption('summary'), prompt=True, mark=False, quit=True)
                 else:
                     page.delete(reason=self.getOption('summary'), prompt=False, mark=True)
-                '''
             else:
                 #pywikibot.output(u'Removing template from {0}'.format(page))
                 page.text = disctext
                 page.save(summary=self.getOption('summary'))
+            '''
+        page.text = disctext
+        page.save(summary=self.getOption('summary'))
+        return
 
     def removelinktemplate(self,link, text):
         """
