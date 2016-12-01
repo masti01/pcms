@@ -192,8 +192,8 @@ class BasicBot(
                 page.text = disctext
                 page.save(summary=self.getOption('summary'))
             '''
-        page.text = disctext
-        page.save(summary=self.getOption('summary'))
+            page.text = disctext
+            page.save(summary=self.getOption('summary'))
         return
 
     def removelinktemplate(self,link, text):
