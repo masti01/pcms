@@ -141,7 +141,7 @@ class BasicBot(
 	header += u':<small>Pominięto strony z szablonem {{s|Inne znaczenia}}</small>\n\n'
 	header += u'Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n'
 	header += u'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
-        footer = u''
+        footer = u'\n[[Kategoria:Wikiprojekt Strony ujednoznaczniające z linkami]]'
 
         redir50 = {}
         redir1049 = {}
