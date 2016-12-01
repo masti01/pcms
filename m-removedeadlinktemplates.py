@@ -138,6 +138,8 @@ class BasicBot(
 	disctext = page.text
         if not disctext:
             return
+        originaltext = disctext
+
         articlepage = page.toggleTalkPage()
         articletext = articlepage.text
         if not articletext:
@@ -178,11 +180,14 @@ class BasicBot(
         if changed:
             if len(disctext) < 4:
                 #pywikibot.output(u'Deleting {0}.'.format(page))
-                #disctext = u'{{ek|Pusta strona dyskusji - usunięte szablony martwych linków}}\n\n' + disctext
+                disctext = u'{{ek|Pusta strona dyskusji - usunięte szablony martwych linków}}\n\n' + disctext
+                '''
+                #wait until way found to use i18n for templatenames
                 if self.getOption('test'):
                     page.delete(reason=self.getOption('summary'), prompt=True, mark=False, quit=True)
                 else:
                     page.delete(reason=self.getOption('summary'), prompt=False, mark=True)
+                '''
             else:
                 #pywikibot.output(u'Removing template from {0}'.format(page))
                 page.text = disctext
