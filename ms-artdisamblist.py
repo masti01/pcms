@@ -4,7 +4,8 @@
 This bot creates a table of articles linking to disambig pages: Wikiprojekt:Strony ujednoznaczniające z linkami/Artykuły na medal
 Call: 
 python pwb.py masti/ms-artdisamblist.py -catr:"Artykuły na medal" -ns:0 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Artykuły na medal" -summary:"Bot uaktualnia stronę"
-python pwb.py masti/ms-artdisamblist.py -catr:"Dobre artykuły" -ns:0 -outpage:"Wikiprojekt:Strouny ujednoznaczniające z linkami/Dobre artykuły" -summary:"Bot uaktualnia stronę"
+python pwb.py masti/ms-artdisamblist.py -catr:"Dobre artykuły" -ns:0 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Dobre artykuły" -summary:"Bot uaktualnia stronę"
+python pwb.py masti/ms-artdisamblist.py -catr:"Szablony nawigacyjne" -ns:10 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Linki z szablonów" -summary:"Bot uaktualnia stronę"
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -160,7 +161,7 @@ class BasicBot(
             pywikibot.output(u'Processing page #%i (%i marked): %s' % (counter, marked, page.title(asLink=True)) )
             result = self.treat(page)
             if result:
-               results[page.title()] = result
+               results[page.title(withNamespace=False)] = ( result, page.namespace() == 10 )
                marked += 1
                pywikibot.output(u'Added line #%i: %s elements: %i' % ( marked, page.title(asLink=True), len(result) ))
 
@@ -178,6 +179,8 @@ class BasicBot(
         linkedDisambigs = [] # list of linked disambigs
 
         text = page.text
+        if self.getOption('test'):
+            pywikibot.output(text)
         if not text or page.isDisambig():
             return(None)
 
@@ -209,10 +212,14 @@ class BasicBot(
         finalpage = header
         lineN = 1
         for i in list(redirlist):
-            finalpage += u'\n|-\n| ' + str(lineN) + u' || [[' + i + u']] || '
+            r, t = redirlist[i]
+            if t: #marked page is Template
+                finalpage += u'\n|-\n| ' + str(lineN) + u' || {{s|' + i + u'}} || '
+            else: #marked page is article
+                finalpage += u'\n|-\n| ' + str(lineN) + u' || [[' + i + u']] || '
             lineN += 1
             firstLine = True
-            for d in redirlist[i]:
+            for d in r:
                 if firstLine:
                     firstLine = False
                     finalpage += u'[[' + d + u']]'
