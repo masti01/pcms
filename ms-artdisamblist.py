@@ -210,6 +210,7 @@ class BasicBot(
         lineN = 1
         for i in list(redirlist):
             finalpage += u'\n|-\n| ' + str(lineN) + u' || [[' + i + u']] || '
+            lineN += 1
             firstLine = True
             for d in redirlist[i]:
                 if firstLine:
