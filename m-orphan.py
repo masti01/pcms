@@ -128,7 +128,11 @@ class BasicBot(
         for page in self.generator:
             pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
             counter += 1
-            if self.checkOrphan(page):
+            if page.isDisambig():
+                if self.getOption('test'):
+                    pywikibot.output('Skipping disambig...')
+            else:
+                self.checkOrphan(page)
                 marked += 1
 
     def checkOrphan(self, page):
