@@ -124,21 +124,27 @@ class BasicBot(
 
     def run(self):
         counter = 1
+        marked = 0
         for page in self.generator:
-            pywikibot.output(u'Processing #%i:%s' % (counter, page.title(asLink=True)))
+            pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
             counter += 1
-            self.checkOrphan(page)
+            if self.checkOrphan(page):
+                marked += 1
 
     def checkOrphan(self, page):
         """
         check if the page is linked from other articles
-        if not place {{Sierotka|{{subst:#time:Y-m}}}} in talk page
+        if not place {{Sierotka|data={{subst:#time:Y-m}}}} in talk page
         """
         refs = list(page.getReferences(namespaces=0))
         if self.getOption('test'):
             pywikibot.output(u'refs#:%i' % len(refs))
         if not len(refs):
+            if self.getOption('test'):
+                pywikibot.input('Waiting...')
             self.markOrphan(page)
+            return(True)
+        return(False)
 
     def markOrphan(self, page):
         '''
@@ -146,11 +152,10 @@ class BasicBot(
         '''
         talkPage = page.toggleTalkPage()
         if not u'{{Sierotka' in page.text:
-            page.text = u'{{Sierotka|{{subst:#time:Y-m}}}}\n' + page.text
+            page.text = u'{{Sierotka|data={{subst:#time:Y-m}}}}\n' + page.text
             if self.getOption('test'):
                 pywikibot.output(page.text)
             page.save(summary=self.getOption('summary'))
-
 
 def main(*args):
     """
