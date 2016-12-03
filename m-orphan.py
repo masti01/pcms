@@ -146,7 +146,7 @@ class BasicBot(
         '''
         talkPage = page.toggleTalkPage()
         if not u'{{Sierotka' in talkPage.text:
-            talkPage.text = u'{{Sierotka|{{subst:#time:Y-m}}}}\n'
+            talkPage.text = u'{{Sierotka|{{subst:#time:Y-m}}}}\n' + talkPage.text
             if self.getOption('test'):
                 pywikibot.output(talkPage.text)
             talkPage.save(summary=self.getOption('summary'))
