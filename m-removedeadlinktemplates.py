@@ -125,7 +125,10 @@ class BasicBot(
             pywikibot.output('config.simulate was set to True')
 
     def run(self):
+        counter = 1
         for page in self.generator:
+            pywikibot.output(u'Processing #%i:%s' % (counter, page.title(asLink=True))
+            counter += 1
             self.treat(page)
 
     def treat(self, page):
@@ -147,8 +150,8 @@ class BasicBot(
 
         #test printout
         if self.getOption('test'):
-                pywikibot.output(u'Page: %s' % articlepage.title(asLink=True))
-        pywikibot.output(u'Talk: %s' % page.title(asLink=True))
+            pywikibot.output(u'Page: %s' % articlepage.title(asLink=True))
+            pywikibot.output(u'Talk: %s' % page.title(asLink=True))
 
         #find dead link templates
         #linkR = re.compile(ur'\{\{(?P<infobox>([^\]\n\|}]+?infobox))')
