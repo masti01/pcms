@@ -5,7 +5,7 @@ An incomplete sample script.
 
 This is a bot to check for orphaned pages adding {{Sierotka|{{subst:#time:Y-m}}}} templates to it's discussion page.
 Call:
-   python pwb.py masti/m-orphan.py -start:'!' -summary:"Bot oznacza [[:Kategoria:Artykuły_osierocone|artykuł osierocony" -pt:0
+   python pwb.py masti/m-orphan.py -start:'!' -summary:"Bot oznacza [[:Kategoria:Artykuły_osierocone|artykuł osierocony]]" -pt:0
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
