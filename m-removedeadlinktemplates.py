@@ -180,7 +180,7 @@ class BasicBot(
         if changed:
             if len(disctext) < 4:
                 #pywikibot.output(u'Deleting {0}.'.format(page))
-                disctext = u'{{ek|Pusta strona dyskusji - usunięte szablony martwych linków}}\n\n' + disctext
+                disctext = u'{{ek|Nieaktualna informacja o martwym linku zewnętrznym}}\n\n' + disctext
                 '''
                 #wait until way found to use i18n for templatenames
                 if self.getOption('test'):
