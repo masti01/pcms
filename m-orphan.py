@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-This is a bot to remove {{Martwy link dyskusja}} templates from discussion pages if the link reported no longer exists in the article.
-Call:
-   python pwb.py masti/m-removedeadlinktemplates.py -cat:"Niezweryfikowane martwe linki" -ns:1 -summary:"Nieaktualna informacja o martwym linku zewnętrznym" -pt:0
+An incomplete sample script.
+
+This is not a complete bot; rather, it is a template from which simple
+bots can be made. You can rename it to mybot.py, then edit it in
+whatever way you want.
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -22,8 +24,6 @@ The following parameters are supported:
 -top              Place additional text on top of the page
 
 -summary:         Set the action summary message for the edit.
-
--test:            Switch on test prinouts
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -41,8 +41,6 @@ from pywikibot import pagegenerators
 from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
-
-import re
 
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
@@ -132,118 +130,23 @@ class BasicBot(
             self.treat(page)
 
     def treat(self, page):
-        """
-        Loads the given discussion page, verifies if the links in {{Martwy link dyskusja}}
-        were removed from article or are a part of {{Cytuj}} template with properly filled archiwum= parameter
-        Then removes the template(s) or marks page for deletion
-        """
-        
-	talktext = page.text
-        if not talktext:
-            return
-        originaltext = talktext
+        """Load the given page, do some changes, and save it."""
+        text = page.text
 
-        articlepage = page.toggleTalkPage()
-        articletext = articlepage.text
-        if not articletext:
-            return
+        ################################################################
+        # NOTE: Here you can modify the text in whatever way you want. #
+        ################################################################
 
-        #test printout
-        if self.getOption('test'):
-            pywikibot.output(u'Page: %s' % articlepage.title(asLink=True))
-            pywikibot.output(u'Talk: %s' % page.title(asLink=True))
+        # If you find out that you do not want to edit this page, just return.
+        # Example: This puts Text on a page.
 
-        #find dead link templates
-        #linkR = re.compile(ur'\{\{(?P<infobox>([^\]\n\|}]+?infobox))')
-        tempR = re.compile(ur'(?P<template>\{\{Martwy link dyskusja[^}]*?}}\n*?)')
-        weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
-        links = u''
-        changed = False
-        templs = tempR.finditer(talktext)
-        for link in templs:
-            template = link.group('template').strip()
-	    #pywikibot.output(template)
-            weblink = re.search(weblinkR,template).group('weblink').strip()
-            if weblink in articletext:
-                if self.getOption('test'):
-                    pywikibot.output(u'Still there >>%s<<' % weblink)
-                if not self.removelinktemplate(weblink,articletext):
-                    if self.getOption('test'):
-                        pywikibot.output(u'Should stay >>%s<<' % weblink )
-                else:
-                    pywikibot.output(u'Has to go >>%s<<' % weblink )
-                    talktext = re.sub(re.escape(template), u'', talktext)
-                    changed = True
-            else:
-                if self.getOption('test'):
-                    pywikibot.output(u'Uuups! 404 - link not found >>%s<<' % weblink)
-                talktext = re.sub(re.escape(template), u'', talktext)
-                changed = True
- 
-        if changed:
-            if len(talktext) < 4:
-                #pywikibot.output(u'Deleting {0}.'.format(page))
-                talktext = u'{{ek|Nieaktualna informacja o martwym linku zewnętrznym}}\n\n' + talktext
-                '''
-                #wait until way found to use i18n for templatenames
-                if self.getOption('test'):
-                    page.delete(reason=self.getOption('summary'), prompt=True, mark=False, quit=True)
-                else:
-                    page.delete(reason=self.getOption('summary'), prompt=False, mark=True)
-            else:
-                #pywikibot.output(u'Removing template from {0}'.format(page))
-                page.text = talktext
-                page.save(summary=self.getOption('summary'))
-            '''
-            page.text = talktext
-            page.save(summary=self.getOption('summary'))
-        return
+        # Retrieve your private option
+        # Use your own text or use the default 'Test'
 
-    def removelinktemplate(self,link, text):
-        """
-        check if link is within {{cytuj...}} template with filled archiwum= field or within this field
-	conditions on link removal:
-	    link in url/tytuł field + archiwum not empty
-	    link in archiwum field
-        """
-        citetempR = re.compile(ur'(?P<citetemplate>\{\{[cC]ytuj.*?\|[^}]*?\}\})')
-        urlfieldR = re.compile(ur'(url|tytuł)\s*?=(?P<url>[^\|\}]*)')
-        archfieldR = re.compile(ur'archiwum\s*?=\s*?(?P<arch>[^\|\}]*)')
-        result = False
-        
-        cites = citetempR.finditer(text)
-        for c in cites:
-            citetemplate = c.group('citetemplate').strip()
-            if self.getOption('test'):
-                pywikibot.output(u'Cite:%s' % citetemplate)
-            try:
-                urlfield = re.search(urlfieldR,citetemplate).group('url').strip()
-            except AttributeError:
-                if self.getOption('test'):
-                    pywikibot.output(u'No url or tytuł field in Cytuj')
-                continue
-            #pywikibot.output(u'URL:%s' % urlfield) 
-            try:
-                archfield = re.search(archfieldR,citetemplate).group('arch').strip()
-            except AttributeError:
-                if self.getOption('test'):
-                    pywikibot.output(u'No ARCH field')
-                continue
-            if self.getOption('test'):
-                pywikibot.output(u'URL2:%s' % urlfield)            
-                pywikibot.output(u'Arch2:%s' % archfield)
-            if link in urlfield:
-                if self.getOption('test'):
-                    pywikibot.output(u'URL in URL field')            
-                if (len(archfield) > 0):
-                    if self.getOption('test'):
-                        pywikibot.output(u'ARCHIVE field filled in')
-                    result = True
-            else:
-                if self.getOption('test'):
-                    pywikibot.output(u'URL not found in template')
+        # if summary option is None, it takes the default i18n summary from
+        # i18n subdirectory with summary_key as summary key.
+        #self.put_current(text, summary=self.getOption('summary'))
 
-        return(result)
 
 def main(*args):
     """

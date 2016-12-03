@@ -2,8 +2,7 @@
 # Set of Wikiprojekt:Strony ujednoznaczniające z linkami
 cd ~/pw/core
 python pwb.py masti/ms-disambrefslists.py -cat:"Strony ujednoznaczniające" -summary:"Bot uaktualnia stronę"
-#python basictemplatedisamblist.py -catr:"Szablony nawigacyjne" -ns:10 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Linki z szablonów" -summary:"Bot uaktualnia stronę"
 python pwb.py masti/ms-artdisamblist.py -cat:"Artykuły na medal" -ns:0 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Artykuły na medal" -summary:"Bot uaktualnia stronę"
 python pwb.py masti/ms-artdisamblist.py -cat:"Dobre artykuły" -ns:0 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Dobre artykuły" -summary:"Bot uaktualnia stronę"
-
+python pwb.py masti/ms-artdisamblist.py -catr:"Szablony nawigacyjne" -ns:10 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Linki z szablonów" -summary:"Bot uaktualnia stronę"
 
