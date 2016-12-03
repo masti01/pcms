@@ -3,9 +3,10 @@
 """
 An incomplete sample script.
 
-This is not a complete bot; rather, it is a template from which simple
-bots can be made. You can rename it to mybot.py, then edit it in
-whatever way you want.
+This is a bot to check for orphaned pages adding {{Sierotka|{{subst:#time:Y-m}}}} templates to it's discussion page.
+Call:
+   python pwb.py masti/m-orphan.py -start:'!' -summary:"Bot oznacza [[:Kategoria:Artykuły_osierocone|artykuł osierocony" -pt:0
+
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -127,25 +128,29 @@ class BasicBot(
         for page in self.generator:
             pywikibot.output(u'Processing #%i:%s' % (counter, page.title(asLink=True)))
             counter += 1
-            self.treat(page)
+            self.checkOrphan(page)
 
-    def treat(self, page):
-        """Load the given page, do some changes, and save it."""
-        text = page.text
+    def checkOrphan(self, page):
+        """
+        check if the page is linked from other articles
+        if not place {{Sierotka|{{subst:#time:Y-m}}}} in talk page
+        """
+        refs = list(page.getReferences(namespaces=0))
+        if self.getOption('test'):
+            pywikibot.output(u'refs#:%i' % len(refs))
+        if not len(refs):
+            self.markOrphan(page)
 
-        ################################################################
-        # NOTE: Here you can modify the text in whatever way you want. #
-        ################################################################
-
-        # If you find out that you do not want to edit this page, just return.
-        # Example: This puts Text on a page.
-
-        # Retrieve your private option
-        # Use your own text or use the default 'Test'
-
-        # if summary option is None, it takes the default i18n summary from
-        # i18n subdirectory with summary_key as summary key.
-        #self.put_current(text, summary=self.getOption('summary'))
+    def markOrphan(self, page):
+        '''
+        if {{Sierotka}} not present add it
+        '''
+        talkPage = page.toggleTalkPage()
+        if not u'{{Sierotka' in talkPage.text:
+            talkPage.text = u'{{Sierotka|{{subst:#time:Y-m}}}}\n'
+            if self.getOption('test'):
+                pywikibot.output(talkPage.text)
+            talkPage.save(summary=self.getOption('summary'))
 
 
 def main(*args):
