@@ -135,10 +135,10 @@ class BasicBot(
         Then removes the template(s) or marks page for deletion
         """
         
-	disctext = page.text
-        if not disctext:
+	talktext = page.text
+        if not talktext:
             return
-        originaltext = disctext
+        originaltext = talktext
 
         articlepage = page.toggleTalkPage()
         articletext = articlepage.text
@@ -148,7 +148,7 @@ class BasicBot(
         #test printout
         if self.getOption('test'):
                 pywikibot.output(u'Page: %s' % articlepage.title(asLink=True))
-        pywikibot.output(u'Discussion: %s' % page.title(asLink=True))
+        pywikibot.output(u'Talk: %s' % page.title(asLink=True))
 
         #find dead link templates
         #linkR = re.compile(ur'\{\{(?P<infobox>([^\]\n\|}]+?infobox))')
@@ -156,7 +156,7 @@ class BasicBot(
         weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
         links = u''
         changed = False
-        templs = tempR.finditer(disctext)
+        templs = tempR.finditer(talktext)
         for link in templs:
             template = link.group('template').strip()
 	    #pywikibot.output(template)
@@ -169,18 +169,18 @@ class BasicBot(
                         pywikibot.output(u'Should stay >>%s<<' % weblink )
                 else:
                     pywikibot.output(u'Has to go >>%s<<' % weblink )
-                    disctext = re.sub(re.escape(template), u'', disctext)
+                    talktext = re.sub(re.escape(template), u'', talktext)
                     changed = True
             else:
                 if self.getOption('test'):
                     pywikibot.output(u'Uuups! 404 - link not found >>%s<<' % weblink)
-                disctext = re.sub(re.escape(template), u'', disctext)
+                talktext = re.sub(re.escape(template), u'', talktext)
                 changed = True
  
         if changed:
-            if len(disctext) < 4:
+            if len(talktext) < 4:
                 #pywikibot.output(u'Deleting {0}.'.format(page))
-                disctext = u'{{ek|Nieaktualna informacja o martwym linku zewnętrznym}}\n\n' + disctext
+                talktext = u'{{ek|Nieaktualna informacja o martwym linku zewnętrznym}}\n\n' + talktext
                 '''
                 #wait until way found to use i18n for templatenames
                 if self.getOption('test'):
@@ -189,10 +189,10 @@ class BasicBot(
                     page.delete(reason=self.getOption('summary'), prompt=False, mark=True)
             else:
                 #pywikibot.output(u'Removing template from {0}'.format(page))
-                page.text = disctext
+                page.text = talktext
                 page.save(summary=self.getOption('summary'))
             '''
-            page.text = disctext
+            page.text = talktext
             page.save(summary=self.getOption('summary'))
         return
 
@@ -216,7 +216,8 @@ class BasicBot(
             try:
                 urlfield = re.search(urlfieldR,citetemplate).group('url').strip()
             except AttributeError:
-                pywikibot.output(u'No URL field')
+                if self.getOption('test'):
+                    pywikibot.output(u'No url or tytuł field in Cytuj')
                 continue
             #pywikibot.output(u'URL:%s' % urlfield) 
             try:
