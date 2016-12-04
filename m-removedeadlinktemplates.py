@@ -126,10 +126,13 @@ class BasicBot(
 
     def run(self):
         counter = 1
+        changeCounter = 0
         for page in self.generator:
-            pywikibot.output(u'Processing #%i:%s' % (counter, page.title(asLink=True)))
+            pywikibot.output(u'Processing #%i (%i changed):%s' % (counter, changeCounter, page.title(asLink=True)))
             counter += 1
-            self.treat(page)
+            if self.treat(page):
+                changeCounter += 1
+        pywikibot.output(u'Statistics: Processed: %i, Removed: %i' % ( counter, changeCounter ))
 
     def treat(self, page):
         """
@@ -197,7 +200,8 @@ class BasicBot(
             '''
             page.text = talktext
             page.save(summary=self.getOption('summary'))
-        return
+            return(True)
+        return(False)
 
     def removelinktemplate(self,link, text):
         """
