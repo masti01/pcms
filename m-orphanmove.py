@@ -137,7 +137,7 @@ class BasicBot(
         '''
         if {{Sierotka}} not present add it
         '''
-        orphanR = re.compile(ur'(?P<orphan>\{\{Sierotka\|.*?\}\}\n)', re.I)
+        orphanR = re.compile(ur'(?P<orphan>\{\{Sierotka\|.*?\}\}\n?)', re.I)
         text = page.text
         orphan = re.search(orphanR,text).group('orphan')
         if self.getOption('test'):
