@@ -178,7 +178,7 @@ class BasicBot(
         elif restart:
             outpage.text += u'\n:#Process restarted: ~~~~~'
         else:
-            outpage.text += u'\n#' +str(counter) + u'#' + str(marked) + u' - ' + lastPage + u'- ~~~~~'
+            outpage.text += u'\n#' +str(counter) + u'#' + str(marked) + u' – ' + lastPage + u' – ~~~~~'
         outpage.save(summary=self.getOption('summary'))
         return
 
