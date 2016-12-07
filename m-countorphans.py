@@ -145,7 +145,7 @@ class BasicBot(
                 counter += 1
                 onPageCount += 1
                 if onPageCount >= int(self.getOption('maxlines')):
-                    self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
+                    self.saveProgress(self.getOption('outpage'), counter-1, marked, page.title(asLink=True))
                     onPageCount = 0
                 if self.checkOrphan(page):
                     marked += 1
