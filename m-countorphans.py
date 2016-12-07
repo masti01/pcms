@@ -133,7 +133,7 @@ class BasicBot(
 
     def run(self):
         counter = 1
-        onPageCount = 1
+        onPageCount = 0
         marked = 0
         try:
             if self.getOption('restart'):
@@ -144,9 +144,9 @@ class BasicBot(
                 pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
                 counter += 1
                 onPageCount += 1
-                if onPageCount > int(self.getOption('maxlines')):
+                if onPageCount >= int(self.getOption('maxlines')):
                     self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
-                    onPageCount = 1
+                    onPageCount = 0
                 if self.checkOrphan(page):
                     marked += 1
         finally:
