@@ -3,7 +3,7 @@
 """
 This is a bot to remove template {{Przypisy}} if no reference in article present
 Call:
-   python pwb.py masti/m-reftemplate.py -transcludes:Przypisy -outpage:"Wikipedysta:mastiBot/refTemplate" -maxlines:100 -summary:"Bot usuwa zbędny szablon {{s|Przypisy}}"
+   python pwb.py masti/m-reftemplate.py -transcludes:Przypisy -outpage:"Wikipedysta:mastiBot/refTemplate" -maxlines:10000 -summary:"Bot usuwa zbędny szablon {{s|Przypisy}}"
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -45,27 +45,35 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 
+import re
+
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
 docuReplacements = {
     '&params;': pagegenerators.parameterHelp
 }
-refTemplates = [ 
-    u'Okres geologiczny infobox'
-    u'Zwierzę infobox'
-    u'Hetmani wielcy litewscy'
-    u'Przesilenia'
-    u'Równonoce'
-    u'Wartość odżywcza'
-    u'Ziemia-Śnieżka'
-    u'Związki cywilne osób tej samej płci'
-    u'Rynek alternatywnych przeglądarek internetowych'
-    u'Linia czasu modeli iPhone'
-    u'Ostatnie stabilne wydanie/Gnome'
-    u'Ostatnie stabilne wydanie/KDE'
-    u'Ostatnie testowe wydanie/KDE'
-    u'Ostatnie stabilne wydanie/Konqueror'
-    u'Ostatnie stabilne wydanie/mIRC'
+refTemplates = [
+    u'<ref',
+    u'{{r',
+    u'{{odn',
+    u'{{Odn',
+    u'{{uwaga',
+    u'{{Okres geologiczny infobox',
+    u'{{Zwierzę infobox',
+    u'{{Hetmani wielcy litewscy',
+    u'{{Przesilenia',
+    u'{{Równonoce',
+    u'{{Wartość odżywcza',
+    u'{{Ziemia-Śnieżka',
+    u'{{Związki cywilne osób tej samej płci',
+    u'{{Rynek alternatywnych przeglądarek internetowych',
+    u'{{Linia czasu modeli iPhone',
+    u'{{Ostatnie stabilne wydanie/Gnome',
+    u'{{Ostatnie stabilne wydanie/KDE',
+    u'{{Ostatnie testowe wydanie/KDE',
+    u'{{Ostatnie stabilne wydanie/Konqueror',
+    u'{{Ostatnie stabilne wydanie/mIRC',
+    u'{{PubChem',
 ]
 
 class BasicBot(
@@ -172,18 +180,20 @@ class BasicBot(
         text = page.text
         found = False
 
+        if u'{{Przypisy' not in text:
+            return(False)
         for t in refTemplates:
             if t in text:
                 found = True
-        if found:     
-            text = re.sub(ur'\n\{\{Przypisy.*?\}\}', u'', text, flags=re.IGNORECASE)
+        if not found:     
+            text = re.sub(ur'\n\{\{Przypisy.*?\}\}', u'', text, re.I)
             
             if self.getOption('test'):
                 pywikibot.input('Waiting...')
             # if summary option is None, it takes the default i18n summary from
             # i18n subdirectory with summary_key as summary key.
-            self.save(text, summary=self.getOption('summary'))
-        return(found)
+            page.save(summary=self.getOption('summary'))
+        return(not found)
          
     def saveProgress(self, pagename, counter, marked, lastPage, init=False, restart=False):
         """
@@ -196,7 +206,7 @@ class BasicBot(
             outpage.text += u'\n:#Process restarted: ~~~~~'
         else:
             outpage.text += u'\n#' +str(counter) + u'#' + str(marked) + u' – ' + lastPage + u' – ~~~~~'
-        outpage.save(summary=u'Bot aktualizuje postęp prac')
+        outpage.save(summary=u'Bot aktualizuje postęp prac (' + str(counter) + u'#' + str(marked) + u')')
         return
 
 def main(*args):
