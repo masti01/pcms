@@ -133,22 +133,25 @@ class BasicBot(
 
     def run(self):
         counter = 1
-        onPageCount =1
+        onPageCount = 1
         marked = 0
-        if self.getOption('restart'):
-            self.saveProgress(self.getOption('outpage'), counter, marked, '', init=False, restart=True)
-        else:
-            self.saveProgress(self.getOption('outpage'), counter, marked, '', init=True, restart=False)
-        for page in self.generator:
-            pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
-            counter += 1
-            onPageCount += 1
-            if onPageCount == int(self.getOption('maxlines')):
-                self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
-            if self.checkOrphan(page):
-                marked += 1
-        self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
-        pywikibot.output(u'Processed: %i, Orphans:%i' % (counter,marked))
+        try:
+            if self.getOption('restart'):
+                self.saveProgress(self.getOption('outpage'), counter, marked, '', init=False, restart=True)
+            else:
+                self.saveProgress(self.getOption('outpage'), counter, marked, '', init=True, restart=False)
+            for page in self.generator:
+                pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
+                counter += 1
+                onPageCount += 1
+                if onPageCount == int(self.getOption('maxlines')):
+                    self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
+                    onPageCount = 1
+                if self.checkOrphan(page):
+                    marked += 1
+        finally:
+            self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
+            pywikibot.output(u'Processed: %i, Orphans:%i' % (counter,marked))
 
     def checkOrphan(self, page):
         """
@@ -175,7 +178,7 @@ class BasicBot(
         elif restart:
             outpage.text += u'\n:#Process restarted: ~~~~~'
         else:
-            outpage.text += u'\n#' +str(counter) + u'#' + str(marked) + u' - ' + lastPage + u'~~~~~'
+            outpage.text += u'\n#' +str(counter) + u'#' + str(marked) + u' - ' + lastPage + u'- ~~~~~'
         outpage.save(summary=self.getOption('summary'))
         return
 
