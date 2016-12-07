@@ -137,14 +137,25 @@ class BasicBot(
         check if the page is linked from other articles
         if not place {{Sierotka|data={{subst:#time:Y-m}}}} in talk page
         """
-        refs = list(page.getReferences(namespaces=0))
+        #refs = list(page.getReferences(namespaces=0, ))
+        refsLen = self.iterLen(page.getReferences(namespaces=0))
         if self.getOption('test'):
-            pywikibot.output(u'refs#:%i' % len(refs))
-        if not len(refs):
+            pywikibot.output(u'refs#:%i' % refsLen)
+        if not refsLen:
             if self.getOption('test'):
                 pywikibot.input('Waiting...')
             return(True)
         return(False)
+
+    def iterLen(self,iterator):
+        """
+        count iterated items
+        due to list conversion errors
+        """
+        c = 0
+        for i in iterator:
+            c += 1
+        return(c)
 
 def main(*args):
     """
