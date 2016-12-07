@@ -196,7 +196,7 @@ class BasicBot(
             outpage.text += u'\n:#Process restarted: ~~~~~'
         else:
             outpage.text += u'\n#' +str(counter) + u'#' + str(marked) + u' – ' + lastPage + u' – ~~~~~'
-        outpage.save(summary=self.getOption('summary'))
+        outpage.save(summary=u'Bot aktualizuje postęp prac')
         return
 
 def main(*args):
