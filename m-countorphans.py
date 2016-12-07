@@ -24,6 +24,11 @@ The following parameters are supported:
 -top              Place additional text on top of the page
 
 -summary:         Set the action summary message for the edit.
+
+-outpage          Results page; otherwise "Wikipedysta:mastiBot/test" is used
+
+-maxlines         Max number of entries before new subpage is created; default 1000
+
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -87,6 +92,10 @@ class BasicBot(
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
             'test': False, #switch on test functionality
+            'outpage': u'User:mastiBot/test', #default output page
+            'maxlines': 1000, #default number of entries per page
+            'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
+            'restart': False, #if restarting do not clean summary page
         })
 
         # call constructor of the super class
@@ -124,12 +133,21 @@ class BasicBot(
 
     def run(self):
         counter = 1
+        onPageCount =1
         marked = 0
+        if self.getOption('restart'):
+            self.saveProgress(self.getOption('outpage'), counter, marked, '', init=False, restart=True)
+        else:
+            self.saveProgress(self.getOption('outpage'), counter, marked, '', init=True, restart=False)
         for page in self.generator:
             pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
             counter += 1
+            onPageCount += 1
+            if onPageCount == self.getOption('maxlines'):
+                self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
             if self.checkOrphan(page):
                 marked += 1
+        self.saveProgress(self.getOption('outpage'), counter, marked, page.title(asLink=True))
         pywikibot.output(u'Processed: %i, Orphans:%i' % (counter,marked))
 
     def checkOrphan(self, page):
@@ -146,6 +164,20 @@ class BasicBot(
                 pywikibot.input('Waiting...')
             return(True)
         return(False)
+
+    def saveProgress(self, pagename, counter, marked, lastPage, init=False, restart=False):
+        """
+        log run progress
+        """
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        if init:
+            outpage.text = u'Process started: ~~~~~'
+        elif restart:
+            outpage.text += u'\n:#Process restarted: ~~~~~'
+        else:
+            outpage.text += u'\n#' +str(counter) + u'#' + str(marked) + u' - ' + lastPage + u'~~~~~'
+        outpage.save(summary=self.getOption('summary'))
+        return
 
     def iterLen(self,iterator):
         """
@@ -185,7 +217,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text'):
+        if option in ('summary', 'text', 'outpage', 'maxlines'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
