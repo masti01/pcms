@@ -186,10 +186,11 @@ class BasicBot(
             if t in text:
                 found = True
         if not found:     
-            text = re.sub(ur'\n\{\{Przypisy.*?\}\}', u'', text, re.I)
+            page.text = re.sub(ur'\n\{\{Przypisy.*?\}\}', u'', text, re.I)
             
             if self.getOption('test'):
                 pywikibot.input('Waiting...')
+                pywikibot.output(page.text)
             # if summary option is None, it takes the default i18n summary from
             # i18n subdirectory with summary_key as summary key.
             page.save(summary=self.getOption('summary'))
