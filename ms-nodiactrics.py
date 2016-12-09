@@ -196,7 +196,9 @@ class BasicBot(
             return(None)
 
         noDPage = pywikibot.Page(pywikibot.Site(), noDiactricsTitle)
-        if not noDPage.exists():
+        if not self.getOption('doubles') and not noDPage.exists():
+            return(noDiactricsTitle)
+        elif self.getOption('doubles') and noDPage.exists() and not noDPage.isRedirectPage():
             return(noDiactricsTitle)
         else:
             if self.getOption('test'):
