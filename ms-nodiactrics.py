@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-An incomplete sample script by masti for creating statistics/listings pages
+Article to find miisng/potential doubled articles with or without dicatrical chararcters in title
 
-This is not a complete bot; rather, it is a template from which simple
-bots can be made. You can rename it to mybot.py, then edit it in
-whatever way you want.
+Call:
+    python pwb.py masti/ms-nodiactrics.py -catr:"Sportowcy" -summary:"Bot uaktualnia tabelę" -outpage:"Wikipedysta:MastiBot/Przekierowania bez diaktryków" -skippl
+    python pwb.py masti/ms-nodiactrics.py -catr:"Sportowcy" -summary:"Bot uaktualnia tabelę" -outpage:"Wikipedysta:MastiBot/Przekierowania bez diaktryków/duble" -skippl -doubles
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -46,6 +46,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 import unicodedata
 import re
+import string
 
 import pywikibot
 from pywikibot import pagegenerators
@@ -104,6 +105,7 @@ class BasicBot(
             'testprint': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
             'skippl': False, #try to assume if the title is polish based on chars used
+            'doubles': False, #find when articles with and without diactrics exist
         })
 
         # call constructor of the super class
@@ -156,8 +158,13 @@ class BasicBot(
 
         counter = 1
         marked = 0
+        skipped = 0
         for page in self.generator:
-            pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
+            pywikibot.output(u'Processing #%i (%i marked, %i skipped):%s' % (counter, marked, skipped, page.title(asLink=True)))
+            if page.title() in results.keys():
+                pywikibot.output(u'Already done...')
+                skipped += 1
+                continue
             counter += 1
             res = self.treat(page)
             if res:
@@ -172,24 +179,28 @@ class BasicBot(
         If no: return title without diactrics
         If yes: return None
         """
-        title = page.title()
+        title = self.noDisambig(page.title())
         
         if self.getOption('skippl'):
-           if self.assumedPolish(self.noDisambig(title)):
+           if self.assumedPolish(title):
                if self.getOption('test'):
-                   pywikibot.output(u'Assumed polish name:%s' % self.noDisambig(title))
+                   pywikibot.output(u'Assumed polish name:%s' % title)
                return(None)
 
         noDiactricsTitle = self.strip_accents(title)
+        if self.getOption('test'):
+              pywikibot.output(u'Diactrics stripped:%s' % noDiactricsTitle)
         if noDiactricsTitle == title:
+            if self.getOption('test'):
+                pywikibot.output(u'No diactrics found:%s' % title)
             return(None)
-
-        noDiactricsTitle = self.noDisambig(noDiactricsTitle)
 
         noDPage = pywikibot.Page(pywikibot.Site(), noDiactricsTitle)
         if not noDPage.exists():
             return(noDiactricsTitle)
         else:
+            if self.getOption('test'):
+                pywikibot.output(u'Diactrics page exists:%s' % noDiactricsTitle)
             return(None)
 
     def noDisambig(self, text):
@@ -215,19 +226,27 @@ class BasicBot(
         #text = unicodedata.normalize('NFD', text)
         #text = text.encode('ascii', 'ignore')
         #text = text.decode("utf-8")
-        text = re.sub(u'Ł','L',text)
+        trans = [
+            ('Đ', 'D'),
+            ('đ', 'd'),
+            ('ð', 'd'),
+            ('Ł', 'L'),
+            ('ł', 'l'),
+            ('ß', 'ss'),
+            ('ñ', 'n')
+        ]
+
+        text = self.multisub(trans, text)
         if self.getOption('test'):
             pywikibot.output(text)
-        text = re.sub(u'ł','l',text) 
-        if self.getOption('test'):
-            pywikibot.output(text)
+            pywikibot.input('Waiting...')
         return str(''.join((c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')))
 
     def assumedPolish(self,text):
         """
         Try to verify if the text is in Polish
         """
-        polishChars = [u'ą',u'ć',u'ę',u'ł',u'ń',u'ó',u'ś',u'ź',u'ż',u'Ą',u'Ć',u'Ę',u'Ł',u'Ń',u'Ó',u'Ś',u'Ź',u'Ż']
+        polishChars = [u'ą',u'ć',u'ę',u'ń',u'ó',u'ś',u'ź',u'ż',u'Ą',u'Ć',u'Ę',u'Ń',u'Ó',u'Ś',u'Ź',u'Ż']
         for c in polishChars:
             if c in text:
                 return(True)
@@ -255,43 +274,12 @@ class BasicBot(
         pywikibot.output(rlist)
         return(res)
 
-def templateWithNamedParams(self):
-        """
-        Iterate template as returned by templatesWithNames()
-
-        @return: a generator that yields a tuple for each param of a template
-            type: named, int
-            name: name of param
-            value: value of param
-        @rtype: generator
-        """
-        # TODO
-
-def templateArg(self, param):
-        """
-        return name,value for each template param
-
-        input text in form "name = value"
-        @return: a tuple for each param of a template
-            named: named (True) or int
-            name: name of param or None if numbered
-            value: value of param
-        @rtype: tuple
-        """
-        # TODO
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
-        if '=' in param:
-            match = paramR.search(param)
-            named = True
-            name = match.group("name").strip()
-            value = match.group("value").strip()
-        else:
-           named = False
-           name = None
-           value = param
-        #test
-        pywikibot.output(u'name:%s:value:%s' % (name, value))
-        return named, name, value
+    def multisub(self, subs, subject):
+        "Simultaneously perform all substitutions on the subject string."
+        pattern = '|'.join('(%s)' % re.escape(p) for p, s in subs)
+        substs = [s for p, s in subs]
+        replace = lambda m: substs[m.lastindex - 1]
+        return re.sub(pattern, replace, subject)
 
 def main(*args):
     """
