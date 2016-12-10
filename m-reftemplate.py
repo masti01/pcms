@@ -58,22 +58,22 @@ refTemplates = [
     u'{{odn',
     u'{{Odn',
     u'{{uwaga',
-    u'{{Okres geologiczny infobox',
-    u'{{Zwierzę infobox',
-    u'{{Hetmani wielcy litewscy',
-    u'{{Przesilenia',
-    u'{{Równonoce',
-    u'{{Wartość odżywcza',
-    u'{{Ziemia-Śnieżka',
-    u'{{Związki cywilne osób tej samej płci',
-    u'{{Rynek alternatywnych przeglądarek internetowych',
-    u'{{Linia czasu modeli iPhone',
-    u'{{Ostatnie stabilne wydanie/Gnome',
-    u'{{Ostatnie stabilne wydanie/KDE',
-    u'{{Ostatnie testowe wydanie/KDE',
-    u'{{Ostatnie stabilne wydanie/Konqueror',
-    u'{{Ostatnie stabilne wydanie/mIRC',
-    u'{{PubChem',
+    u'{{okres geologiczny infobox',
+    u'{{zwierzę infobox',
+    u'{{hetmani wielcy litewscy',
+    u'{{przesilenia',
+    u'{{równonoce',
+    u'{{wartość odżywcza',
+    u'{{ziemia-śnieżka',
+    u'{{związki cywilne osób tej samej płci',
+    u'{{rynek alternatywnych przeglądarek internetowych',
+    u'{{linia czasu modeli iphone',
+    u'{{ostatnie stabilne wydanie/gnome',
+    u'{{ostatnie stabilne wydanie/kde',
+    u'{{ostatnie testowe wydanie/kde',
+    u'{{ostatnie stabilne wydanie/konqueror',
+    u'{{otatnie stabilne wydanie/mirc',
+    u'{{pubchem',
 ]
 
 class BasicBot(
@@ -180,13 +180,13 @@ class BasicBot(
         text = page.text
         found = False
 
-        if u'{{Przypisy' not in text:
+        if u'{{przypisy' not in text.lower():
             return(False)
         for t in refTemplates:
-            if t in text:
+            if t in text.lower():
                 found = True
         if not found:     
-            page.text = re.sub(ur'\n\{\{Przypisy.*?\}\}', u'', text, re.I)
+            page.text = re.sub(ur'\n\{\{przypisy.*?\}\}', u'', text, re.I)
             
             if self.getOption('test'):
                 pywikibot.input('Waiting...')
