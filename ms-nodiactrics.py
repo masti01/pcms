@@ -162,13 +162,13 @@ class BasicBot(
         skipped = 0
         for page in self.generator:
             pywikibot.output(u'Processing #%i (%i marked, %i skipped):%s' % (counter, marked, skipped, page.title(asLink=True)))
+            counter += 1
             if page.title() in processed.keys():
                 pywikibot.output(u'Already done...')
                 skipped += 1
                 processed[page.title()] += 1
                 continue
             processed[page.title()] = 1
-            counter += 1
             res = self.treat(page)
             if res:
                 marked += 1
