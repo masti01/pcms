@@ -165,7 +165,7 @@ class BasicBot(
             if page.title() in processed.keys():
                 pywikibot.output(u'Already done...')
                 skipped += 1
-                processes[page.title()] += 1
+                processed[page.title()] += 1
                 continue
             processed[page.title()] = 1
             counter += 1
