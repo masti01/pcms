@@ -76,6 +76,15 @@ refTemplates = [
     u'{{pubchem',
 ]
 
+referencesT = [
+    u'<references/>', 
+    u'{{przypisy', 
+    u'{{przypisy-lista',
+    u'{{mini przypisy',
+    u'{{uwagi',
+    u'{{uwagi-lista',
+]
+
 class BasicBot(
     # Refer pywikobot.bot for generic bot classes
     SingleSiteBot,  # A bot only working on one site
@@ -179,9 +188,18 @@ class BasicBot(
         """Load the given page, do some changes, and save it."""
         text = page.text
         found = False
+        refActionNeeded = False
 
-        if u'{{przypisy' not in text.lower():
+        # TODO
+        # set of templates: {{Przypisy}}, {{Przypisy-lista}}, {{Mini przypisy}}, {{Uwagi}} lub {{Uwagi-lista}}, <references/> 
+        for r in referencesT:
+            if r in: text.lower():
+                if self.getOption('test'):
+                    pywikibot.output(u'reference template found:%s' % r)
+                refActionNeeded = True
+        if not refActionNeeded:
             return(False)
+
         for t in refTemplates:
             if t in text.lower():
                 found = True
