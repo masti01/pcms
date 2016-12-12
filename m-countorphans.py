@@ -40,6 +40,10 @@ from __future__ import absolute_import, unicode_literals
 __version__ = '$Id: c1795dd2fb2de670c0b4bddb289ea9d13b1e9b3f $'
 #
 
+import sys 
+reload(sys) 
+sys.setdefaultencoding("utf-8")
+
 import pywikibot
 from pywikibot import pagegenerators
 
@@ -158,8 +162,8 @@ class BasicBot(
         check if the page is linked from other articles
         if not place {{Sierotka|data={{subst:#time:Y-m}}}} in talk page
         """
-        #refs = list(page.getReferences(namespaces=0, ))
-        refsLen = self.iterLen(page.getReferences(namespaces=0))
+        refsLen = len(list(page.getReferences(namespaces=0)))
+        #refsLen = self.iterLen(page.getReferences(namespaces=0))
         if self.getOption('test'):
             pywikibot.output(u'refs#:%i' % refsLen)
         if not refsLen:
