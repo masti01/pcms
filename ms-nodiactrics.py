@@ -144,6 +144,7 @@ class BasicBot(
     def run(self):
 
         results = {}
+        processed = {}
 
         #prepare new page with table
 	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|bota]]. Ostatnia aktualizacja ~~~~~. \nWszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]]."
@@ -159,12 +160,14 @@ class BasicBot(
         counter = 1
         marked = 0
         skipped = 0
-        for page in self.generator:
+        for page in set(self.generator):
             pywikibot.output(u'Processing #%i (%i marked, %i skipped):%s' % (counter, marked, skipped, page.title(asLink=True)))
-            if page.title() in results.keys():
+            if page.title() in processed.keys():
                 pywikibot.output(u'Already done...')
                 skipped += 1
+                processes[page.title()] += 1
                 continue
+            processed[page.title()] = 1
             counter += 1
             res = self.treat(page)
             if res:
@@ -172,6 +175,9 @@ class BasicBot(
                 results[page.title()] = res
 
         self.generateresultspage(results, self.getOption('outpage'), header, footer)
+        pywikibot.output(processed)
+        pywikibot.output(u'Processed #%i (%i marked, %i skipped)' % (counter, marked, skipped))
+        
 
     def treat(self, page):
         """
@@ -235,7 +241,21 @@ class BasicBot(
             ('Ł', 'L'),
             ('ł', 'l'),
             ('ß', 'ss'),
-            ('ñ', 'n')
+            ('ñ', 'n'),
+            ('Ä', 'Ae'),
+            ('ä', 'ae'),
+            ('Ö', 'Oe'),
+            ('ö', 'oe'),
+            ('Ü', 'Ue'),
+            ('ü', 'ue'),
+            ('Å', 'Aa'),
+            ('å', 'aa'),
+            ('Ø', 'Oe'),
+            ('ø', 'oe'),
+            ('Æ', 'Ae'),
+            ('æ', 'ae'),
+            ('Œ', 'Oe'),
+            ('œ', 'oe'),
         ]
 
         text = self.multisub(trans, text)
