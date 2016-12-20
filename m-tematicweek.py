@@ -6,7 +6,7 @@ Use global -simulate option for test purposes. No changes to live wiki
 will be done.
 
 Call: 
-	python pwb.py m-tematicweek.py -page:"Wikiprojekt:Tygodnie tematyczne/Tydzień Artykułu Bhutańskiego" -pt:0 -log:"Tydzień Artykułu Bhutańskiego"
+	python pwb.py masti/m-tematicweek.py -page:"Wikiprojekt:Tygodnie tematyczne/Tydzień Artykułu Bhutańskiego" -pt:0 -log:"Tydzień Artykułu Bhutańskiego"
 
 The following parameters are supported:
 
