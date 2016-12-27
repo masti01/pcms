@@ -100,6 +100,7 @@ class BasicBot(
             'top': False,  # append text on top of the page
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
+            'test': False, #test options
         })
 
         # call constructor of the super class
@@ -178,21 +179,30 @@ class BasicBot(
         #res = sorted(redirlist, key=redirlist.__getitem__, reverse=False)
         res = sorted(redirlist)
         itemcount = 0
+        if self.getOption('test'):
+                pywikibot.output(u'GENERATING RESULTS')
         for i in res:
 
+            if self.getOption('test'):
+                pywikibot.output(i)
             title, ident, name, creator, lastedit = i
 
             if (not name) or (name == title):
                 itemcount += 1
 
-                finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + ident + u' || '
-                finalpage += u'{{Kneset|' + ident + u'|name='
+                if ident:
+                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + ident + u' || '
+                    finalpage += u'{{Kneset|' + ident + u'|name='
+                else:
+                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + u"'''brak'''" + u' || '
                 if name:
                     finalpage += name
                 else:
                     finalpage += title
                 #finalpage += u'}} || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(datetime.datetime.strptime(str(lastedit), "%Y%m%d%H%M%S"))
-                finalpage += u'}} || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(lastedit)
+                if ident:
+                    finalpage += u'}}'
+                finalpage += u' || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(lastedit)
 
                 if itemcount > maxlines-1:
                     pywikibot.output(u'*** Breaking output loop ***')
@@ -201,8 +211,9 @@ class BasicBot(
                 pywikibot.output(u'SKIPPING')
 
         finalpage += footer 
-
-        #pywikibot.output(finalpage)
+        
+        if self.getOption('test'):
+            pywikibot.output(finalpage)
         success = True
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         outpage.text = finalpage
