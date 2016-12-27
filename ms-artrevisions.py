@@ -1,11 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-This bot creates a table of articles linking to disambig pages: Wikiprojekt:Strony ujednoznaczniające z linkami/Artykuły na medal
+This bot creates a sorted table of number of edits per page including anon(IP) and bot edits
 Call: 
-python pwb.py masti/ms-artdisamblist.py -catr:"Artykuły na medal" -ns:0 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Artykuły na medal" -summary:"Bot uaktualnia stronę"
-python pwb.py masti/ms-artdisamblist.py -catr:"Dobre artykuły" -ns:0 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Dobre artykuły" -summary:"Bot uaktualnia stronę"
-python pwb.py masti/ms-artdisamblist.py -catr:"Szablony nawigacyjne" -ns:10 -outpage:"Wikiprojekt:Strony ujednoznaczniające z linkami/Linki z szablonów" -summary:"Bot uaktualnia stronę"
+    python pwb.py masti/ms-artrevisions.py -start:'!' -maxlines:1000 -summary:"Bot uaktualnia stronę" -outpage:"Wikipedia:Statystyki/2016"
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
