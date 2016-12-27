@@ -232,24 +232,27 @@ class BasicBot(
         """
         found = False
         rowtext = u''
+        ident = None
+        name = None
 	
         # check for id & name(optional)
         for t in tpage.templatesWithParams():
             (tTitle,paramList) = t
             #test
-            #pywikibot.output(u'Template:%s' % tTitle)
-            if u'Kneset' in tTitle.title():
+            if self.getOption('test'):
+                pywikibot.output(u'Template:%s' % tTitle)
+            if tTitle.title().startswith('Szablon:Kneset'):
                 name = None
                 ident = None
                 for p in paramList:
                     pywikibot.output(u'param:%s' % p)
                     pnamed, pname, pvalue = templateArg(p)
-                    if pnamed:
-                        if pname.startswith('name'):
-                            name = pvalue
+                    if pnamed and pname.startswith('name'):
+                        name = pvalue
                     else:
                         ident = pvalue
-                        #pywikibot.output(u'ident:%s' % ident)
+                        pywikibot.output(u'ident:%s' % ident)
+                break
 
         # check for page creator
         #creator, timestamp = tpage.getCreator()
@@ -260,9 +263,9 @@ class BasicBot(
 
         # check for last edit
         lastedit = tpage.editTime()
-        #test
-        pywikibot.output(u'lastedit:%s' % lastedit)
-        pywikibot.output(u'ident:%s' % ident)
+        if self.getOption('test'):
+            pywikibot.output(u'lastedit:%s' % lastedit)
+            pywikibot.output(u'ident:%s' % ident)
          
         return(tpage.title(),ident,name,creator,lastedit)
 
@@ -288,7 +291,7 @@ def templateArg(param):
            name = None
            value = param
         #test
-        pywikibot.output(u'name:%s:value:%s' % (name, value))
+        pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
         return named, name, value
 
 def main(*args):
