@@ -164,6 +164,8 @@ class BasicBot(
             result = self.treat(page)
             if result:
                results = self.addResult(results, page.title(withNamespace=False), result, mlines=self.getOption('maxlines'))
+               marked += 1
+               pywikibot.output(u'Added line #%i: %s elements: %i/%i/%i' % ( marked, page.title(asLink=True), result[0],result[1],result[2] ))
 
         pywikibot.output(results)
         self.generateresultspage(results, self.getOption('outpage'), header, footer)
@@ -203,8 +205,6 @@ class BasicBot(
         return(resultsDict)
         '''
         results[page.title(withNamespace=False)] = result
-               marked += 1
-               pywikibot.output(u'Added line #%i: %s elements: %i/%i/%i' % ( marked, page.title(asLink=True), result[0],result[1],result[2] ))
         '''
 
     def treat(self, page):
