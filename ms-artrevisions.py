@@ -189,14 +189,17 @@ class BasicBot(
             res = sorted(resultsDict, key=resultsDict.__getitem__, reverse=False)
             if self.getOption('test'):
                 pywikibot.output(res)
+            deleted = False
             for r in res:
                 if resultsDict[r][0] < result[0]:
                     if self.getOption('test'):
                         pywikibot.output(u'deleting element: %s' % r)
                     del resultsDict[r]
+                    deleted = True
                 else:
                     break
-            resultsDict[pageT] = result
+            if deleted:
+                resultsDict[pageT] = result
 
         if self.getOption('test'):
             pywikibot.output(resultsDict)
