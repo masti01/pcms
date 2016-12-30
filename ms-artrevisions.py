@@ -163,13 +163,49 @@ class BasicBot(
                 pywikibot.output(u'Processing page #%i (%i marked): %s' % (counter, marked, page.title(asLink=True)) )
             result = self.treat(page)
             if result:
-               results[page.title(withNamespace=False)] = result
-               marked += 1
-               pywikibot.output(u'Added line #%i: %s elements: %i/%i/%i' % ( marked, page.title(asLink=True), result[0],result[1],result[2] ))
+               results = self.addResult(results, page.title(withNamespace=False), result, mlines=self.getOption('maxlines'))
 
         pywikibot.output(results)
         self.generateresultspage(results, self.getOption('outpage'), header, footer)
         return
+
+    def addResult(self, resultsDict, pageT, result, mlines=1000):
+        '''
+        if resultDict has less elements then max add result
+        check if the result has more edits then last element then add it and remove last element
+        '''
+        if self.getOption('test'):
+            pywikibot.output(u'addResult: %s, %s, %s/%s:%s' % (pageT, result, len(list(resultsDict)), mlines, len(list(resultsDict))<int(mlines) ) )
+            pywikibot.output(resultsDict)
+        if len(list(resultsDict)) < int(mlines):
+            if self.getOption('test'):
+                pywikibot.output(u'adding element')
+            resultsDict[pageT] = result
+        else:
+            if self.getOption('test'):
+                pywikibot.output(u'processing long list')
+            res = sorted(resultsDict, key=resultsDict.__getitem__, reverse=False)
+            if self.getOption('test'):
+                pywikibot.output(res)
+            for r in res:
+                if resultsDict[r][0] < result[0]:
+                    if self.getOption('test'):
+                        pywikibot.output(u'deleting element: %s' % r)
+                    del resultsDict[r]
+                else:
+                    break
+            resultsDict[pageT] = result
+
+        if self.getOption('test'):
+            pywikibot.output(resultsDict)
+            pywikibot.input(u'Waiting...')
+
+        return(resultsDict)
+        '''
+        results[page.title(withNamespace=False)] = result
+               marked += 1
+               pywikibot.output(u'Added line #%i: %s elements: %i/%i/%i' % ( marked, page.title(asLink=True), result[0],result[1],result[2] ))
+        '''
 
     def treat(self, page):
         """
@@ -225,10 +261,15 @@ class BasicBot(
         finalpage = header
         lineN = 1
 
+        pywikibot.output(u'Generating results page: sorting')
+
         res = sorted(redirlist, key=redirlist.__getitem__, reverse=True)
+
+        pywikibot.output(u'Generating results page: creating table')
 
         for i in res:
             rev, anon, bot = redirlist[i]
+            pywikibot.output(u'Processed line #%i: %s elements: %i/%i/%i' % ( lineN, i, rev, anon, bot ))
             finalpage += u'\n|-\n| ' + str(lineN) + u' || [[' + i + u']] || ' + str(rev) + u' || ' + str(anon) + u' || ' + str(bot)
             lineN += 1
             if lineN > int(self.getOption('maxlines')):
