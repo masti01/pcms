@@ -141,7 +141,8 @@ class BasicBot(
 	    licznik += 1
             pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
             refs = self.treat(page) # get flag code
-            pywikibot.output(refs)
+            if self.getOption('test'):
+                pywikibot.output(refs)
             reflinks[page.title()] = refs
             pywikibot.output(u'{{Flaga|%s}} [[%s]]' % (reflinks[page.title()],page.title()))
 
