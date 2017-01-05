@@ -41,3 +41,7 @@ python pwb.py replace.py "{{Dziennik Ustaw|rok=2008|numer=45|pozycja=271}}" "{{D
 
 python pwb.py replace.py "{{Dziennik Ustaw|2015|1774}}" "{{Dziennik Ustaw|2016|2147}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Ustawa o gospodarce nieruchomościami"
 
+Kodeks wyborczy
+{{Dziennik Ustaw|rok=2011|numer=21|pozycja=112}}
+{{Dziennik Ustaw|2017|15}}
+python pwb.py replace.py "{{Dziennik Ustaw|rok=2011|numer=21|pozycja=112}}" "{{Dziennik Ustaw|2017|15}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Kodeks wyborczy"
