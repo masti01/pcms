@@ -159,7 +159,7 @@ class BasicBot(
             #test
             #pywikibot.output(u'Template:%s' % tTitle)
             if self.getOption('test'):
-                pywikibot.output(u'Template:%s' % tTitle)
+                pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
             if tTitle.title(withNamespace=False) in (u'Tenisista infobox',u'Sportowiec infobox'):
                 if self.getOption('test'):
                     pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
