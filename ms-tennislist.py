@@ -199,7 +199,7 @@ class BasicBot(
                 finalpage += u'# {{Flaga|' + redirlist[i] + u'}} [[' + title + u']] <nowiki>{{Flaga|' + redirlist[i] + u'}} [[' + title + u']]</nowiki>\n'
             else:
                 finalpage += u'# [[' + title + u']] <nowiki> [[' + title + u']]</nowiki>\n'
-            if itemcount > self.maxlines-1:
+            if itemcount > int(self.getOption('maxlines')-1:
                 pywikibot.output(u'*** Breaking output loop ***')
                 break
 
