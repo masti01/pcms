@@ -157,8 +157,8 @@ class BasicBot(
 	
         for t in page.templatesWithParams():
             (tTitle,paramList) = t
-            if self.getOption('test'):
-                pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
+            #if self.getOption('test'):
+            pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
             if tTitle.title(withNamespace=False) in (u'Tenisista infobox',u'Sportowiec infobox'):
                 if self.getOption('test'):
                     pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
@@ -168,12 +168,12 @@ class BasicBot(
                     pnamed, pname, pvalue = self.templateArg(p)
                     if pnamed and pname == 'państwo':
                         if len(pvalue.strip()):
-                            if self.getOption('test'):
-                                pywikibot.output(u'Flaga:%s w %s;%s' % ( pvalue.strip(),page.title(),tTitle) )
+                            #if self.getOption('test'):
+                            pywikibot.output(u'Flaga:%s w %s;%s' % ( pvalue.strip(),page.title(),tTitle) )
                             return(pvalue.strip())
                         else:
-                            if self.getOption('test'):
-                                pywikibot.output(u'Brak flagi w %s;%s' % ( page.title(),tTitle) )
+                            #if self.getOption('test'):
+                            pywikibot.output(u'Brak flagi w %s;%s' % ( page.title(),tTitle) )
                             return(None)
         return(None)
 
