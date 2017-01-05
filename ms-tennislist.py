@@ -4,8 +4,8 @@
 This bot creates a pages with links to tennis players.
 
 Call:
-	python pwb.py masti/ms-tennislist.py -catr:"Tenisistki według narodowości" -outpage:"Wikipedysta:masti/Tenisistki według narodowości" -maxlines:10000
-	python pwb.py masti/ms-tennislist.py -catr:"Tenisiści według narodowości" -outpage:"Wikipedysta:masti/Tenisiści według narodowości" -maxlines:10000
+	python pwb.py masti/ms-tennislist.py -catr:"Tenisistki według narodowości" -outpage:"Wikipedysta:masti/Tenisistki według narodowości" -maxlines:10000 -summary:"Bot uaktualnia stronę"
+	python pwb.py masti/ms-tennislist.py -catr:"Tenisiści według narodowości" -outpage:"Wikipedysta:masti/Tenisiści według narodowości" -maxlines:10000 -summary:"Bot uaktualnia stronę"
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -156,22 +156,23 @@ class BasicBot(
 	
         for t in page.templatesWithParams():
             (tTitle,paramList) = t
-            #test
-            #pywikibot.output(u'Template:%s' % tTitle)
             if self.getOption('test'):
                 pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
             if tTitle.title(withNamespace=False) in (u'Tenisista infobox',u'Sportowiec infobox'):
                 if self.getOption('test'):
                     pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
                 for p in paramList:
-                    pywikibot.output(u'param:%s' % p)
+                    if self.getOption('test'):
+                        pywikibot.output(u'param:%s' % p)
                     pnamed, pname, pvalue = self.templateArg(p)
                     if pnamed and pname == 'państwo':
                         if len(pvalue.strip()):
-                            pywikibot.output(u'Flaga:%s w %s;%s' % ( pvalue.strip(),page.title(),tTitle) )
+                            if self.getOption('test'):
+                                pywikibot.output(u'Flaga:%s w %s;%s' % ( pvalue.strip(),page.title(),tTitle) )
                             return(pvalue.strip())
                         else:
-                            pywikibot.output(u'Brak flagi w %s;%s' % ( page.title(),tTitle) )
+                            if self.getOption('test'):
+                                pywikibot.output(u'Brak flagi w %s;%s' % ( page.title(),tTitle) )
                             return(None)
         return(None)
 
@@ -196,8 +197,9 @@ class BasicBot(
            named = False
            name = None
            value = param
-        #test
-        pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
+
+        if self.getOption('test'):
+            pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
         return named, name, value
 
     def generateresultspage(self, redirlist, pagename, header, footer):
@@ -239,44 +241,6 @@ class BasicBot(
         #   pywikibot.output(u'Page %s not saved.' % outpage.title(asLink=True))
         #   success = False
         return(success)
-
-def templateWithNamedParams(self):
-        """
-        Iterate template as returned by templatesWithNames()
-
-        @return: a generator that yields a tuple for each param of a template
-            type: named, int
-            name: name of param
-            value: value of param
-        @rtype: generator
-        """
-        # TODO
-
-def templateArg(self, param):
-        """
-        return name,value for each template param
-
-        input text in form "name = value"
-        @return: a tuple for each param of a template
-            named: named (True) or int
-            name: name of param or None if numbered
-            value: value of param
-        @rtype: tuple
-        """
-        # TODO
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
-        if '=' in param:
-            match = paramR.search(param)
-            named = True
-            name = match.group("name").strip()
-            value = match.group("value").strip()
-        else:
-           named = False
-           name = None
-           value = param
-        #test
-        pywikibot.output(u'name:%s:value:%s' % (name, value))
-        return named, name, value
 
 def main(*args):
     """
