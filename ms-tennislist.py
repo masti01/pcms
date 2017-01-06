@@ -175,6 +175,7 @@ class BasicBot(
                             #if self.getOption('test'):
                             pywikibot.output(u'Brak flagi w %s;%s' % ( page.title(),tTitle) )
                             return(None)
+        pywikibot.output(u'Nie znaleziono szablonu')
         return(None)
 
     def templateArg(self,param):
