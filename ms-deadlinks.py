@@ -166,14 +166,16 @@ class BasicBot(
                    deadlinksf[ref] += 1
 	        else:
 	           deadlinksf[ref] = 1
-                pywikibot.output(u'%s - %i' % (ref,deadlinksf[ref]))
+                if self.getOption('test'):
+                    pywikibot.output(u'%s - %i' % (ref,deadlinksf[ref]))
             refs = self.treat(page, True) # get list of weblinks
             for ref in refs:
                 if ref in deadlinkss:
                    deadlinkss[ref] += 1
 	        else:
 	           deadlinkss[ref] = 1
-                pywikibot.output(u'%s - %i' % (ref,deadlinkss[ref]))
+                if self.getOption('test'):
+                    pywikibot.output(u'%s - %i' % (ref,deadlinkss[ref]))
 
             #if licznik > self.maxlines-1:
             #    pywikibot.output(u'*** Breaking outer loop ***')
@@ -192,10 +194,12 @@ class BasicBot(
         tempR = re.compile(ur'(?P<template>\{\{Martwy link dyskusja[^}]*?}}\n*?)')
         if domains:
             weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>.*?://[^ \n\(/]*)')
-            pywikibot.output(u'domains=True')
+            if self.getOption('test'):
+                pywikibot.output(u'domains=True')
         else:
             weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
-            pywikibot.output(u'domains=False')
+            if self.getOption('test'):
+                pywikibot.output(u'domains=False')
         links = u''
         templs = tempR.finditer(page.text)
         for link in templs:
