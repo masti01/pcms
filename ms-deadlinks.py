@@ -242,7 +242,7 @@ class BasicBot(
                  suffix = u'wystąpień'
             finalpage += u'#' + i + u' ([[Specjalna:Wyszukiwarka linków/' + i + u'|' + str(count) + u' ' + suffix + u']])\n'
             pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
-            if itemcount > self.maxlines-1:
+            if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
                 break
 
