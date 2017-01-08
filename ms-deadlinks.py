@@ -220,12 +220,6 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-    def generateresultspage(self, redirlist, pagename, header, footer):
-        """
-        Generates results page from redirlist
-        Starting with header, ending with footer
-        Output page is pagename
-        """
         maxlines = int(self.getOption('maxlines'))
         finalpage = header
         res = sorted(redirlist, key=redirlist.__getitem__, reverse=True)
@@ -247,7 +241,18 @@ class BasicBot(
                 break
 
         finalpage += footer 
- 
+
+        if self.getOption('test'):
+            pywikibot.output(finalpage)
+        success = True
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        outpage.text = finalpage
+
+        pywikibot.output(outpage.title())
+        
+        outpage.save(summary=self.getOption('summary'))
+        return(success)
+
 
 def templateArg(param):
         """
