@@ -183,8 +183,8 @@ class BasicBot(
 
         footer = u'Przetworzono: ' + str(licznik) + u' stron'        
 
-        result = self.generateresultspage(deadlinksf,self.outputpage,headerfull,footer)
-        result = self.generateresultspage(deadlinkss,self.outputpage+u'/ogólne',headersum,footer)
+        result = self.generateresultspage(deadlinksf,self.getOption('outpage'),headerfull,footer)
+        result = self.generateresultspage(deadlinkss,self.getOption('outpage')+u'/ogólne',headersum,footer)
 
     def treat(self, page, domains):
         """
