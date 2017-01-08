@@ -143,7 +143,7 @@ class BasicBot(
         header +=u'\n!Autor'
         header +=u'\n!Data modyfikacji'
 
-        headerfull = u"Poniżej znajduje się lista" + self.getOption('maxlines') + u" martwych linków wystepujących w największej liczbie artykułów.\n\n"
+        headerfull = u"Poniżej znajduje się lista " + self.getOption('maxlines') + u" martwych linków wystepujących w największej liczbie artykułów.\n\n"
         headersum = headerfull
         headersum += u"Zobacz też: [[Wikipedysta:MastiBot/Statystyka martwych linków|Statystykę szczegółowych linków]]\n\n"
         headerfull += u"Zobacz też: [[Wikipedysta:MastiBot/Statystyka martwych linków/ogólne|Statystykę domen z największą liczbą martwych linków]]\n\n"
@@ -234,7 +234,7 @@ class BasicBot(
                 suffix = u'wystąpienia'
             else:
                  suffix = u'wystąpień'
-            finalpage += u'#' + i + u' ([[Specjalna:Wyszukiwarka linków/' + i + u'|' + str(count) + u' ' + suffix + u']])\n'
+            finalpage += u'#' + i + u' ([[Specjalna:Wyszukiwarka linków/' + i + u' | ' + str(count) + u' ' + suffix + u']])\n'
             pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
