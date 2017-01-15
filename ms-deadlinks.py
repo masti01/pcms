@@ -46,7 +46,7 @@ from pywikibot.tools import issue_deprecation_warning
 import re
 import urllib2
 import datetime
-import weblib
+
 
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
