@@ -150,8 +150,7 @@ class BasicBot(
 
         footer = u'\n\nPrzetworzono ' + str(counter) + u' stron'
 
-        if self.getOption('test'):
-            outputpage = self.getOption('outpage')
+        outputpage = self.getOption('outpage')
 
         result = self.generateresultspage(reflinks,outputpage,header,footer)
         
