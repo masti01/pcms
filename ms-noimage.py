@@ -172,7 +172,7 @@ class BasicBot(
             return(page.title)
 
     def excludedImage(self,title):
-        exclusions = ( 'flag', 'map', 'stamp', 'pictogram', 'ensign')
+        exclusions = ( 'flag', 'map', 'stamp', 'pictogram', 'ensign', 'medal', 'logo')
         for e in exclusions:
             if e in title.lower():
                 return(True)
