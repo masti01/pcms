@@ -1,0 +1,7 @@
+#/bin/bash
+cd ~/pw/core
+python pwb.py masti/ms-noimage.py -catr:"Pochowani na Powązkach-Cmentarzu Wojskowym w Warszawie" -outpage:"Wikipedysta:MastiBot/Powązki Wojskowe" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę" 
+python pwb.py masti/ms-noimage.py -catr:"Pochowani na Cmentarzu Powązkowskim w Warszawie" -outpage:"Wikipedysta:MastiBot/Powązki" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
+python pwb.py masti/ms-noimage.py -catr:"Pochowani na Cmentarzu Komunalnym Północnym w Warszawie" -outpage:"Wikipedysta:MastiBot/Północny" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
+python pwb.py masti/ms-noimage.py -catr:"Pochowani na Cmentarzu na Służewie przy ul. Renety w Warszawie" -outpage:"Wikipedysta:MastiBot/Renety" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
+python pwb.py masti/ms-noimage.py -catr:"Pochowani na Cmentarzu Bródnowskim" -outpage:"Wikipedysta:MastiBot/Bródnowski" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
