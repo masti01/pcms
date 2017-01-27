@@ -16,4 +16,5 @@ pywikibot/families/
 build
 dist
 docs/_build/
-
+#masti
+/tasks/*~
