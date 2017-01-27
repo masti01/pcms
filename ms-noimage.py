@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-An incomplete sample script.
+An incomplete sample script by masti for creating statistics/listings pages
 
-This is not a complete bot; rather, it is a template from which simple
-bots can be made. You can rename it to mybot.py, then edit it in
-whatever way you want.
+This bot lists pages without images
+Call:
+python pwb.py masti/ms-noimage.py -catr:Sportowcy -outpage:"Wikipedysta:Szoltys/skoczkowie bez zdjęć" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -15,7 +15,11 @@ The following parameters are supported:
 &params;
 
 -always           If used, the bot won't ask if it should file the message
-                  onto user talk page.
+                  onto user talk page.   
+
+-outpage          Results page; otherwise "Wikipedysta:mastiBot/test" is used
+
+-maxlines         Max number of entries before new subpage is created; default 1000
 
 -text:            Use this text to be added; otherwise 'Test' is used
 
@@ -24,6 +28,8 @@ The following parameters are supported:
 -top              Place additional text on top of the page
 
 -summary:         Set the action summary message for the edit.
+
+-negative:        mark if text not in page
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -86,6 +92,10 @@ class BasicBot(
             'summary': None,  # your own bot summary
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
+            'outpage': u'User:mastiBot/test', #default output page
+            'maxlines': 1000, #default number of entries per page
+            'test': False, # print testoutput
+            'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
         })
 
         # call constructor of the super class
@@ -121,36 +131,75 @@ class BasicBot(
             pywikibot.config.simulate = True
             pywikibot.output('config.simulate was set to True')
 
-    def treat_page(self):
-        """Load the given page, do some changes, and save it."""
-        text = self.current_page.text
+    def run(self):
+	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+	header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
 
-        ################################################################
-        # NOTE: Here you can modify the text in whatever way you want. #
-        ################################################################
+        reflinks = [] #initiate list
+        counter = 0
+        marked = 0
+        for tpage in self.generator:
+	    counter += 1
+            pywikibot.output(u'Treating #%i (%i marked): %s' % (counter, marked, tpage.title()))
+            refs = self.treat(tpage) # get (name)
+            #if self.getOption('test'):
+                #pywikibot.output(u'%s' % refs)
+            if refs:
+                reflinks.append(tpage.title(asLink=True))
+                marked += 1
 
-        # If you find out that you do not want to edit this page, just return.
-        # Example: This puts Text on a page.
+        footer = u'\n\nPrzetworzono ' + str(counter) + u' stron'
 
-        # Retrieve your private option
-        # Use your own text or use the default 'Test'
-        text_to_add = self.getOption('text')
+        outputpage = self.getOption('outpage')
 
-        if self.getOption('replace'):
-            # replace the page text
-            text = text_to_add
+        result = self.generateresultspage(reflinks,outputpage,header,footer)
+        
 
-        elif self.getOption('top'):
-            # put text on top
-            text = text_to_add + text
-
+    def treat(self, page):
+        #search for imagelinks in page
+        #quit after first one
+        found = False
+        for i in page.imagelinks():
+            if self.getOption('test'):
+                pywikibot.output(i.title())
+            if not self.excludedImage(i.title()):
+                found = True
+                break
+        if found:
+            return(None)
         else:
-            # put text on bottom
-            text += text_to_add
+            return(page.title)
 
-        # if summary option is None, it takes the default i18n summary from
-        # i18n subdirectory with summary_key as summary key.
-        self.put_current(text, summary=self.getOption('summary'))
+    def excludedImage(self,title):
+        exclusions = ( 'flag', 'map', 'stamp', 'pictogram', 'ensign', 'medal', 'logo')
+        for e in exclusions:
+            if e in title.lower():
+                return(True)
+        return(False)
+
+    def generateresultspage(self, redirlist, pagename, header, footer):
+        """
+        Generates results page from redirlist
+        Starting with header, ending with footer
+        Output page is pagename
+        """
+        maxlines = int(self.getOption('maxlines'))
+        finalpage = header
+        if self.getOption('test'):
+            pywikibot.output(u'GENERATING RESULTS')
+        for p in redirlist:
+            if self.getOption('test'):
+                pywikibot.output(p)
+            finalpage += u'\n# ' + p
+
+        finalpage += footer
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        outpage.text = finalpage
+
+        pywikibot.output(outpage.title())
+        
+        outpage.save(summary=self.getOption('summary'))
+        return(True)
 
 
 def main(*args):
@@ -181,7 +230,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text'):
+        if option in ('summary', 'text', 'outpage', 'maxlines'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value

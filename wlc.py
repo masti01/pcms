@@ -237,7 +237,11 @@ ignorelist = [
     re.compile('.*[\./@]ft\.dk(/.*)?'),  # bot rejected on site  (masti)
     re.compile('.*[\./@]tygodnikpowszechny\.pl(/.*)?'),  # bot redirect loop  (masti)
     re.compile('.*[\./@]przewodnik-katolicki\.pl(/.*)?'),  # bot rejected on site  (masti)
-
+    re.compile('.*[\./@]seriea\.pl(/.*)?'),  # slow response  (masti)
+    re.compile('.*[\./@]shmetro\.com(/.*)?'),  # slow response  (masti)
+    re.compile('.*[\./@]the-sports\.org(/.*)?'),  # slow response  (masti)
+    re.compile('.*[\./@]pzhl\.org\.pl/files/absolwencisms\.doc'),  # slow response (masti)
+    re.compile('.*[\./@]bs\.sejm\.gov\.pl'),  # slow response (masti)
 ]
 
 

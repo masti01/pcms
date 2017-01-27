@@ -24,6 +24,8 @@ The following parameters are supported:
 -summary:         Set the action summary message for the edit.
 
 -test:            Switch on test prinouts
+
+-nodelete:        Do not delete empty pages
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -89,6 +91,7 @@ class BasicBot(
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
             'test': False, #switch on test functionality
+            'nodelete': False, #do not delete empty pages
         })
 
         # call constructor of the super class
@@ -185,19 +188,10 @@ class BasicBot(
  
         if changed:
             if len(talktext) < 4:
-                #pywikibot.output(u'Deleting {0}.'.format(page))
-                talktext = u'{{ek|Nieaktualna informacja o martwym linku zewnętrznym}}\n\n' + talktext
-                '''
-                #wait until way found to use i18n for templatenames
                 if self.getOption('test'):
-                    page.delete(reason=self.getOption('summary'), prompt=True, mark=False, quit=True)
-                else:
-                    page.delete(reason=self.getOption('summary'), prompt=False, mark=True)
-            else:
-                #pywikibot.output(u'Removing template from {0}'.format(page))
-                page.text = talktext
-                page.save(summary=self.getOption('summary'))
-            '''
+                    pywikibot.output(u'Deleting {0}.'.format(page))
+                if not self.getOption('nodelete'):
+                    talktext = u'{{ek|Nieaktualna informacja o martwym linku zewnętrznym}}\n\n' + talktext
             page.text = talktext
             page.save(summary=self.getOption('summary'))
             return(True)

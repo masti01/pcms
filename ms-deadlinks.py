@@ -47,6 +47,7 @@ import re
 import urllib2
 import datetime
 
+
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
 docuReplacements = {
