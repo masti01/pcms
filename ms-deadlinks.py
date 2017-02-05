@@ -229,12 +229,8 @@ class BasicBot(
             itemcount += 1
             count = redirlist[i]
             strcount = str(count)
-            if count == 1:
-                suffix = u'wystąpienie'
-            elif strcount[len(strcount)-1] in (u'2',u'3',u'4') and (count<10 or count>20) :
-                suffix = u'wystąpienia'
-            else:
-                 suffix = u'wystąpień'
+            suffix = self.declination(count, u'wystąpienie', u'wystąpienia', u'wystąpień')
+
             finalpage += u'#' + i + u' ([{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u'])\n'
             pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
             if itemcount > maxlines-1:
@@ -253,6 +249,18 @@ class BasicBot(
         
         outpage.save(summary=self.getOption('summary'))
         return(success)
+
+    def declination(self, v, t1, t2, t3):
+        value = int(v.strip()[-2:])
+        if value == 0:
+            return(t3)
+        elif value == 1:
+            return(t1)
+        elif value < 5:
+            return(t2)
+        else:
+            return(t3)
+
 
 
 def templateArg(param):
