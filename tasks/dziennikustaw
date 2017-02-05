@@ -45,3 +45,8 @@ Kodeks wyborczy
 {{Dziennik Ustaw|rok=2011|numer=21|pozycja=112}}
 {{Dziennik Ustaw|2017|15}}
 python pwb.py replace.py "{{Dziennik Ustaw|rok=2011|numer=21|pozycja=112}}" "{{Dziennik Ustaw|2017|15}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Kodeks wyborczy"
+
+{{Dziennik Ustaw|2015|613}}
+{{Dziennik Ustaw|2017|201}}
+Ordynacja podatkowa
+python pwb.py replace.py "{{Dziennik Ustaw|2015|613}}" "{{Dziennik Ustaw|2017|201}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Ordynacja podatkowa"
