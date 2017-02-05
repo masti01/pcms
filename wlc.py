@@ -242,6 +242,9 @@ ignorelist = [
     re.compile('.*[\./@]the-sports\.org(/.*)?'),  # slow response  (masti)
     re.compile('.*[\./@]pzhl\.org\.pl/files/absolwencisms\.doc'),  # slow response (masti)
     re.compile('.*[\./@]bs\.sejm\.gov\.pl'),  # slow response (masti)
+    re.compile('.*[\./@]metacritic\.com'),  # false positive (masti)
+    re.compile('.*[\./@]plantes-botanique\.org'),  # false positive (masti)
+    re.compile('.*[\./@]niezalezna\.pl'),  # false positive (masti)
 ]
 
 
