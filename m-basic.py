@@ -23,6 +23,8 @@ The following parameters are supported:
 
 -top              Place additional text on top of the page
 
+-test:            Switch on test prinouts
+
 -summary:         Set the action summary message for the edit.
 """
 #
@@ -86,6 +88,7 @@ class BasicBot(
             'summary': None,  # your own bot summary
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
+            'test': False, #switch on test functionality
         })
 
         # call constructor of the super class
