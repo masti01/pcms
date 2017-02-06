@@ -251,7 +251,7 @@ class BasicBot(
         return(success)
 
     def declination(self, v, t1, t2, t3):
-        value = int(v.strip()[-2:])
+        value = int(str(v)[-2:])
         if value == 0:
             return(t3)
         elif value == 1:
