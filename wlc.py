@@ -245,6 +245,7 @@ ignorelist = [
     re.compile('.*[\./@]metacritic\.com'),  # false positive (masti)
     re.compile('.*[\./@]plantes-botanique\.org'),  # false positive (masti)
     re.compile('.*[\./@]niezalezna\.pl'),  # false positive (masti)
+    re.compile('.*[\./@]doi\.org'),  # false positive (masti)
 ]
 
 
