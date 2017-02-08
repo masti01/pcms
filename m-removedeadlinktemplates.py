@@ -161,13 +161,15 @@ class BasicBot(
 
         #find dead link templates
         #linkR = re.compile(ur'\{\{(?P<infobox>([^\]\n\|}]+?infobox))')
-        tempR = re.compile(ur'(?P<template>\{\{Martwy link dyskusja[^}]*?}}\n*?)')
-        weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
+        tempR = re.compile(ur'(?P<template>\{\{Martwy link dyskusja[^}]*?}}\n*)')
+        weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\s][^\n\s]*)')
         links = u''
         changed = False
         templs = tempR.finditer(talktext)
         for link in templs:
-            template = link.group('template').strip()
+            template = link.group('template')
+            if self.getOption('test'):
+                pywikibot.output(u'>>%s<<' % template)
 	    #pywikibot.output(template)
             weblink = re.search(weblinkR,template).group('weblink').strip()
             if weblink in articletext:
@@ -193,6 +195,8 @@ class BasicBot(
                 if not self.getOption('nodelete'):
                     talktext = u'{{ek|Nieaktualna informacja o martwym linku zewnętrznym}}\n\n' + talktext
             page.text = talktext
+            if self.getOption('test'):
+                pywikibot.output(talktext)
             page.save(summary=self.getOption('summary'))
             return(True)
         return(False)
