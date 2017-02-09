@@ -270,7 +270,7 @@ class BasicBot(
         # check for last edit
         #lastedit = unicode(tpage.latest_revision.timestamp.isoformat())
         lastedit = unicode(tpage.latest_revision.timestamp.strftime('%Y-%m-%d'))
-        lastEditor = tpage.oldest_revision.user
+        lastEditor = tpage.latest_revision.user
         #get numer of linking pages
         refsCount = self.linking(tpage)
         if self.getOption('test'):
