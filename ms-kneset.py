@@ -149,6 +149,8 @@ class BasicBot(
         header +=u'\n!Polityk'
         header +=u'\n!Autor'
         header +=u'\n!Data modyfikacji'
+        header +=u'\n!Autor modyfikacji'
+        header +=u'\n!Linkujące'
 
 
         reflinks = [] #initiate list
@@ -185,30 +187,31 @@ class BasicBot(
 
             if self.getOption('test'):
                 pywikibot.output(i)
-            title, ident, name, creator, lastedit = i
+            ident, title, name, creator, lastedit, lasteditor, refscount = i
 
             if (not name) or (name == title):
                 itemcount += 1
 
                 if ident:
-                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + ident + u' || '
-                    finalpage += u'{{Kneset|' + ident + u'|name='
+                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + str(ident) + u' || '
+                    finalpage += u'{{Kneset|' + str(ident) + u'|name='
                 else:
                     finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + u"'''brak'''" + u' || '
                 if name:
                     finalpage += name
                 else:
                     finalpage += title
-                #finalpage += u'}} || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(datetime.datetime.strptime(str(lastedit), "%Y%m%d%H%M%S"))
+
                 if ident:
                     finalpage += u'}}'
-                finalpage += u' || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(lastedit)
+                finalpage += u' || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(lastedit) 
+                finalpage += u' || [[Wikipedysta:' + lasteditor + u'|' + lasteditor + u']] || ' + self.linknumber(title,refscount) + u'\n'
 
                 if itemcount > maxlines-1:
                     pywikibot.output(u'*** Breaking output loop ***')
                     break
             else:
-                pywikibot.output(u'SKIPPING')
+                pywikibot.output(u'SKIPPING:%s' % title)
 
         finalpage += footer 
         
@@ -228,7 +231,7 @@ class BasicBot(
  
     def treat(self, tpage):
         """
-        Creates a tuple (title, id, name, creator, lastedit)
+        Creates a tuple (id, title, name, creator, lastedit, refscount)
         """
         found = False
         rowtext = u''
@@ -245,31 +248,55 @@ class BasicBot(
                 name = None
                 ident = None
                 for p in paramList:
-                    pywikibot.output(u'param:%s' % p)
-                    pnamed, pname, pvalue = templateArg(p)
+                    if self.getOption('test'):
+                        pywikibot.output(u'param:%s' % p)
+                    pnamed, pname, pvalue = self.templateArg(p)
                     if pnamed and pname.startswith('name'):
                         name = pvalue
                     else:
-                        ident = pvalue
-                        pywikibot.output(u'ident:%s' % ident)
+                        ident = int(pvalue)
+                        if self.getOption('test'):
+                            pywikibot.output(u'ident:%s' % ident)
                 break
 
         # check for page creator
         #creator, timestamp = tpage.getCreator()
         creator = tpage.oldest_revision.user
-        timestamp = unicode(tpage.oldest_revision.timestamp.isoformat())
+        timestamp = unicode(tpage.oldest_revision.timestamp.strftime('%Y-%m-%d'))
         #test
-        pywikibot.output(u'Creator:%s<<Timestamp %s' % (creator, timestamp))
+        if self.getOption('test'):
+            pywikibot.output(u'Creator:%s<<Timestamp %s' % (creator, timestamp))
 
         # check for last edit
-        lastedit = tpage.editTime()
+        #lastedit = unicode(tpage.latest_revision.timestamp.isoformat())
+        lastedit = unicode(tpage.latest_revision.timestamp.strftime('%Y-%m-%d'))
+        lastEditor = tpage.oldest_revision.user
+        #get numer of linking pages
+        refsCount = self.linking(tpage)
         if self.getOption('test'):
             pywikibot.output(u'lastedit:%s' % lastedit)
             pywikibot.output(u'ident:%s' % ident)
+            pywikibot.output(u'refsCount:%s' % refsCount)
+            pywikibot.output(u'lastEditor:%s' % lastEditor)
          
-        return(tpage.title(),ident,name,creator,lastedit)
+        return(ident,tpage.title(),name,creator,lastedit, lastEditor, refsCount)
 
-def templateArg(param):
+    def linking(self, page):
+        """ get number of references """
+        count = 0
+        for i in page.getReferences(namespaces=0):
+            count +=1
+
+        if self.getOption('test'):
+            pywikibot.output(u'RefsCount:%s' % count)
+        return(count)
+
+    def linknumber(self, t, i):
+        if self.getOption('test'):
+            pywikibot.output(u'[[Specjalna:Linkujące/' + t + u'|' + str(i) + u']]')
+        return(u'[[Specjalna:Linkujące/' + t + u'|' + str(i) +  u']]')
+
+    def templateArg(self,param):
         """
         return name,value for each template param
 
@@ -291,7 +318,8 @@ def templateArg(param):
            name = None
            value = param
         #test
-        pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
+        if self.getOption('test'):
+            pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
         return named, name, value
 
 def main(*args):
