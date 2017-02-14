@@ -1207,7 +1207,7 @@ class BasicBot(
         # write ready file
         #test
         #pywikibot.output(u'Writing file: %s' % self.getOption('outpage'))
-        rf= open(self.getOption('outpage'),'w')
+        rf= open(u'masti/html/'+self.getOption('outpage'),'w')
         rf.write(output.encode('utf8'))
         rf.close()
         return
