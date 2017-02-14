@@ -147,6 +147,9 @@ class BasicBot(
         reviews24 = self.countReviews(currtime, 24)
         reviews168 = self.countReviews(currtime, 168)
 
+	pywikibot.output(u'Results24: %s' % reviews24)
+	pywikibot.output(u'Results168: %s' % reviews168)
+
         self.generateresultspage(reviews24,reviews168)
 
     def countReviews(self,starttime, hours):
