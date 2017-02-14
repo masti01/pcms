@@ -221,7 +221,7 @@ class BasicBot(
         # add creation time
         header += u'	<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
         header += u'\n'
-        header += u'<center><b><a class="external text" href="http://tools.wikimedia.pl/~masti/' + self.getOption('outpage') + u'">ODŚWIEŻ</a></b></center>\n'
+        header += u'<center><b><a class="external text" href="http://tools.wikimedia.pl/~masti/review.html">ODŚWIEŻ</a></b></center>\n'
         return(header)
 
     def mainfooter(self):
