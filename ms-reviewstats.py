@@ -242,7 +242,7 @@ class BasicBot(
         footer +=u'				<li><a href="//pl.wikipedia.org">wiki</a></li>\n'
         footer +=u'				<li><a href="/">tools</a></li>\n'
         footer +=u'				<li><a href="/~masti/">masti</a></li>\n'
-        footer +=u'				<li><a href="/~masti/stats">Statystyki</a></li>\n'
+        footer +=u'				<li><a href="/~masti/stats.html">Statystyki</a></li>\n'
         footer +=u'</ul>\n'
         footer +=u'		</div>\n'
         footer +=u'	</div>\n'
