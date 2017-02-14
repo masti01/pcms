@@ -220,7 +220,7 @@ class BasicBot(
         header +=u'			<tr><td><a href="#reviewers24h">Redaktorzy - 24h</a></td></tr>\n'
         header +=u'			<tr><td><a href="#reviewers168h">Redaktorzy - 168h</a></td></tr>\n'
         header +=u'		</table>\n'
-        header +=u'		<p>Strona przedstawia statystyki dotyczące działań redaktorów. Podsumowanie jest generowane na podstawie danych z ostatnich 24h i 30 dni (168h) . Strona jest aktualizowana co pięć minut.</p>\n'
+        header +=u'		<p>Strona przedstawia statystyki dotyczące działań redaktorów. Podsumowanie jest generowane na podstawie danych z ostatnich 24h i 7 dni (168h) . Strona jest aktualizowana co pięć minut.</p>\n'
         # add creation time
         header += u'	<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
         header += u'\n'
