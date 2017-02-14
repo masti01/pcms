@@ -133,21 +133,10 @@ class BasicBot(
 
     def run(self):
 
-	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
-        header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
-        header +=u'\n|-'
-        header +=u'\n!Nr'
-        header +=u'\n!Id'
-        header +=u'\n!Link Kneset'
-        header +=u'\n!Polityk'
-        header +=u'\n!Autor'
-        header +=u'\n!Data modyfikacji'
-
         headerfull = u"Poniżej znajduje się lista " + self.getOption('maxlines') + u" martwych linków wystepujących w największej liczbie artykułów.\n\n"
         headersum = headerfull
-        headersum += u"Zobacz też: [[Wikipedysta:MastiBot/Statystyka martwych linków|Statystykę szczegółowych linków]]\n\n"
-        headerfull += u"Zobacz też: [[Wikipedysta:MastiBot/Statystyka martwych linków/ogólne|Statystykę domen z największą liczbą martwych linków]]\n\n"
+        headersum += u"Zobacz też: [[" + self.getOption('outpage') + u"|Statystykę szczegółowych linków]]\n\n"
+        headerfull += u"Zobacz też: [[" + self.getOption('outpage') + u"/ogólne|Statystykę domen z największą liczbą martwych linków]]\n\n"
 
 	headerfull += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
 	headerfull += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
@@ -223,6 +212,14 @@ class BasicBot(
         """
         maxlines = int(self.getOption('maxlines'))
         finalpage = header
+         
+        finalpage +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
+        finalpage +=u'\n|-'
+        finalpage +=u'\n!Nr'
+        finalpage +=u'\n!Link'
+        finalpage +=u'\n!Linkujące'
+
+
         res = sorted(redirlist, key=redirlist.__getitem__, reverse=True)
         itemcount = 0
         for i in res:
@@ -231,12 +228,14 @@ class BasicBot(
             strcount = str(count)
             suffix = self.declination(count, u'wystąpienie', u'wystąpienia', u'wystąpień')
 
-            finalpage += u'#' + i + u' ([{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u'])\n'
+            #finalpage += u'#' + i + u' ([{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u'])\n'
             pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
+            finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']\n'
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
                 break
 
+        finalpage += u'\n|}\n'
         finalpage += footer 
 
         if self.getOption('test'):
