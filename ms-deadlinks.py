@@ -95,6 +95,8 @@ class BasicBot(
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
             'test': False, #test options
+            'includes' : False, #only include links that include this text
+            'includelink' : 'test', # link to be searched for
         })
 
         # call constructor of the super class
@@ -132,6 +134,10 @@ class BasicBot(
             pywikibot.output('config.simulate was set to True')
 
     def run(self):
+
+
+        pywikibot.output(self.getOption('includes'))
+        pywikibot.output(self.getOption('includelink'))
 
         headerfull = u"Poniżej znajduje się lista " + self.getOption('maxlines') + u" martwych linków wystepujących w największej liczbie artykułów.\n\n"
         headersum = headerfull
@@ -174,7 +180,9 @@ class BasicBot(
         footer = u'Przetworzono: ' + str(licznik) + u' stron'        
 
         result = self.generateresultspage(deadlinksf,self.getOption('outpage'),headerfull,footer)
-        result = self.generateresultspage(deadlinkss,self.getOption('outpage')+u'/ogólne',headersum,footer)
+        # skip domains gouping if looking for specific text
+        if not self.getOption('includes'):
+            result = self.generateresultspage(deadlinkss,self.getOption('outpage')+u'/ogólne',headersum,footer)
 
     def treat(self, page, domains):
         """
@@ -223,6 +231,10 @@ class BasicBot(
         res = sorted(redirlist, key=redirlist.__getitem__, reverse=True)
         itemcount = 0
         for i in res:
+            # use only links with -includes if specified
+            if self.getOption('includes'):
+                if not (self.getOption('includes') in i):
+                    continue
             itemcount += 1
             count = redirlist[i]
             strcount = str(count)
@@ -315,7 +327,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage', 'maxlines'):
+        if option in ('summary', 'text', 'outpage', 'maxlines', 'includes'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
