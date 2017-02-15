@@ -491,8 +491,8 @@ class BasicBot(
             endofvoting = u'brak danych'
 
         # vote counting regexp
-        forR = re.compile(ur"\*\s*?'''Głosy za:'''\s*?\n+(?P<forvotes>.*?)\n\*\s*?'''", re.S)
-        againstR = re.compile(ur"\*\s*?'''Głosy przeciw:'''\s*?\n+(?P<againstvotes>.*?)\n\*\s*?'''", re.S)
+        forR = re.compile(ur"\*\s*?'''Głosy za( odebraniem medalu)?:'''\s*?\n+(?P<forvotes>.*?)\n\*\s*?'''", re.S)
+        againstR = re.compile(ur"\*\s*?'''Głosy przeciw( odebraniu medalu)?:'''\s*?\n+(?P<againstvotes>.*?)\n\*\s*?'''", re.S)
 
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
