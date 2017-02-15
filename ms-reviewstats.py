@@ -290,6 +290,9 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(u'%s->%s' % (i, reviews[i]))
             total, initial, other, unreview = reviews[i]
+            # dirty hack for empty entries
+            if total == 0:
+                break
             output += u'\t\t\t<tr>\n'
             link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i).encode('utf-8'))
             output += u'\t\t\t\t<td><a href="' + link + u'">' + i + u'</a></td><td>' + str(total) + u'</td><td>' + str(initial) + u'</td><td>' + str(other) + u'</td><td>' + str(unreview) + u'</td>\n'
