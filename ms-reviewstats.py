@@ -100,6 +100,7 @@ class BasicBot(
             'maxlines': 1000, #default number of entries per page
             'test': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
+            'automatic' : False, #include automatic reviews in stats
         })
 
         # call constructor of the super class
@@ -182,13 +183,18 @@ class BasicBot(
             unreview = 0
         if self.getOption('test'):
             pywikibot.output(u'IN:%s>>%s>>%i>>%i>>%i>>%i' % (action, user, total, initial, other, unreview))
-        total += 1
-        if action.startswith('unapprove'):
-            unreview += 1
-        elif '-i' in action:
-            initial += 1
+        # distinguish automatic review
+        if self.getOption('automatic') or not action.endswith('a'):
+            total += 1
+            if action.startswith('unapprove'):
+                unreview += 1
+            elif '-i' in action:
+                initial += 1
+            else:
+                other += 1
         else:
-            other += 1
+            if self.getOption('test'):
+                pywikibot.output(u'Skipped automatic review')
         if self.getOption('test'):
             pywikibot.output(u'OUT:%s>>%s>>%i>>%i>>%i>>%i' % (action, user, total, initial, other, unreview))
         return (total, initial, other, unreview)
