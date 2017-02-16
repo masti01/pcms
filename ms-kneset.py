@@ -145,8 +145,9 @@ class BasicBot(
         header +=u'\n|-'
         header +=u'\n!Nr'
         header +=u'\n!Id'
-        header +=u'\n!Link Kneset'
         header +=u'\n!Polityk'
+        header +=u'\n!Link Kneset'
+        header +=u'\n!Rozmiar'
         header +=u'\n!Autor'
         header +=u'\n!Data modyfikacji'
         header +=u'\n!Autor modyfikacji'
@@ -187,24 +188,24 @@ class BasicBot(
 
             if self.getOption('test'):
                 pywikibot.output(i)
-            ident, title, name, creator, lastedit, lasteditor, refscount = i
+            ident, title, name, creator, lastedit, lasteditor, refscount, size = i
 
             if (not name) or (name == title):
                 itemcount += 1
 
                 if ident:
-                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + str(ident) + u' || '
-                    finalpage += u'{{Kneset|' + str(ident) + u'|name='
+                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + str(ident) + u' || [[' + title + u']] || '
+                    finalpage += u'[https://www.knesset.gov.il/mk/eng/mk_eng.asp?mk_individual_id_t=' + str(ident) + u' '
+                    if name:
+                        finalpage += name
+                    else:
+                        finalpage += title
+                    finalpage += u']'
+                    #finalpage += u'{{Kneset|' + str(ident) + u'|name='
                 else:
-                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + u"'''brak'''" + u' || '
-                if name:
-                    finalpage += name
-                else:
-                    finalpage += title
+                    finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + u"'''brak'''" + u' || [[' + title + u']] || '
 
-                if ident:
-                    finalpage += u'}}'
-                finalpage += u' || [[' + title + u']] || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(lastedit) 
+                finalpage += u' || ' + str(size) + u' || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + str(lastedit) 
                 finalpage += u' || [[Wikipedysta:' + lasteditor + u'|' + lasteditor + u']] || ' + self.linknumber(title,refscount) + u'\n'
 
                 if itemcount > maxlines-1:
@@ -231,12 +232,13 @@ class BasicBot(
  
     def treat(self, tpage):
         """
-        Creates a tuple (id, title, name, creator, lastedit, refscount)
+        Creates a tuple (id, title, name, creator, lastedit, refscount, size)
         """
         found = False
         rowtext = u''
         ident = None
         name = None
+        size = 0
 	
         # check for id & name(optional)
         for t in tpage.templatesWithParams():
@@ -273,13 +275,18 @@ class BasicBot(
         lastEditor = tpage.latest_revision.user
         #get numer of linking pages
         refsCount = self.linking(tpage)
+        #get articlke size
+        size = len(tpage.text)
+
+
         if self.getOption('test'):
             pywikibot.output(u'lastedit:%s' % lastedit)
             pywikibot.output(u'ident:%s' % ident)
             pywikibot.output(u'refsCount:%s' % refsCount)
             pywikibot.output(u'lastEditor:%s' % lastEditor)
+            pywikibot.output(u'size:%s' % size)
          
-        return(ident,tpage.title(),name,creator,lastedit, lastEditor, refsCount)
+        return(ident,tpage.title(),name,creator,lastedit, lastEditor, refsCount, size)
 
     def linking(self, page):
         """ get number of references """
