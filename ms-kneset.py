@@ -190,7 +190,7 @@ class BasicBot(
                 pywikibot.output(i)
             ident, title, name, creator, lastedit, lasteditor, refscount, size = i
 
-            if (not name) or (name == title):
+            if (not name) or (name == self.shortTitle(title)):
                 itemcount += 1
 
                 if ident:
@@ -239,6 +239,9 @@ class BasicBot(
         ident = None
         name = None
         size = 0
+        sTitle = self.shortTitle(tpage.title())
+        if self.getOption('test'):
+            pywikibot.output(u'sTitle:%s' % sTitle)
 	
         # check for id & name(optional)
         for t in tpage.templatesWithParams():
@@ -259,7 +262,8 @@ class BasicBot(
                         ident = int(pvalue)
                         if self.getOption('test'):
                             pywikibot.output(u'ident:%s' % ident)
-                break
+                if pnamed and name == sTitle:
+                    break
 
         # check for page creator
         #creator, timestamp = tpage.getCreator()
@@ -287,6 +291,16 @@ class BasicBot(
             pywikibot.output(u'size:%s' % size)
          
         return(ident,tpage.title(),name,creator,lastedit, lastEditor, refsCount, size)
+
+    def shortTitle(self, t):
+        """ return text without part in parentheses"""
+        if u'(' in t:
+            shR = re.compile(ur'(?P<short>.*?) \(')
+            match = shR.search(t)
+            return (match.group("short").strip())
+        else:
+            return(t)
+
 
     def linking(self, page):
         """ get number of references """
