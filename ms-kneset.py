@@ -262,7 +262,7 @@ class BasicBot(
                         ident = int(pvalue)
                         if self.getOption('test'):
                             pywikibot.output(u'ident:%s' % ident)
-                if pnamed and name == sTitle:
+                if not pnamed or (pnamed and name == sTitle):
                     break
 
         # check for page creator
