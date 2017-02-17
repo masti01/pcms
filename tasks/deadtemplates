@@ -1,2 +1,5 @@
 seriea.pl, metacritic.com, plantes-botanique.org (do wyjątków!), niezalezna.pl, the-sports.org
 python pwb.py replace.py -regex "\s*?\{\{Martwy link dyskusja[^}]*the-sports\.org.*?}}\s*" "" -nocase -dotall -namespace:1 -summary:"Bot usuwa zbędne szablony martwego linku" -weblink:"*.the-sports.org" -pt:0
+
+www.portalsamorzadowy.pl
+python pwb.py replace.py -regex "\s*?\{\{Martwy link dyskusja[^}]*portalsamorzadowy\.pl.*?}}\s*" "" -nocase -dotall -namespace:1 -summary:"Bot usuwa zbędne szablony martwego linku" -weblink:"*.portalsamorzadowy.pl" -pt:0
