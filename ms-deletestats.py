@@ -257,7 +257,7 @@ class BasicBot(
         header +=u'			<tr><td><a href="#deletereason">Usunięcia - uzasadnienia</a></td></tr>\n'
         header +=u'			<tr><td><a href="#deleteadmins">Usunięcia - administratorzy</a></td></tr>\n'
         header +=u'		</table>\n'
-        header +=u'		<p>Strona przedstawia statystykiusunięć stron. Podsumowanie jest generowane na podstawie danych z ostatnich ' + self.getOption('days') + u' dni. Strona jest aktualizowana co godzinę.</p>\n'
+        header +=u'		<p>Strona przedstawia statystykiusunięć stron. Podsumowanie jest generowane na podstawie danych z ostatnich ' + self.getOption('days') + u' dni. Strona jest aktualizowana raz dziennie (04:00).</p>\n'
         # add creation time
         header += u'	<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
         header += u'\n'
