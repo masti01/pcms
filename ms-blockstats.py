@@ -3,7 +3,7 @@
 """
 AThis bot creates a pages with article reviewer's statistics on pl.wikipedia
 
-Call: time python masti/ms-blockstats.py -page:'!' -outpage:'blocks.html' -days:30; cp ~/pw/compat/masti/html/blocks.html ~/public_html/blocks.html
+Call: time python pwb.py masti/ms-blockstats.py -page:'!' -outpage:'blocks.html' -days:30; cp ~/pw/compat/masti/html/blocks.html ~/public_html/blocks.html
 
 
 Use global -simulate option for test purposes. No changes to live wiki
