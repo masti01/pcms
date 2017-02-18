@@ -287,6 +287,7 @@ class BasicBot(
         header  =u'		<h2><a name="blockreason'+ str(days) + u'h"></a>Blokady - uzasadnienia</h2>\n'
         header +=u'		<table class="wikitable sortable" style="width: 100%">\n'
         header +=u'			<colgroup span="1" style="width: 5%"></colgroup>\n'
+        header +=u'			<colgroup span="1" style="text-align: left"></colgroup>\n'
         header +=u'			<tr>\n'
         header +=u'				<th>Liczba</th>\n'
         header +=u'				<th>Powód</th>\n'	
