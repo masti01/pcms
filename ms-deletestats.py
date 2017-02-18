@@ -164,13 +164,17 @@ class BasicBot(
 
         for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(days=days), reverse=True, logtype='delete'):
             count += 1
+            try:
+                comment = le.comment()
+            except KeyError:
+                comment = u''
             if self.getOption('test'):
-                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),le.comment()))
-            #b = self.addreview(reviews,le.user(),le.action())
-            if le.comment() in deletes.keys():
-                deletes[le.comment()] += 1
+                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),comment))
+
+            if comment in deletes.keys():
+                deletes[comment] += 1
             else:
-                deletes[le.comment()] = 1
+                deletes[comment] = 1
 
         return(deletes)
 
@@ -184,8 +188,12 @@ class BasicBot(
 
         for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(days=days), reverse=True, logtype='delete'):
             count += 1
+            try:
+                comment = le.comment()
+            except KeyError:
+                comment = u''
             if self.getOption('test'):
-                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),le.comment()))
+                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),comment))
             #b = self.addreview(reviews,le.user(),le.action())
             if le.user() in deletes.keys():
                 deletes[le.user()] += 1
