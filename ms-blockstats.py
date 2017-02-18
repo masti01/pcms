@@ -312,7 +312,7 @@ class BasicBot(
             if blocks[i] < 2:
                 break
             output += u'\t\t\t<tr>\n'
-            output += u'\t\t\t\t<td>' + str(blocks[i]) + u'</td><td>' + i + u'</td>\n'
+            output += u'\t\t\t\t<td>' + u'{:6d}'.format(blocks[i]) + u'</td><td>' + i + u'</td>\n'
             output += u'\t\t\t</tr>\n'
         output += self.blockreasonfooter()
         return(output)
