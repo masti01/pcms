@@ -100,7 +100,7 @@ class BasicBot(
             'test': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
             'automatic' : False, #include automatic reviews in stats
-            'days' : 30, #number of days to calculate statistics
+            'days' : '30', #number of days to calculate statistics
         })
 
         # call constructor of the super class
@@ -286,7 +286,7 @@ class BasicBot(
         #create section header
         header  =u'		<h2><a name="blockreason'+ str(days) + u'h"></a>Blokady - uzasadnienia</h2>\n'
         header +=u'		<table class="wikitable sortable" style="width: 100%">\n'
-        header +=u'			<colgroup span="1" style="width: 5%; text-align: center"></colgroup>\n'
+        header +=u'			<colgroup span="1" style="width: 5%"></colgroup>\n'
         header +=u'			<colgroup span="1" style="text-align: left"></colgroup>\n'
         header +=u'			<tr>\n'
         header +=u'				<th>Liczba</th>\n'
