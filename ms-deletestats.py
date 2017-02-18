@@ -336,7 +336,7 @@ class BasicBot(
         header +=u'			<tr>\n'
         header +=u'				<th>Administrator</th>\n'
         header +=u'				<th>Liczba</th>\n'
-        header +=u'				<th>Powód</th>\n'	
+        header +=u'				<th>Udział</th>\n'	
         header +=u'			</tr>\n'
         return(header)
 
