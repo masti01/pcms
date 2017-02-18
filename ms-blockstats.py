@@ -284,8 +284,8 @@ class BasicBot(
 
     def blockreasonheader(self,days):
         #create section header
-        header  =u'		<h2><a name="blockreason'+ str(days) + u'h"></a>Blokady - uzasadnienia</h2>\n'
-        header +=u'		<table class="wikitable sortable" style="width: 100%">\n'
+        header  =u'		<h2><a name="blockreason"></a>Blokady - uzasadnienia - ostatnie '+ str(days) + u' dni</h2>\n'
+        header +=u'		<table class="wikitable sortable" >\n'
         header +=u'			<colgroup span="1" style="width: 5%"></colgroup>\n'
         header +=u'			<colgroup span="1" style="text-align: left"></colgroup>\n'
         header +=u'			<tr>\n'
@@ -319,7 +319,7 @@ class BasicBot(
 
     def blockstatheader(self,days):
         #create section header
-        header  =u'		<h2><a name="blockadmins'+ str(days) + u'h"></a>Blokady - administratorzy</h2>\n'
+        header  =u'		<h2><a name="blockadmins"></a>Blokady - administratorzy - ostatnie '+ str(days) + u' dni</h2>\n'
         header +=u'		<table class="stats">\n'
         header +=u'			<colgroup>\n'
         header +=u'				<col style="width: 15%"/>\n'
