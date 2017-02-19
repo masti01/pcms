@@ -3,7 +3,7 @@
 """
 AThis bot creates a pages with article reviewer's statistics on pl.wikipedia
 
-Call: time python masti/ms-reviewstats.py -page:'!' -outpage:'review.html' ; cp ~/pw/compat/masti/html/review.html ~/public_html/review.html
+Call: time python pwb.py masti/ms-reviewstats.py -page:'!' -outpage:'review.html' ; cp ~/pw/compat/masti/html/review.html ~/public_html/review.html
 
 
 Use global -simulate option for test purposes. No changes to live wiki
@@ -266,10 +266,10 @@ class BasicBot(
         header  =u'		<h2><a name="reviewers'+ str(hours) + u'h"></a>Najaktywniejsi redaktorzy w ostatnich ' + str(hours) + u'h</h2>\n'
         header +=u'		<table class="wikitable sortable">\n'
         header +=u'			<colgroup span="1"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%"></colgroup>\n'
+        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
+        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
+        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
+        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
         header +=u'			<tr>\n'
         header +=u'				<th>Redaktor</th>\n'
         header +=u'				<th>Oznaczeń</th>\n'
