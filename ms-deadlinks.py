@@ -26,6 +26,8 @@ The following parameters are supported:
 -top              Place additional text on top of the page
 
 -summary:         Set the action summary message for the edit.
+
+-includes:        Link to be searched for
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -96,7 +98,6 @@ class BasicBot(
             'maxlines': 1000, #default number of entries per page
             'test': False, #test options
             'includes' : False, #only include links that include this text
-            'includelink' : False, # link to be searched for
         })
 
         # call constructor of the super class
@@ -141,7 +142,7 @@ class BasicBot(
 
         headerfull = u"Poniżej znajduje się lista " + self.getOption('maxlines') + u" martwych linków występujących w największej liczbie artykułów.\n\n"
         headersum = headerfull
-        if not self.getOption('includelink'):
+        if not self.getOption('includes'):
             headersum += u"Zobacz też: [[" + self.getOption('outpage') + u"|Statystykę szczegółowych linków]]\n\n"
             headerfull += u"Zobacz też: [[" + self.getOption('outpage') + u"/ogólne|Statystykę domen z największą liczbą martwych linków]]\n\n"
 
