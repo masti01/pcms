@@ -96,7 +96,7 @@ class BasicBot(
             'maxlines': 1000, #default number of entries per page
             'test': False, #test options
             'includes' : False, #only include links that include this text
-            'includelink' : 'test', # link to be searched for
+            'includelink' : False, # link to be searched for
         })
 
         # call constructor of the super class
@@ -141,8 +141,9 @@ class BasicBot(
 
         headerfull = u"Poniżej znajduje się lista " + self.getOption('maxlines') + u" martwych linków występujących w największej liczbie artykułów.\n\n"
         headersum = headerfull
-        headersum += u"Zobacz też: [[" + self.getOption('outpage') + u"|Statystykę szczegółowych linków]]\n\n"
-        headerfull += u"Zobacz też: [[" + self.getOption('outpage') + u"/ogólne|Statystykę domen z największą liczbą martwych linków]]\n\n"
+        if not self.getOption('includelink'):
+            headersum += u"Zobacz też: [[" + self.getOption('outpage') + u"|Statystykę szczegółowych linków]]\n\n"
+            headerfull += u"Zobacz też: [[" + self.getOption('outpage') + u"/ogólne|Statystykę domen z największą liczbą martwych linków]]\n\n"
 
 	headerfull += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
 	headerfull += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
