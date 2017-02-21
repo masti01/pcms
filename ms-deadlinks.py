@@ -138,7 +138,6 @@ class BasicBot(
 
 
         pywikibot.output(self.getOption('includes'))
-        pywikibot.output(self.getOption('includelink'))
 
         headerfull = u"Poniżej znajduje się lista " + self.getOption('maxlines') + u" martwych linków występujących w największej liczbie artykułów.\n\n"
         headersum = headerfull
