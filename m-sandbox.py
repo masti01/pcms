@@ -4,14 +4,14 @@
 This is a bot to reset sandboxes
 
 Call hourly:
-    python pwb.py masti/m-sandbox.py -page:"Wikipedia:Brudnopis" -text:"{{Prosimy - NIE ZMIENIAJ, NIE KASUJ, NIE PRZENOŚ tej linijki - pisz niżej}}\n" -summary:"resetowanie brudnopisu"
+    python pwb.py masti/m-sandbox.py -page:"Wikipedia:Brudnopis" -text:"{{Prosimy - NIE ZMIENIAJ, NIE KASUJ, NIE PRZENOŚ tej linijki - pisz niżej}}" -summary:"resetowanie brudnopisu" -always
 
 Call daily:
-python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok pierwszy - edytowanie" -text:"{{/podstrona}}\n" -summary:"resetowanie brudnopisu"
-python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok drugi - formatowanie" -text:"{{/podstrona}}\n" -summary:"resetowanie brudnopisu"
-python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok trzeci - linki" -text:"{{/podstrona}}\n" -summary:"resetowanie brudnopisu"
-python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok czwarty - grafiki" -text:"{{/podstrona}}\n" -summary:"resetowanie brudnopisu"
-python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok piąty - szablony" -text:"{{/podstrona}}\n" -summary:"resetowanie brudnopisu"
+python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok pierwszy - edytowanie" -text:"{{/podstrona}}" -summary:"resetowanie brudnopisu" -always
+python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok drugi - formatowanie" -text:"{{/podstrona}}" -summary:"resetowanie brudnopisu" -always
+python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok trzeci - linki" -text:"{{/podstrona}}" -summary:"resetowanie brudnopisu" -always
+python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok czwarty - grafiki" -text:"{{/podstrona}}" -summary:"resetowanie brudnopisu" -always
+python pwb.py masti/m-sandbox.py -page:"Pomoc:Krok piąty - szablony" -text:"{{/podstrona}}" -summary:"resetowanie brudnopisu" -always
 
 
 Use global -simulate option for test purposes. No changes to live wiki
@@ -132,35 +132,7 @@ class BasicBot(
             pywikibot.output('config.simulate was set to True')
 
     def treat_page(self):
-        """Load the given page, do some changes, and save it."""
-        text = self.current_page.text
-
-        ################################################################
-        # NOTE: Here you can modify the text in whatever way you want. #
-        ################################################################
-
-        # If you find out that you do not want to edit this page, just return.
-        # Example: This puts Text on a page.
-
-        # Retrieve your private option
-        # Use your own text or use the default 'Test'
-        text_to_add = self.getOption('text')
-
-        if self.getOption('replace'):
-            # replace the page text
-            text = text_to_add
-
-        elif self.getOption('top'):
-            # put text on top
-            text = text_to_add + text
-
-        else:
-            # put text on bottom
-            text += text_to_add
-
-        # if summary option is None, it takes the default i18n summary from
-        # i18n subdirectory with summary_key as summary key.
-        self.put_current(text, summary=self.getOption('summary'))
+        self.put_current(self.getOption('text'), summary=self.getOption('summary'))
 
 
 def main(*args):
