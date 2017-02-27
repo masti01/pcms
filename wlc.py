@@ -253,6 +253,7 @@ ignorelist = [
     re.compile('.*[\./@]ira\.art\.pl'),  # false positive (masti)
     re.compile('.*[\./@]pointstreak\.com'),  # false positive (masti)
     re.compile('.*[\./@]postal-codes\.findthedata\.com'),  # false positive (masti)
+    re.compile('.*[\./@]parlamentarny\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]otz\.de/web/zgt/politik/detail/-/specific/Fusionen-im-Altenburger-Land-Kreis-Greiz-und-Saalfeld-Rudolstadt-nun-moeglich-1908536788'),  # false positive (masti)
 
 ]
