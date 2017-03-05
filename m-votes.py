@@ -818,7 +818,7 @@ class BasicBot(
 
     def KAheader(self):
         header = u'	<h2><a name="ka"></a>Komitet Arbitrażowy</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/2016-09" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/2016-09">Wikipedia:Komitet Arbitrażowy/Wybór członków/2016-09</a>.</i></div>\n'
+        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/2017-03" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/2016-09">Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-03</a>.</i></div>\n'
 
         return(header)
 
@@ -1012,7 +1012,7 @@ class BasicBot(
         output = self.mainheader()
         sortablelist = []
 
-        """
+        
         # KA section
         output += self.KAheader()
         if 'KA' in results.keys():
@@ -1042,7 +1042,7 @@ class BasicBot(
                         output += u'	<tr>\n'
                         
                     #output += u'	<tr>\n'
-                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/2016-09/' + wiki).encode('utf-8'))
+                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/2017-03/' + wiki).encode('utf-8'))
                     output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
                     output += u'		<td>' + str(z) + u'</td>'
                     output += u'		<td>' + str(p) + u'</td>'
@@ -1057,7 +1057,7 @@ class BasicBot(
             output += self.KAtablefooter()
         else:
             output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
-        """
+        
 
         # PU section
         output += self.PUheader()
