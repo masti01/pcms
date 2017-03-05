@@ -132,14 +132,14 @@ class BasicBot(
 
     def run(self):
 
-        """
+        
         #KAvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
-        KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2016-09/Całość')
+        KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-03/Całość')
         if KAvotesResult:
             voteResults['KA'] = KAvotesResult
             # test only
             #pywikibot.output(u'KAvotesResult: %s' % KAvotesResult)
-        """
+        
 
         #PUvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
         PUvotesResult = self.PUvotes(u'Wikipedia:Przyznawanie_uprawnień')
@@ -190,7 +190,7 @@ class BasicBot(
 
     """
     Tylko na czas wyborów
-    
+    """
     def KAvotes(self, pagename):
         #generate Przyznawanie uprawnień page list of voting subpages as list
         #test
@@ -200,7 +200,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/2016-09\/(?P<puname>.*)}}')
+        kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/2017-03\/(?P<puname>.*)}}')
         kafound = False
         kalist = kaR.finditer(text)
         for ka in kalist:
@@ -219,7 +219,7 @@ class BasicBot(
         #generate Single Vote result as tuple (wikipedysta, error, (za, przeciw,  neutral, netto, %))
         #test
         #pywikibot.output(u'****generateKAvoteresult:' + pagename)
-        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2016-09/' + pagename)
+        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-03/' + pagename)
         text = votespage.text
         if not text:
             return(None)
@@ -267,7 +267,7 @@ class BasicBot(
         except:
             pywikibot.output(u'***ERROR - cannot analyse votes: %s' % pagename)
             return( (pagename, True, ()) )
-    """
+    
 
         
     """
