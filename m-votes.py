@@ -3,7 +3,7 @@
 """
 This bot creates a pages with current results of various votings on pl.wikipedia
 
-Call: time python masti/m-votes.py -page:'!' -outpage:'votes.html' -log ; cp ~/pw/compat/votes.html ~/public_html/votes.html
+Call: time python pwb.py masti/m-votes.py -page:'!' -outpage:'votes.html' -log ; cp ~/pw/compat/votes.html ~/public_html/votes.html
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -1019,13 +1019,15 @@ class BasicBot(
             output += self.KAtableheader()
 
             #sorted list
+            pywikibot.output(results['KA'])
             for p in results['KA']:
-                (wiki,error, counters) = p
-                if not error:
-                    (z,p,n,netto,percent) = counters
-                    sortablelist.append( (wiki,error,z,p,n,netto,percent) )
-                else:
-                    sortablelist.append( (wiki,error,-9999,-9999,-9999,-9999,0) )
+                if not p == None:
+                    (wiki,error, counters) = p
+                    if not error:
+                        (z,p,n,netto,percent) = counters
+                        sortablelist.append( (wiki,error,z,p,n,netto,percent) )
+                    else:
+                        sortablelist.append( (wiki,error,-9999,-9999,-9999,-9999,0) )
 
             sortedVotes = sorted(sortablelist, key=lambda tup: tup[5], reverse=True)
             #pywikibot.output(u'SORTEDVOTES:')
@@ -1036,7 +1038,7 @@ class BasicBot(
             for p in sortedVotes:
                 (wiki,error, z,p,n,netto,percent) = p
                 if not error:
-                    if rowscount < 5:
+                    if rowscount < 4:
                         output += u'	<tr class="valid">\n'
                     else:
                         output += u'	<tr>\n'
