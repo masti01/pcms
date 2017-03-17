@@ -190,7 +190,7 @@ class BasicBot(
 
     """
     Tylko na czas wyborów
-    """
+    
     def KAvotes(self, pagename):
         #generate Przyznawanie uprawnień page list of voting subpages as list
         #test
@@ -267,7 +267,7 @@ class BasicBot(
         except:
             pywikibot.output(u'***ERROR - cannot analyse votes: %s' % pagename)
             return( (pagename, True, ()) )
-    
+    """
 
         
     """
@@ -1012,7 +1012,7 @@ class BasicBot(
         output = self.mainheader()
         sortablelist = []
 
-        
+        """
         # KA section
         output += self.KAheader()
         if 'KA' in results.keys():
@@ -1059,7 +1059,7 @@ class BasicBot(
             output += self.KAtablefooter()
         else:
             output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
-        
+        """
 
         # PU section
         output += self.PUheader()
