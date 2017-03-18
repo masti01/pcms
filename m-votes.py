@@ -132,14 +132,14 @@ class BasicBot(
 
     def run(self):
 
-        
+        '''
         #KAvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
         KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-03/Całość')
         if KAvotesResult:
             voteResults['KA'] = KAvotesResult
             # test only
             #pywikibot.output(u'KAvotesResult: %s' % KAvotesResult)
-        
+        '''
 
         #PUvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
         PUvotesResult = self.PUvotes(u'Wikipedia:Przyznawanie_uprawnień')
