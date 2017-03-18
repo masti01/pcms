@@ -3,7 +3,7 @@
 """
 This bot creates a pages with current results of various votings on pl.wikipedia
 
-Call: time python pwb.py masti/m-votes.py -page:'!' -outpage:'votes.html' -log ; cp ~/pw/compat/votes.html ~/public_html/votes.html
+Call: time python pwb.py masti/m-votes.py -page:'!' -outpage:'votes.html'; cp ~/pw/core/masti/html/votes.html ~/public_html/votes.html
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
