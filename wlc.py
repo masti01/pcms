@@ -255,6 +255,7 @@ ignorelist = [
     re.compile('.*[\./@]postal-codes\.findthedata\.com'),  # false positive (masti)
     re.compile('.*[\./@]parlamentarny\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]otz\.de/web/zgt/politik/detail/-/specific/Fusionen-im-Altenburger-Land-Kreis-Greiz-und-Saalfeld-Rudolstadt-nun-moeglich-1908536788'),  # false positive (masti)
+    re.compile('.*[\./@]soccerbase\.com'),  # bot rejected on site (masti)
 
 ]
 
