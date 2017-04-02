@@ -52,7 +52,7 @@ def main(*args):
         result += outputRow(a)
     file = codecs.open('masti/artnosbody.html', 'w', 'utf-8')
     # printout log
-    pywkibot.output(result)
+    pywikibot.output(result)
     file.write(result)
     file.close()
 
