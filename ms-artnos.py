@@ -33,14 +33,13 @@ def header():
     header += u'	<div id="mw_content">\n'
     header += u'\n'
     header += u'		<p>Strona przedstawia numerację ostatnio utworzonych 100 artykułów z głównej przestrzeni nazw.<br />\n'
-    header += u'		Rodzaj: A (artykuł), R (przekierowanie)<br />\n'
-    header += u'		<small>Strona uaktualniana co 5 minut</small><br />\n'
-    header += u'		<small>Wyświetlanie od najnowszych</small>\n'
+    header += u'		<small>Rodzaj: <b>A</b> (artykuł), <b>R</b> (przekierowanie)</small><br />\n'
+    header += u'		<small>Strona uaktualniana co 5 minut. Wyświetlanie od najnowszych</small><br />\n'
+    header += u'		</p>\n'
     # add creation time
     header += u'		<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
     header += u'\n'
     #
-    header += u'		</p>\n'
     header += u'                <center>\n'
     header += u'		<table class="wikitable" style="width:85%">\n'
     header += u'			<tr>\n'
