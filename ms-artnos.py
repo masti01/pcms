@@ -125,7 +125,7 @@ def main(*args):
     for a in reversed(arts):
         result += outputRow(a)
     result += footer()
-    file = codecs.open('artykuly.html', 'w', 'utf-8')
+    file = codecs.open('masti/artykuly.html', 'w', 'utf-8')
     # printout log
     pywikibot.output(result)
     file.write(result)
