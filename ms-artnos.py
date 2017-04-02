@@ -32,7 +32,7 @@ def outputRow(logline):
         result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
     result += u'\t\t\t</tr>\n'
 
-    pywikibot.output(result)
+    #pywikibot.output(result)
     return(result)
     
 
