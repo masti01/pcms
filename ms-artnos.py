@@ -51,6 +51,8 @@ def main(*args):
     for a in reversed(arts):
         result += outputRow(a)
     file = codecs.open('masti/artnosbody.html', 'w', 'utf-8')
+    # printout log
+    pywkibot.output(result)
     file.write(result)
     file.close()
 
