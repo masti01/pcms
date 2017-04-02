@@ -51,7 +51,7 @@ def header():
     header += u'				<th>Tytuł</th>'
     header += u'				<th>Cel</th>'
     header += u'			</tr>'
-
+    return(header)
 
 def footer():
     #generate html file footer
@@ -125,7 +125,7 @@ def main(*args):
     for a in reversed(arts):
         result += outputRow(a)
     result += footer()
-    file = codecs.open('~/public_html/articles.html', 'w', 'utf-8')
+    file = codecs.open('artykuly.html', 'w', 'utf-8')
     # printout log
     pywikibot.output(result)
     file.write(result)
