@@ -5,6 +5,8 @@ import re
 import pywikibot
 import codecs
 import urllib
+from datetime import datetime
+from time import strftime
 
 def header():
     #generate html file header
@@ -74,7 +76,7 @@ def footer():
     footer += u'		</div>'
     footer += u'		</div>'
     footer += u'<div class="stopka">layout by <a href="../~beau/">Beau</a></div>'
-    footer += u'</body></html>
+    footer += u'</body></html>'
     return(footer)
 
 def outputRow(logline):
@@ -119,8 +121,10 @@ def main(*args):
 
     #print artlist
     
+    result = header()
     for a in reversed(arts):
         result += outputRow(a)
+    result += footer()
     file = codecs.open('~/public_html/articles.html', 'w', 'utf-8')
     # printout log
     pywikibot.output(result)
