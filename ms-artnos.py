@@ -6,6 +6,77 @@ import pywikibot
 import codecs
 import urllib
 
+def header():
+    #generate html file header
+    header = u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
+    header += u'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl" dir="ltr">'
+    header += u'	<head>'
+    header += u'		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'
+    header += u'		<meta http-equiv="refresh" content="300">'
+    header += u'		<title>Licznik artykułów pl.wikipedia - ostatnie 100 pozycji - tools.wikimedia.pl</title>'
+    header += u'		<link rel="stylesheet" type="text/css" href="/~masti/modern.css" />'
+    header += u'	</head>'
+    header += u'<body>'
+    header += u''
+    header += u'	<!-- heading -->'
+    header += u''
+    header += u'	<div id="mw_header">'
+    header += u'		<h1 id="firstHeading">Ostatnie nowe artykuły</h1>'
+    header += u'	</div>'
+    header += u''
+    header += u'	<div id="mw_main">'
+    header += u'	<div id="mw_contentwrapper">'
+    header += u''
+    header += u'	<!-- content -->'
+    header += u'	<div id="mw_content">		'
+    header += u''
+    header += u'		<p>Strona przedstawia numerację ostatnio utworzonych 100 artykułów z głównej przestrzeni nazw.<br />'
+    header += u'		Rodzaj: A (artykuł), R (przekierowanie)<br />	'
+    header += u'		<small>Strona uaktualniana co 5 minut</small><br />	'
+    header += u'		<small>Wyświetlanie od najnowszych</small>'
+    # add creation time
+    header += u'		<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
+    header += u'\n'
+    #
+    header += u'		</p>'
+    header += u'                <center>'
+    header += u'		<table class="wikitable" style="width:85%">'
+    header += u'			<tr>'
+    header += u'				<th>Numer artykułu</th>'
+    header += u'				<th>Data</th>'
+    header += u'				<th>Czas</th>'
+    header += u'				<th>Rodzaj</th>'
+    header += u'				<th>Tytuł</th>'
+    header += u'				<th>Cel</th>'
+    header += u'			</tr>'
+
+
+def footer():
+    #generate html file footer
+    footer = u'		</table>'
+    footer += u'                </center> '
+    footer += u''
+    footer += u'	</div><!-- mw_content -->'
+    footer += u'	</div><!-- mw_contentwrapper -->'
+    footer += u''
+    footer += u'	</div><!-- main -->'
+    footer += u''
+    footer += u'	<div class="mw_clear"></div>'
+    footer += u''
+    footer += u'	<!-- personal portlet -->'
+    footer += u'	<div class="portlet" id="p-personal">'
+    footer += u'		<div class="pBody">'
+    footer += u'			<ul>'
+    footer += u'				<li><a href="http://pl.wikipedia.org">wiki</a></li>'
+    footer += u'				<li><a href="/">tools</a></li>'
+    footer += u'				<li><a href="/~masti/">masti</a></li>'
+    footer += u'			</ul>'
+    footer += u'		</div>'
+    footer += u'		</div>'
+    footer += u'<div class="stopka">layout by <a href="../~beau/">Beau</a></div>'
+    footer += u'</body></html>
+    return(footer)
+
 def outputRow(logline):
     #creates one output row
     s = re.sub(u'\n',u'',logline)
@@ -50,7 +121,7 @@ def main(*args):
     
     for a in reversed(arts):
         result += outputRow(a)
-    file = codecs.open('masti/artnosbody.html', 'w', 'utf-8')
+    file = codecs.open('~/public_html/articles.html', 'w', 'utf-8')
     # printout log
     pywikibot.output(result)
     file.write(result)
