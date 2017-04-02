@@ -114,7 +114,7 @@ def main(*args):
     artlist = []
     result = u''
     
-    file = codecs.open("~/pw/core/ircbot/artnos.log", "r", "utf-8")
+    file = codecs.open("ircbot/artnos.log", "r", "utf-8")
     artlist  = file.readlines()
     file.close()
     arts = artlist[-100:]
