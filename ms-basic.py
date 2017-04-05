@@ -94,7 +94,7 @@ class BasicBot(
             'top': False,  # append text on top of the page
             'outpage': u'User:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
-            'testprint': False, # print testoutput
+            'test': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
         })
 
