@@ -125,7 +125,9 @@ def main(*args):
     
     result = header()
     for a in reversed(arts):
-        result += outputRow(a)
+        r = outputRow(a)
+        if r:
+            result += outputRow(a)
     result += footer()
     file = codecs.open('masti/artykuly.html', 'w', 'utf-8')
     # printout log
