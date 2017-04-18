@@ -82,8 +82,11 @@ def outputRow(logline):
     #creates one output row
     s = re.sub(u'\n',u'',logline)
     #print s
-    anum,adtime,atype,atitle,atarget =  s.split(u';')
-    adate, atime = adtime.split()
+    try:
+        anum,adtime,atype,atitle,atarget =  s.split(u';')
+        adate, atime = adtime.split()
+    except:
+        return(None)
     # ecode URLs for title and target
     utitle = urllib.quote((u'//pl.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
     if atarget == u'':
