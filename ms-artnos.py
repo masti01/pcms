@@ -87,7 +87,7 @@ def outputRow(logline):
         adate, atime = adtime.split()
     except:
         return(None)
-    # ecode URLs for title and target
+    # encode URLs for title and target
     utitle = urllib.quote((u'//pl.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
     if atarget == u'':
         utarget = u''
@@ -102,6 +102,8 @@ def outputRow(logline):
     result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
     if atarget == u'':
         result += u'\t\t\t\t<td></td>\n'
+    elif atarget = u'BŁĄD PRZEKIEROWANIA':
+        result += u'\t\t\t\t<td>BŁĄD PRZEKIEROWANIA</td>\n'
     else:
         utarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
         result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
