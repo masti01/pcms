@@ -102,7 +102,7 @@ def outputRow(logline):
     result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
     if atarget == u'':
         result += u'\t\t\t\t<td></td>\n'
-    elif atarget = u'BŁĄD PRZEKIEROWANIA':
+    elif atarget == u'BŁĄD PRZEKIEROWANIA':
         result += u'\t\t\t\t<td>BŁĄD PRZEKIEROWANIA</td>\n'
     else:
         utarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
