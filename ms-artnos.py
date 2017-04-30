@@ -102,14 +102,14 @@ def outputRow(logline):
     page = pywikibot.Page(pywikibot.Site(), atitle)
     if atype == u'R':
         if page.exists():
-            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:green">' + atitle + u'</a></td>\n'
+            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#308050">' + atitle + u'</a></td>\n'
         else:
-            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:red">' + atitle + u'</a></td>\n'
+            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#CC2200">' + atitle + u'</a></td>\n'
     else:
         if page.exists():
             result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
         else:
-            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:red">' + atitle + u'</a></td>\n'
+            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#CC2200">' + atitle + u'</a></td>\n'
     if atarget == u'':
         result += u'\t\t\t\t<td></td>\n'
     elif atarget == u'BŁĄD PRZEKIEROWANIA':
@@ -120,7 +120,7 @@ def outputRow(logline):
         if redir.exists():
             result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
         else:
-            result += u'\t\t\t\t<td><a href="'+ utarget + u'" style="color:red">' + atarget + u'</a></td>\n'
+            result += u'\t\t\t\t<td><a href="'+ utarget + u'" style="color:#CC2200">' + atarget + u'</a></td>\n'
     result += u'\t\t\t</tr>\n'
 
     #pywikibot.output(result)
