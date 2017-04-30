@@ -99,7 +99,10 @@ def outputRow(logline):
     result += u'\t\t\t\t<td>' + adate +'</td>\n'
     result += u'\t\t\t\t<td>' + atime +'</td>\n'
     result += u'\t\t\t\t<td>' + atype +'</td>\n'
-    result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
+    if atype == u'R': 
+        result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:green">' + atitle + u'</a></td>\n'
+    else:
+        result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
     if atarget == u'':
         result += u'\t\t\t\t<td></td>\n'
     elif atarget == u'BŁĄD PRZEKIEROWANIA':
