@@ -99,17 +99,28 @@ def outputRow(logline):
     result += u'\t\t\t\t<td>' + adate +'</td>\n'
     result += u'\t\t\t\t<td>' + atime +'</td>\n'
     result += u'\t\t\t\t<td>' + atype +'</td>\n'
-    if atype == u'R': 
-        result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:green">' + atitle + u'</a></td>\n'
+    page = pywikibot.Page(pywikibot.Site(), atitle)
+    if atype == u'R':
+        if page.exists():
+            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:green">' + atitle + u'</a></td>\n'
+        else:
+            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:red">' + atitle + u'</a></td>\n'
     else:
-        result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
+        if page.exists():
+            result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
+        else:
+            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:red">' + atitle + u'</a></td>\n'
     if atarget == u'':
         result += u'\t\t\t\t<td></td>\n'
     elif atarget == u'BŁĄD PRZEKIEROWANIA':
         result += u'\t\t\t\t<td>BŁĄD PRZEKIEROWANIA</td>\n'
     else:
+        redir = pywikibot.Page(pywikibot.Site(), atarget)
         utarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
-        result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
+        if redir.exists():
+            result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
+        else:
+            result += u'\t\t\t\t<td><a href="'+ utarget + u'" style="color:red">' + atarget + u'</a></td>\n'
     result += u'\t\t\t</tr>\n'
 
     #pywikibot.output(result)
