@@ -258,6 +258,7 @@ ignorelist = [
     re.compile('.*[\./@]soccerbase\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]usnews\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]archive\.fo'),  # redirect t archive.is (masti)
+    re.compile('.*[\./@]researchgate\.net'),  # bot rejected on site (masti)
 ]
 
 
