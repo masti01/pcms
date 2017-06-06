@@ -171,22 +171,26 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(u'>>%s<<' % template)
 	    #pywikibot.output(template)
-            weblink = re.search(weblinkR,template).group('weblink').strip()
-            if weblink in articletext:
-                if self.getOption('test'):
-                    pywikibot.output(u'Still there >>%s<<' % weblink)
-                if not self.removelinktemplate(weblink,articletext):
+            # check if the template is properly built
+            try:
+                weblink = re.search(weblinkR,template).group('weblink').strip()
+                if weblink in articletext:
                     if self.getOption('test'):
-                        pywikibot.output(u'Should stay >>%s<<' % weblink )
+                        pywikibot.output(u'Still there >>%s<<' % weblink)
+                    if not self.removelinktemplate(weblink,articletext):
+                        if self.getOption('test'):
+                            pywikibot.output(u'Should stay >>%s<<' % weblink )
+                    else:
+                        pywikibot.output(u'Has to go >>%s<<' % weblink )
+                        talktext = re.sub(re.escape(template), u'', talktext)
+                        changed = True
                 else:
-                    pywikibot.output(u'Has to go >>%s<<' % weblink )
+                    if self.getOption('test'):
+                        pywikibot.output(u'Uuups! 404 - link not found >>%s<<' % weblink)
                     talktext = re.sub(re.escape(template), u'', talktext)
                     changed = True
-            else:
-                if self.getOption('test'):
-                    pywikibot.output(u'Uuups! 404 - link not found >>%s<<' % weblink)
-                talktext = re.sub(re.escape(template), u'', talktext)
-                changed = True
+            except:
+                pywikibot.output(u'Unrecognized template content in %s' % page.title() )
  
         if changed:
             if len(talktext) < 4:
