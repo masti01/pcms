@@ -3,7 +3,7 @@
 """
 This is a bot to delete empty pages (less than 4 characters).
 Call:
-   python pwb.py masti/m-deleteempty.py -start:'Dyskusja:!' -summary:"Bot usuwa puste strony dyskusji" -pt:0
+   python pwb.py masti/m-deleteempty.py -start:'Dyskusja:!' -summary:"Pusta strona dyskusji" -pt:0
 
 
 Use global -simulate option for test purposes. No changes to live wiki
