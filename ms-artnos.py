@@ -100,6 +100,43 @@ def outputRow(logline):
     result += u'\t\t\t\t<td>' + atime +'</td>\n'
     result += u'\t\t\t\t<td>' + atype +'</td>\n'
     page = pywikibot.Page(pywikibot.Site(), atitle)
+
+    if page.exists():
+        astyle = u''
+        if page.isRedirectPage():
+            astyle = u' style="color:#308050">'
+            try:
+                tpage = page.getRedirectTarget()
+            except:
+                tpage = None
+            ttitle = tpage.title()
+            targetshow = True
+            if tpage.exists():
+                if tpage.isRedirectPage():
+                    tstyle = u' style="color:#308050">'
+                else:
+                    tstyle  = u''
+            else:
+                tstyle = u' style="color:#CC2200">'
+        else:
+            astyle = u' style="color:#CC2200">'
+            if atype = u'R':
+                tpage = pywikibot.Page(pywikibot.Site(), atarget)
+                ttitle = tpage.title()
+                if tpage.exists():
+                    if tpage.isRedirectPage():
+                        tstyle = u' style="color:#308050">'
+                    else:
+                        tstyle  = u''
+                else:
+                    tstyle = u' style="color:#CC2200">'
+
+    urlatitle = urllib.quote((u'//pl.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
+    urlatarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
+
+
+    result += u'\t\t\t\t<td><a href="'+ utitle + u'"' + atitle + u'</a></td>\n'
+
     if atype == u'R':
         if page.exists():
             result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#308050">' + atitle + u'</a></td>\n'
