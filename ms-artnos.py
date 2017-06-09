@@ -120,7 +120,7 @@ def outputRow(logline):
                 tstyle = u' style="color:#CC2200">'
         else:
             astyle = u' style="color:#CC2200">'
-            if atype = u'R':
+            if atype == u'R':
                 tpage = pywikibot.Page(pywikibot.Site(), atarget)
                 ttitle = tpage.title()
                 if tpage.exists():
