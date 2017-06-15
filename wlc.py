@@ -260,6 +260,8 @@ ignorelist = [
     re.compile('.*[\./@]archive\.fo'),  # redirect t archive.is (masti)
     re.compile('.*[\./@]researchgate\.net'),  # bot rejected on site (masti)
     re.compile('.*[\./@]pe2014\.pkw\.gov\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]raciborz\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]encysol\.pl'),  # wrong URLs (masti)
     re.compile('.*[\./@]formula3\.co'),  # bot rejected on site (masti)
 ]
 
