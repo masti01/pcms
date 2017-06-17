@@ -159,8 +159,9 @@ class BasicBot(
             #finalpage = finalpage + self.treat(page)
             pywikibot.output(u'Processing page #%i (%i marked): %s' % (counter, marked, page.title(asLink=True)) )
             article, WDQ = self.treat(page)
-            results[article] = WDQ
-            marked += 1
+            if article:
+                results[article] = WDQ
+                marked += 1
 
         pywikibot.output(results)
         self.generateresultspage(results, self.getOption('outpage'), header, footer)
@@ -174,9 +175,22 @@ class BasicBot(
         found = False
         rowtext = u''
 
-        wdpage = page.data_item()
-        wdq = wdpage.getID()
+        try:
+            wdpage = page.data_item()
+            wdq = wdpage.getID()
+        except:
+            wdq = 0
+            pywikibot.output(u'ERORR: Wikidata item not found')
 
+        # get list of interwiki codes
+        ll = page.langlinks()
+        if self.getOption('test'):
+            pywikibot.output(ll)
+        for l in ll:
+            if self.getOption('test'):
+                pywikibot.output(u'lang:%s' % l.site.lang)
+            if l.site.lang == u'pl':
+                return None,None
         if self.getOption('test'):
             pywikibot.output(u'art:%s>>>WDQ:%s' % (page.title(asLink=True),wdq))
         return page.title(),wdq
@@ -198,8 +212,13 @@ class BasicBot(
 
         #generate WDQ list
         finalpage += u'\n\nWDQ:'
+        firstline = True
         for i in redirlist.keys():
-            finalpage += redirlist[i] + u','
+            if firstline:
+                firstline = False
+            else:
+                finalpage += u','
+            finalpage += redirlist[i]
         finalpage += u'\n'
             
 
