@@ -179,7 +179,7 @@ class BasicBot(
             wdpage = page.data_item()
             wdq = wdpage.getID()
         except:
-            wdq = 0
+            wdq = u'Q0'
             pywikibot.output(u'ERORR: Wikidata item not found')
 
         # get list of interwiki codes
