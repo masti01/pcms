@@ -264,6 +264,9 @@ ignorelist = [
     re.compile('.*[\./@]encysol\.pl'),  # wrong URLs (masti)
     re.compile('.*[\./@]formula3\.co'),  # bot rejected on site (masti)
     re.compile('.*[\./@]senate\.gov'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]rektor\.us\.edu\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]upjp2\.edu\.pl'),  # bot rejected on site (masti)
+
 ]
 
 
