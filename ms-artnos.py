@@ -111,14 +111,17 @@ def outputRow(logline):
             except:
                 tpage = None
                 ttitle = u''
-               
-            if tpage.exists():
-                if tpage.isRedirectPage():
-                    tstyle = u' style="color:#308050">'
+              
+            if tpage: 
+                if tpage.exists():
+                    if tpage.isRedirectPage():
+                        tstyle = u' style="color:#308050">'
+                    else:
+                        tstyle  = u''
                 else:
-                    tstyle  = u''
+                    tstyle = u' style="color:#CC2200">'
             else:
-                tstyle = u' style="color:#CC2200">'
+                tstyle  = u''
         else:
             astyle = u' style="color:#CC2200">'
             if atype == u'R':
