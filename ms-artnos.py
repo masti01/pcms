@@ -107,10 +107,11 @@ def outputRow(logline):
             astyle = u' style="color:#308050">'
             try:
                 tpage = page.getRedirectTarget()
+                ttitle = tpage.title()
             except:
                 tpage = None
-            ttitle = tpage.title()
-            targetshow = True
+                ttitle = u''
+               
             if tpage.exists():
                 if tpage.isRedirectPage():
                     tstyle = u' style="color:#308050">'
