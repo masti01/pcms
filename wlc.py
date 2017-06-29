@@ -266,7 +266,19 @@ ignorelist = [
     re.compile('.*[\./@]senate\.gov'),  # bot rejected on site (masti)
     re.compile('.*[\./@]rektor\.us\.edu\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]upjp2\.edu\.pl'),  # bot rejected on site (masti)
-
+    re.compile('.*[\./@]kyivpost\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]inserbia\.info'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]plymouthherald\.co\.uk'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]aei\.org'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]sns\.org\.rs'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]sdlp\.ie'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]emmelle\.it'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]trm\.md'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]frontnational\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]rzeszow-news\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]tiger\.edu\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]gazetagazeta\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]hfhrpol\.waw\.pl'),  # bot rejected on site (masti)
 ]
 
 
