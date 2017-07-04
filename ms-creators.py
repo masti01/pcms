@@ -185,8 +185,11 @@ class BasicBot(
         """
         found = False
         rowtext = u''
-
-        art = page.toggleTalkPage()
+        
+        if page.namespace() == 1:
+            art = page.toggleTalkPage()
+        else:
+            art = page
         creator,time = art.getCreator()
 
         if self.getOption('test'):
