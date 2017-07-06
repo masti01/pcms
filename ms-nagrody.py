@@ -144,8 +144,6 @@ class BasicBot(
 	header += u"\n</small>\n"
 	header += u'{| class="wikitable" style="font-size:85%;"\n|-\n!Lp.\n!Hasło\n!Nagrody'
 
-        footer = u'\n|}'
-
         results = {}
 
         finalpage = header
@@ -161,8 +159,12 @@ class BasicBot(
                marked += 1
                pywikibot.output(u'Added line #%i: %s' % ( marked, page.title(asLink=True) ))
 
-        pywikibot.output(results)
-        #self.generateresultspage(results, self.getOption('outpage'), header, footer)
+        footer = u'\n|}\n\n'
+        footer += u'Przetworzono stron:' + str(counter)
+
+        if self.getOption('test'):
+            pywikibot.output(results)
+        self.generateresultspage(results, self.getOption('outpage'), header, footer)
         return
 
     def treat(self, page):
