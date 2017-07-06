@@ -206,6 +206,8 @@ class BasicBot(
                     if self.getOption('test'):
                         pywikibot.output(u'Arg:%s' % a)
                     named, name, value = self.templateArg(a)
+                    if not named:
+                        continue
                     if self.getOption('test'):
                         pywikibot.output(u'name:%s; value:%s' % (name,value))
                     if u'nagrody' in name:
