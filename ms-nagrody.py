@@ -271,7 +271,8 @@ class BasicBot(
            name = None
            value = param
         #test
-        pywikibot.output(u'name:%s:value:%s' % (name, value))
+        if self.getOption('test'):
+            pywikibot.output(u'name:%s:value:%s' % (name, value))
         return named, name, value
 
 
