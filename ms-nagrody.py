@@ -208,10 +208,13 @@ class BasicBot(
                     named, name, value = self.templateArg(a)
                     if self.getOption('test'):
                         pywikibot.output(u'name:%s; value:%s' % (name,value))
-                    if u'nagrody' in name and len(value)>0:
-                        mark = True
-                        result = value
-                        return (result)
+                    if u'nagrody' in name:
+                        if len(value)>0:
+                            mark = True
+                            result = value
+                            return (result)
+                        else:
+                            return(None)
 
 	#return None as no filled field found
         return(None)
