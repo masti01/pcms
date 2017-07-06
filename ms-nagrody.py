@@ -190,10 +190,11 @@ class BasicBot(
             found = True
             if self.getOption('test'):
                 pywikibot.output(u'wynik:%s' % award.group(0))
+            return(None)
         else:
             if self.getOption('test'):
                 pywikibot.output(u'wynik: BRAK')
-            return(None)
+
 
         #look for film infobox
         for t in page.templatesWithParams():
