@@ -224,20 +224,9 @@ class BasicBot(
         finalpage = header
         lineN = 1
         for i in list(redirlist):
-            r, t = redirlist[i]
-            if t: #marked page is Template
-                finalpage += u'\n|-\n| ' + str(lineN) + u' || {{s|' + i + u'}} || '
-            else: #marked page is article
-                finalpage += u'\n|-\n| ' + str(lineN) + u' || [[' + i + u']] || '
+            finalpage += u'\n|-\n| ' + str(lineN) + u' || {{s|' + i + u'}} || ' + u'[[' + redirlist[i] + u']]'
             lineN += 1
-            firstLine = True
-            for d in r:
-                if firstLine:
-                    firstLine = False
-                    finalpage += u'[[' + d + u']]'
-                else:
-                    finalpage += u'<br />[[' + d + u']]'
-
+   
         finalpage += footer
 
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
