@@ -224,7 +224,7 @@ class BasicBot(
         finalpage = header
         lineN = 1
         for i in list(redirlist):
-            finalpage += u'\n|-\n| ' + str(lineN) + u' || {{s|' + i + u'}} || ' + u'[[' + redirlist[i] + u']]'
+            finalpage += u'\n|-\n| ' + str(lineN) + u' || [[' + i + u']] || ' + redirlist[i]
             lineN += 1
    
         finalpage += footer
