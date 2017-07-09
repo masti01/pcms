@@ -279,6 +279,13 @@ ignorelist = [
     re.compile('.*[\./@]tiger\.edu\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]gazetagazeta\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]hfhrpol\.waw\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]mae\.ro'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]jusbrasil\.com\.br'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]hertfordshiremercury\.co\.uk'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]hfhr\.org\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]scholar\.google\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]raciborz\.com\.pl'),  # bot rejected on site (masti)
+
 ]
 
 
