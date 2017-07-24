@@ -288,6 +288,7 @@ ignorelist = [
     re.compile('.*[\./@]harku\.ee'),  # bot rejected on site (masti)
     re.compile('.*[\./@]pcworld\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]the-athenaeum\.org'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]diecezja\.rzeszow\.pl'),  # bot rejected on site (masti)
 ]
 
 
