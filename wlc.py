@@ -5,7 +5,7 @@ This bot is used for checking external links found at the wiki.
 
 masti's personalized version for polish projects
 
-Call: python pwb.py masti/wlc.py -ignore:401 -ignore:403 -ignore:451 -ignore:500 -ignore:503 -talk -start:'!'
+Call: python pwb.py masti/wlc.py -ignore:401 -ignore:403 -ignore:451 -ignore:500 -ignore:503 -ignore:429 -talk -pt:0 -talk -start:'!'
 
 It checks several pages at once, with a limit set by the config variable
 max_external_links, which defaults to 50.
