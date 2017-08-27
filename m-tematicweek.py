@@ -95,6 +95,7 @@ class BasicBot(
             'maxlines': 1000, #default number of entries per page
             'testprint': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
+            'test': False, #switch on test functionality 
         })
 
         # call constructor of the super class
@@ -148,13 +149,23 @@ class BasicBot(
 
         text = page.text
 	# get template for marking articles
-	t = re.search(ur'(?P<templatename>{{Wikiprojekt:Tygodnie tematyczne/info.*?}})',text)
-        if not t:
+	t = re.search(ur'(?P<templatename>\{\{Wikiprojekt:Tygodnie tematyczne\/info.*?\}\})',text)
+        g = re.search(ur'\{\{Tydzień tematyczny\/szablony.*?grafika tygodnia\s*?=\s*?(?P<iconname>[^\|\n]*).*?\[\[Wikiprojekt:Tygodnie tematyczne\/(?P<weekname>[^\|]*).*?}}', text, flags=re.S)
+        if self.getOption('test'):
+            pywikibot.output(u't:%s' % t)
+            pywikibot.output(u'g:%s' % g)
+        if not t and not g:
             pywikibot.output(u'Template not found!')
             return(False)
 
-	templatename = t.group('templatename')
-	pywikibot.output(u'Template:%s' % templatename)
+        if t:
+	    templatename = t.group('templatename')
+        if g:
+	    templatename = u'{{Wikiprojekt:Tygodnie tematyczne/info|' + g.group('weekname') + '|' + g.group('iconname') + u'}}'
+        if self.getOption('test'):
+            pywikibot.output(u'templatename:%s' % templatename)
+
+        pywikibot.output(u'Template:%s' % templatename)
 
 	# set summary for edits
 	summary = u'Bot dodaje szablon ' + templatename
@@ -193,7 +204,7 @@ class BasicBot(
 	    worktext = workpage.text
             if worktext:
 	        #check if template exists
-                if u'{{Wikiprojekt:Tygodnie tematyczne/info' in worktext:
+                if u'{{Wikiprojekt:Tygodnie tematyczne/info' in worktext or u'{{Wikiprojekt:Tygodnie tematyczne/info' in worktext:
 	            pywikibot.output(u'Art:[[%s]] not changed: template found' % workpage.title())
                     continue
 	        else:
