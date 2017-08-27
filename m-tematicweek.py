@@ -179,16 +179,22 @@ class BasicBot(
 	Rlink = re.compile(r'\[\[(?P<title>[^\]\|\[]*)(\|[^\]]*)?\]\]')
 
 	for match in Rlink.finditer(articlesection):
-            title = match.group('title')
-            title = title.replace("_", " ").strip(" ")
+            try:
+                title = match.group('title')
+                title = title.replace("_", " ").strip(" ")
+            except:
+                continue
 	    #pywikibot.output(u'Art:[[%s]]' % title)
             artpage = pywikibot.Page(pywikibot.Site(), title)
 
             # follow redirects
-            while artpage.isRedirectPage():
-                oldtitle = artpage.title()
-                artpage = artpage.getRedirectTarget()
-                pywikibot.output(u'Art:[[%s]] FOLLOWING REDIR TO:%s' % (oldtitle, artpage.title()))
+            try:
+                while artpage.isRedirectPage():
+                    oldtitle = artpage.title()
+                    artpage = artpage.getRedirectTarget()
+                    pywikibot.output(u'Art:[[%s]] FOLLOWING REDIR TO:%s' % (oldtitle, artpage.title()))
+            except:
+                continue
 
             #check if article exists
             if not (artpage.namespace() in [0,10,14]):
