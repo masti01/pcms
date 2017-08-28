@@ -294,6 +294,10 @@ ignorelist = [
     re.compile('.*[\./@]pcworld\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]the-athenaeum\.org'),  # bot rejected on site (masti)
     re.compile('.*[\./@]diecezja\.rzeszow\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]wielcy\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]planespotters\.net'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]sbc\.org\.pl/dlibra'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]spoilertv\.pl'),  # bot rejected on site (masti)
 ]
 
 
