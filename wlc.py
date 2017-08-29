@@ -350,6 +350,7 @@ def get_archive_url(url):
         #archive = _get_closest_memento_url(
         #    url,
         #    timegate_uri='http://timetravel.mementoweb.org/webcite/timegate/')
+        pass
 
     # FIXME: Hack for T167463: Use https instead of http for archive.org links
     if archive.startswith('http://web.archive.org'):
