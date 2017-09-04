@@ -227,7 +227,7 @@ class BasicBot(
                     pywikibot.output('NEGATIVE:Text found')
                 return None
         else:
-            # mark when DOES NOT contain
+            # mark when DOES contain
             if self.getOption('text') in page.text:
                 if self.getOption('test'):
                     pywikibot.output('POSITIVE:Text found')
