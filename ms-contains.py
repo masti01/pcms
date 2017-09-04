@@ -10,10 +10,12 @@ whatever way you want.
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
 
-This bot creates a pages with links to tennis players.
-
 Call:
-	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" -summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
+	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" \
+		-summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
+
+	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
+		-summary:"Bot uaktualnia tabelę" -text:"http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*" -ns:0 -regex
 
 The following parameters are supported:
 
@@ -35,6 +37,9 @@ The following parameters are supported:
 -summary:         Set the action summary message for the edit.
 
 -negative:        mark if text not in page
+
+-regex:           treat text as regex - should contain <result> group. if not whole match will be used
+
 """
 #
 # (C) Pywikibot team, 2006-2016
