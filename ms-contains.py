@@ -162,7 +162,8 @@ class BasicBot(
                     #test
                     pywikibot.output(u'Already marked')
             else:
-                pywikibot.output(u'Text Found:%s' % self.getOption('text'))
+                if self.getOption('test'):
+                    pywikibot.output(u'Text Found:%s' % self.getOption('text'))
 
         footer = u'\n'
         footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
