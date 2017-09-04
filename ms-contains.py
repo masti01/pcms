@@ -103,7 +103,8 @@ class BasicBot(
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
             'negative': False, #if True mark pages that DO NOT contain search string
-            'test': False, #switch on test functionality 
+            'test': False, #switch on test functionality
+            'regex': False, #use text as regex
         })
 
         # call constructor of the super class
@@ -161,9 +162,6 @@ class BasicBot(
                 else:
                     #test
                     pywikibot.output(u'Already marked')
-            else:
-                if self.getOption('test'):
-                    pywikibot.output(u'Text Found:%s' % self.getOption('text'))
 
         footer = u'\n'
         footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
@@ -186,8 +184,13 @@ class BasicBot(
         itemcount = 0
         for i in res:
 
-            title = i
+            if self.getOption('regex'):
+                title, link = i
+            else:
+                title = i
             finalpage += u'\n# [[' + title + u']]'
+            if self.getOption('regex'):
+                finalpage += u' - ' + link
             itemcount += 1
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
@@ -217,27 +220,29 @@ class BasicBot(
         Returns page title if param 'text' not in page
         """
 
-        if self.getOption('negative'):
-            # mark when DOES NOT contain
-            if not self.getOption('text') in page.text:
+        # new version
+        if self.getOption('regex'):
+            if u'?P<result>' in self.getOption('text'):
+                resultR =  self.getOption('text')
+            else:
+                resultR = u'(?P<result>' + self.getOption('text') + u')'
+            if self.getOption('test'):
+                pywikibot.output(resultR)
+            match = re.search(resultR, page.text)
+            if not match:
+                return(None)
+            return(page.title(),match.group('result'))
+        else:  
+            isIn = self.getOption('text') in page.text
+            if not isIn and self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('NEGATIVE:Text not found')
                 return(page.title())
-            else:
-                if self.getOption('test'):
-                    pywikibot.output('NEGATIVE:Text found')
-                return None
-        else:
-            # mark when DOES contain
-            if self.getOption('text') in page.text:
+            if isIn and not self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('POSITIVE:Text found')
                 return(page.title())
-            else:
-                if self.getOption('test'):
-                    pywikibot.output('POSITIVE:Text not found')
-                return None
-            
+            return(None)
 
 def main(*args):
     """
