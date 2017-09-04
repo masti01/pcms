@@ -146,15 +146,17 @@ class BasicBot(
         
         reflinks = [] #initiate list
         licznik = 0
+        marked = 0
         for page in self.generator:
 	    licznik += 1
-            pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
+            pywikibot.output(u'Treating #%i (marked:%i): %s' % (licznik, marked, page.title()))
             refs = self.treat(page) # get (name)
             if refs:
                 if not refs in reflinks:
                     #test
                     pywikibot.output(refs)
                     reflinks.append(refs)
+                    marked += 1
                 else:
                     #test
                     pywikibot.output(u'Already marked')
