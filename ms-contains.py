@@ -103,6 +103,7 @@ class BasicBot(
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
             'negative': False, #if True mark pages that DO NOT contain search string
+            'test': False, #switch on test functionality 
         })
 
         # call constructor of the super class
@@ -218,18 +219,22 @@ class BasicBot(
         if self.getOption('negative'):
             # mark when DOES NOT contain
             if not self.getOption('text') in page.text:
-                pywikibot.output('NEGATIVE:Text not found')
+                if self.getOption('test'):
+                    pywikibot.output('NEGATIVE:Text not found')
                 return(page.title())
             else:
-                pywikibot.output('NEGATIVE:Text found')
+                if self.getOption('test'):
+                    pywikibot.output('NEGATIVE:Text found')
                 return None
         else:
             # mark when DOES NOT contain
             if self.getOption('text') in page.text:
-                pywikibot.output('POSITIVE:Text found')
+                if self.getOption('test'):
+                    pywikibot.output('POSITIVE:Text found')
                 return(page.title())
             else:
-                pywikibot.output('POSITIVE:Text not found')
+                if self.getOption('test'):
+                    pywikibot.output('POSITIVE:Text not found')
                 return None
             
 
