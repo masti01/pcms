@@ -132,14 +132,14 @@ class BasicBot(
 
     def run(self):
 
-        '''
+        
         #KAvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
-        KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-03/Całość')
+        KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09/Całość')
         if KAvotesResult:
             voteResults['KA'] = KAvotesResult
             # test only
             #pywikibot.output(u'KAvotesResult: %s' % KAvotesResult)
-        '''
+        
 
         #PUvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
         PUvotesResult = self.PUvotes(u'Wikipedia:Przyznawanie_uprawnień')
@@ -190,7 +190,7 @@ class BasicBot(
 
     """
     Tylko na czas wyborów
-    
+    """
     def KAvotes(self, pagename):
         #generate Przyznawanie uprawnień page list of voting subpages as list
         #test
@@ -200,7 +200,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/2017-03\/(?P<puname>.*)}}')
+        kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/2017-09\/(?P<puname>.*)}}')
         kafound = False
         kalist = kaR.finditer(text)
         for ka in kalist:
@@ -219,7 +219,7 @@ class BasicBot(
         #generate Single Vote result as tuple (wikipedysta, error, (za, przeciw,  neutral, netto, %))
         #test
         #pywikibot.output(u'****generateKAvoteresult:' + pagename)
-        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-03/' + pagename)
+        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09/' + pagename)
         text = votespage.text
         if not text:
             return(None)
@@ -267,7 +267,7 @@ class BasicBot(
         except:
             pywikibot.output(u'***ERROR - cannot analyse votes: %s' % pagename)
             return( (pagename, True, ()) )
-    """
+    
 
         
     """
@@ -818,7 +818,7 @@ class BasicBot(
 
     def KAheader(self):
         header = u'	<h2><a name="ka"></a>Komitet Arbitrażowy</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/2017-03" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/2016-09">Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-03</a>.</i></div>\n'
+        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/2017-09" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09">Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09</a>.</i></div>\n'
 
         return(header)
 
@@ -1012,7 +1012,7 @@ class BasicBot(
         output = self.mainheader()
         sortablelist = []
 
-        """
+        
         # KA section
         output += self.KAheader()
         if 'KA' in results.keys():
@@ -1044,7 +1044,7 @@ class BasicBot(
                         output += u'	<tr>\n'
                         
                     #output += u'	<tr>\n'
-                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/2017-03/' + wiki).encode('utf-8'))
+                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/2017-09/' + wiki).encode('utf-8'))
                     output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
                     output += u'		<td>' + str(z) + u'</td>'
                     output += u'		<td>' + str(p) + u'</td>'
@@ -1059,7 +1059,7 @@ class BasicBot(
             output += self.KAtablefooter()
         else:
             output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
-        """
+        
 
         # PU section
         output += self.PUheader()
