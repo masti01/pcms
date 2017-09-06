@@ -138,8 +138,8 @@ class BasicBot(
 
         
         if self.getOption('KA'):  
-            #KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'/Całość')
-            KAvotesResult = self.KAvotes(u'Wikipedysta:masti/KA')
+            KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'/Całość')
+            #KAvotesResult = self.KAvotes(u'Wikipedysta:masti/KA')
             if KAvotesResult:
                 voteResults['KA'] = KAvotesResult
                 # test only
@@ -229,8 +229,8 @@ class BasicBot(
         #generate Single Vote result as tuple (wikipedysta, error, (za, przeciw,  neutral, netto, %))
         if self.getOption('test'):
             pywikibot.output(u'****generateKAvoteresult:' + pagename)
-        #votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'/' + pagename)
-        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedysta:masti/KA/' + pagename)
+        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'/' + pagename)
+        #votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedysta:masti/KA/' + pagename)
         text = votespage.text
         if not text:
             return(None)
