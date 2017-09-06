@@ -95,6 +95,10 @@ class BasicBot(
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
             'outpage': u'User:mastiBot/test', #default output page
+            'test': False, #switch on test functionality
+            'KA': False, #switch on ArbCom voting
+            'KAmonth': None, #ArbCom voting month eg. 2017-09
+            'KAplaces': 4, #ArbCom plac to be won
         })
 
         # call constructor of the super class
@@ -133,56 +137,59 @@ class BasicBot(
     def run(self):
 
         
-        #KAvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
-        KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09/Całość')
-        if KAvotesResult:
-            voteResults['KA'] = KAvotesResult
-            # test only
-            #pywikibot.output(u'KAvotesResult: %s' % KAvotesResult)
+        if self.getOption('KA'):  
+            #KAvotesResult = self.KAvotes(u'Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'/Całość')
+            KAvotesResult = self.KAvotes(u'Wikipedysta:masti/KA')
+            if KAvotesResult:
+                voteResults['KA'] = KAvotesResult
+                # test only
+                #pywikibot.output(u'KAvotesResult: %s' % KAvotesResult)
         
-
+        """
         #PUvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
         PUvotesResult = self.PUvotes(u'Wikipedia:Przyznawanie_uprawnień')
         if PUvotesResult:
             voteResults['PU'] = PUvotesResult
-            # test only
-            #pywikibot.output(u'PUvotesResult: %s' % PUvotesResult)
+            if self.getOption('test'):
+	        pywikibot.output(u'PUvotesResult: %s' % PUvotesResult)
         
         PDAvotesResult = self.PDAvotes(u'Wikipedia:Propozycje do Dobrych Artykułów', u'PDA')
         if PDAvotesResult:
             voteResults['PDA'] = PDAvotesResult
-            # test only
-            #pywikibot.output(u'PDAvotesResult: %s' % PDAvotesResult)
+            if self.getOption('test'):
+                pywikibot.output(u'PDAvotesResult: %s' % PDAvotesResult)
         
         PAMvotesResult = self.PDAvotes(u'Wikipedia:Propozycje do Artykułów na medal', u'PAM')
         if PAMvotesResult:
             voteResults['PAM'] = PAMvotesResult
-            # test only
-            #pywikibot.output(u'PAMvotesResult: %s' % PAMvotesResult)
+            if self.getOption('test'):
+                pywikibot.output(u'PAMvotesResult: %s' % PAMvotesResult)
         
         INMvotesResult = self.INMvotes(u'Wikipedia:Ilustracja na medal - propozycje')
         if INMvotesResult:
             voteResults['INM'] = INMvotesResult
-            # test only
-            #pywikibot.output(u'INMvotesResult: %s' % INMvotesResult)
+            if self.getOption('test'):
+                pywikibot.output(u'INMvotesResult: %s' % INMvotesResult)
 
         LNMvotesResult = self.LNMvotes(u'Wikipedia:Propozycje do List na medal')
         if LNMvotesResult:
             voteResults['LNM'] = LNMvotesResult
-            # test only
-            #pywikibot.output(u'LNMvotesResult: %s' % LNMvotesResult)
+            if self.getOption('test'):
+                pywikibot.output(u'LNMvotesResult: %s' % LNMvotesResult)
 
         PDGAvotesResult = self.PDGAvotes(u'Wikipedia:Propozycje do Grup Artykułów')
         if PDGAvotesResult:
             voteResults['PDGA'] = PDGAvotesResult
-            # test only
-            #pywikibot.output(u'LNMvotesResult: %s' % LNMvotesResult)
-        
+            if self.getOption('test'):
+                pywikibot.output(u'LNMvotesResult: %s' % LNMvotesResult)
+        """
 
         pywikibot.output(u'voteResults: %s' % voteResults)
 
         self.generateresultspage( voteResults )
-        #pywikibot.output(u'****END OF PROGRAM***')
+
+        if self.getOption('test'):
+            pywikibot.output(u'****END OF PROGRAM***')
 
     """
     KA related part
@@ -200,7 +207,10 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/2017-09\/(?P<puname>.*)}}')
+        #kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/' + self.getOption('KAmonth') + u'\/(?P<puname>.*)}}')
+        kaR = re.compile(ur'\{\{\/(?P<puname>.*)}}')
+        if self.getOption('test'):
+            pywikibot.output(u'kaR: %s' % kaR)
         kafound = False
         kalist = kaR.finditer(text)
         for ka in kalist:
@@ -217,17 +227,18 @@ class BasicBot(
 
     def KASingleVote(self, pagename):
         #generate Single Vote result as tuple (wikipedysta, error, (za, przeciw,  neutral, netto, %))
-        #test
-        #pywikibot.output(u'****generateKAvoteresult:' + pagename)
-        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09/' + pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'****generateKAvoteresult:' + pagename)
+        #votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'/' + pagename)
+        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedysta:masti/KA/' + pagename)
         text = votespage.text
         if not text:
             return(None)
 
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
-        #test
-        #pywikibot.output(u'Vote text:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'Vote text:\n%s' % text)
 
         # vote counting regexp
         forR = re.compile(ur'={4}\s*?Za:?\s*?={4}\n(?P<forvotes>.*?)={4}',re.S)
@@ -238,31 +249,31 @@ class BasicBot(
             votesection = forR.search(text).group('forvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             forvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'For votes count: %i' % forvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'For votes count: %i' % forvotes)
 
             # count Against votes
             votesection = againstR.search(text).group('againstvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             againstvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Against votes count: %i' % againstvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Against votes count: %i' % againstvotes)
 
             # count Abstain votes
             votesection = abstainR.search(text).group('abstainvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             abstainvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Abstain votes count: %i' % abstainvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Abstain votes count: %i' % abstainvotes)
 
             #pywikibot.output(u'Sumvotes: %i' % forvotes + againstvotes)
             if forvotes + againstvotes > 0:
                 percentvotes = forvotes / float(forvotes + againstvotes)
             else:
                 percentvotes = 0
-            #test
-            #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
-            #pywikibot.output(u'Percentage: %f' % percentvotes)
+            if self.getOption('test'):
+                #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
+                pywikibot.output(u'Percentage: %f' % percentvotes)
             return( (pagename, False, (forvotes, againstvotes, abstainvotes, forvotes-againstvotes, percentvotes)) )
         except:
             pywikibot.output(u'***ERROR - cannot analyse votes: %s' % pagename)
@@ -276,8 +287,8 @@ class BasicBot(
 
     def PUvotes(self, pagename):
         #generate Przyznawanie uprawnień page list of voting subpages as list
-        #test
-        #pywikibot.output(u'***PUvotes')
+        if self.getOption('test'):
+            pywikibot.output(u'***PUvotes')
         votesL = []
         votespage = pywikibot.Page(pywikibot.Site(), pagename)
         text = votespage.text
@@ -288,20 +299,20 @@ class BasicBot(
         pulist = puR.finditer(text)
         for pu in pulist:
             subpage = pu.group('puname').strip()
-            #test
-	    #pywikibot.output(subpage)
+            if self.getOption('test'):
+                pywikibot.output(subpage)
             if not u'Wstęp' in subpage:
                pufound = True
                votesL.append(self.PUSingleVote(subpage))
-               # test
-               #pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
+               if self.getOption('test'):
+                   pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
 
         return(votesL)
 
     def PUSingleVote(self, pagename):
         #generate Single Vote result as tuple (wikipedysta, error, (za, przeciw,  neutral, netto, %, data))
-        #test
-        #pywikibot.output(u'****generatePUvoteresult:' + pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'****generatePUvoteresult:' + pagename)
         votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Przyznawanie uprawnień/' + pagename)
         text = votespage.text
         if not text:
@@ -312,15 +323,15 @@ class BasicBot(
             eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
-            #test
-            #pywikibot.output(u'End of Voting: %s' % endofvoting)
+            if self.getOption('test'):
+                pywikibot.output(u'End of Voting: %s' % endofvoting)
         except:
             endofvoting = u'brak danych'
 
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
-        #test
-        #pywikibot.output(u'Vote text:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'Vote text:\n%s' % text)
 
         # vote counting regexp
         forR = re.compile(ur'={4}\s*?Za\s*?={4}\n(?P<forvotes>.*?)={4}',re.S)
@@ -331,30 +342,30 @@ class BasicBot(
             votesection = forR.search(text).group('forvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             forvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'For votes count: %i' % forvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'For votes count: %i' % forvotes)
 
             # count Against votes
             votesection = againstR.search(text).group('againstvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             againstvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Against votes count: %i' % againstvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Against votes count: %i' % againstvotes)
 
             # count Abstain votes
             votesection = abstainR.search(text).group('abstainvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             abstainvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Abstain votes count: %i' % abstainvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Abstain votes count: %i' % abstainvotes)
 
             if forvotes + againstvotes > 0:
                 percentvotes = forvotes / float(forvotes + againstvotes)
             else:
                 percentvotes = 0
-            #test
-            #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
-            #pywikibot.output(u'Percentage: %f' % percentvotes)
+            if self.getOption('test'):
+                #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
+                pywikibot.output(u'Percentage: %f' % percentvotes)
             return( (pagename, False, (forvotes, againstvotes, abstainvotes, forvotes-againstvotes, percentvotes, endofvoting)) )
         except:
             pywikibot.output(u'***ERROR - cannot analyse votes: %s' % pagename)
@@ -362,8 +373,8 @@ class BasicBot(
 
     def CountVotes(self, voteslist):
         #count votes in list
-        #test
-        #pywikibot.output(u'****CountVotes:' + voteslist)
+        if self.getOption('test'):
+            pywikibot.output(u'****CountVotes:' + voteslist)
         #voteR = re.compile(ur'#(\s*?[^\s\n;#]+)')
         voteR = re.compile(ur'^#[^:](?P<vote>[^\n]*)', re.M)
         voteL = voteR.finditer(voteslist)
@@ -379,8 +390,8 @@ class BasicBot(
     """
     def PDAvotes(self, pagename, pdapam):
         #generate Propozycje do Dobrych Artykułów page list of voting subpages as list
-        #test
-        #pywikibot.output(u'***PDAvotes')
+        if self.getOption('test'):
+            pywikibot.output(u'***PDAvotes')
         votesL = []
         votespage = pywikibot.Page(pywikibot.Site(), pagename)
         text = votespage.text
@@ -391,20 +402,20 @@ class BasicBot(
         pdalist = pdaR.finditer(text)
         for pda in pdalist:
             subpage = pda.group('subpage').strip()
-	    #test
-            #pywikibot.output(subpage)
+            if self.getOption('test'):
+                pywikibot.output(subpage)
             if (not subpage.startswith(u'przyznawanie')) and (not subpage.startswith(u'weryfikacja')):
-               pdafound = True
-               votesL.append(self.PDASingleVote(subpage, pdapam))
-               # test
-               #pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
+                pdafound = True
+                votesL.append(self.PDASingleVote(subpage, pdapam))
+                if self.getOption('test'):
+                    pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
 
         return(votesL)
 
     def PDASingleVote(self, pagename, pdapam):
         #generate Single Vote result as tuple (strona, error, (sprawdzający, data))
-        #test
-        #pywikibot.output(u'****generatePDAvoteresult:' + pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'****generatePDAvoteresult:' + pagename)
         if u'PDA' in pdapam:
             votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do Dobrych Artykułów/' + pagename)
             #votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedysta:MastiBot/test')
@@ -419,26 +430,26 @@ class BasicBot(
             eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
-            #test
-            #pywikibot.output(u'End of Voting: %s' % endofvoting)
+            if self.getOption('test'):
+                pywikibot.output(u'End of Voting: %s' % endofvoting)
         except:
             endofvoting = u'brak danych'
 
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
-        #test
-        #pywikibot.output(u'Vote text:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'Vote text:\n%s' % text)
 
         # vote counting regexp
         verR = re.compile(ur'; Sprawdzone przez\s*?\n+(?P<verifiers>.*)', re.S)
         try:
             # count verifiers votes
             votesection = verR.search(text).group('verifiers')
-            #test
-            #pywikibot.output(u'Vote section: %s' % votesection)
+            if self.getOption('test'):
+                pywikibot.output(u'Vote section: %s' % votesection)
             vervotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Ver votes count: %i' % vervotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Ver votes count: %i' % vervotes)
             return( (pagename, False, (vervotes, endofvoting)) )
         except:
             pywikibot.output(u'***ERROR - cannot analyse votes: %s' % pagename)
@@ -449,8 +460,8 @@ class BasicBot(
     """
     def INMvotes(self, pagename):
         #generate Wikipedia:Ilustracja na medal - propozycje page list of voting subpages as list
-        #test
-        #pywikibot.output(u'***INMvotes')
+        if self.getOption('test'):
+            pywikibot.output(u'***INMvotes')
         votesL = []
         votespage = pywikibot.Page(pywikibot.Site(), pagename)
         text = votespage.text
@@ -461,20 +472,20 @@ class BasicBot(
         inmlist = inmR.finditer(text)
         for inm in inmlist:
             subpage = inm.group('subpage').strip()
-	    #test
-            #pywikibot.output(subpage)
+            if self.getOption('test'):
+                pywikibot.output(subpage)
             if (not subpage.startswith(u'Zasady')) and (not subpage.startswith(u'Instrukcja')):
-               inmfound = True
-               votesL.append(self.INMSingleVote(subpage))
-               # test
-               #pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
+                inmfound = True
+                votesL.append(self.INMSingleVote(subpage))
+                if self.getOption('test'):
+                    pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
 
         return(votesL)
 
     def INMSingleVote(self, pagename):
         #generate Single Vote result as tuple (strona, error, (za, przeciw, netto, procent, data))
-        #test
-        #pywikibot.output(u'****generatePDAvoteresult:' + pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'****generatePDAvoteresult:' + pagename)
         votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Ilustracja na medal - propozycje/' + pagename)
         text = votespage.text
         if not text:
@@ -485,8 +496,8 @@ class BasicBot(
             eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
-            #test
-            #pywikibot.output(u'End of Voting: %s' % endofvoting)
+            if self.getOption('test'):
+                pywikibot.output(u'End of Voting: %s' % endofvoting)
         except:
             endofvoting = u'brak danych'
 
@@ -496,37 +507,37 @@ class BasicBot(
 
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
-        #test
-        #pywikibot.output(u'Vote text:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'Vote text:\n%s' % text)
 
         try:
             # count For votes
             votesection = forR.search(text).group('forvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             forvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'For votes count: %i' % forvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'For votes count: %i' % forvotes)
 
             # count Against votes
             votesection = againstR.search(text).group('againstvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             againstvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Against votes count: %i' % againstvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Against votes count: %i' % againstvotes)
 
             #calculate netto
             netto = forvotes - againstvotes
-            #test
-            #pywikibot.output(u'Netto votes count: %i' % netto)
+            if self.getOption('test'):
+                pywikibot.output(u'Netto votes count: %i' % netto)
 
             #calculate percentage
             if forvotes + againstvotes > 0:
                 percentvotes = forvotes / float(forvotes + againstvotes)
             else:
                 percentvotes = 0
-            #test
-            #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
-            #pywikibot.output(u'Percentage: %f' % percentvotes)
+            if self.getOption('test'):
+                #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
+                pywikibot.output(u'Percentage: %f' % percentvotes)
 
             return( (pagename, False, (forvotes, againstvotes, netto, percentvotes, endofvoting)) )
         except:
@@ -564,8 +575,8 @@ class BasicBot(
 
     def LNMSingleVote(self, pagename):
         #generate Single Vote result as tuple (strona, error, (za, przeciw, netto, procent, data))
-        #test
-        #pywikibot.output(u'****generateLNMvoteresult:' + pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'****generateLNMvoteresult:' + pagename)
         votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do List na medal/' + pagename)
         text = votespage.text
         if not text:
@@ -576,8 +587,8 @@ class BasicBot(
             eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
-            #test
-            #pywikibot.output(u'End of Voting: %s' % endofvoting)
+            if self.getOption('test'):
+                pywikibot.output(u'End of Voting: %s' % endofvoting)
         except:
             endofvoting = u'brak danych'
 
@@ -587,8 +598,8 @@ class BasicBot(
         
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
-        #test
-        #pywikibot.output(u'Vote text:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'Vote text:\n%s' % text)
 
         forvotes = ''
         againstvotes = ''
@@ -600,29 +611,29 @@ class BasicBot(
             votesection = forR.search(text).group('forvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             forvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'For votes count: %i' % forvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'For votes count: %i' % forvotes)
 
             # count Against votes
             votesection = againstR.search(text).group('againstvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             againstvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Against votes count: %i' % againstvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Against votes count: %i' % againstvotes)
 
             #calculate netto
             netto = forvotes - againstvotes
-            #test
-            #pywikibot.output(u'Netto votes count: %i' % netto)
+            if self.getOption('test'):
+                pywikibot.output(u'Netto votes count: %i' % netto)
 
             #calculate percentage
             if forvotes + againstvotes > 0:
                 percentvotes = forvotes / float(forvotes + againstvotes)
             else:
                 percentvotes = 0
-            #test
-            #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
-            #pywikibot.output(u'Percentage: %f' % percentvotes)
+            if self.getOption('test'):
+                #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
+                pywikibot.output(u'Percentage: %f' % percentvotes)
 
             return( (pagename, False, (forvotes, againstvotes, netto, percentvotes, endofvoting)) )
         except:
@@ -644,31 +655,31 @@ class BasicBot(
 
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
-        #test
-        #pywikibot.output(u'Vote text:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'Vote text:\n%s' % text)
 
 
-        #test
-        #pywikibot.output(u'*** PDGA:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'*** PDGA:\n%s' % text)
         pdgaR = re.compile(ur'\{\{(Wikipedia:Propozycje do Grup Artykułów)?\/(?P<subpage>.*?)}}')
         pdgafound = False
         pdgalist = pdgaR.finditer(text)
         for pdga in pdgalist:
             subpage = pdga.group('subpage').strip()
-	    #test
-            #pywikibot.output(subpage)
+            if self.getOption('test'):
+                pywikibot.output(subpage)
             if (not subpage.startswith(u'przyznawanie')) and (not subpage.startswith(u'weryfikacja') ) :
-               pdgafound = True
-               votesL.append(self.PDGASingleVote(subpage))
-               # test
-               #pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
+                pdgafound = True
+                votesL.append(self.PDGASingleVote(subpage))
+                if self.getOption('test'):
+                    pywikibot.output(u'Subpage: %s votesL: %s' % (subpage, votesL[len(votesL)-1]))
 
         return(votesL)
 
     def PDGASingleVote(self, pagename):
         #generate Single Vote result as tuple (strona, error, (za, przeciw, netto, procent, data))
-        #test
-        #pywikibot.output(u'****generateLNMvoteresult:' + pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'****generateLNMvoteresult:' + pagename)
         votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do Grup Artykułów/' + pagename)
         text = votespage.text
         if not text:
@@ -679,8 +690,8 @@ class BasicBot(
             eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
-            #test
-            #pywikibot.output(u'End of Voting: %s' % endofvoting)
+            if self.getOption('test'):
+                pywikibot.output(u'End of Voting: %s' % endofvoting)
         except:
             endofvoting = u'brak danych'
 
@@ -690,8 +701,8 @@ class BasicBot(
         
         #removeDisabledParts
         text = pywikibot.textlib.removeDisabledParts(text)
-        #test
-        #pywikibot.output(u'Vote text:\n%s' % text)
+        if self.getOption('test'):
+            pywikibot.output(u'Vote text:\n%s' % text)
 
         forvotes = ''
         againstvotes = ''
@@ -703,29 +714,29 @@ class BasicBot(
             votesection = forR.search(text).group('forvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             forvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'For votes count: %i' % forvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'For votes count: %i' % forvotes)
 
             # count Against votes
             votesection = againstR.search(text).group('againstvotes')
             #pywikibot.output(u'Vote section: %s' % votesection)
             againstvotes = self.CountVotes(votesection)
-            #test
-            #pywikibot.output(u'Against votes count: %i' % againstvotes)
+            if self.getOption('test'):
+                pywikibot.output(u'Against votes count: %i' % againstvotes)
 
             #calculate netto
             netto = forvotes - againstvotes
-            #test
-            #pywikibot.output(u'Netto votes count: %i' % netto)
+            if self.getOption('test'):
+                pywikibot.output(u'Netto votes count: %i' % netto)
 
             #calculate percentage
             if forvotes + againstvotes > 0:
                 percentvotes = forvotes / float(forvotes + againstvotes)
             else:
                 percentvotes = 0
-            #test
-            #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
-            #pywikibot.output(u'Percentage: %f' % percentvotes)
+            if self.getOption('test'):
+                #pywikibot.output(u'Sum of votes count: %i' % sumvotes)
+                pywikibot.output(u'Percentage: %f' % percentvotes)
 
             return( (pagename, False, (forvotes, againstvotes, netto, percentvotes, endofvoting)) )
         except:
@@ -818,13 +829,14 @@ class BasicBot(
 
     def KAheader(self):
         header = u'	<h2><a name="ka"></a>Komitet Arbitrażowy</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/2017-09" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09">Wikipedia:Komitet Arbitrażowy/Wybór członków/2017-09</a>.</i></div>\n'
+        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/' + self.getOption('KAmonth') + u'" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'">Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'</a>.</i></div>\n'
 
         return(header)
 
     def KAtableheader(self):
         header = u'	<table class="votestable">\n'
         header += u'		<tr>\n'
+        header += u'			<th>Pozycja</th>\n'
         header += u'			<th>wikipedysta</th>\n'
         header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
         header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
@@ -1000,6 +1012,39 @@ class BasicBot(
 
         return(footer)
 
+    def ranklist(self,sortedlist):
+        """
+        Return list of ranks in results
+        """
+
+        result = []
+        counter = 1
+        rank = 1
+        previousnetto = 0
+
+        for p in sortedlist:
+            wiki,error,z,p,n,netto,percent = p
+            if self.getOption('test'):
+                pywikibot.output(u'Name:%s votes:%s, previous:%s, count:%s' % (wiki,netto, previousnetto, counter))
+            if counter == 1:
+                previousnetto = netto
+            else:
+                if netto == previousnetto:
+                    if self.getOption('test'):
+                        pywikibot.output(u'Tied')
+                    pass
+                else:
+                    rank = counter
+                    previousnetto = netto
+            if self.getOption('test'):
+                pywikibot.output(u'Rank:%s' % rank)
+            result.append(rank)
+            counter += 1
+        if self.getOption('test'):
+            pywikibot.output(u'Ranks:%s' % result)
+
+        return(result)
+
 
     def generateresultspage(self, results):
         """
@@ -1014,51 +1059,64 @@ class BasicBot(
 
         
         # KA section
-        output += self.KAheader()
-        if 'KA' in results.keys():
-            output += self.KAtableheader()
+        if self.getOption('KA'):
+            output += self.KAheader()
+            if 'KA' in results.keys():
+                output += self.KAtableheader()
 
-            #sorted list
-            pywikibot.output(results['KA'])
-            for p in results['KA']:
-                if not p == None:
-                    (wiki,error, counters) = p
+                #sorted list
+                pywikibot.output(results['KA'])
+                for p in results['KA']:
+                    if not p == None:
+                        (wiki,error, counters) = p
+                        if not error:
+                            (z,p,n,netto,percent) = counters
+                            sortablelist.append( (wiki,error,z,p,n,netto,percent) )
+                        else:
+                            sortablelist.append( (wiki,error,-9999,-9999,-9999,-9999,0) )
+
+                sortedVotes = sorted(sortablelist, key=lambda tup: tup[5], reverse=True)
+                if self.getOption('test'):
+                    pywikibot.output(u'SORTEDVOTES:')
+                    pywikibot.output(sortedVotes)
+
+                ranks = self.ranklist(sortedVotes)
+                lastrank = ranks[int(self.getOption('KAplaces'))-1]
+                if self.getOption('test'):
+                    pywikibot.output(u'Last rank:%i' % lastrank)
+
+                # with sorting
+                rowscount = 0
+                for p in sortedVotes:
+                    (wiki,error, z,p,n,netto,percent) = p
                     if not error:
-                        (z,p,n,netto,percent) = counters
-                        sortablelist.append( (wiki,error,z,p,n,netto,percent) )
-                    else:
-                        sortablelist.append( (wiki,error,-9999,-9999,-9999,-9999,0) )
-
-            sortedVotes = sorted(sortablelist, key=lambda tup: tup[5], reverse=True)
-            #pywikibot.output(u'SORTEDVOTES:')
-            #pywikibot.output(sortedVotes)
-
-            # with sorting
-            rowscount = 0
-            for p in sortedVotes:
-                (wiki,error, z,p,n,netto,percent) = p
-                if not error:
-                    if rowscount < 5 and netto >= 0:
-                        output += u'	<tr class="valid">\n'
-                    else:
-                        output += u'	<tr>\n'
+                        if netto >= 0:
+                            if ranks[rowscount] == lastrank:
+                                output += u'	<tr class="tied">\n'
+                            elif rowscount < int(self.getOption('KAplaces')):
+                                output += u'	<tr class="valid">\n'
+                            else:
+                                output += u'	<tr>\n'
+                        else:
+                            output += u'	<tr>\n'
                         
-                    #output += u'	<tr>\n'
-                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/2017-09/' + wiki).encode('utf-8'))
-                    output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
-                    output += u'		<td>' + str(z) + u'</td>'
-                    output += u'		<td>' + str(p) + u'</td>'
-                    output += u'		<td>' + str(n) + u'</td>'
-                    output += u'		<td><b>' + str(netto) + u'</b></td>'
-                    output += u'		<td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
-                else:
-                    output += u'	<tr class="invalid">\n'
-                    output += u'		<td colspan="6">nie można odczytać danych</td>\n'
-                output += u'	</tr>\n'
-                rowscount += 1
-            output += self.KAtablefooter()
-        else:
-            output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
+                        #output += u'	<tr>\n'
+                        output += u'		<td><center>' + str(ranks[rowscount]) + u'.</center></td>'
+                        link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/' + self.getOption('KAmonth') + u'/' + wiki).encode('utf-8'))
+                        output += u'		<td><center><a href="' + link + u'">' + wiki + u'</a></center></td>'
+                        output += u'		<td>' + str(z) + u'</td>'
+                        output += u'		<td>' + str(p) + u'</td>'
+                        output += u'		<td>' + str(n) + u'</td>'
+                        output += u'		<td><b>' + str(netto) + u'</b></td>'
+                        output += u'		<td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
+                    else:
+                        output += u'	<tr class="invalid">\n'
+                        output += u'		<td colspan="6">nie można odczytać danych</td>\n'
+                    output += u'	</tr>\n'
+                    rowscount += 1
+                output += self.KAtablefooter()
+            else:
+                output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
         
 
         # PU section
@@ -1243,7 +1301,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage'):
+        if option in ('summary', 'text', 'outpage','KAmonth', 'KAplaces'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
