@@ -1038,7 +1038,7 @@ class BasicBot(
             for p in sortedVotes:
                 (wiki,error, z,p,n,netto,percent) = p
                 if not error:
-                    if rowscount < 4 and netto >= 0:
+                    if rowscount < 5 and netto >= 0:
                         output += u'	<tr class="valid">\n'
                     else:
                         output += u'	<tr>\n'
