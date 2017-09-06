@@ -145,7 +145,7 @@ class BasicBot(
                 # test only
                 #pywikibot.output(u'KAvotesResult: %s' % KAvotesResult)
         
-        """
+        
         #PUvotesResult = self.PUvotes(u'Wikipedysta:MastiBot/Przyznawanie_uprawnień')
         PUvotesResult = self.PUvotes(u'Wikipedia:Przyznawanie_uprawnień')
         if PUvotesResult:
@@ -182,7 +182,7 @@ class BasicBot(
             voteResults['PDGA'] = PDGAvotesResult
             if self.getOption('test'):
                 pywikibot.output(u'LNMvotesResult: %s' % LNMvotesResult)
-        """
+        
 
         pywikibot.output(u'voteResults: %s' % voteResults)
 
@@ -207,8 +207,8 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        #kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/' + self.getOption('KAmonth') + u'\/(?P<puname>.*)}}')
-        kaR = re.compile(ur'\{\{\/(?P<puname>.*)}}')
+        kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/' + self.getOption('KAmonth') + u'\/(?P<puname>.*)}}')
+        #kaR = re.compile(ur'\{\{\/(?P<puname>.*)}}')
         if self.getOption('test'):
             pywikibot.output(u'kaR: %s' % kaR)
         kafound = False
