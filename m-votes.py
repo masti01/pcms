@@ -1045,6 +1045,14 @@ class BasicBot(
 
         return(result)
 
+    def tied(self,ranks):
+        """
+        verify if the last valid position is tied
+        """
+        if self.getOption('test'):
+            pywikibot.output('uTied count:%i' % ranks.count(ranks[int(self.getOption('KAplaces'))-1]))
+        return( ranks.count(ranks[int(self.getOption('KAplaces'))-1]) > 1 )
+
 
     def generateresultspage(self, results):
         """
@@ -1091,7 +1099,7 @@ class BasicBot(
                     (wiki,error, z,p,n,netto,percent) = p
                     if not error:
                         if netto >= 0:
-                            if ranks[rowscount] == lastrank:
+                            if ranks[rowscount] == lastrank and self.tied(ranks):
                                 output += u'	<tr class="tied">\n'
                             elif rowscount < int(self.getOption('KAplaces')):
                                 output += u'	<tr class="valid">\n'
