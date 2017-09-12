@@ -43,6 +43,8 @@ The following parameters are supported:
 
 -regex:           treat text as regex - should contain <result> group. if not whole match will be used
 
+-title:           search in title not page.text
+
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -113,6 +115,7 @@ class BasicBot(
             'negative': False, #if True mark pages that DO NOT contain search string
             'test': False, #switch on test functionality
             'regex': False, #use text as regex
+            'title': False, #search in page.title not in page.text
         })
 
         # call constructor of the super class
@@ -225,8 +228,13 @@ class BasicBot(
  
     def treat(self, page):
         """
-        Returns page title if param 'text' not in page
+        Returns page title if param 'text' in page
         """
+
+        if self.getOption('title'):
+            source = page.title
+        else:
+            source = page.text
 
         # new version
         if self.getOption('regex'):
@@ -236,12 +244,12 @@ class BasicBot(
                 resultR = u'(?P<result>' + self.getOption('text') + u')'
             if self.getOption('test'):
                 pywikibot.output(resultR)
-            match = re.search(resultR, page.text)
+            match = re.search(resultR, source)
             if not match:
                 return(None)
             return(page.title(),match.group('result'))
         else:  
-            isIn = self.getOption('text') in page.text
+            isIn = self.getOption('text') in source
             if not isIn and self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('NEGATIVE:Text not found')
