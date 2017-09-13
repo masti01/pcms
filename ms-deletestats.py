@@ -169,8 +169,10 @@ class BasicBot(
             except KeyError:
                 comment = u''
             if self.getOption('test'):
-                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),comment))
-
+                try:
+                    pywikibot.output(u'REAS:%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),comment))
+                except KeyError:
+                    pywikibot.output(u'REAS:%i:CANNOT READ DATA' % count)
             if comment in deletes.keys():
                 deletes[comment] += 1
             else:
@@ -193,12 +195,22 @@ class BasicBot(
             except KeyError:
                 comment = u''
             if self.getOption('test'):
-                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),comment))
+                try:
+                    pywikibot.output(u'STAT:%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),comment))
+                except KeyError:
+                    pywikibot.output(u'REAS:%i:CANNOT READ DATA' % count)
             #b = self.addreview(reviews,le.user(),le.action())
-            if le.user() in deletes.keys():
-                deletes[le.user()] += 1
-            else:
-                deletes[le.user()] = 1
+            try:
+                if le.user() in deletes.keys():
+                    deletes[le.user()] += 1
+                else:
+                    deletes[le.user()] = 1
+            except:
+                if u'BŁĄD DANYCH' in deletes.keys():
+                    deletes[u'BŁĄD DANYCH'] += 1
+                else:
+                    deletes[u'BŁĄD DANYCH'] = 1
+                continue
 
         return(deletes)
 
