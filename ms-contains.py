@@ -234,7 +234,7 @@ class BasicBot(
         if self.getOption('title'):
             source = page.title()
         else:
-            source = page.text()
+            source = page.text
 
         # new version
         if self.getOption('regex'):
