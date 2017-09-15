@@ -1019,7 +1019,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
 
         """report  page.title and time"""
         now = datetime.datetime.now()
-        pywikibot.output(u'P:%s >>>%s' % (page.title, now))
+        pywikibot.output(u'P:%s >>>%s' % (page.title(), now))
 
         for url in weblinksIn(text):
             ignoreUrl = False
