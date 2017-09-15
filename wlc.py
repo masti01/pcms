@@ -1016,6 +1016,11 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
         """Process one page."""
         page = self.current_page
         text = page.get()
+
+        """report  page.title and time"""
+        now = datetime.datetime.now()
+        pywikibot.output(u'P:%s >>>%s' % (page.title, now))
+
         for url in weblinksIn(text):
             ignoreUrl = False
             for ignoreR in ignorelist:
