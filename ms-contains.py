@@ -201,7 +201,8 @@ class BasicBot(
                 title = i
             finalpage += u'\n# [[' + title + u']]'
             if self.getOption('regex'):
-                finalpage += u' - ' + link
+                if link:
+                    finalpage += u' - ' + link
             itemcount += 1
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
@@ -245,8 +246,24 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(resultR)
             match = re.search(resultR, source)
-            if (match and self.getOption('negative')) or (not match and not self.getOption('negative')) :
-                return(None)
+            if self.getOption('test'):
+                pywikibot.output(u'M:%s>>N:%s' % (match,self.getOption('negative')))
+            if self.getOption('negative'):
+                if match:
+                    if self.getOption('test'):
+                        pywikibot.output(u'Negative but match')
+                    return(None)
+                else:
+                    return(page.title(),None)
+            else:
+                if not match:
+                    if self.getOption('test'):
+                        pywikibot.output(u'Positive but no match')
+                    return(None)
+                else:
+                    return(page.title(),match.group('result'))
+            #if (match and self.getOption('negative')) or (not match and not self.getOption('negative')) :
+            #    return(None)
             return(page.title(),match.group('result'))
         else:  
             isIn = self.getOption('text') in source
