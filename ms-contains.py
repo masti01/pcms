@@ -245,7 +245,7 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(resultR)
             match = re.search(resultR, source)
-            if not match:
+            if (match and self.getOption('negative')) or (not match and not self.getOption('negative')) :
                 return(None)
             return(page.title(),match.group('result'))
         else:  
