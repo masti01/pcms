@@ -299,6 +299,9 @@ ignorelist = [
     re.compile('.*[\./@]sbc\.org\.pl/dlibra'),  # bot rejected on site (masti)
     re.compile('.*[\./@]spoilertv\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]rain-tree\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]epolotsk\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]gminawilkow\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]keanemusic\.com'),  # bot rejected on site (masti)
 ]
 
 
