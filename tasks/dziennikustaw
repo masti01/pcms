@@ -56,3 +56,36 @@ Prawo energetyczne w Polsce
 {{Dziennik Ustaw|2012|1059}}
 {{Dziennik Ustaw|2017|220}}
 python pwb.py replace.py "{{Dziennik Ustaw|2012|1059}}" "{{Dziennik Ustaw|2017|220}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Prawo energetyczne w Polsce"
+
+Prawo dewizowe
+{{Dziennik Ustaw|rok=2012|numer=0|pozycja=826}}
+{{Dziennik Ustaw|2012|826}}
+{{Dziennik Ustaw|2017|679}}
+python pwb.py replace.py "{{Dziennik Ustaw|rok=2012|numer=0|pozycja=826}}" "{{Dziennik Ustaw|2017|679}}" "{{Dziennik Ustaw|2012|826}}" "{{Dziennik Ustaw|2017|679}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Prawo dewizowe"
+
+Kodeks rodzinny i opiekuńczy
+{{Dziennik Ustaw|2015|2082}}
+{{Dziennik Ustaw|2017|682}}
+python pwb.py replace.py "{{Dziennik Ustaw|2015|2082}}" "{{Dziennik Ustaw|2017|682}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Kodeks rodzinny i opiekuńczy"
+
+Ustawa o prawach konsumenta
+{{Dziennik Ustaw|2014|827}}
+python pwb.py replace.py "{{Dziennik Ustaw|2014|827}}" "{{Dziennik Ustaw|2017|683}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Ustawa o prawach konsumenta"
+
+Ustawa o przeciwdziałaniu narkomanii
+{{Dziennik Ustaw|2016|224}}
+{{Dziennik Ustaw|2017|783}}
+python pwb.py replace.py "{{Dziennik Ustaw|2016|224}}" "{{Dziennik Ustaw|2017|783}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Ustawa o przeciwdziałaniu narkomanii"
+
+Prawo własności przemysłowej (ustawa)
+{{Dziennik Ustaw|rok=2013|numer=0|pozycja=1410}}
+{{Dziennik Ustaw|2017|776}}
+python pwb.py replace.py "{{Dziennik Ustaw|rok=2013|numer=0|pozycja=1410}}" "{{Dziennik Ustaw|2017|776}}" "{{Dziennik Ustaw|2013|1410}}" "{{Dziennik Ustaw|2017|776}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Prawo własności przemysłowej (ustawa)"
+
+{{Dziennik Ustaw|2012|145}}
+{{Dziennik Ustaw|2017|1121}}
+python pwb.py replace.py "{{Dziennik Ustaw|2012|145}}" "{{Dziennik Ustaw|2017|1121}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Prawo wodne"
+
+2015 r. poz. 1274
+time python pwb.py replace.py "{{Dziennik Ustaw|2016|639}}" "{{Dziennik Ustaw|2017|1414}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -always -excepttitle:"Karta Polaka"
+

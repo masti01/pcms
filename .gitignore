@@ -16,5 +16,9 @@ pywikibot/families/
 build
 dist
 docs/_build/
+*.bz2
+*.gz
+*.ods
 #masti
-/tasks/*~
+/tasks/*
+/html/*
