@@ -113,6 +113,9 @@ class BasicBot(
             'negative': False, #if True mark pages that DO NOT contain search string
             'test': False, #switch on test functionality
             'regex': False, #use text as regex
+            'aslink': False, #put links as wikilinks
+            'append': False, #append results to page
+            'section': None, #section title
         })
 
         # call constructor of the super class
@@ -151,8 +154,12 @@ class BasicBot(
 
     def run(self):
 
-	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+        if not self.getOption('append'):
+	    #header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+            header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+	    header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+        else:
+            header = u'\n\n'
         
         reflinks = [] #initiate list
         licznik = 0
@@ -187,6 +194,8 @@ class BasicBot(
         """
         maxlines = int(self.getOption('maxlines'))
         finalpage = header
+        if self.getOption('section'):
+            finalpage += u'== ' + self.getOption('section') + u' ==\n'
         #res = sorted(redirlist, key=redirlist.__getitem__, reverse=False)
         res = sorted(redirlist)
         itemcount = 0
@@ -196,7 +205,8 @@ class BasicBot(
                 title, link = i
             else:
                 title = i
-            finalpage += u'\n# [[' + title + u']]'
+            #finalpage += u'\n# [[' + title + u']]'
+            finalpage += u'\n# ' + re.sub(ur'\[\[',u'[[:',title, count=1)
             if self.getOption('regex'):
                 finalpage += u' - ' + link
             itemcount += 1
@@ -213,7 +223,10 @@ class BasicBot(
         #pywikibot.output(finalpage)
         success = True
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
-        outpage.text = finalpage
+        if self.getOption('append'):
+            outpage.text += finalpage
+        else:
+            outpage.text = finalpage
 
         pywikibot.output(outpage.title())
         
@@ -239,17 +252,17 @@ class BasicBot(
             match = re.search(resultR, page.text)
             if not match:
                 return(None)
-            return(page.title(),match.group('result'))
+            return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
         else:  
             isIn = self.getOption('text') in page.text
             if not isIn and self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('NEGATIVE:Text not found')
-                return(page.title())
+                return(page.title(asLink=True,forceInterwiki=True, textlink=True))
             if isIn and not self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('POSITIVE:Text found')
-                return(page.title())
+                return(page.title(asLink=True,forceInterwiki=True, textlink=True))
             return(None)
 
 def main(*args):
@@ -280,7 +293,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage', 'maxlines'):
+        if option in ('summary', 'text', 'outpage', 'maxlines', 'section'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
