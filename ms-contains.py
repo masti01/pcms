@@ -43,8 +43,6 @@ The following parameters are supported:
 
 -regex:           treat text as regex - should contain <result> group. if not whole match will be used
 
--title:           search in title not page.text
-
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -115,13 +113,9 @@ class BasicBot(
             'negative': False, #if True mark pages that DO NOT contain search string
             'test': False, #switch on test functionality
             'regex': False, #use text as regex
-<<<<<<< HEAD
-            'title': False, #search in page.title not in page.text
-=======
             'aslink': False, #put links as wikilinks
             'append': False, #append results to page
             'section': None, #section title
->>>>>>> contains
         })
 
         # call constructor of the super class
@@ -214,8 +208,7 @@ class BasicBot(
             #finalpage += u'\n# [[' + title + u']]'
             finalpage += u'\n# ' + re.sub(ur'\[\[',u'[[:',title, count=1)
             if self.getOption('regex'):
-                if link:
-                    finalpage += u' - ' + link
+                finalpage += u' - ' + link
             itemcount += 1
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
@@ -245,13 +238,8 @@ class BasicBot(
  
     def treat(self, page):
         """
-        Returns page title if param 'text' in page
+        Returns page title if param 'text' not in page
         """
-
-        if self.getOption('title'):
-            source = page.title()
-        else:
-            source = page.text
 
         # new version
         if self.getOption('regex'):
@@ -261,35 +249,12 @@ class BasicBot(
                 resultR = u'(?P<result>' + self.getOption('text') + u')'
             if self.getOption('test'):
                 pywikibot.output(resultR)
-<<<<<<< HEAD
-            match = re.search(resultR, source)
-            if self.getOption('test'):
-                pywikibot.output(u'M:%s>>N:%s' % (match,self.getOption('negative')))
-            if self.getOption('negative'):
-                if match:
-                    if self.getOption('test'):
-                        pywikibot.output(u'Negative but match')
-                    return(None)
-                else:
-                    return(page.title(),None)
-            else:
-                if not match:
-                    if self.getOption('test'):
-                        pywikibot.output(u'Positive but no match')
-                    return(None)
-                else:
-                    return(page.title(),match.group('result'))
-            #if (match and self.getOption('negative')) or (not match and not self.getOption('negative')) :
-            #    return(None)
-            return(page.title(),match.group('result'))
-=======
             match = re.search(resultR, page.text)
             if not match:
                 return(None)
             return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
->>>>>>> contains
         else:  
-            isIn = self.getOption('text') in source
+            isIn = self.getOption('text') in page.text
             if not isIn and self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('NEGATIVE:Text not found')
