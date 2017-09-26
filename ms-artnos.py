@@ -139,7 +139,7 @@ def outputRow(logline):
     urlatarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
 
 
-    result += u'\t\t\t\t<td><a href="'+ utitle + u'"' + atitle + u'</a></td>\n'
+    #result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
 
     if atype == u'R':
         if page.exists():
