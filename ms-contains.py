@@ -2,47 +2,30 @@
 # -*- coding: utf-8 -*-
 """
 An incomplete sample script by masti for creating statistics/listings pages
-
 This is not a complete bot; rather, it is a template from which simple
 bots can be made. You can rename it to mybot.py, then edit it in
 whatever way you want.
-
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
-
 Call:
 	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" \
 		-summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
-
 	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
 		-summary:"Bot uaktualnia tabelę" -text:"http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*" -ns:0 -regex
-
 	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
 		-summary:"Bot uaktualnia tabelę" -text:"(?P<result>http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*)" -ns:0 -regex
-
 The following parameters are supported:
-
 &params;
-
 -always           If used, the bot won't ask if it should file the message
                   onto user talk page.   
-
 -outpage          Results page; otherwise "Wikipedysta:mastiBot/test" is used
-
 -maxlines         Max number of entries before new subpage is created; default 1000
-
 -text:            Use this text to be added; otherwise 'Test' is used
-
 -replace:         Dont add text but replace it
-
 -top              Place additional text on top of the page
-
 -summary:         Set the action summary message for the edit.
-
 -negative:        mark if text not in page
-
 -regex:           treat text as regex - should contain <result> group. if not whole match will be used
-
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -83,7 +66,6 @@ class BasicBot(
 
     """
     An incomplete sample bot.
-
     @ivar summary_key: Edit summary message key. The message that should be used
         is placed on /i18n subdirectory. The file containing these messages
         should have the same name as the caller script (i.e. basic.py in this
@@ -96,7 +78,6 @@ class BasicBot(
     def __init__(self, generator, **kwargs):
         """
         Constructor.
-
         @param generator: the page generator that determines on which pages
             to work
         @type generator: generator
@@ -116,6 +97,7 @@ class BasicBot(
             'aslink': False, #put links as wikilinks
             'append': False, #append results to page
             'section': None, #section title
+            'title': False, #check in title not text
         })
 
         # call constructor of the super class
@@ -131,16 +113,12 @@ class BasicBot(
     def _handle_dry_param(self, **kwargs):
         """
         Read the dry parameter and set the simulate variable instead.
-
         This is a private method. It prints a deprecation warning for old
         -dry paramter and sets the global simulate variable and informs
         the user about this setting.
-
         The constuctor of the super class ignores it because it is not
         part of self.availableOptions.
-
         @note: You should ommit this method in your own application.
-
         @keyword dry: deprecated option to prevent changes on live wiki.
             Use -simulate instead.
         @type dry: bool
@@ -201,13 +179,13 @@ class BasicBot(
         itemcount = 0
         for i in res:
 
-            if self.getOption('regex'):
+            if self.getOption('regex') and not self.getOption('negative'):
                 title, link = i
             else:
                 title = i
             #finalpage += u'\n# [[' + title + u']]'
             finalpage += u'\n# ' + re.sub(ur'\[\[',u'[[:',title, count=1)
-            if self.getOption('regex'):
+            if self.getOption('regex') and not self.getOption('negative'):
                 finalpage += u' - ' + link
             itemcount += 1
             if itemcount > maxlines-1:
@@ -241,6 +219,12 @@ class BasicBot(
         Returns page title if param 'text' not in page
         """
 
+        #choose proer source - title or text
+        if self.getOption('title'):
+            source = page.title
+        else:
+            source = page.text
+
         # new version
         if self.getOption('regex'):
             if u'?P<result>' in self.getOption('text'):
@@ -249,14 +233,15 @@ class BasicBot(
                 resultR = u'(?P<result>' + self.getOption('text') + u')'
             if self.getOption('test'):
                 pywikibot.output(resultR)
-            match = re.search(resultR, page.text)
+            match = re.search(resultR, source)
             if not match and self.getOption('negative'):
                 return(page.title(asLink=True,forceInterwiki=True, textlink=True))
-            if not match:
-                return(None)
-            return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
+            elif match and not self.getOption('negative'):
+                return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
+            return(None)
+            
         else:  
-            isIn = self.getOption('text') in page.text
+            isIn = self.getOption('text') in source
             if not isIn and self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('NEGATIVE:Text not found')
@@ -270,9 +255,7 @@ class BasicBot(
 def main(*args):
     """
     Process command line arguments and invoke bot.
-
     If args is an empty list, sys.argv is used.
-
     @param args: command line arguments
     @type args: list of unicode
     """
