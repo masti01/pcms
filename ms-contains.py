@@ -250,6 +250,8 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(resultR)
             match = re.search(resultR, page.text)
+            if not match and self.getOption('negative'):
+                return(page.title(asLink=True,forceInterwiki=True, textlink=True))
             if not match:
                 return(None)
             return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
