@@ -303,7 +303,9 @@ ignorelist = [
     re.compile('.*[\./@]gminawilkow\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]keanemusic\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]apa\.org'),  # redirect loop (masti)
-    re.compile('.*[\./@]interlude\.'),  # timeouts (masti)
+    re.compile('.*[\./@]interlude\.hk'),  # timeouts (masti)
+    re.compile('.*[\./@]ochtrup\.de'),  # timeouts (masti)
+    re.compile('.*[\./@]stadtlohn\.de'),  # timeouts (masti)
 ]
 
 
@@ -1024,7 +1026,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
 
         """report  page.title and time"""
         now = datetime.datetime.now()
-        pywikibot.output(u'P:%s >>>%s' % (page.title(), now))
+        pywikibot.output(u'P:%s >>>%s' % (page.title, now))
 
         for url in weblinksIn(text):
             ignoreUrl = False
