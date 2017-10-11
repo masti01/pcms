@@ -304,8 +304,10 @@ ignorelist = [
     re.compile('.*[\./@]keanemusic\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]apa\.org'),  # redirect loop (masti)
     re.compile('.*[\./@]interlude\.hk'),  # timeouts (masti)
-    re.compile('.*[\./@]ochtrup\.de'),  # timeouts (masti)
-    re.compile('.*[\./@]stadtlohn\.de'),  # timeouts (masti)
+    re.compile('.*[\./@]ochtrup\.de'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]stadtlohn\.de'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]switzenhausen\.eu'),  # bot rejected on site (masti)
+
 ]
 
 
