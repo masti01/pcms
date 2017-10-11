@@ -1029,7 +1029,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
         """report  page.title and time"""
         now = datetime.datetime.now()
         try:
-            pywikibot.output(u'P:%s >>>%s' % (page.title, now))
+            pywikibot.output(u'P:%s >>>%s' % (page.title(), now))
         except:
             pass
 
