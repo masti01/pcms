@@ -272,13 +272,15 @@ class BasicBot(
                 #    continue
                 self.templatesList[lang] = i.title()
                 pywikibot.output(u'Getting references to %s Lang:%s' % (i.title(asLink=True,forceInterwiki=True), lang) )
+                countlang = 0
                 for p in i.getReferences(namespaces=1):
                     artParams = {}
                     art = p.toggleTalkPage()
                     if art.exists():
+                        countlang += 1
                         artList.append(art)
                         if self.getOption('test'):
-                            pywikibot.output(u'#%i:%s:%s' % (count,lang,art.title()))
+                            pywikibot.output(u'#%i/%i:%s:%s' % (count,countlang,lang,art.title()))
                         count += 1
         #get et.wiki article list
         if self.getOption('test'):
