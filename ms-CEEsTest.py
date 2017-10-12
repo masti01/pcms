@@ -245,7 +245,7 @@ class BasicBot(
                 #test switch
                 #if lang not in ('crh'):
                 #    continue
-                continue
+                #continue
                 self.templatesList[lang] = i.title()
                 pywikibot.output(u'Getting references to %s Lang:%s' % (i.title(asLink=True,forceInterwiki=True), lang) )
                 countlang = 0
