@@ -86,7 +86,12 @@ countryNames = {
 'tr':{ 'Arnavutluk':'Albania', 'Avusturya':'Austria', 'Azerbaycan':'Azerbaijan', 'Başkurdistan':'Bashkortostan', 'Beyaz Rusya':'Belarus', 'Bulgaristan':'Bulgaria', 'Ermenistan':'Armenia', 'Bosna-Hersek':'Bosnia and Herzegovina', 'Erzya':'Erzia', 'Esperanto':'Esperanto', 'Estonya':'Estonia', 'Gürcistan':'Georgia', 'Çek Cumhuriyeti':'Czechia', 'Hırvatistan':'Croatia', 'Kosova':'Kosovo', 'Kırım Tatarları':'Crimean Tatars', 'Litvanya':'Lithuania', 'Letonya':'Latvia', 'Macaristan':'Hungary', 'Makedonya':'Macedonia', 'Moldova':'Moldova', 'Polonya':'Poland', 'Rusya':'Russia', 'Romanya':'Romania', 'Sırp Cumhuriyeti':'Serbia', 'Sırbistan':'Serbia', 'Slovakya':'Slovakia ', 'Türkiye':'Turkey', 'Ukrayna':'Ukraine', 'Yunanistan':'Greece', 'Kazakistan':'Kazakhstan', },
 'uk':{ 'Албанія':'Albania', 'Австрія':'Austria', 'Азербайджан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Білорусь':'Belarus', 'Болгарія':'Bulgaria', 'Вірменія':'Armenia', 'Боснія і Герцеговина':'Bosnia and Herzegovina', 'Ерзя':'Erzia', 'Есперанто':'Esperanto', 'Естонія':'Estonia', 'Грузія':'Georgia', 'Чехія':'Czechia', 'Хорватія':'Croatia', 'Косово':'Kosovo', 'Кримські татари':'Crimean Tatars', 'Литва':'Lithuania', 'Латвія':'Latvia', 'Угорщина':'Hungary', 'Македонія':'Macedonia', 'Молдова':'Moldova', 'Польща':'Poland', 'Росія':'Russia', 'Румунія':'Romania', 'Республіка Сербська':'Serbia', 'Сербія':'Serbia', 'Словаччина':'Slovakia ', 'Туреччина':'Turkey', 'Україна':'Ukraine', 'Греція':'Greece', 'Казахстан':'Kazakhstan', },
 'hu':{ 'Albánia':'Albania', 'Ausztria':'Austria', 'Azerbajdzsán':'Azerbaijan', 'Baskirföld':'Bashkortostan', 'Belorusz':'Belarus', 'Bulgária':'Bulgaria', 'Örményország':'Armenia', 'Bosznia és Hercegovina':'Bosnia and Herzegovina', 'Eszperantó':'Esperanto', 'Észtország':'Estonia', 'Grúzia':'Georgia', 'Csehország':'Czechia', 'Horvátország':'Croatia', 'Koszovo':'Kosovo', 'Krími tatárok':'Crimean Tatars', 'Litvánia':'Lithuania', 'Lettország':'Latvia', 'Magyarország':'Hungary', 'Macedónia':'Macedonia', 'Moldávia':'Moldova', 'Lengyelország':'Poland', 'Oroszország':'Russia', 'Románia':'Romania', 'Boszniai Szerb Köztársaság':'Serbia', 'Szerbia':'Serbia', 'Szlovákia':'Slovakia ', 'Törökország':'Turkey', 'Ukrajna':'Ukraine', 'Görögország':'Greece', 'Kazahsztán':'Kazakhstan', },
+'kk':{ 'Албания':'Albania', 'Аустрия':'Austria', 'Әзірбайжан':'Azerbaijan', 'Башқұртстан':'Bashkortostan', 'Беларусь':'Belarus', 'Болгария':'Bulgaria', 'Армения':'Armenia', 'Босния және Герцеговина':'Bosnia and Herzegovina', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово':'Kosovo', 'Қырым татарлары':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Мажарстан':'Hungary', 'Македония':'Macedonia', 'Молдова':'Moldova', 'Польша':'Poland', 'Ресей':'Russia', 'Румыния':'Romania', 'Сербия':'Serbia', 'Словакия':'Slovakia ', 'Түркия':'Turkey', 'Украина':'Ukraine', 'Грекия':'Greece', 'Қазақстан':'Kazakhstan', },
+'et':{ 'Albaania':'Albania', 'Austria':'Austria', 'Aserbaidžaan':'Azerbaijan', 'Baškortostan':'Bashkortostan', 'Valgevene':'Belarus', 'Bulgaaria':'Bulgaria', 'Armeenia':'Armenia', 'Bosnia ja Hertsegoviina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Eesti':'Estonia', 'Gruusia':'Georgia', 'Tšehhi':'Czechia', 'Horvaatia':'Croatia', 'Kosovo':'Kosovo', 'Krimmitatarlased':'Crimean Tatars', 'Leedu':'Lithuania', 'Läti':'Latvia', 'Ungari':'Hungary', 'Makedoonia':'Macedonia', 'Moldova':'Moldova', 'Poola':'Poland', 'Venemaa':'Russia', 'Rumeenia':'Romania', 'Serblaste Vabariik':'Serbia', 'Serbia':'Serbia', 'Slovakkia':'Slovakia ', 'Türgi':'Turkey', 'Ukraina':'Ukraine', 'Kreeka':'Greece', 'Kasahstan':'Kazakhstan', 'Ersa':'Erzia'},
+'hr':{ 'Albanija':'Albania', 'Austrija':'Austria', 'Azerbajdžan':'Azerbaijan', 'Baškirska':'Bashkortostan', 'Bjelorusija':'Belarus', 'Bugarska':'Bulgaria', 'Armenija':'Armenia', 'Bosna i Hercegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonija':'Estonia', 'Gruzija':'Georgia', 'Češka':'Czechia', 'Hrvatska':'Croatia', 'Kosovo':'Kosovo', 'Krimski Tatari':'Crimean Tatars', 'Litva':'Lithuania', 'Latvija':'Latvia', 'Mađarska':'Hungary', 'Makedonija':'Macedonia', 'Moldavija':'Moldova', 'Poljska':'Poland', 'Rusija':'Russia', 'Rumunjska':'Romania', 'Republika Srpska':'Serbia', 'Srbija':'Serbia', 'Slovačka':'Slovakia ', 'Turska':'Turkey', 'Ukrajina':'Ukraine', 'Grčka':'Greece', 'Kazahstan':'Kazakhstan', 'Erzya':'Erzia'},
 }
+etArticles = {'Chocimsk':'','Chocimski rajoon':'','Emilia Plater':'','Bánov':'','Nezdenice':'','Aleksotase vald':'','Centrase vald':'','Dainava vald':'','Eiguliai vald':'','Gričiupise vald':'','Panemunė vald':'','Petrašiūnai vald':'','Šančiai vald':'','Šilainiai vald':'','Žaliakalnise vald':'','Vilijampolė vald':'','Pačeriaukštė I':'','Parovėja':'','Likėnai':'','Kazliškis':'','Kriaunos':'','Karsakiškis':'','Dainava':'','Gričiupis':'','Palemonas':'','Amaliai':'','Naujasodis':'','Pažaislis':'','Petrašiūnai':'','Rambynas':'','Brenguļi vald':'','Trikāta vald':'','Kauguri vald':'','Trikāta':'','Brenguļi':'','Grundzāle vald':'','Aumeisteri mõis':'','Bilska vald':'','Palsmane vald':'','Variņi vald':'','Blome vald':'','Branti vald':'','Launkalne vald':'','Smiltene vald':'','Kalnamuiža':'','Smiltene mõis':'','Łoša (Minski oblast)':'','Vusa':'','Uša (Nemunas)':'','Usa jõgi':'',':lv:Pociems (stacija)':'','Agrolinnake':'','Třebenice':'','Štiavnica mäestik':'','Kalnujai':'','Vičiūnai':'','Rokai':'','Vaišvydava':'','Panemunė (Kaunas)':'','Kalniečiai':'','Žaliakalnis':'','Eiguliai kalmistu':'','Izmir Smajlaj':'Albaania','Amel Tuka':'Bosnia ja Hertsegoviina','Gabriela Petrova':'Bulgaaria','Aleksandr Šaronov':'Ersa','Laša Talahhadze':'Gruusia','Sara Kolak':'Horvaatia','Olga Rõpakova':'Kasahstan','Majlinda Kelmendi':'Kosovo','Kyriákos Ioánnou':'Küpros','Laura Ikauniece-Admidiņa':'Läti','Vadims Vasiļevskis':'','Mogamed Ibragimov':'Makedoonia','Libor Charfreitag':'Slovakkia','Primož Kozmus':'Sloveenia','Jan Kudlička':'Tšehhi','Áron Szilágyi':'Ungari','Iłona Usovič':'Valgevene','Ekateríni Stefanídi':'Kreeka','Nikoléta Kiriakopoúlou':'Kreeka','Paraskeví Papahrístou':'Kreeka','Ivana Španović':'Serbia','SunStroke Project':'Moldova','Sergei Polunin':'Ukraina','Deniss Vasiļjevs':'Läti','Pažaislise klooster':'Leedu','Poola-Türgi sõda (1672–1676)':'Poola','Natalia Jaresko':'Ukraina','Oleksandr Danõljuk':'Ukraina','Vladimir Suure mälestusmärk':'Ukraina','Jadranka Joksimović':'Serbia','Jaroslavli Riiklik Pedagoogikaülikool':'Venemaa','Arkadi Dvorkovitš':'Venemaa','Konstantin Ušinski':'Venemaa','Talat Xhaferi':'Makedoonia','Nikola Poposki':'Makedoonia','Nikola Popovski':'Makedoonia','Jana Burčeska':'Makedoonia','Comrati Riiklik Ülikool':'Moldova','Andrej Plenković':'Horvaatia','Artsvik':'Armeenia','Diana Hacıyeva':'Aserbaidžaan','Nathan Trent':'Austria','Adnan Terzić':'Bosnia ja Hertsegoviina','Anton Rop':'Sloveenia','Pauls Stradiņš':'Läti','Ivan Pilný':'Tšehhi','Stepan Erzia':'Ersa','Lituanica SAT-1':'Leedu','Kruonise hüdroakumulatsioonijaam':'Leedu','Elektrėnai Elektrijaam':'Leedu','Ventspilsi Raadioastronoomiakeskus':'Läti','Ksamili saared':'Albaania','Sisian':'Armeenia','Bakuu Kristallhall':'Aserbaidžaan','Šaršau':'Baškortostan','Bosnalijek':'Bosnia ja Hertsegoviina','Mustafa paša sild':'Bulgaaria','Vardzia':'Gruusia','Vennad Karusüdamed':'Eesti','Jalgat':'Ersa','Zofia Zamenhof':'Esperanto','Eurodom Osijek':'Horvaatia','Kasahstani pealinn':'Kasahstan','Mamuša':'Kosovo','Ohi päev':'Kreeka','Perekop':'Krimski Tatari','Asveja (järv Leedus)':'Leedu','Kuldīga tellissild':'Läti','Suur vesi':'Makedoonia','Radan':'Serbia','Topologi viadukt':'Rumeenia','Redžep-paša torn':'Republika Srpska','Dobšinská jääkoobas':'Slovakkia','Karla kraater':'Tatarstan','Baksı muuseum':'Türgi','Łahojski meteoriidikraater':'Valgevene','Arvils Ašeradens':'Läti','Göd':'Ungari','Szarvas':'Ungari','Tóthfalu':'Serbia','Lobnja':'Venemaa','Georgi Gretško':'Venemaa','Lubań (Poola)':'Poola','Anastasija Sevastova':'Läti','Aleksandrs Čaks':'Läti','Makedoonia denaar':'Makedoonia','Rodniki':'Venemaa','Ivan Makarov':'Eesti','Constanța Casino':'Rumeenia','Vasile Milea':'Rumeenia','Kadri Hazbiu':'Albaania','Pál Losonczi':'Ungari','Jarosław Iwaszkiewicz':'Poola','Ilze Indrāne':'Läti','Antonín Zápotocký':'Tšehhi','Arkadi Perventsev':'Venemaa','Karl Erjavec':'Sloveenia','Skënder Hyseni':'Kosovo'}
+hrArticles = {'Erzjanski jezik':'Erzya', 'Alatjir (rijeka)':'Rusija', 'Villa Koliba':'Poljska', 'Bogorodica (himan)':'Poljska', 'Promet Bosne i Hercegovine':'Bosna i Hercegovina', 'Kolo (ples)':'Republika Srpska', 'Sarajevski progon Srba 1914.':'Bosna i Hercegovina', 'Halil Inalcik':'Turska', 'Tubetejka':'Tatarstan', 'Podzemna željeznica Samara':'Rusija', 'Podzemna željeznica Ekaterinburg':'Rusija', 'Podzemna željeznica Nižnji Novgorod':'Rusija', 'Podzemna željeznica Novosibirsk':'Rusija', 'Podzemna željeznica Kazanj':'Rusija', 'Struške večeri poezije':'Makedonija', 'HK Slovan Bratislava':'Slovačka', 'Peter Machajdik':'Slovačka', 'Aleko Konstantinov':'Bugarska', 'Predsjednik Kosova':'Kosovo', 'Stanovništvo Kosova':'Kosovo', 'Krimska Narodna Republika':'Tatarstan', 'Magnit':'Rusija', 'Aleksandra Herasimenja':'Bjelorusija', 'Birač (BIH)':'Bosna i Hercegovina', 'Hercegovački ustanak (1875.-1878.)':'Republika Srpska', 'Andrićgrad':'Republika Srpska', 'Kuršumli han':'Makedonija', 'Karusaru':'Estonija', 'Kuremaa':'Estonija', 'Mullutu-Suurlahi':'Estonija', 'Narva rezervoar':'Estonija', 'Paunkula rezervoar':'Estonija', 'Veisjaru':'Estonija', 'Eczabibasi Vitra':'Turska', 'Palatinos (jezero)':'Mađarska', 'Morskie Oko':'Poljska', 'RK Vardar':'Makedonija', 'Asveja (jezero)':'Litva', 'Plateliai (jezero)':'Litva', 'Nevežis (rijeka)':'Litva', 'Alania':'Gruzija', 'Inguri (rijeka)':'Gruzija', 'Tblisi (jezero)':'Gruzija', 'Giorgi Dvali':'Gruzija', 'Nicholas Marr':'Gruzija', 'Naviband':'Bjelorusija', 'Njemačka okupacija Bjelorusije u Drugom svjetskom ratu':'Bjelorusija'}
 
 class BasicBot(
     # Refer pywikobot.bot for generic bot classes
@@ -115,6 +120,7 @@ class BasicBot(
     authors = {}
     missingCount = {}
     pagesCount = {}
+    countryTable = {}
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'myv':0, 'eo':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
              'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'Be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'el':'country', \
@@ -186,12 +192,41 @@ class BasicBot(
             else:
                 self.authors[aInfo['creator']] += 1
 
+        self.printArtInfo(self.springList)
+        #print self.springList
+
+        self.createCountryTable(self.springList)
+        self.generateCountrytable(self.countryTable,self.getOption('outpage'),header,footer)
+
         self.generateArticleList(self.springList,self.getOption('outpage')+u'/Article list',header,footer)
         self.generateAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
-        self.generateWomenPage(self.authors,self.getOption('outpage')+u'/Articles about women',header,footer)
+        self.generateWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
 
         return
 
+    def createCountryTable(self,aList):
+        #creat dictionary with la:country article counts
+        if self.getOption('test'):
+            pywikibot.output(u'createCountryTable')
+        artCount = 0
+        countryCount = 0
+        for l in aList.keys():
+            for a in aList[l]:
+                print a
+                artCount += 1
+                lang = a['lang'] #source language
+                tmpl = a['template'] #template data {country:[clist], women:T/F}
+                cList = tmpl['country']
+                if lang not in self.countryTable.keys():
+                        self.countryTable[lang] = {}
+                for c in cList:
+                    if c not in self.countryTable[lang].keys():
+                        self.countryTable[lang][c] = 0
+                    self.countryTable[lang][c] += 1
+                    countryCount += 1
+                    if self.getOption('test'):
+                        pywikibot.output(u'art:%i coutry:%i, [[%s:%s]]' % (artCount, countryCount, lang, a['title']))
+        return
 
     def getArticleList(self):
         #generate article list
@@ -207,8 +242,10 @@ class BasicBot(
             count = 0
             for i in self.genInterwiki(p):
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
+                #test switch
                 #if lang not in ('crh'):
                 #    continue
+                continue
                 self.templatesList[lang] = i.title()
                 pywikibot.output(u'Getting references to %s Lang:%s' % (i.title(asLink=True,forceInterwiki=True), lang) )
                 countlang = 0
@@ -225,14 +262,25 @@ class BasicBot(
         if self.getOption('test'):
             pywikibot.output(u'GET ET WIKI')
         etwiki = pywikibot.Site('et',fam='wikipedia')
-        etpage = pywikibot.Page( etwiki, 'Vikipeedia:Wikimedia CEE Spring 2017/Osalejad ja artiklid' )
-        lang = self.lang(etpage.title(asLink=True,forceInterwiki=True))
-        pywikibot.output(u'Getting links from %s Lang:%s' % (etpage.title(asLink=True,forceInterwiki=True), lang) )
-        for p in etpage.linkedPages(namespaces=0):
-            if p.exists():
-                artList.append(p)
+        lang = u'et'
+        for etart in etArticles.keys():
+            etpage = pywikibot.Page( etwiki, etart )
+            if etpage.exists():
+                artList.append(etpage)
                 if self.getOption('test'):
-                     pywikibot.output(u'#%i:%s:%s' % (count,lang,p.title()))
+                     pywikibot.output(u'#%i:%s:%s' % (count,lang,etpage.title()))
+                count += 1
+        #get hr.wiki article list
+        if self.getOption('test'):
+            pywikibot.output(u'GET HR WIKI')
+        hrwiki = pywikibot.Site('hr',fam='wikipedia')
+        lang = u'hr'
+        for hrart in hrArticles.keys():
+            hrpage = pywikibot.Page( hrwiki, hrart )
+            if hrpage.exists():
+                artList.append(hrpage)
+                if self.getOption('test'):
+                     pywikibot.output(u'#%i:%s:%s' % (count,lang,hrpage.title()))
                 count += 1
 
         return(artList)
@@ -242,6 +290,16 @@ class BasicBot(
             s = p.site
             l = s.code
             pywikibot.output(u'Page lang:%s : %s' % (l, p.title(asLink=True,forceInterwiki=True)))
+        return
+
+    def printArtInfo(self,artInfo):
+        #test print of article list result
+        pywikibot.output(u'***************************************')
+        pywikibot.output(u'**            artInfo                **')
+        pywikibot.output(u'***************************************')
+        for l in artInfo.keys():
+            for a in artInfo[l]:
+                pywikibot.output(a)
         return
 
     def getArtInfo(self,art):
@@ -261,9 +319,38 @@ class BasicBot(
             if lang in CEEtemplates.keys() and talk.exists():
                 TmplInfo = self.getTemplateInfo(talk, CEEtemplates[lang], lang)
                 artParams['template'] = TmplInfo
+            #hack for languages without templates
+            countryEN = ''
+            if lang == 'et':
+                countryET = etArticles[artParams['title']]
+                if self.getOption('test'):
+                    pywikibot.output(u'countryET:%s' % countryET)
+                if countryET:
+                    if countryET in countryNames['et'].keys():
+                        countryEN = countryNames['et'][countryET]
+                    else:
+                        countryEN = u'unknown'
+                if self.getOption('test'):
+                    pywikibot.output(u'countryEN:%s' % countryEN)
+                artParams['template'] = {'country':[countryEN],'women':False}
+            if lang == 'hr':
+                countryHR = hrArticles[artParams['title']]
+                if self.getOption('test'):
+                    pywikibot.output(u'countryHR:%s' % countryHR)
+                if countryHR:
+                    if countryHR in countryNames['hr'].keys():
+                        countryEN = countryNames['hr'][countryHR]
+                    else:
+                        countryEN = u'unknown'
+                if self.getOption('test'):
+                    pywikibot.output(u'countryEN:%s' % countryEN)
+                countryEN = hrArticles[artParams['title']]
+                artParams['template'] = {'country':[countryEN],'women':False}
 
             if not artParams['newarticle']:
                 artParams['creator'], artParams['creationDate'] = self.getUpdater(art)
+            if u'template' not in artParams.keys():
+                artParams['template'] = {u'country':[(u'')], 'women':False}
 
 
             #print artParams
@@ -283,6 +370,7 @@ class BasicBot(
 
     def getTemplateInfo(self,page,template,lang):
         param = {}
+        parlist = {}
         #return dictionary with template params
         for t in page.templatesWithParams():
             title, params = t
@@ -293,6 +381,8 @@ class BasicBot(
                 pywikibot.output(u'tml:%s = %s = %s' % (title,tt,template) )
             if tt == template:
                 paramcount = 1
+                parlist['women'] = False
+                parlist['country'] = []
                 for p in params:
                     named, name, value = self.templateArg(p)
                     if not named:
@@ -307,22 +397,29 @@ class BasicBot(
                             pywikibot.output(u'topic:%s:%s' % (name,value))
                         if lang in self.womenp.keys() and value.lower().startswith(self.womenp[lang].lower()):
                             self.women[lang] += 1
+                            parlist['women'] = True
                     #check article about country
                     if lang in self.countryp.keys() and name.lower().startswith(self.countryp[lang].lower()):
                         if self.getOption('test'):
                             pywikibot.output(u'country:%s:%s' % (name,value))
-                        if lang in countryNames.keys() and value in (countryNames[lang].keys()):
-                            countryEN = countryNames[lang][value]
-                            if lang not in self.pagesCount.keys():
-                                self.pagesCount[lang] = {}
-                            if countryEN in self.pagesCount[lang].keys():
-                                self.pagesCount[lang][countryEN] += 1
+                        if len(value):
+                            if lang in countryNames.keys() and value in (countryNames[lang].keys()):
+                                countryEN = countryNames[lang][value]
+                                parlist['country'].append(countryEN)
+                                if lang not in self.pagesCount.keys():
+                                    self.pagesCount[lang] = {}
+                                if countryEN in self.pagesCount[lang].keys():
+                                    self.pagesCount[lang][countryEN] += 1
+                                else:
+                                    self.pagesCount[lang][countryEN] = 1
                             else:
-                                self.pagesCount[lang][countryEN] = 1
+                                parlist['country'].append('unknown')
                     print self.pagesCount
-                print param
-                return param
-        return param
+                if self.getOption('test'):
+                    pywikibot.output(u'PARAM:%s' % param)
+                    pywikibot.output(u'PARLIST:%s' % parlist)
+                return parlist
+        return parlist
 
     def lang(self,template):
         return(re.sub(ur'\[\[(.*?):.*?\]\]',ur'\1',template))
@@ -351,6 +448,21 @@ class BasicBot(
             pass
         #print(iw)
         return(iw)
+
+    def generateCountrytable(self, res, pagename, header, footer):
+        """
+        Generates results page from res
+        Starting with header, ending with footer
+        Output page is pagename
+        """
+
+        finalpage = header
+
+        pywikibot.output('u****************')
+        print res
+        pywikibot.output('u****************')
+
+        return
 
     def generateWomenPage(self, res, pagename, header, footer):
         """
