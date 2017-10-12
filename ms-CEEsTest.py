@@ -207,8 +207,8 @@ class BasicBot(
             count = 0
             for i in self.genInterwiki(p):
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
-                if lang not in ('crh'):
-                    continue
+                #if lang not in ('crh'):
+                #    continue
                 self.templatesList[lang] = i.title()
                 pywikibot.output(u'Getting references to %s Lang:%s' % (i.title(asLink=True,forceInterwiki=True), lang) )
                 countlang = 0
