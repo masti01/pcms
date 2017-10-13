@@ -216,7 +216,10 @@ class BasicBot(
                 artCount += 1
                 lang = a['lang'] #source language
                 tmpl = a['template'] #template data {country:[clist], women:T/F}
-                cList = tmpl['country']
+                if u'country' in tmpl.keys():
+                    cList = tmpl['country']
+                else:
+                    continue
                 if lang not in self.countryTable.keys():
                         self.countryTable[lang] = {}
                 for c in cList:
