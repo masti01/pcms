@@ -61,6 +61,7 @@ docuReplacements = {
     '&params;': pagegenerators.parameterHelp
 }
 CEEtemplates = {'pl' : 'Szablon:CEE Spring 2017', 'az' : 'Şablon:Vikibahar 2017', 'ba' : 'Ҡалып:Вики-яҙ 2017', 'be' : 'Шаблон:CEE Spring 2017', 'Be-tarask' : 'Шаблён:Артыкул ВікіВясны-2017', 'bg' : 'Шаблон:CEE Spring 2017', 'de' : 'Vorlage:CEE_Spring_2017', 'crh' : 'Şablon:CEE Spring 2017', 'el' : 'Πρότυπο:CEE Spring 2017', 'myv' : 'ЛопаПарцун:ВикиТундо 2017', 'eo' : 'Ŝablono:Viki-printempo 2017', 'hy' : 'Կաղապար:CEE Spring 2017/հոդված', 'ka' : 'თარგი:ვიკიგაზაფხული 2017', 'lv' : 'Veidne:CEE Spring 2017', 'lt' : 'Šablonas:VRE 2017', 'mk' : 'Шаблон:СИЕ Пролет 2017', 'ro' : 'Format:Wikimedia CEE Spring 2017', 'ru' : 'Шаблон:Вики-весна 2017', 'sq' : 'Stampa:CEE Spring 2017', 'sr' : 'Šablon:CEE Spring 2017', 'tt' : 'Калып:Вики-яз 2017', 'tr' : 'Şablon:Vikibahar 2017', 'uk' : 'Шаблон:CEE Spring 2017', 'hu' : 'Sablon:CEE Tavasz 2017' }
+countryList =[ u'Albania', u'Armenia', u'Austria', u'Azerbaijan', u'Bashkortostan', u'Belarus', u'Bosnia and Herzegovina', u'Bulgaria', u'Crimean Tatars', u'Croatia', u'Czechia', u'Erzia', u'Esperanto', u'Estonia', u'Georgia', u'Greece', u'Hungary', u'Kazakhstan', u'Kosovo', u'Latvia', u'Lithuania', u'Macedonia', u'Moldova', u'Poland', u'Romania', u'Russia', u'Serbia', u'Serbia', u'Slovakia ', u'Turkey', u'Ukraine', u'unknown' ]
 countryNames = {
 'pl':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbejdżan':'Azerbaijan', 'Baszkortostan':'Bashkortostan', 'Białoruś':'Belarus', 'Bułgaria':'Bulgaria', 'Armenia':'Armenia', 'Bośnia i Hercegowina':'Bosnia and Herzegovina', 'Erzja':'Erzia', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Gruzja':'Georgia', 'Czechy':'Czechia', 'Chorwacja':'Croatia', 'Kosowo':'Kosovo', 'Tatarzy krymscy':'Crimean Tatars', 'Litwa':'Lithuania', 'Łotwa':'Latvia', 'Węgry':'Hungary', 'Macedonia':'Macedonia', 'Mołdawia':'Moldova', 'Polska':'Poland', 'Rosja':'Russia', 'Rumunia':'Romania', 'Republika Serbska':'Serbia', 'Serbia':'Serbia', 'Słowacja':'Slovakia ', 'Turcja':'Turkey', 'Ukraina':'Ukraine', 'Grecja':'Greece', 'Kazachstan':'Kazakhstan', },
 'az':{ 'Albaniya':'Albania', 'Avstriya':'Austria', 'Azərbaycan':'Azerbaijan', 'Başqırdıstan':'Bashkortostan', 'Belarus':'Belarus', 'Bolqarıstan':'Bulgaria', 'Ermənistan':'Armenia', 'Bosniya və Herseqovina':'Bosnia and Herzegovina', 'Erzya':'Erzia', 'Esperantida':'Esperanto', 'Estoniya':'Estonia', 'Gürcüstan':'Georgia', 'Çexiya':'Czechia', 'Xorvatiya':'Croatia', 'Kosovo':'Kosovo', 'Krım-Tatar':'Crimean Tatars', 'Litva':'Lithuania', 'Latviya':'Latvia', 'Macarıstan':'Hungary', 'Makedoniya':'Macedonia', 'Moldova':'Moldova', 'Polşa':'Poland', 'Rusiya':'Russia', 'Rumıniya':'Romania', 'Serb Respublikası':'Serbia', 'Serbiya':'Serbia', 'Slovakiya':'Slovakia ', 'Türkiyə':'Turkey', 'Ukrayna':'Ukraine', 'Yunanıstan':'Greece', 'Qazaxıstan':'Kazakhstan', },
@@ -130,8 +131,11 @@ class BasicBot(
              'myv':'тема', 'eo':'topic', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'ro':'subiect', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
              'tt':'тема', 'tr':'konu', 'uk':'тема'}
     womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'Be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', \
-              'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın', 'uk':'жінки', 'hu':'nők'}
-    
+              'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
+               'uk':'жінки', 'hu':'nők'}
+    userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'Be-tarask':'удзельнік', 'bg':'потребител', 'hu':'szerkesztő',\
+             'de':'benutzer','crh':'qullanıcı','el':'user', 'myv':'сёрмадыця', 'eo':'user', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
+             'mk':'корисник', 'ro':'utilizator', 'ru':'участник', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', 'uk':'користувач' }
 
     def __init__(self, generator, **kwargs):
         """
@@ -153,6 +157,7 @@ class BasicBot(
             'testprint': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
             'test': False, # make verbose output
+            'test2': False, # make verbose output
             'append': False, 
 
         })
@@ -195,18 +200,20 @@ class BasicBot(
         self.printArtInfo(self.springList)
         #print self.springList
 
-        self.createCountryTable(self.springList)
-        self.generateCountrytable(self.countryTable,self.getOption('outpage'),header,footer)
+        self.createCountryTable(self.springList) #generate results for pages about countries 
 
-        self.generateArticleList(self.springList,self.getOption('outpage')+u'/Article list',header,footer)
-        self.generateAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
-        self.generateWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
+        self.createWomenTable(self.springList) #generate results for pages about women
+
+        self.generateResultCountryTable(self.countryTable,self.getOption('outpage'),header,footer)
+        self.generateResultArticleList(self.springList,self.getOption('outpage')+u'/Article list',header,footer)
+        self.generateResultAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
+        self.generateResultWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
 
         return
 
     def createCountryTable(self,aList):
         #creat dictionary with la:country article counts
-        if self.getOption('test'):
+        if self.getOption('test2'):
             pywikibot.output(u'createCountryTable')
         artCount = 0
         countryCount = 0
@@ -231,6 +238,33 @@ class BasicBot(
                         pywikibot.output(u'art:%i coutry:%i, [[%s:%s]]' % (artCount, countryCount, lang, a['title']))
         return
 
+    def createWomenTable(self,aList):
+        #creat dictionary with la:country article counts
+        if self.getOption('test'):
+            pywikibot.output(u'createWomenTable')
+        artCount = 0
+        countryCount = 0
+        for l in aList.keys():
+            for a in aList[l]:
+                print a
+                artCount += 1
+                lang = a['lang'] #source language
+                tmpl = a['template'] #template data {country:[clist], women:T/F}
+                if u'women' in tmpl.keys():
+                    if not tmpl['women']:
+                        continue
+                else:
+                    continue
+                if lang not in self.women.keys():
+                    self.women[lang] = 1
+                else:
+                    self.women[lang] += 1
+                countryCount += 1
+                if self.getOption('test'):
+                    pywikibot.output(u'art:%i Women:True [[%s:%s]]' % (artCount, lang, a['title']))
+        return
+
+
     def getArticleList(self):
         #generate article list
         artList = []
@@ -246,8 +280,8 @@ class BasicBot(
             for i in self.genInterwiki(p):
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
-                #if lang not in ('crh'):
-                #    continue
+                if lang not in ('crh'):
+                    continue
                 #continue
                 self.templatesList[lang] = i.title()
                 pywikibot.output(u'Getting references to %s Lang:%s' % (i.title(asLink=True,forceInterwiki=True), lang) )
@@ -326,34 +360,36 @@ class BasicBot(
             countryEN = ''
             if lang == 'et':
                 countryET = etArticles[artParams['title']]
-                if self.getOption('test'):
+                if self.getOption('test2'):
                     pywikibot.output(u'countryET:%s' % countryET)
                 if countryET:
                     if countryET in countryNames['et'].keys():
                         countryEN = countryNames['et'][countryET]
                     else:
                         countryEN = u'unknown'
-                if self.getOption('test'):
+                if self.getOption('test2'):
                     pywikibot.output(u'countryEN:%s' % countryEN)
-                artParams['template'] = {'country':[countryEN],'women':False}
+                artParams['template'] = {'country':[countryEN], 'user':None, 'women':False}
             if lang == 'hr':
                 countryHR = hrArticles[artParams['title']]
-                if self.getOption('test'):
+                if self.getOption('test2'):
                     pywikibot.output(u'countryHR:%s' % countryHR)
                 if countryHR:
                     if countryHR in countryNames['hr'].keys():
                         countryEN = countryNames['hr'][countryHR]
                     else:
                         countryEN = u'unknown'
-                if self.getOption('test'):
+                if self.getOption('test2'):
                     pywikibot.output(u'countryEN:%s' % countryEN)
-                countryEN = hrArticles[artParams['title']]
-                artParams['template'] = {'country':[countryEN],'women':False}
+                artParams['template'] = {'country':[countryEN], 'user':None, 'women':False}
+                if self.getOption('test2'):
+                    pywikibot.output(u'artParams[template]:%s' % artParams['template'])
 
-            if not artParams['newarticle']:
-                artParams['creator'], artParams['creationDate'] = self.getUpdater(art)
             if u'template' not in artParams.keys():
-                artParams['template'] = {u'country':[(u'')], 'women':False}
+                artParams['template'] = {u'country':[(u'')], 'user':None, 'women':False}
+            if not artParams['newarticle'] and not artParams['template']['user']:
+                #artParams['creator'], artParams['creationDate'] = self.getUpdater(art)
+                artParams['creator'] = u'unknown'
 
 
             #print artParams
@@ -380,12 +416,13 @@ class BasicBot(
             #print(title)
             #print(params)
             tt = re.sub(ur'\[\[.*?:(.*?)\]\]', r'\1', title.title())
-            if self.getOption('test'):
+            if self.getOption('test2'):
                 pywikibot.output(u'tml:%s = %s = %s' % (title,tt,template) )
             if tt == template:
                 paramcount = 1
                 parlist['women'] = False
                 parlist['country'] = []
+                parlist['user'] = None
                 for p in params:
                     named, name, value = self.templateArg(p)
                     if not named:
@@ -394,6 +431,12 @@ class BasicBot(
                     paramcount += 1
                     if self.getOption('test'):
                         pywikibot.output(u'p:%s' % p )
+                    #check username in template
+                    if lang in self.userp.keys() and name.lower().startswith(self.userp[lang].lower()):
+                        if self.getOption('test'):
+                            pywikibot.output(u'user:%s:%s' % (name,value))
+                        if lang in self.userp.keys() and value.lower().startswith(self.userp[lang].lower()):
+                            parlist['user'] = value
                     #check article about women
                     if lang in self.topicp.keys() and name.lower().startswith(self.topicp[lang].lower()):
                         if self.getOption('test'):
@@ -403,7 +446,7 @@ class BasicBot(
                             parlist['women'] = True
                     #check article about country
                     if lang in self.countryp.keys() and name.lower().startswith(self.countryp[lang].lower()):
-                        if self.getOption('test'):
+                        if self.getOption('test2'):
                             pywikibot.output(u'country:%s:%s' % (name,value))
                         if len(value):
                             if lang in countryNames.keys() and value in (countryNames[lang].keys()):
@@ -418,7 +461,7 @@ class BasicBot(
                             else:
                                 parlist['country'].append('unknown')
                     print self.pagesCount
-                if self.getOption('test'):
+                if self.getOption('test2'):
                     pywikibot.output(u'PARAM:%s' % param)
                     pywikibot.output(u'PARLIST:%s' % parlist)
                 return parlist
@@ -452,7 +495,7 @@ class BasicBot(
         #print(iw)
         return(iw)
 
-    def generateCountrytable(self, res, pagename, header, footer):
+    def generateResultCountryTable(self, res, pagename, header, footer):
         """
         Generates results page from res
         Starting with header, ending with footer
@@ -461,13 +504,55 @@ class BasicBot(
 
         finalpage = header
 
-        pywikibot.output('u****************')
-        print res
-        pywikibot.output('u****************')
+        pywikibot.output('u**************************')
+        pywikibot.output(u'generateResultCountryTable')
+        pywikibot.output('u**************************')
+
+        #total counters
+        countryTotals = {}
+        for c in countryList:
+            countryTotals[c] = 0
+
+        # generate table header
+        finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
+        finalpage += u'\n|-'
+        finalpage += u'\n! wiki/country'
+        for c in countryList:
+            finalpage += u' !! ' + c 
+
+        # generate table rows
+        for wiki in res.keys():
+            finalpage += u'\n|-'
+            finalpage += u'\n| [[' + pagename + u'/Article list#'+wiki + u'.wikipedia|' + wiki + u']]'
+            for c in countryList:
+                finalpage += u' || '
+                if c in res[wiki].keys():
+                    if res[wiki][c]:
+                        finalpage += str(res[wiki][c])
+                        countryTotals[c] += res[wiki][c]
+        finalpage += u'\n|-'
+
+        # generate totals
+        finalpage += u'\n! Total:'
+        for c in countryList:
+            finalpage += u' !! ' + str(countryTotals[c])
+        # generate table footer
+        finalpage += u'\n|}'
+
+        finalpage += footer
+
+        if self.getOption('test2'):
+            pywikibot.output(finalpage)
+
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'WomenPage:%s' % outpage.title())
+        outpage.text = finalpage
+        outpage.save(summary=self.getOption('summary'))
 
         return
 
-    def generateWomenPage(self, res, pagename, header, footer):
+    def generateResultWomenPage(self, res, pagename, header, footer):
         """
         Generates results page from res
         Starting with header, ending with footer
@@ -496,7 +581,7 @@ class BasicBot(
         return
 
 
-    def generateAuthorsPage(self, res, pagename, header, footer):
+    def generateResultAuthorsPage(self, res, pagename, header, footer):
         """
         Generates results page from res
         Starting with header, ending with footer
@@ -524,7 +609,7 @@ class BasicBot(
         outpage.save(summary=self.getOption('summary'))
         return
 
-    def generateArticleList(self, res, pagename, header, footer):
+    def generateResultArticleList(self, res, pagename, header, footer):
         """
         Generates results page from res
         Starting with header, ending with footer
@@ -545,15 +630,19 @@ class BasicBot(
             finalpage += u'\n=== new articles ==='
             for i in res[l]:
                 itemcount += 1
-                artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate']
                 if i['newarticle']:
                     #finalpage += u' (NEW)'
+                    artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate']
                     finalpage += artLine
-                    pywikibot.output(u'# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate'] + u' (NEW)')
+                    pywikibot.output(artLine + u' (NEW)')
                 else:
                     #finalpage += u" '''(updated)'''"
+                    if i['template']['user']:
+                        artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['template']['user'] 
+                    else:
+                        artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:uknown'
                     updatedArticles += artLine
-                    pywikibot.output(u'# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate'] + u" '''(updated)'''")
+                    pywikibot.output(artLine + u" '''(updated)'''")
 
                 #if self.getOption('test'):
                 #    pywikibot.output(u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate'])
