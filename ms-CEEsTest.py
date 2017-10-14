@@ -399,8 +399,8 @@ class BasicBot(
             if u'template' not in artParams.keys():
                 artParams['template'] = {u'country':[], 'user':None, 'women':False}
             if not artParams['newarticle'] and not artParams['template']['user']:
-                #artParams['creator'], artParams['creationDate'] = self.getUpdater(art)
-                artParams['creator'] = u'unknown'
+                artParams['creator'], artParams['creationDate'] = self.getUpdater(art)
+                #artParams['creator'] = u'unknown'
 
 
             #print artParams
@@ -421,8 +421,13 @@ class BasicBot(
 
     def getUpdater(self, art):
         #find author and update datetime of the biggest update within CEESpring
-
-        return(art.getCreator())
+        user = None
+        for rv in art.revisions(reverse=True,starttime="2017-03-21T00:00:00Z",endtime="2017-06-01T00:00:00Z"):
+            user = rv['user']
+        if user:
+            return(user,rv['timestamp'])
+        else:
+            return(u'unknown',None)
 
     def newArticle(self,creationDate):
         #check if the article was created within CEE Spring
