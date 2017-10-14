@@ -79,7 +79,7 @@ countryNames = {
 'lv':{ 'Albānija':'Albania', 'Austrija':'Austria', 'Azerbaidžāna':'Azerbaijan', 'Baškortostāna':'Bashkortostan', 'Baltkrievija':'Belarus', 'Bulgārija':'Bulgaria', 'Armēnija':'Armenia', 'Bosnija un Hercegovina':'Bosnia and Herzegovina', 'Erzju':'Erzia', 'Esperanto':'Esperanto', 'Igaunija':'Estonia', 'Gruzija':'Georgia', 'Čehija':'Czechia', 'Horvātija':'Croatia', 'Kosova':'Kosovo', 'Krimas tatāri':'Crimean Tatars', 'Lietuva':'Lithuania', 'Latvija':'Latvia', 'Ungārija':'Hungary', 'Maķedonija':'Macedonia', 'Moldova':'Moldova', 'Polija':'Poland', 'Krievija':'Russia', 'Rumānija':'Romania', 'Serbu Republika':'Serbia', 'Serbija':'Serbia', 'Slovākija':'Slovakia', 'Turcija':'Turkey', 'Ukraina':'Ukraine', 'Grieķija':'Greece', 'Kazahstāna':'Kazakhstan', },
 'lt':{ 'Albanija':'Albania', 'Austrija':'Austria', 'Azerbaidžanas':'Azerbaijan', 'Baškirija':'Bashkortostan', 'Baltarusija':'Belarus', 'Bulgarija':'Bulgaria', 'Armėnija':'Armenia', 'Bosnija ir Hercegovina':'Bosnia and Herzegovina', 'Erzių':'Erzia', 'Esperanto':'Esperanto', 'Estija':'Estonia', 'Gruzija':'Georgia', 'Čekija':'Czechia', 'Kroatija':'Croatia', 'Kosovas':'Kosovo', 'Krymo totoriai':'Crimean Tatars', 'Lietuva':'Lithuania', 'Latvija':'Latvia', 'Vengrija':'Hungary', 'Makedonija':'Macedonia', 'Moldavija':'Moldova', 'Lenkija':'Poland', 'Rusija':'Russia', 'Rumunija':'Romania', 'Serbų respublika':'Serbia', 'Serbija':'Serbia', 'Slovakija':'Slovakia', 'Turkija':'Turkey', 'Ukraina':'Ukraine', 'Graikija':'Greece', 'Kazachstanas':'Kazakhstan', },
 'mk':{ 'Албанија':'Albania', 'Австрија':'Austria', 'Азербејџан':'Azerbaijan', 'Bashkortostani':'Bashkortostan', 'Белорусија':'Belarus', 'Бугарија':'Bulgaria', 'Ерменија':'Armenia', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'Ерзја':'Erzia', 'Есперанто':'Esperanto', 'Естонија':'Estonia', 'Грузија':'Georgia', 'Чешка':'Czechia', 'Хрватска':'Croatia', 'Република Косово':'Kosovo', 'Кримски Татари':'Crimean Tatars', 'Литванија':'Lithuania', 'Латвија':'Latvia', 'Унгарија':'Hungary', 'Македонија':'Macedonia', 'Молдавија':'Moldova', 'Полска':'Poland', 'Русија':'Russia', 'Романија':'Romania', 'Република Српска':'Serbia', 'Србија':'Serbia', 'Словачка':'Slovakia', 'Турција':'Turkey', 'Украина':'Ukraine', 'Грција':'Greece', 'Казахстан':'Kazakhstan', },
-'ro':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbaidjan':'Azerbaijan', 'Bașchiria':'Bashkortostan', 'Belarus':'Belarus', 'Bulgaria':'Bulgaria', 'Armenia':'Armenia', 'Bosnia și Herțegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Georgia':'Georgia', 'Cehia':'Czechia', 'Croația':'Croatia', 'Kosovo':'Kosovo', 'Tătarii crimeeni':'Crimean Tatars', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Ungaria':'Hungary', 'Macedonia':'Macedonia', 'Moldova':'Moldova', 'Polonia':'Poland', 'Rusia':'Russia', 'România':'Romania', 'Republika Srpska':'Serbia', 'Serbia':'Serbia', 'Slovacia':'Slovakia', 'Turcia':'Turkey', 'Ucraina':'Ukraine', 'Grecia':'Greece', 'Kazahstan':'Kazakhstan', },
+'ro':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbaidjan':'Azerbaijan', 'Bașchiria':'Bashkortostan', 'Belarus':'Belarus', 'Bulgaria':'Bulgaria', 'Armenia':'Armenia', 'Bosnia și Herțegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Georgia':'Georgia', 'Cehia':'Czechia', 'Croația':'Croatia', 'Kosovo':'Kosovo', 'Crimeea':'Crimean Tatars', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Ungaria':'Hungary', 'Macedonia':'Macedonia', 'Republica Moldova':'Moldova', 'Polonia':'Poland', 'Rusia':'Russia', 'România':'Romania', 'Republika Srpska':'Serbia', 'Serbia':'Serbia', 'Slovacia':'Slovakia', 'Turcia':'Turkey', 'Ucraina':'Ukraine', 'Grecia':'Greece', 'Kazahstan':'Kazakhstan', , 'Erzia':'Erzia'},
 'ru':{ 'Албания':'Albania', 'Австрия':'Austria', 'Азербайджан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Белоруссия':'Belarus', 'Болгария':'Bulgaria', 'Армения':'Armenia', 'Босния и Герцеговина':'Bosnia and Herzegovina', 'Эрзя':'Erzia', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово':'Kosovo', 'Крымские татары':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Венгрия':'Hungary', 'Македония':'Macedonia', 'Молдавия':'Moldova', 'Польша':'Poland', 'Россия':'Russia', 'Румыния':'Romania', 'Республика Сербская':'Serbia', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Турция':'Turkey', 'Украина':'Ukraine', 'Греция':'Greece', 'Казахстан':'Kazakhstan', },
 'sq':{ 'Shqipëria':'Albania', 'Austria':'Austria', 'Azerbajxhani':'Azerbaijan', 'Bashkortostani':'Bashkortostan', 'Bjellorusia':'Belarus', 'Bullgaria':'Bulgaria', 'Armenia':'Armenia', 'Bosnja dhe Hercegovina':'Bosnia and Herzegovina', 'Gjuha esperanto':'Esperanto', 'Estonia':'Estonia', 'Gjeorgjia':'Georgia', 'Republika Çeke':'Czechia', 'Kroacia':'Croatia', 'Kosova':'Kosovo', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Hungaria':'Hungary', 'Maqedonisë':'Macedonia', 'Moldavia':'Moldova', 'Polonia':'Poland', 'Rusia':'Russia', 'Rumania':'Romania', 'Serbia':'Serbia', 'Sllovakia':'Slovakia', 'Turqia':'Turkey', 'Ukraina':'Ukraine', 'Greqia':'Greece', 'Kazakistani':'Kazakhstan', },
 'sr':{ 'Албанија':'Albania', 'Аустрија':'Austria', 'Азербејџан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Белорусија':'Belarus', 'Бугарска':'Bulgaria', 'Јерменија':'Armenia', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'Ерзја':'Erzia', 'Есперанто':'Esperanto', 'Естонија':'Estonia', 'Грузија':'Georgia', 'Чешка':'Czechia', 'Хрватска':'Croatia', 'Република Косово':'Kosovo', 'Кримски Татари':'Crimean Tatars', 'Литванија':'Lithuania', 'Летонија':'Latvia', 'Мађарска':'Hungary', 'Република Македонија':'Macedonia', 'Молдавија':'Moldova', 'Пољска':'Poland', 'Русија':'Russia', 'Румунија':'Romania', 'Република Српска':'Serbia', 'Србија':'Serbia', 'Словачка':'Slovakia', 'Турска':'Turkey', 'Украјина':'Ukraine', 'Грчка':'Greece', 'Казахстан':'Kazakhstan', },
@@ -131,7 +131,7 @@ class BasicBot(
                  'myv':'мастор', 'eo':'country', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'ro':'țară', 'ru':'страна', 'sq':'country', \
                  'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна' }
     topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'Be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', \
-             'myv':'тема', 'eo':'topic', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'ro':'subiect', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
+             'myv':'тема', 'eo':'topic', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
              'tt':'тема', 'tr':'konu', 'uk':'тема'}
     womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'Be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', \
               'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
@@ -287,7 +287,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('crh'):
+                    if lang not in ('ro'):
                          continue
 
                 self.templatesList[lang] = i.title()
@@ -352,15 +352,15 @@ class BasicBot(
         artParams = {}
         talk = art.toggleTalkPage()
         if art.exists():
-            creator, creationDate = art.getCreator()
+            creator, creationDate = self.getUpdater(art)
             lang = art.site.code
             
             artParams['title'] = art.title()
             artParams['lang'] = lang
             artParams['creator'] = creator
             artParams['creationDate'] = creationDate
-            artParams['newarticle'] = self.newArticle(creationDate)
-            artParams['template'] = {u'country':[], 'user':None, 'women':False}
+            artParams['newarticle'] = self.newArticle(art)
+            artParams['template'] = {u'country':[], 'user':creator, 'women':False}
 
             if lang in CEEtemplates.keys() and talk.exists():
                 TmplInfo = self.getTemplateInfo(talk, CEEtemplates[lang], lang)
@@ -398,12 +398,12 @@ class BasicBot(
 
             if u'template' not in artParams.keys():
                 artParams['template'] = {u'country':[], 'user':None, 'women':False}
-            if not artParams['newarticle'] and not artParams['template']['user']:
-                artParams['creator'], artParams['creationDate'] = self.getUpdater(art)
+            if not artParams['newarticle'] or artParams['template']['user'] or artParams['template']['user']==u'unknown' : 
+                artParams['template']['user'], artParams['creationDate'] = self.getUpdater(art)
                 #artParams['creator'] = u'unknown'
 
 
-            #print artParams
+            print artParams
         return(artParams)
 
     def checkWomen(self,art):
@@ -421,17 +421,29 @@ class BasicBot(
 
     def getUpdater(self, art):
         #find author and update datetime of the biggest update within CEESpring
-        user = None
-        for rv in art.revisions(reverse=True,starttime="2017-03-21T00:00:00Z",endtime="2017-06-01T00:00:00Z"):
-            user = rv['user']
-        if user:
-            return(user,rv['timestamp'])
+        creator, creationDate = art.getCreator()
+        SpringStart =  datetime.strptime("2017-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
+        if self.newArticle(art):
+            if self.getOption('test3'):
+                pywikibot.output(u'New art creator %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),creator,creationDate))
+            return(creator, creationDate)
         else:
-            return(u'unknown',None)
+            #for rv in art.revisions(reverse=True,starttime="2017-03-20T12:00:00Z",endtime="2017-06-01T00:00:00Z"):
+            for rv in art.revisions(reverse=True, starttime=SpringStart):
+                if self.getOption('test3'):
+                    pywikibot.output(u'updated art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv.user,rv.timestamp))
+                    if rv.timestamp > SpringStart:
+                        return(rv.user,rv.timestamp)
+                #if self.getOption('test3'):
+                #    pywikibot.output(u'updated art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv['user'],rv['timestamp']))
+            #    return(rv['user'],rv['timestamp'])
+            return('unknown', creationDate)
+       
 
-    def newArticle(self,creationDate):
+    def newArticle(self,art):
         #check if the article was created within CEE Spring
-        SpringStart =  datetime.strptime("2017-03-21T00:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
+        creator, creationDate = art.getCreator()
+        SpringStart =  datetime.strptime("2017-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         SpringEnd = datetime.strptime("2017-06-01T00:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         return ( datetime.strptime(creationDate, "%Y-%m-%dT%H:%M:%SZ") > SpringStart )
 
@@ -464,8 +476,9 @@ class BasicBot(
                     if lang in self.userp.keys() and name.lower().startswith(self.userp[lang].lower()):
                         if self.getOption('test'):
                             pywikibot.output(u'user:%s:%s' % (name,value))
-                        if lang in self.userp.keys() and value.lower().startswith(self.userp[lang].lower()):
-                            parlist['user'] = value
+                        #if lang in self.userp.keys() and value.lower().startswith(self.userp[lang].lower()):
+                        #    parlist['user'] = value
+                        parlist['user'] = value
                     #check article about women
                     if lang in self.topicp.keys() and name.lower().startswith(self.topicp[lang].lower()):
                         if self.getOption('test'):
@@ -709,19 +722,28 @@ class BasicBot(
                     #finalpage += u' (NEW)'
                     artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate']
                     for a in i['template']['country']:
-                        artLine +=  u' - ' + a
+                        if a in countryList:
+                            artLine +=  u' - ' + a
+                        else:
+                            artLine +=  u" - '''" + a + u"'''"
                     finalpage += artLine
                     pywikibot.output(artLine + u' (NEW)')
                 else:
                     #finalpage += u" '''(updated)'''"
                     if i['template']['user']:
                         artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['template']['user'] 
-                        for a in i['template']['country']:
-                            artLine += u' - ' + a
+                    for a in i['template']['country']:
+                        if a in countryList:
+                            artLine +=  u' - ' + a
+                        else:
+                            artLine +=  u" - '''" + a + u"'''"
                     else:
                         artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:uknown'
-                        for a in i['template']['country']:
-                            artLine += u' - ' + a
+                    for a in i['template']['country']:
+                        if a in countryList:
+                            artLine +=  u' - ' + a
+                        else:
+                            artLine +=  u" - '''" + a + u"'''"
                     updatedArticles += artLine
                     pywikibot.output(artLine + u" '''(updated)'''")
 
