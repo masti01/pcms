@@ -123,6 +123,8 @@ class BasicBot(
     missingCount = {}
     pagesCount = {}
     countryTable = {}
+    otherCountriesList = {'pl':[], 'az':[], 'ba':[], 'be':[], 'be-tarask':[], 'bg':[], 'de':[], 'crh':[], 'el':[], 'myv':[], 'eo':[], 'hy':[], 'ka':[], 'lv':[], 'lt':[], \
+             'mk':[], 'ro':[], 'ru':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'myv':0, 'eo':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
              'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'Be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'el':'country', \
@@ -206,6 +208,7 @@ class BasicBot(
 
         self.createWomenTable(self.springList) #generate results for pages about women
 
+        self.generateOtherCountriesTable(self.otherCountriesList,self.getOption('outpage')+u'/Other countries',header,footer)
         self.generateResultCountryTable(self.countryTable,self.getOption('outpage'),header,footer)
         self.generateResultArticleList(self.springList,self.getOption('outpage')+u'/Article list',header,footer)
         self.generateResultAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
@@ -282,8 +285,8 @@ class BasicBot(
             for i in self.genInterwiki(p):
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
-                #if lang not in ('crh'):
-                #    continue
+                #if lang not in ('myv'):
+                #   continue
                 #continue
                 self.templatesList[lang] = i.title()
                 pywikibot.output(u'Getting references to %s Lang:%s' % (i.title(asLink=True,forceInterwiki=True), lang) )
@@ -463,9 +466,10 @@ class BasicBot(
                                     self.pagesCount[lang][countryEN] = 1
                             else:
                                 parlist['country'].append(value)
+                                self.otherCountriesList[lang].append(value)
                     print self.pagesCount
                 if self.getOption('test3'):
-                    pywikibot.output(u'PARAM:%s' % param)
+                    #pywikibot.output(u'PARAM:%s' % param)
                     pywikibot.output(u'PARLIST:%s' % parlist)
                 return parlist
         return parlist
@@ -497,6 +501,34 @@ class BasicBot(
             pass
         #print(iw)
         return(iw)
+
+    def generateOtherCountriesTable(self, res, pagename, header, footer):
+        """
+        Generates results page from res
+        Starting with header, ending with footer
+        Output page is pagename
+        """
+
+        finalpage = header
+
+        pywikibot.output(u'**************************')
+        pywikibot.output(u'generateResultCountryTable')
+        pywikibot.output(u'**************************')
+
+        for c in self.otherCountriesList.keys():
+            finalpage += u'\n== ' + c + u' =='
+            for i in self.otherCountriesList[c]:
+                finalpage += u'\n# <nowiki>' + i + u'</nowiki>'
+
+        finalpage += footer
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'OtherCountries:%s' % outpage.title())
+        outpage.text = finalpage
+        outpage.save(summary=self.getOption('summary'))
+
+        return
+
 
     def generateResultCountryTable(self, res, pagename, header, footer):
         """
@@ -634,17 +666,18 @@ class BasicBot(
         """
 
         finalpage = header
-        updatedArticles = u'\n\n=== updated articles ==='
-
+        
         itemcount = 0
         #go by language
         for l in res.keys():
+            artCount = 0
             #print('[[:' + i + u':' + self.templatesList[i] +u'|' + i + u' wikipedia]]')
             if l in self.templatesList.keys():
                 finalpage += u'\n== [[:' + l + u':Template:' + self.templatesList[l] +u'|' + l + u'.wikipedia]] =='
             else:
                 finalpage += u'\n== ' + l + u'.wikipedia =='
-            finalpage += u'\n=== new articles ==='
+            finalpage += u'\n=== ' + l + u'.wikipedia new articles ==='
+            updatedArticles = u'\n\n=== ' + l + u'.wikipedia updated articles ==='
             for i in res[l]:
                 itemcount += 1
                 if i['newarticle']:
@@ -671,6 +704,7 @@ class BasicBot(
                 #    pywikibot.output(u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate'])
 
             finalpage += updatedArticles
+            finalpage += u'\nTotal number of articles:' + str(artCount)
 
         finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
         finalpage += footer
