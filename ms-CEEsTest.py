@@ -233,7 +233,7 @@ class BasicBot(
         #check if user is a newbie
         newbieLimit =  datetime.strptime("2016-12-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         if user in self.authorsData.keys():
-            if lang not in self.authorsData['wikis']:
+            if lang not in self.authorsData[user]['wikis']:
                 self.authorsData[user]['wikis'].append(lang)
             if self.authorsData[user]['anon']:
                 return(False)
@@ -299,8 +299,8 @@ class BasicBot(
                 artCount += 1
                 lang = a['lang'] #source language
                 tmpl = a['template'] #template data {country:[clist], women:T/F}
-                if u'women' in tmpl.keys():
-                    if not tmpl['women']:
+                if u'woman' in tmpl.keys():
+                    if not tmpl['woman']:
                         continue
                 else:
                     continue
@@ -404,14 +404,14 @@ class BasicBot(
             artParams['creator'] = creator
             artParams['creationDate'] = creationDate
             artParams['newarticle'] = self.newArticle(art)
-            artParams['template'] = {u'country':[], 'user':creator, 'women':woman}
+            artParams['template'] = {u'country':[], 'user':creator, 'woman':woman}
 
 
             if lang in CEEtemplates.keys() and talk.exists():
                 TmplInfo = self.getTemplateInfo(talk, CEEtemplates[lang], lang)
                 artParams['template'] = TmplInfo
-            if not artParams['template']['women']:
-                artParams['template']['women'] = woman
+            if not artParams['template']['woman']:
+                artParams['template']['woman'] = woman
             #hack for languages without templates
             countryEN = ''
             if lang == 'et':
@@ -425,7 +425,7 @@ class BasicBot(
                         countryEN = countryET
                 #if self.getOption('test2'):
                 #    pywikibot.output(u'countryEN:%s' % countryEN)
-                artParams['template'] = {'country':[countryEN], 'user':etAuthors[artParams['title']], 'women':woman}
+                artParams['template'] = {'country':[countryEN], 'user':etAuthors[artParams['title']], 'woman':woman}
             if lang == 'hr':
                 countryHR = hrArticles[artParams['title']]
                 #if self.getOption('test2'):
@@ -437,12 +437,12 @@ class BasicBot(
                         countryEN = countryHR
                 #if self.getOption('test2'):
                 #    pywikibot.output(u'countryEN:%s' % countryEN)
-                artParams['template'] = {'country':[countryEN], 'user':creator, 'women':woman}
+                artParams['template'] = {'country':[countryEN], 'user':creator, 'woman':woman}
                 if self.getOption('test2'):
                     pywikibot.output(u'artParams[template]:%s' % artParams['template'])
 
             if u'template' not in artParams.keys():
-                artParams['template'] = {u'country':[], 'user':creator, 'women':woman}
+                artParams['template'] = {u'country':[], 'user':creator, 'woman':woman}
             if not artParams['newarticle'] : 
                 artParams['template']['user'] = creator
                 #artParams['creator'] = u'unknown'
@@ -512,7 +512,7 @@ class BasicBot(
     def getTemplateInfo(self,page,template,lang):
         param = {}
         author, creationDate = self.getUpdater(page)
-        parlist = {'country':[],'user':author,'women':False}
+        parlist = {'country':[],'user':author,'woman':False}
         #return dictionary with template params
         for t in page.templatesWithParams():
             title, params = t
@@ -523,7 +523,7 @@ class BasicBot(
                 pywikibot.output(u'tml:%s = %s = %s' % (title,tt,template) )
             if tt == template:
                 paramcount = 1
-                parlist['women'] = False
+                parlist['woman'] = False
                 parlist['country'] = []
                 parlist['user'] = author
                 for p in params:
@@ -547,7 +547,7 @@ class BasicBot(
                             pywikibot.output(u'topic:%s:%s' % (name,value))
                         if lang in self.womenp.keys() and value.lower().startswith(self.womenp[lang].lower()):
                             self.women[lang] += 1
-                            parlist['women'] = True
+                            parlist['woman'] = True
                     #check article about country
                     if lang in self.countryp.keys() and name.lower().startswith(self.countryp[lang].lower()):
                         if self.getOption('test2'):
