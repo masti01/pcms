@@ -79,7 +79,7 @@ countryNames = {
 'lv':{ 'Albānija':'Albania', 'Austrija':'Austria', 'Azerbaidžāna':'Azerbaijan', 'Baškortostāna':'Bashkortostan', 'Baltkrievija':'Belarus', 'Bulgārija':'Bulgaria', 'Armēnija':'Armenia', 'Bosnija un Hercegovina':'Bosnia and Herzegovina', 'Erzju':'Erzia', 'Esperanto':'Esperanto', 'Igaunija':'Estonia', 'Gruzija':'Georgia', 'Čehija':'Czechia', 'Horvātija':'Croatia', 'Kosova':'Kosovo', 'Krimas tatāri':'Crimean Tatars', 'Lietuva':'Lithuania', 'Latvija':'Latvia', 'Ungārija':'Hungary', 'Maķedonija':'Macedonia', 'Moldova':'Moldova', 'Polija':'Poland', 'Krievija':'Russia', 'Rumānija':'Romania', 'Serbu Republika':'Serbia', 'Serbija':'Serbia', 'Slovākija':'Slovakia', 'Turcija':'Turkey', 'Ukraina':'Ukraine', 'Grieķija':'Greece', 'Kazahstāna':'Kazakhstan', },
 'lt':{ 'Albanija':'Albania', 'Austrija':'Austria', 'Azerbaidžanas':'Azerbaijan', 'Baškirija':'Bashkortostan', 'Baltarusija':'Belarus', 'Bulgarija':'Bulgaria', 'Armėnija':'Armenia', 'Bosnija ir Hercegovina':'Bosnia and Herzegovina', 'Erzių':'Erzia', 'Esperanto':'Esperanto', 'Estija':'Estonia', 'Gruzija':'Georgia', 'Čekija':'Czechia', 'Kroatija':'Croatia', 'Kosovas':'Kosovo', 'Krymo totoriai':'Crimean Tatars', 'Lietuva':'Lithuania', 'Latvija':'Latvia', 'Vengrija':'Hungary', 'Makedonija':'Macedonia', 'Moldavija':'Moldova', 'Lenkija':'Poland', 'Rusija':'Russia', 'Rumunija':'Romania', 'Serbų respublika':'Serbia', 'Serbija':'Serbia', 'Slovakija':'Slovakia', 'Turkija':'Turkey', 'Ukraina':'Ukraine', 'Graikija':'Greece', 'Kazachstanas':'Kazakhstan', },
 'mk':{ 'Албанија':'Albania', 'Австрија':'Austria', 'Азербејџан':'Azerbaijan', 'Bashkortostani':'Bashkortostan', 'Белорусија':'Belarus', 'Бугарија':'Bulgaria', 'Ерменија':'Armenia', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'Ерзја':'Erzia', 'Есперанто':'Esperanto', 'Естонија':'Estonia', 'Грузија':'Georgia', 'Чешка':'Czechia', 'Хрватска':'Croatia', 'Република Косово':'Kosovo', 'Кримски Татари':'Crimean Tatars', 'Литванија':'Lithuania', 'Латвија':'Latvia', 'Унгарија':'Hungary', 'Македонија':'Macedonia', 'Молдавија':'Moldova', 'Полска':'Poland', 'Русија':'Russia', 'Романија':'Romania', 'Република Српска':'Serbia', 'Србија':'Serbia', 'Словачка':'Slovakia', 'Турција':'Turkey', 'Украина':'Ukraine', 'Грција':'Greece', 'Казахстан':'Kazakhstan', },
-'ro':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbaidjan':'Azerbaijan', 'Bașchiria':'Bashkortostan', 'Belarus':'Belarus', 'Bulgaria':'Bulgaria', 'Armenia':'Armenia', 'Bosnia și Herțegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Georgia':'Georgia', 'Cehia':'Czechia', 'Croația':'Croatia', 'Kosovo':'Kosovo', 'Crimeea':'Crimean Tatars', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Ungaria':'Hungary', 'Macedonia':'Macedonia', 'Republica Moldova':'Moldova', 'Polonia':'Poland', 'Rusia':'Russia', 'România':'Romania', 'Republika Srpska':'Serbia', 'Serbia':'Serbia', 'Slovacia':'Slovakia', 'Turcia':'Turkey', 'Ucraina':'Ukraine', 'Grecia':'Greece', 'Kazahstan':'Kazakhstan', , 'Erzia':'Erzia'},
+'ro':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbaidjan':'Azerbaijan', 'Bașchiria':'Bashkortostan', 'Belarus':'Belarus', 'Bulgaria':'Bulgaria', 'Armenia':'Armenia', 'Bosnia și Herțegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Georgia':'Georgia', 'Cehia':'Czechia', 'Croația':'Croatia', 'Kosovo':'Kosovo', 'Crimeea':'Crimean Tatars', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Ungaria':'Hungary', 'Macedonia':'Macedonia', 'Republica Moldova':'Moldova', 'Polonia':'Poland', 'Rusia':'Russia', 'România':'Romania', 'Republika Srpska':'Serbia', 'Serbia':'Serbia', 'Slovacia':'Slovakia', 'Turcia':'Turkey', 'Ucraina':'Ukraine', 'Grecia':'Greece', 'Kazahstan':'Kazakhstan', 'Erzia':'Erzia'},
 'ru':{ 'Албания':'Albania', 'Австрия':'Austria', 'Азербайджан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Белоруссия':'Belarus', 'Болгария':'Bulgaria', 'Армения':'Armenia', 'Босния и Герцеговина':'Bosnia and Herzegovina', 'Эрзя':'Erzia', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово':'Kosovo', 'Крымские татары':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Венгрия':'Hungary', 'Македония':'Macedonia', 'Молдавия':'Moldova', 'Польша':'Poland', 'Россия':'Russia', 'Румыния':'Romania', 'Республика Сербская':'Serbia', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Турция':'Turkey', 'Украина':'Ukraine', 'Греция':'Greece', 'Казахстан':'Kazakhstan', },
 'sq':{ 'Shqipëria':'Albania', 'Austria':'Austria', 'Azerbajxhani':'Azerbaijan', 'Bashkortostani':'Bashkortostan', 'Bjellorusia':'Belarus', 'Bullgaria':'Bulgaria', 'Armenia':'Armenia', 'Bosnja dhe Hercegovina':'Bosnia and Herzegovina', 'Gjuha esperanto':'Esperanto', 'Estonia':'Estonia', 'Gjeorgjia':'Georgia', 'Republika Çeke':'Czechia', 'Kroacia':'Croatia', 'Kosova':'Kosovo', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Hungaria':'Hungary', 'Maqedonisë':'Macedonia', 'Moldavia':'Moldova', 'Polonia':'Poland', 'Rusia':'Russia', 'Rumania':'Romania', 'Serbia':'Serbia', 'Sllovakia':'Slovakia', 'Turqia':'Turkey', 'Ukraina':'Ukraine', 'Greqia':'Greece', 'Kazakistani':'Kazakhstan', },
 'sr':{ 'Албанија':'Albania', 'Аустрија':'Austria', 'Азербејџан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Белорусија':'Belarus', 'Бугарска':'Bulgaria', 'Јерменија':'Armenia', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'Ерзја':'Erzia', 'Есперанто':'Esperanto', 'Естонија':'Estonia', 'Грузија':'Georgia', 'Чешка':'Czechia', 'Хрватска':'Croatia', 'Република Косово':'Kosovo', 'Кримски Татари':'Crimean Tatars', 'Литванија':'Lithuania', 'Летонија':'Latvia', 'Мађарска':'Hungary', 'Република Македонија':'Macedonia', 'Молдавија':'Moldova', 'Пољска':'Poland', 'Русија':'Russia', 'Румунија':'Romania', 'Република Српска':'Serbia', 'Србија':'Serbia', 'Словачка':'Slovakia', 'Турска':'Turkey', 'Украјина':'Ukraine', 'Грчка':'Greece', 'Казахстан':'Kazakhstan', },
@@ -120,6 +120,7 @@ class BasicBot(
     springList = {}
     templatesList = {}
     authors = {}
+    authorsData = {}
     missingCount = {}
     pagesCount = {}
     countryTable = {}
@@ -162,6 +163,7 @@ class BasicBot(
             'test': False, # make verbose output
             'test2': False, # make verbose output
             'test3': False, # make verbose output
+            'test4': False, # make verbose output
             'short': False, # make short run
             'append': False, 
 
@@ -197,16 +199,24 @@ class BasicBot(
                 self.springList[aInfo['lang']] = []
             self.springList[aInfo['lang']].append(aInfo)
             #populate authors list
-            if aInfo['creator'] not in self.authors.keys():
-                self.authors[aInfo['creator']] = 1
+            if aInfo['newarticle']:
+                if aInfo['creator'] not in self.authors.keys():
+                    self.authors[aInfo['creator']] = 1
+                else:
+                    self.authors[aInfo['creator']] += 1
             else:
-                self.authors[aInfo['creator']] += 1
+                if aInfo['template']['user'] not in self.authors.keys():
+                    self.authors[aInfo['template']['user']] = 1
+                else:
+                    self.authors[aInfo['template']['user']] += 1
+
+
 
         self.printArtInfo(self.springList)
         #print self.springList
 
+        self.createAuthorsDataTable(self.springList) #create table about authors
         self.createCountryTable(self.springList) #generate results for pages about countries 
-
         self.createWomenTable(self.springList) #generate results for pages about women
 
         self.generateOtherCountriesTable(self.otherCountriesList,self.getOption('outpage')+u'/Other countries',header,footer)
@@ -215,6 +225,24 @@ class BasicBot(
         self.generateResultAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
         self.generateResultWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
 
+        return
+
+    def createAuthorsDataTable(self,aList):
+        #create table about authors
+        #dict(name:dict(lang,registration,newbie))
+        for l in aList.keys():
+            '''
+            if aList[l]['newarticle']:
+                pywikibot.output(u'createAuthorsDataTable:%s' % aList[l]['creator'])
+                author = aList[l]['creator']
+            else:
+                pywikibot.output(u'createAuthorsDataTable:%s' % aList[l]['template']['user'])
+                author = aList[l]['template']['user']
+            if author not in authorsData.keys():
+                authorsData[author] = {}
+            authorsData[author]['lang'] = aList[l]['lang']
+            '''
+            pywikibot.output(l)
         return
 
     def createCountryTable(self,aList):
@@ -403,7 +431,7 @@ class BasicBot(
                 #artParams['creator'] = u'unknown'
 
 
-            print artParams
+            #print artParams
         return(artParams)
 
     def checkWomen(self,art):
@@ -763,98 +791,6 @@ class BasicBot(
         outpage.text = finalpage        
         outpage.save(summary=self.getOption('summary'))
         return
-
-    def generateresultspage(self, res, pagename, header, footer):
-        """
-        Generates results page from res
-        Starting with header, ending with footer
-        Output page is pagename
-        """
-
-        finalpage = header
-
-        itemcount = 0
-        for i in res.keys():
-            count = 1
-            #print('[[:' + i + u':' + self.templatesList[i] +u'|' + i + u' wikipedia]]')
-            finalpage += u'\n== [[:' + i + u':' + self.templatesList[i] +u'|' + i + u' wikipedia]] ==\n\n'
-            finalpage += u'Counted: ' + str(self.pagesCount[i]) + u' Missing:' + str(self.missingCount[i]) + u'\n\n'
-            wiki = res[i]
-            #print(wiki)
-            for a in wiki.keys():
-                finalpage += u'\n# [[:' + i + u':' + a + u']] - user:' + wiki[a]['creator'] + u' date:' + wiki[a]['creationDate']
-                '''
-                tmpl = wiki[a]['template']
-                for p in tmpl.keys():
-                    #print(p)
-                    #print(tmpl[p])
-                    finalpage += u',' + p + u'='
-                    if tmpl[p]:
-                        finalpage += tmpl[p]
-                '''
-
-        finalpage += u'\n== Authors ==\n'
-        #ath = sorted(self.authors, reverse=True)
-        ath = sorted(self.authors, key=self.authors.__getitem__, reverse=True)
-        for a in ath:
-             finalpage += u'\n# ' + a + u' - ' + str(self.authors[a])
-
-        finalpage += u'\n== Articles about women ==\n'
-        #ath = sorted(self.authors, reverse=True)
-        wom = sorted(self.women, key=self.women.__getitem__, reverse=True)
-        for a in self.women:
-             finalpage += u'\n# ' + a + u' - ' + str(self.women[a])
-
-
-        finalpage += footer 
-
-        #pywikibot.output(finalpage)
-        success = True
-        outpage = pywikibot.Page(pywikibot.Site(), pagename)
-        if self.getOption('append'):
-            outpage.text += finalpage
-        else:
-            outpage.text = finalpage
-
-        pywikibot.output(outpage.title())
-        
-        outpage.save(summary=self.getOption('summary'))
-        #if not outpage.save(finalpage, outpage, self.summary):
-        #   pywikibot.output(u'Page %s not saved.' % outpage.title(asLink=True))
-        #   success = False
-        return(success)
-
-
-    def treat_page(self):
-        """Load the given page, do some changes, and save it."""
-        text = self.current_page.text
-
-        ################################################################
-        # NOTE: Here you can modify the text in whatever way you want. #
-        ################################################################
-
-        # If you find out that you do not want to edit this page, just return.
-        # Example: This puts Text on a page.
-
-        # Retrieve your private option
-        # Use your own text or use the default 'Test'
-        text_to_add = self.getOption('text')
-
-        if self.getOption('replace'):
-            # replace the page text
-            text = text_to_add
-
-        elif self.getOption('top'):
-            # put text on top
-            text = text_to_add + text
-
-        else:
-            # put text on bottom
-            text += text_to_add
-
-        # if summary option is None, it takes the default i18n summary from
-        # i18n subdirectory with summary_key as summary key.
-        self.put_current(text, summary=self.getOption('summary'))
 
     def templateWithNamedParams(self):
         """
