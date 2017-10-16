@@ -497,6 +497,9 @@ class BasicBot(
                     if self.getOption('test3'):
                         pywikibot.output(u'returning art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv.user,rv.timestamp))
                     return(rv.user,rv.timestamp)
+                else:
+                    if self.getOption('test3'):
+                        pywikibot.output(u'Skipped returning art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv.user,rv.timestamp))
                 #if self.getOption('test3'):
                 #    pywikibot.output(u'updated art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv['user'],rv['timestamp']))
             #    return(rv['user'],rv['timestamp'])
@@ -513,8 +516,8 @@ class BasicBot(
 
     def getTemplateInfo(self,page,template,lang):
         param = {}
-        author, creationDate = self.getUpdater(page)
-        parlist = {'country':[],'user':author,'woman':False}
+        #author, creationDate = self.getUpdater(page)
+        parlist = {'country':[],'user':'dummy','woman':False}
         #return dictionary with template params
         for t in page.templatesWithParams():
             title, params = t
@@ -527,7 +530,7 @@ class BasicBot(
                 paramcount = 1
                 parlist['woman'] = False
                 parlist['country'] = []
-                parlist['user'] = author
+                parlist['user'] = 'dummy'
                 for p in params:
                     named, name, value = self.templateArg(p)
                     if not named:
@@ -797,6 +800,8 @@ class BasicBot(
             finalpage += u'\n=== ' + l + u'.wikipedia new articles ==='
             updatedArticles = u'\n\n=== ' + l + u'.wikipedia updated articles ==='
             for i in res[l]:
+                if self.getOption('test3'):
+                    pywikibot.output(u'Generating line from: %s:' % i )
                 itemcount += 1
                 artCount += 1
                 if i['newarticle']:
@@ -814,11 +819,6 @@ class BasicBot(
                     #finalpage += u" '''(updated)'''"
                     if i['template']['user']:
                         artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['template']['user'] 
-                    for a in i['template']['country']:
-                        if a in countryList:
-                            artLine +=  u' - ' + a
-                        else:
-                            artLine +=  u" - '''" + a + u"'''"
                     else:
                         artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:uknown'
                     for a in i['template']['country']:
@@ -833,7 +833,7 @@ class BasicBot(
                 #    pywikibot.output(u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate'])
 
             finalpage += updatedArticles
-            finalpage += u'\nTotal number of articles:' + str(artCount)
+            finalpage += u'\nTotal number of articles (' + l u'.wikipedia:' + str(artCount)
 
         finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
         finalpage += footer
