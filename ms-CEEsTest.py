@@ -330,7 +330,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('ro'):
+                    if lang not in ('de'):
                          continue
 
                 self.templatesList[lang] = i.title()
@@ -472,7 +472,7 @@ class BasicBot(
             genderclaim = cjson[u'mainsnak'][u'datavalue'][u'value'][u'numeric-id']
             if u'6581072' == str(genderclaim):
                 if self.getOption('test4'):
-                    pywikibot.output(u'%s:Women' % art.title())
+                    pywikibot.output(u'%s:Woman' % art.title())
                 return(True)
             else:
                 if self.getOption('test4'):
@@ -799,7 +799,8 @@ class BasicBot(
                 artCount += 1
                 if i['newarticle']:
                     #finalpage += u' (NEW)'
-                    artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate']
+                    #artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate']
+                    artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator']
                     for a in i['template']['country']:
                         if a in countryList:
                             artLine +=  u' - ' + a
