@@ -833,7 +833,7 @@ class BasicBot(
                 #    pywikibot.output(u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate'])
 
             finalpage += updatedArticles
-            finalpage += u'\nTotal number of articles (' + l u'.wikipedia:' + str(artCount)
+            finalpage += u'\nTotal number of articles (' + l + u'.wikipedia:' + str(artCount)
 
         finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
         finalpage += footer
