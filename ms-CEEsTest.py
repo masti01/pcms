@@ -493,7 +493,9 @@ class BasicBot(
             for rv in art.revisions(reverse=True, starttime=SpringStart):
                 if self.getOption('test3'):
                     pywikibot.output(u'updated art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv.user,rv.timestamp))
-                if rv.timestamp > SpringStart:
+                if datetime.strptime(str(rv.timestamp), "%Y-%m-%dT%H:%M:%SZ") > SpringStart:
+                    if self.getOption('test3'):
+                        pywikibot.output(u'returning art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv.user,rv.timestamp))
                     return(rv.user,rv.timestamp)
                 #if self.getOption('test3'):
                 #    pywikibot.output(u'updated art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv['user'],rv['timestamp']))
@@ -799,8 +801,8 @@ class BasicBot(
                 artCount += 1
                 if i['newarticle']:
                     #finalpage += u' (NEW)'
-                    #artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate']
-                    artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator']
+                    artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + str(i['creationDate'])
+                    #artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator']
                     for a in i['template']['country']:
                         if a in countryList:
                             artLine +=  u' - ' + a
