@@ -294,7 +294,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        puR = re.compile(ur'\{\{Wikipedia:Przyznawanie uprawnień\/(?P<puname>.*)}}')
+        puR = re.compile(ur'\{\{(Wikipedia:Przyznawanie uprawnień\)?/(?P<puname>.*)}}')
         pufound = False
         pulist = puR.finditer(text)
         for pu in pulist:
