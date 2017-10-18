@@ -131,7 +131,8 @@ def outputRow(logline,lang):
     result += u'\t\t\t\t<td>' + adate +'</td>\n'
     result += u'\t\t\t\t<td>' + atime +'</td>\n'
     result += u'\t\t\t\t<td>' + atype +'</td>\n'
-    page = pywikibot.Page(pywikibot.Site(), atitle)
+    site = pywikibot.Site(lang,fam='wikipedia')
+    page = pywikibot.Page(site, atitle)
 
     if page.exists():
         astyle = u''
@@ -157,7 +158,7 @@ def outputRow(logline,lang):
         else:
             astyle = u' style="color:#CC2200">'
             if atype == u'R':
-                tpage = pywikibot.Page(pywikibot.Site(), atarget)
+                tpage = pywikibot.Page(site, atarget)
                 ttitle = tpage.title()
                 if tpage.exists():
                     if tpage.isRedirectPage():
@@ -188,7 +189,7 @@ def outputRow(logline,lang):
     elif atarget == u'REDIRECT ERROR':
         result += u'\t\t\t\t<td>REDIRECT ERROR</td>\n'
     else:
-        redir = pywikibot.Page(pywikibot.Site(), atarget)
+        redir = pywikibot.Page(site, atarget)
         utarget = urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
         if redir.exists():
             result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
