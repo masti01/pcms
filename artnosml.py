@@ -24,8 +24,8 @@ i18 = {
     'htitle' : u'Tytuł',
     'htarget' : u'Cel' },
 'tr' : {
-    'head' : u'Article counter tr.wikipedia - last 100 articles - tools.wikimedia.pl',
-    'heading' : u'Last new articles',
+    'head' : u'tr.wikipedia Madde sayacı - son 100 madde',
+    'heading' : u'Son yeni maddeler',
     'line1' : u"Sayfa, belirtilen dil sürümündeki son 100 makalenin makale ID'lerini gösterir",
     'legend' : u'Tür: <b>A</b> (madde), <b>R</b> (yönlendirme)',
     'lastupdate' : u'Son güncellenme: ',
