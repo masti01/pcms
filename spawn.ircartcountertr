@@ -1,0 +1,23 @@
+#!/usr/bin/perl -w
+
+use strict;
+use POSIX qw(strftime);
+use Env;
+
+my $pid = 0;
+
+if ( open( PID, '<', "$ENV{HOME}/pw/core/masti/pid/ircartcountertr.pid" ) ) {
+	$pid = <PID>;
+	$pid = int($pid);
+	close(PID);
+}
+
+exit(0) if $pid and kill( 'CHLD', $pid );
+
+open( my $log, '>>', "$ENV{HOME}/pw/core/masti/respawn.log" );
+my $datestring = strftime "%Y-%m-%d %H:%M:%S", localtime;
+#print "$datestring DAMN! irssi is dead... reviving...\n";
+print $log "$datestring DAMN! IRCartcounter.py -lang:tr is dead... reviving...\n";
+close($log);
+
+exec( 'python', 'pwb.py', 'ircbot/IRCartcounter.py', '-lang:tr' ) or die $!;
