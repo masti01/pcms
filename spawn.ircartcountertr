@@ -6,7 +6,7 @@ use Env;
 
 my $pid = 0;
 
-if ( open( PID, '<', "$ENV{HOME}/pw/core/masti/pid/ircartcountertr.pid" ) ) {
+if ( open( PID, '<', "$ENV{HOME}/pw/core/masti/pid/IRCartcounter-tr.pid" ) ) {
 	$pid = <PID>;
 	$pid = int($pid);
 	close(PID);
