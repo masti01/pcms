@@ -1,0 +1,24 @@
+#!/usr/bin/perl -w
+
+use strict;
+use POSIX qw(strftime);
+use Env;
+
+my $pid = 0;
+
+print "$ENV{HOME}/pw/core/masti/pid/ms-basictest.pid";
+if ( open( PID, '<', "$ENV{HOME}/pw/core/masti/pid/ms-basictest.pid" ) ) {
+	$pid = <PID>;
+	$pid = int($pid);
+	close(PID);
+}
+
+exit(0) if $pid and kill( 'CHLD', $pid );
+
+open( my $log, '>>', "$ENV{HOME}/pw/core/masti/respawn.log" );
+my $datestring = strftime "%Y-%m-%d %H:%M:%S", localtime;
+print "$datestring DAMN! basictest is dead... reviving...\n";
+print $log "$datestring DAMN! basictest is dead... reviving...\n";
+close($log);
+
+exec( 'python', 'pwb.py', 'masti/ms-basictest.py', '-page:a' ) or die $!;
