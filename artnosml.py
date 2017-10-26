@@ -121,7 +121,7 @@ def outputRow(logline,lang):
         return(None)
     # encode URLs for title and target
     utitle = urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
-    print utitle
+    #print utitle
     if atarget == u'':
         utarget = u''
     else:
@@ -229,7 +229,7 @@ def main(*args):
     result += footer(lang)
     file = codecs.open(resultfile, 'w', 'utf-8')
     # printout log
-    pywikibot.output(result)
+    #pywikibot.output(result)
     file.write(result)
     file.close()
 
