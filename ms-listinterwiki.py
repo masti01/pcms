@@ -213,7 +213,6 @@ class BasicBot(
                     pywikibot.output(u"%s;%s" % (site,spage.title()) )
                 iw[site] =  spage.title()
 
-            print iw
             return(iw)
 
     def generateresultspage(self, redirlist, pagename, header, footer):
