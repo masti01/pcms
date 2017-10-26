@@ -209,7 +209,8 @@ class BasicBot(
                     continue
                 ssite = pywikibot.Site(site,fam='wikipedia')
                 spage = pywikibot.Category( ssite, title=sitelinks[s] )
-                pywikibot.output(u"%s;%s" % (site,spage.title()) )
+                if self.getOption('test'):
+                    pywikibot.output(u"%s;%s" % (site,spage.title()) )
                 iw[site] =  spage.title()
 
             print iw
@@ -242,7 +243,8 @@ class BasicBot(
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         outpage.text = finalpage
 
-        pywikibot.output(outpage.title())
+        if self.getOption('test'):
+            pywikibot.output(outpage.title())
         
         outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
