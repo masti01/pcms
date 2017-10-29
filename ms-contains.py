@@ -26,6 +26,7 @@ The following parameters are supported:
 -summary:         Set the action summary message for the edit.
 -negative:        mark if text not in page
 -regex:           treat text as regex - should contain <result> group. if not whole match will be used
+-multiline:       '^' and '$' will now match begin and end of each line.
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -98,6 +99,7 @@ class BasicBot(
             'append': False, #append results to page
             'section': None, #section title
             'title': False, #check in title not text
+            'multiline': False, #'^' and '$' will now match begin and end of each line.
         })
 
         # call constructor of the super class
@@ -233,7 +235,10 @@ class BasicBot(
                 resultR = u'(?P<result>' + self.getOption('text') + u')'
             if self.getOption('test'):
                 pywikibot.output(resultR)
-            match = re.search(resultR, source)
+            if self.getOption('multiline'):
+                match = re.search(resultR, source,re.M)
+            else:
+                match = re.search(resultR, source)
             if not match and self.getOption('negative'):
                 return(page.title(asLink=True,forceInterwiki=True, textlink=True))
             elif match and not self.getOption('negative'):
