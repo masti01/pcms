@@ -184,7 +184,8 @@ class BasicBot(
                 pywikibot.output(u'LNMvotesResult: %s' % LNMvotesResult)
         
 
-        pywikibot.output(u'voteResults: %s' % voteResults)
+        if self.getOption('test'):
+            pywikibot.output(u'voteResults: %s' % voteResults)
 
         self.generateresultspage( voteResults )
 
@@ -1073,7 +1074,8 @@ class BasicBot(
                 output += self.KAtableheader()
 
                 #sorted list
-                pywikibot.output(results['KA'])
+                if self.getOption('test'):
+                    pywikibot.output(results['KA'])
                 for p in results['KA']:
                     if not p == None:
                         (wiki,error, counters) = p
