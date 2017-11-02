@@ -147,8 +147,9 @@ class BasicBot(
         reviews24 = self.countReviews(currtime, 24)
         reviews168 = self.countReviews(currtime, 168)
 
-	pywikibot.output(u'Results24: %s' % reviews24)
-	pywikibot.output(u'Results168: %s' % reviews168)
+        if self.getOption('test'):
+	    pywikibot.output(u'Results24: %s' % reviews24)
+	    pywikibot.output(u'Results168: %s' % reviews168)
 
         self.generateresultspage(reviews24,reviews168)
 
@@ -161,7 +162,8 @@ class BasicBot(
         reviews = {}
         count = 0
 
-        for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True, logtype='review'):
+        #for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True, logtype='review'):
+        for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True):
             #if le.action().startswith('unapprove'):
             count += 1
             #if self.getOption('test'):
