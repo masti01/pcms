@@ -27,6 +27,7 @@ The following parameters are supported:
 -negative:        mark if text not in page
 -regex:           treat text as regex - should contain <result> group. if not whole match will be used
 -multiline:       '^' and '$' will now match begin and end of each line.
+-edit:            link thru template:edytuj instead of wikilink
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -100,6 +101,7 @@ class BasicBot(
             'section': None, #section title
             'title': False, #check in title not text
             'multiline': False, #'^' and '$' will now match begin and end of each line.
+            'edit': False, #link thru template:edytuj instead of wikilink
         })
 
         # call constructor of the super class
@@ -186,7 +188,11 @@ class BasicBot(
             else:
                 title = i
             #finalpage += u'\n# [[' + title + u']]'
-            finalpage += u'\n# ' + re.sub(ur'\[\[',u'[[:',title, count=1)
+            if self.getOption('edit'):
+                nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
+                finalpage += u'\n# {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
+            else:
+                finalpage += u'\n# ' + re.sub(ur'\[\[',u'[[:',title, count=1)
             if self.getOption('regex') and not self.getOption('negative'):
                 finalpage += u' - ' + link
             itemcount += 1
