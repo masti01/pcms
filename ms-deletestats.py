@@ -148,8 +148,9 @@ class BasicBot(
         deletereasons = self.deleteReasons(currtime,int(self.getOption('days')))
         deleteadmins = self.deleteStats(currtime,int(self.getOption('days')))
 
-	pywikibot.output(u'Delete Reasons: %s' % deletereasons)
-	pywikibot.output(u'Delete Stats: %s' % deleteadmins)
+	if self.getOption('test'):
+            pywikibot.output(u'Delete Reasons: %s' % deletereasons)
+	    pywikibot.output(u'Delete Stats: %s' % deleteadmins)
 
         self.generateresultspage(deletereasons,deleteadmins)
 
