@@ -307,6 +307,11 @@ ignorelist = [
     re.compile('.*[\./@]ochtrup\.de'),  # bot rejected on site (masti)
     re.compile('.*[\./@]stadtlohn\.de'),  # bot rejected on site (masti)
     re.compile('.*[\./@]switzenhausen\.eu'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]kanalbydgoski\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]mpkolsztyn\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]rehden\.de'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]horneburg\.de'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]zdw\.lublin\.pl'),  # bot rejected on site (masti)
 
 ]
 
