@@ -162,8 +162,8 @@ class BasicBot(
         reviews = {}
         count = 0
 
-        #for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True, logtype='review'):
-        for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True):
+        for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True, logtype='review'):
+        #for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True):
             #if le.action().startswith('unapprove'):
             count += 1
             #if self.getOption('test'):
