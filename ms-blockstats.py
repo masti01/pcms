@@ -148,8 +148,9 @@ class BasicBot(
         blockreasons = self.blockReasons(currtime,int(self.getOption('days')))
         blockadmins = self.blockStats(currtime,int(self.getOption('days')))
 
-	pywikibot.output(u'Block Reasons: %s' % blockreasons)
-	pywikibot.output(u'Block Stats: %s' % blockadmins)
+	if self.getOption('test'):
+            pywikibot.output(u'Block Reasons: %s' % blockreasons)
+	    pywikibot.output(u'Block Stats: %s' % blockadmins)
 
         self.generateresultspage(blockreasons,blockadmins)
 
