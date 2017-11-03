@@ -28,6 +28,8 @@ The following parameters are supported:
 -regex:           treat text as regex - should contain <result> group. if not whole match will be used
 -multiline:       '^' and '$' will now match begin and end of each line.
 -edit:            link thru template:edytuj instead of wikilink
+-cite:            cite search results
+-nowiki           put citation in <nowiki> tags
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -102,6 +104,8 @@ class BasicBot(
             'title': False, #check in title not text
             'multiline': False, #'^' and '$' will now match begin and end of each line.
             'edit': False, #link thru template:edytuj instead of wikilink
+            'cite': False, #cite search results
+            'nowiki': False #put citation in <nowiki> tags
         })
 
         # call constructor of the super class
@@ -193,8 +197,11 @@ class BasicBot(
                 finalpage += u'\n# {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
             else:
                 finalpage += u'\n# ' + re.sub(ur'\[\[',u'[[:',title, count=1)
-            if self.getOption('regex') and not self.getOption('negative'):
-                finalpage += u' - ' + link
+            if self.getOption('regex') and self.getOption('cite') and not self.getOption('negative'):
+                if self.getOption('nowiki'):
+                    finalpage += u' - <nowiki>' + link + u'</nowiki>'
+                else:
+                    finalpage += u' - ' + link
             itemcount += 1
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
