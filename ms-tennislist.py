@@ -139,7 +139,8 @@ class BasicBot(
         licznik = 0
         for page in self.generator:
 	    licznik += 1
-            pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
+            if self.getOption('test'):
+                pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
             refs = self.treat(page) # get flag code
             if self.getOption('test'):
                 pywikibot.output(refs)
@@ -160,7 +161,8 @@ class BasicBot(
         for t in page.templatesWithParams():
             (tTitle,paramList) = t
             #if self.getOption('test'):
-            pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
+            if self.getOption('test'):
+                pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
             if tTitle.title(withNamespace=False) in (u'Tenisista infobox',u'Sportowiec infobox'):
                 found = True
                 if self.getOption('test'):
