@@ -144,7 +144,8 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(refs)
             reflinks[page.title()] = refs
-            pywikibot.output(u'{{Flaga|%s}} [[%s]]' % (reflinks[page.title()],page.title()))
+            if self.getOption('test') and reflinks[page.title()]['country']:
+                pywikibot.output(u'{{Flaga|%s}} [[%s]]' % (reflinks[page.title()]['country'],page.title()))
 
         result = self.generateresultspage(reflinks,self.getOption('outpage'),u'',u'')
 
@@ -154,12 +155,14 @@ class BasicBot(
         """
         found = False
         rowtext = u''
+        result = {'country':None, 'variant':None}
 	
         for t in page.templatesWithParams():
             (tTitle,paramList) = t
             #if self.getOption('test'):
             pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
             if tTitle.title(withNamespace=False) in (u'Tenisista infobox',u'Sportowiec infobox'):
+                found = True
                 if self.getOption('test'):
                     pywikibot.output(u'Template:%s' % tTitle.title(withNamespace=False))
                 for p in paramList:
@@ -168,15 +171,23 @@ class BasicBot(
                     pnamed, pname, pvalue = self.templateArg(p)
                     if pnamed and pname == 'państwo':
                         if len(pvalue.strip()):
-                            #if self.getOption('test'):
-                            pywikibot.output(u'Flaga:%s w %s;%s' % ( pvalue.strip(),page.title(),tTitle) )
-                            return(pvalue.strip())
+                            if self.getOption('test'):
+                                pywikibot.output(u'Flaga:%s w %s;%s' % ( pvalue.strip(),page.title(),tTitle) )
+                            result['country'] = pvalue.strip()
                         else:
-                            #if self.getOption('test'):
-                            pywikibot.output(u'Brak flagi w %s;%s' % ( page.title(),tTitle) )
-                            return(None)
-        pywikibot.output(u'Nie znaleziono szablonu')
-        return(None)
+                            if self.getOption('test'):
+                                pywikibot.output(u'Brak flagi w %s;%s' % ( page.title(),tTitle) )
+                    if pnamed and pname == 'wariant flagi':
+                        if len(pvalue.strip()):
+                            if self.getOption('test'):
+                                pywikibot.output(u'Wariant:%s w %s;%s' % ( pvalue.strip(),page.title(),tTitle) )
+                            result['variant'] = pvalue.strip()
+                        else:
+                            if self.getOption('test'):
+                                pywikibot.output(u'Brak fwariantu w %s;%s' % ( page.title(),tTitle) )
+        if not found:
+            pywikibot.output(u'Nie znaleziono szablonu')
+        return(result)
 
     def templateArg(self,param):
         """
@@ -212,7 +223,7 @@ class BasicBot(
         """
         finalpage = header
         #res = sorted(redirlist, key=redirlist.__getitem__, reverse=False)
-        res = sorted(redirlist)
+        res = sorted(redirlist.keys())
         itemcount = 0
         for i in res:
             itemcount += 1
@@ -220,8 +231,12 @@ class BasicBot(
                 title = re.sub(ur'(.*?)( \(.*?\))', ur'\1\2|\1', i)
             else:
                 title = i
-            if redirlist[i]:
-                finalpage += u'# {{Flaga|' + redirlist[i] + u'}} [[' + title + u']] <nowiki>{{Flaga|' + redirlist[i] + u'}} [[' + title + u']]</nowiki>\n'
+            if redirlist[i]['country']:
+                if redirlist[i]['variant']:
+                    finalpage += u'# {{Flaga|' + redirlist[i]['country'] + u'|' + redirlist[i]['variant'] + u'}} [[' \
+                                 + title + u']] <nowiki>{{Flaga|' + redirlist[i]['country'] + u'|' + redirlist[i]['variant'] + u'}} [[' + title + u']]</nowiki>\n'
+                else:
+                    finalpage += u'# {{Flaga|' + redirlist[i]['country'] + u'}} [[' + title + u']] <nowiki>{{Flaga|' + redirlist[i]['country'] + u'}} [[' + title + u']]</nowiki>\n'
             else:
                 finalpage += u'# [[' + title + u']] <nowiki> [[' + title + u']]</nowiki>\n'
             if itemcount > int(self.getOption('maxlines'))-1:
