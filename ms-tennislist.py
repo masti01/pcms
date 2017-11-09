@@ -186,9 +186,9 @@ class BasicBot(
                             result['variant'] = pvalue.strip()
                         else:
                             if self.getOption('test'):
-                                pywikibot.output(u'Brak fwariantu w %s;%s' % ( page.title(),tTitle) )
+                                pywikibot.output(u'Brak wariantu w %s;%s' % ( page.title(),tTitle) )
         if not found:
-            pywikibot.output(u'Nie znaleziono szablonu')
+            pywikibot.output(u'Nie znaleziono szablonu w:%s' % page.title())
         return(result)
 
     def templateArg(self,param):
