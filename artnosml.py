@@ -15,7 +15,7 @@ i18 = {
     'head' : u'Licznik artykułów pl.wikipedia - ostatnie 100 pozycji - tools.wikimedia.pl',
     'heading' : u'Ostatnie nowe artykuły',
     'line1' : u'Strona przedstawia numerację ostatnio utworzonych 100 artykułów z głównej przestrzeni nazw.',
-    'legend' : u'Rodzaj: <b>A</b> (artykuł), <b>R</b> (przekierowanie)',
+    'legend' : u'Rodzaj: <b>A</b> (artykuł), <b>R</b> (przekierowanie), <b>M</b> (przeniesiony)',
     'lastupdate' : u'Ostatnia aktualizacja: ',
     'refresh' : u'Strona uaktualniana co 5 minut. Wyświetlanie od najnowszych.',
     'hnumber' : u'Numer artykułu',
