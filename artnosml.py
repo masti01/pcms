@@ -158,7 +158,7 @@ def outputRow(logline,lang):
                 tstyle  = u''
         else:
             astyle = u' style="color:#CC2200">'
-            if atype == u'R':
+            if atype.startswith('R'):
                 tpage = pywikibot.Page(site, atarget)
                 ttitle = tpage.title()
                 if tpage.exists():
@@ -175,7 +175,7 @@ def outputRow(logline,lang):
 
     #result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
 
-    if atype == u'R':
+    if atype.startswith('R'):
         if page.exists():
             result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#308050">' + atitle + u'</a></td>\n'
         else:
