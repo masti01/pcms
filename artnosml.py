@@ -134,72 +134,36 @@ def outputRow(logline,lang):
     result += u'\t\t\t\t<td>' + atype +'</td>\n'
     site = pywikibot.Site(lang,fam='wikipedia')
     page = pywikibot.Page(site, atitle)
-
+ 
+    result += u'\t\t\t\t<td>' + linkcolor(page,lang) + u'</td>\n'
     if page.exists():
-        astyle = u''
         if page.isRedirectPage():
-            astyle = u' style="color:#308050">'
-            try:
-                tpage = page.getRedirectTarget()
-                ttitle = tpage.title()
-            except:
-                tpage = None
-                ttitle = u''
-              
-            if tpage: 
-                if tpage.exists():
-                    if tpage.isRedirectPage():
-                        tstyle = u' style="color:#308050">'
-                    else:
-                        tstyle  = u''
-                else:
-                    tstyle = u' style="color:#CC2200">'
-            else:
-                tstyle  = u''
+            tpage = page.getRedirectTarget()
+            result += u'\t\t\t\t<td>' + linkcolor(tpage,lang) + u'</td>\n'
         else:
-            astyle = u' style="color:#CC2200">'
-            if atype.startswith('R'):
-                tpage = pywikibot.Page(site, atarget)
-                ttitle = tpage.title()
-                if tpage.exists():
-                    if tpage.isRedirectPage():
-                        tstyle = u' style="color:#308050">'
-                    else:
-                        tstyle  = u''
-                else:
-                    tstyle = u' style="color:#CC2200">'
-
-    urlatitle = urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
-    urlatarget = urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
-
-
-    #result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
-
-    if atype.startswith('R'):
-        if page.exists():
-            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#308050">' + atitle + u'</a></td>\n'
-        else:
-            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#CC2200">' + atitle + u'</a></td>\n'
+            result += u'\t\t\t\t<td></td>\n'
     else:
-        if page.exists():
-            result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
-        else:
-            result += u'\t\t\t\t<td><a href="'+ utitle + u'" style="color:#CC2200">' + atitle + u'</a></td>\n'
-    if atarget == u'':
         result += u'\t\t\t\t<td></td>\n'
-    elif atarget == u'REDIRECT ERROR':
-        result += u'\t\t\t\t<td>REDIRECT ERROR</td>\n'
-    else:
-        redir = pywikibot.Page(site, atarget)
-        utarget = urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
-        if redir.exists():
-            result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
-        else:
-            result += u'\t\t\t\t<td><a href="'+ utarget + u'" style="color:#CC2200">' + atarget + u'</a></td>\n'
-    result += u'\t\t\t</tr>\n'
+    result += u'\t\t\t</tr>\n'           
 
     #pywikibot.output(result)
     return(result)
+
+def linkcolor(page,lang):
+    #return html link for page
+    # <a href="PAGE TITLE URL" style="color:#308050">' + PAGE TITLE + u'</a>
+
+    if page.exists():
+       if page.isRedirectPage():
+           return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + page.title()).encode('UTF-8')) + u'" style="color:#308050">' + page.title() + u'</a>')
+       elif page.isDisambig():
+           return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + page.title()).encode('UTF-8')) + u'" style="color:#E8D1D1">' + page.title() + u'</a>')
+       else:
+           return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + page.title()).encode('UTF-8')) + u'">' + page.title() + u'</a>')
+    else:
+        return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org//w/index.php?title=' + page.title()).encode('UTF-8')) + u'&amp;action=edit&amp;redlink=1 " style="color:#CC2200">' + page.title() + u'</a>')
+
+
     
 
 def main(*args):
