@@ -158,14 +158,17 @@ class BasicBot(
         for page in self.generator:
             counter += 1
             #finalpage = finalpage + self.treat(page)
-            pywikibot.output(u'Processing page #%i (%i marked): %s' % (counter, marked, page.title(asLink=True)) )
+            if self.getOption('test'):
+                pywikibot.output(u'Processing page #%i (%i marked): %s' % (counter, marked, page.title(asLink=True)) )
             result = self.treat(page)
             if result:
                results[page.title(withNamespace=False)] = ( result, page.namespace() == 10 )
                marked += 1
-               pywikibot.output(u'Added line #%i: %s elements: %i' % ( marked, page.title(asLink=True), len(result) ))
+               if self.getOption('test'):
+                   pywikibot.output(u'Added line #%i: %s elements: %i' % ( marked, page.title(asLink=True), len(result) ))
 
-        pywikibot.output(results)
+        if self.getOption('test'):
+            pywikibot.output(results)
         self.generateresultspage(results, self.getOption('outpage'), header, footer)
         return
 
