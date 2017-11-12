@@ -140,7 +140,8 @@ class BasicBot(
         marked = 0
         for tpage in self.generator:
 	    counter += 1
-            pywikibot.output(u'Treating #%i (%i marked): %s' % (counter, marked, tpage.title()))
+            if self.getOption('test'):
+                pywikibot.output(u'Treating #%i (%i marked): %s' % (counter, marked, tpage.title()))
             refs = self.treat(tpage) # get (name)
             #if self.getOption('test'):
                 #pywikibot.output(u'%s' % refs)
@@ -195,8 +196,8 @@ class BasicBot(
         finalpage += footer
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         outpage.text = finalpage
-
-        pywikibot.output(outpage.title())
+        if self.getOption('test'):
+            pywikibot.output(outpage.title())
         
         outpage.save(summary=self.getOption('summary'))
         return(True)
