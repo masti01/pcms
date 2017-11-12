@@ -599,7 +599,8 @@ class ReferencesRobot(Bot):
                 except (URLError,
                         socket.error,
                         IOError,
-                        httplib.error) as e:
+                        httplib.error,
+                        pywikibot.FatalServerError) as e:
                     pywikibot.output(u'Can\'t retrieve page %s : %s'
                                      % (ref.url, e))
                     continue
