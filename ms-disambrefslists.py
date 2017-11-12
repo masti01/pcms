@@ -99,6 +99,7 @@ class BasicBot(
             'maxlines': 1000, #default number of entries per page
             'testprint': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
+            'test': False, #test printouts
         })
 
         # call constructor of the super class
@@ -151,7 +152,8 @@ class BasicBot(
         refscounter = 0
 
         for page in self.generator:
-            pywikibot.output(u'# %i (%i) Treating:%s' % (counter, refscounter, page.title(asLink=True)) )
+            if self.getOption('test'):
+                pywikibot.output(u'# %i (%i) Treating:%s' % (counter, refscounter, page.title(asLink=True)) )
             refs = self.treat(page)
             counter += 1
             if refs:
@@ -192,7 +194,8 @@ class BasicBot(
         outpage.text = finalpage
         outpage.save(summary=self.getOption('summary'))
 
-        pywikibot.output(redirlist)
+        if self.getOption('test'):
+            pywikibot.output(redirlist)
         return(res)
       
 
