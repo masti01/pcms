@@ -152,17 +152,20 @@ class BasicBot(
         marked = 0
         for page in self.generator:
 	    licznik += 1
-            pywikibot.output(u'Treating #%i (marked:%i): %s' % (licznik, marked, page.title()))
+            if self.getOption('test'):
+                pywikibot.output(u'Treating #%i (marked:%i): %s' % (licznik, marked, page.title()))
             refs = self.treat(page) # get (name)
             if refs:
                 if not refs in reflinks:
                     #test
-                    pywikibot.output(refs)
+                    if self.getOption('test'):
+                        pywikibot.output(refs)
                     reflinks.append(refs)
                     marked += 1
                 else:
                     #test
-                    pywikibot.output(u'Already marked')
+                    if self.getOption('test'):
+                        pywikibot.output(u'Already marked')
 
         footer = u'\n'
         footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
@@ -221,7 +224,8 @@ class BasicBot(
         else:
             outpage.text = finalpage
 
-        pywikibot.output(outpage.title())
+        if self.getOption('test'):
+            pywikibot.output(outpage.title())
         
         outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
