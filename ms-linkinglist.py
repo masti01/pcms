@@ -151,13 +151,16 @@ class BasicBot(
         licznik = 0
         for page in self.generator:
 	    licznik += 1
-            pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
+            if self.getOption('test'):
+                pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
             if (self.getOption('negative') and not page.exists()) or (not self.getOption('negative') and page.exists()):
                 refs = self.treat(page) # get list of links
                 reflinks[page.title()] = refs
-                pywikibot.output(u'%s - %i' % (page.title(),reflinks[page.title()]))
+                if self.getOption('test'):
+                    pywikibot.output(u'%s - %i' % (page.title(),reflinks[page.title()]))
             else:
-                pywikibot.output(u'SKIPPING Page :%s' % page.title() )
+                if self.getOption('test'):
+                    pywikibot.output(u'SKIPPING Page :%s' % page.title() )
 
 	footer = u'\n|}\n'
         footer += u'Przetworzono: ' + str(licznik) + u' stron' 
@@ -189,9 +192,10 @@ class BasicBot(
         elif i in (2,3,4) and (i<10 or i>20) :
             suffix = u'linkujące'
         else:
-             suffix = u'linkujących'
+            suffix = u'linkujących'
 
-        pywikibot.output(u'[[Specjalna:Linkujące/' + t + u'|' + str(i) + u' ' + suffix + u']]')
+        if self.getOption('test'):
+            pywikibot.output(u'[[Specjalna:Linkujące/' + t + u'|' + str(i) + u' ' + suffix + u']]')
         return(u'[[Specjalna:Linkujące/' + t + u'|' + str(i) + u' ' + suffix + u']]\n')
 
     def generateresultspage(self, resdict, pagename, header, footer):
@@ -220,7 +224,8 @@ class BasicBot(
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         outpage.text = finalpage
 
-        pywikibot.output(outpage.title())
+        if self.getOption('test'):
+            pywikibot.output(outpage.title())
         
         outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
@@ -264,7 +269,8 @@ def templateArg(self, param):
            name = None
            value = param
         #test
-        pywikibot.output(u'name:%s:value:%s' % (name, value))
+        if self.getOption('test'):
+            pywikibot.output(u'name:%s:value:%s' % (name, value))
         return named, name, value
 
 def main(*args):
