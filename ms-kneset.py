@@ -158,9 +158,11 @@ class BasicBot(
         licznik = 0
         for tpage in self.generator:
 	    licznik += 1
-            pywikibot.output(u'Treating #%i: %s' % (licznik, tpage.title()))
+            if self.getOption('test'):
+                pywikibot.output(u'Treating #%i: %s' % (licznik, tpage.title()))
             refs = self.treat(tpage) # get (name, id, creator, lastedit)
-            pywikibot.output(refs)
+            if self.getOption('test'):
+                pywikibot.output(refs)
             reflinks.append(refs)
 
         footer = u'\n|}'
@@ -183,7 +185,7 @@ class BasicBot(
         res = sorted(redirlist)
         itemcount = 0
         if self.getOption('test'):
-                pywikibot.output(u'GENERATING RESULTS')
+            pywikibot.output(u'GENERATING RESULTS')
         for i in res:
 
             if self.getOption('test'):
@@ -212,7 +214,8 @@ class BasicBot(
                     pywikibot.output(u'*** Breaking output loop ***')
                     break
             else:
-                pywikibot.output(u'SKIPPING:%s' % title)
+                if self.getOption('test'):
+                    pywikibot.output(u'SKIPPING:%s' % title)
 
         finalpage += footer 
         
@@ -222,7 +225,8 @@ class BasicBot(
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         outpage.text = finalpage
 
-        pywikibot.output(outpage.title())
+        if self.getOption('test'):
+            pywikibot.output(outpage.title())
         
         outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
