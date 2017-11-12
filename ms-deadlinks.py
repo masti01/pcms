@@ -136,8 +136,8 @@ class BasicBot(
 
     def run(self):
 
-
-        pywikibot.output(self.getOption('includes'))
+        if self.getOption('test'):
+            pywikibot.output(self.getOption('includes'))
 
         headerfull = u"Poniżej znajduje się lista " + self.getOption('maxlines') + u" martwych linków występujących w największej liczbie artykułów.\n\n"
         headersum = headerfull
@@ -156,7 +156,8 @@ class BasicBot(
         licznik = 0
         for page in self.generator:
 	    licznik += 1
-            pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
+            if self.getOption('test'):
+                pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
             refs = self.treat(page, False) # get list of weblinks
             for ref in refs:
                 if ref in deadlinksf:
@@ -242,7 +243,8 @@ class BasicBot(
             suffix = self.declination(count, u'wystąpienie', u'wystąpienia', u'wystąpień')
 
             #finalpage += u'#' + i + u' ([{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u'])\n'
-            pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
+            if self.getOption('test'):
+                pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
             finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']\n'
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
@@ -257,7 +259,8 @@ class BasicBot(
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         outpage.text = finalpage
 
-        pywikibot.output(outpage.title())
+        if self.getOption('test'):
+            pywikibot.output(outpage.title())
         
         outpage.save(summary=self.getOption('summary'))
         return(success)
@@ -297,7 +300,8 @@ def templateArg(param):
            name = None
            value = param
         #test
-        pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
+        if self.getOption('test'):
+            pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
         return named, name, value
 
 def main(*args):
