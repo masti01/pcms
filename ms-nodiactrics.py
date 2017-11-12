@@ -161,10 +161,12 @@ class BasicBot(
         marked = 0
         skipped = 0
         for page in self.generator:
-            pywikibot.output(u'Processing #%i (%i marked, %i skipped):%s' % (counter, marked, skipped, page.title(asLink=True)))
+            if self.getOption('test'):
+                pywikibot.output(u'Processing #%i (%i marked, %i skipped):%s' % (counter, marked, skipped, page.title(asLink=True)))
             counter += 1
             if page.title() in processed.keys():
-                pywikibot.output(u'Already done...')
+                if self.getOption('test'):
+                    pywikibot.output(u'Already done...')
                 skipped += 1
                 processed[page.title()] += 1
                 continue
@@ -175,8 +177,9 @@ class BasicBot(
                 results[page.title()] = res
 
         self.generateresultspage(results, self.getOption('outpage'), header, footer)
-        pywikibot.output(processed)
-        pywikibot.output(u'Processed #%i (%i marked, %i skipped)' % (counter, marked, skipped))
+        if self.getOption('test'):
+            pywikibot.output(processed)
+            pywikibot.output(u'Processed #%i (%i marked, %i skipped)' % (counter, marked, skipped))
         
 
     def treat(self, page):
@@ -293,7 +296,8 @@ class BasicBot(
         outpage.text = finalpage
         outpage.save(summary=self.getOption('summary'))
 
-        pywikibot.output(rlist)
+        if self.getOption('test'):
+            pywikibot.output(rlist)
         return(res)
 
     def multisub(self, subs, subject):
