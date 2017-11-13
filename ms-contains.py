@@ -170,8 +170,7 @@ class BasicBot(
                     if self.getOption('test'):
                         pywikibot.output(u'Already marked')
 
-        footer = u'\n'
-        footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
+        footer = u'\n\nPrzetworzono ' + str(licznik) + u' stron.'
 
         outputpage = self.getOption('outpage')
 
@@ -195,7 +194,7 @@ class BasicBot(
         pagecount = 0
 
         if self.getOption('count'):
-            self.savepart(u'',pagename,pagecount,header,self.generateprefooter(pagename,totalcount,pagecount)+footer)
+            self.savepart(finalpage,pagename,pagecount,header,self.generateprefooter(pagename,totalcount,pagecount)+footer)
             return(1)
         
         for i in res:
@@ -243,7 +242,7 @@ class BasicBot(
         if not totalcount:
             result += u"\n\n'''Brak wyników'''\n\n"
         elif self.getOption('count'):
-            result += u"\n\n'''Liczba stron spełniających warunki: " + str(totalcount) + u"'''\n\n"
+            result += u"\n\n'''Liczba stron spełniających warunki: " + str(totalcount) + u"'''"
         else:
             result += u"\n\n"
 
