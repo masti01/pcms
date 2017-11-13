@@ -29,7 +29,8 @@ The following parameters are supported:
 -multiline:       '^' and '$' will now match begin and end of each line.
 -edit:            link thru template:edytuj instead of wikilink
 -cite:            cite search results
--nowiki           put citation in <nowiki> tags
+-nowiki:          put citation in <nowiki> tags
+-navi:            add navigation template {{Wikipedysta:MastiBot/Nawigacja|Wikipedysta:mastiBot/test|Wikipedysta:mastiBot/test 2}}
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -105,7 +106,9 @@ class BasicBot(
             'multiline': False, #'^' and '$' will now match begin and end of each line.
             'edit': False, #link thru template:edytuj instead of wikilink
             'cite': False, #cite search results
-            'nowiki': False #put citation in <nowiki> tags
+            'nowiki': False, #put citation in <nowiki> tags
+            'count': False, #count pages only
+            'navi': False, # add navigation template
         })
 
         # call constructor of the super class
@@ -179,46 +182,102 @@ class BasicBot(
         """
         Generates results page from redirlist
         Starting with header, ending with footer
-        Output page is pagename
+        Output page is pagename + pagenumber split at maxlines rows
         """
-        maxlines = int(self.getOption('maxlines'))
-        finalpage = header
+        #finalpage = header
+        finalpage = u''
         if self.getOption('section'):
             finalpage += u'== ' + self.getOption('section') + u' ==\n'
         #res = sorted(redirlist, key=redirlist.__getitem__, reverse=False)
         res = sorted(redirlist)
         itemcount = 0
-        for i in res:
+        totalcount = len(res)
+        pagecount = 0
 
+        if self.getOption('count'):
+            self.savepart(u'',pagename,pagecount,header,self.generateprefooter(pagename,totalcount,pagecount)+footer)
+            return(1)
+        
+        for i in res:
             if self.getOption('regex') and not self.getOption('negative'):
                 title, link = i
             else:
                 title = i
             #finalpage += u'\n# [[' + title + u']]'
+            linenumber = str(pagecount * int(self.getOption('maxlines')) + itemcount + 1) + u'.'
             if self.getOption('edit'):
                 nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
-                finalpage += u'\n# {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
+                finalpage += u'\n:' + linenumber + ' {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
             else:
-                finalpage += u'\n# ' + re.sub(ur'\[\[',u'[[:',title, count=1)
+                finalpage += u'\n:' + linenumber + u' ' + re.sub(ur'\[\[',u'[[:',title, count=1)
             if self.getOption('regex') and self.getOption('cite') and not self.getOption('negative'):
                 if self.getOption('nowiki'):
                     finalpage += u' - <nowiki>' + link + u'</nowiki>'
                 else:
                     finalpage += u' - ' + link
             itemcount += 1
-            if itemcount > maxlines-1:
-                pywikibot.output(u'*** Breaking output loop ***')
-                break
+
+            if itemcount > int(self.getOption('maxlines'))-1:
+                pywikibot.output(u'***** saving partial results *****')
+                self.savepart(finalpage,pagename,pagecount,header,self.generateprefooter(pagename,totalcount,pagecount)+footer)
+                finalpage = u''
+                itemcount = 0
+                pagecount += 1
+
+        #save remaining results
+        pywikibot.output(u'***** saving remaining results *****')
+        self.savepart(finalpage,pagename,pagecount,header,self.generateprefooter(pagename,totalcount,pagecount)+footer)
+
+
+        return(pagecount)
+
+
+    def generateprefooter(self,pagename, totalcount, pagecount):
+        # generate text to appear before footer
+
+        if self.getOption('test'):
+            pywikibot.output(u'***** GENERATING PREFOOTER page '+ pagename + u' ' + str(pagecount) + u' *****')
+        result = u''
 
         # if no results found to be reported
-        if not itemcount:
-            finalpage += u"\n\n'''Brak wyników'''\n\n"
+        if not totalcount:
+            result += u"\n\n'''Brak wyników'''\n\n"
+        elif self.getOption('count'):
+            result += u"\n\n'''Znaleziono " + str(totalcount) + " stron spełniających warunki'''\n\n"
+        else:
+            result += u"\n\n"
 
-        finalpage += footer 
+        return(result)
 
-        #pywikibot.output(finalpage)
-        success = True
-        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+    def navigation(self,pagename, pagecount):
+        #generate navigation template
+        if pagecount > 1:
+            result = u'{{User:mastiBot/Nawigacja|' + pagename + u' ' + str(pagecount-1) + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
+        elif pagecount:
+            result = u'{{User:mastiBot/Nawigacja|' + pagename + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
+        else:
+            result = u'{{User:mastiBot/Nawigacja|' + pagename + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
+        return(result)
+        
+
+    def savepart(self, pagepart, pagename, pagecount, header, footer):
+        # generate resulting page
+        if self.getOption('test'):
+            pywikibot.output('***** SAVING PAGE #%i' % pagecount) 
+            #pywikibot.output(finalpage)
+
+        if self.getOption('navi'):
+            finalpage = header + self.navigation(pagename,pagecount) + pagepart + footer + self.navigation(pagename,pagecount) 
+        else:
+            finalpage = header + pagepart + footer
+
+        if pagecount: 
+            numberedpage = pagename + u' ' + str(pagecount)
+        else:
+            numberedpage = pagename
+
+        outpage = pywikibot.Page(pywikibot.Site(), numberedpage)
+
         if self.getOption('append'):
             outpage.text += finalpage
         else:
@@ -227,7 +286,7 @@ class BasicBot(
         if self.getOption('test'):
             pywikibot.output(outpage.title())
         
-        outpage.save(summary=self.getOption('summary'))
+        success = outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
         #   pywikibot.output(u'Page %s not saved.' % outpage.title(asLink=True))
         #   success = False
