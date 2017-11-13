@@ -600,7 +600,8 @@ class ReferencesRobot(Bot):
                         socket.error,
                         IOError,
                         httplib.error,
-                        pywikibot.FatalServerError) as e:
+                        pywikibot.FatalServerError,
+                        pywikibot.Server504Error) as e:
                     pywikibot.output(u'Can\'t retrieve page %s : %s'
                                      % (ref.url, e))
                     continue
