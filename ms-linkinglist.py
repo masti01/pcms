@@ -97,6 +97,8 @@ class BasicBot(
             'testprint': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
             'ascending': False, #sort order
+            'test': False, #switch on test functionality
+
         })
 
         # call constructor of the super class
