@@ -243,7 +243,7 @@ class BasicBot(
         if not totalcount:
             result += u"\n\n'''Brak wyników'''\n\n"
         elif self.getOption('count'):
-            result += u"\n\n'''Znaleziono " + str(totalcount) + " stron spełniających warunki'''\n\n"
+            result += u"\n\n'''Liczba stron spełniających warunki: " + str(totalcount) + u"'''\n\n"
         else:
             result += u"\n\n"
 
@@ -252,11 +252,11 @@ class BasicBot(
     def navigation(self,pagename, pagecount):
         #generate navigation template
         if pagecount > 1:
-            result = u'{{User:mastiBot/Nawigacja|' + pagename + u' ' + str(pagecount-1) + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
+            result = u'\n\n{{User:mastiBot/Nawigacja|' + pagename + u' ' + str(pagecount-1) + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
         elif pagecount:
-            result = u'{{User:mastiBot/Nawigacja|' + pagename + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
+            result = u'\n\n{{User:mastiBot/Nawigacja|' + pagename + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
         else:
-            result = u'{{User:mastiBot/Nawigacja|' + pagename + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
+            result = u'\n\n{{User:mastiBot/Nawigacja|' + pagename + u'|' + pagename + u' ' + str(pagecount+1) + u'}}\n\n'
         return(result)
         
 
