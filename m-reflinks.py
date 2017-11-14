@@ -216,11 +216,18 @@ class RefLink(object):
                                                     self.title,
                                                     self.linkComment)
         """
-        return '<ref%s>{{Cytuj| url=%s | tytuł=%s<!-- %s --> | opublikowany=%s | lang=%s | data dostępu=%s}}</ref>' % (self.refname, self.link,
+        if self.lang:
+            return '<ref%s>{{Cytuj| url=%s | tytuł=%s<!-- %s --> | opublikowany=%s | język=%s | data dostępu=%s}}</ref>' % (self.refname, self.link,
                                                     self.title,
                                                     self.linkComment,
                                                     self.refPublication(),
                                                     self.lang,
+                                                    datetime.datetime.now().strftime("%Y-%m-%d"))
+        else:
+            return '<ref%s>{{Cytuj| url=%s | tytuł=%s<!-- %s --> | opublikowany=%s | data dostępu=%s}}</ref>' % (self.refname, self.link,
+                                                    self.title,
+                                                    self.linkComment,
+                                                    self.refPublication(),
                                                     datetime.datetime.now().strftime("%Y-%m-%d"))
 
 
@@ -230,12 +237,12 @@ class RefLink(object):
 
     def langCheck(self):
         # lang
-        pywikibot.output(u'langCheck pre:%s' % self.lang)
+        #pywikibot.output(u'langCheck pre:%s' % self.lang)
         if not self.lang:
             self.lang = u''
         if self.lang == self.site.code:
             self.lang = u''
-        pywikibot.output(u'langCheck post:%s' % self.lang)
+        #pywikibot.output(u'langCheck post:%s' % self.lang)
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
@@ -719,7 +726,7 @@ class ReferencesRobot(Bot):
                 if langmatch:
                     ref.lang = langmatch.group('lang')
                 ref.langCheck()
-                pywikibot.output(u'Page lang:%s' % ref.lang)
+                #pywikibot.output(u'Page lang:%s' % ref.lang)
 
                 if not ref.title:
                     repl = ref.refLink()
