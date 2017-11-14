@@ -48,6 +48,7 @@ import socket
 import subprocess
 import sys
 import tempfile
+import datetime
 
 from functools import partial
 
@@ -200,16 +201,41 @@ class RefLink(object):
         self.linkComment = i18n.twtranslate(self.site, 'reflinks-comment')
         self.url = re.sub(u'#.*', '', self.link)
         self.title = None
+        self.lang = None
+
+    def refPublication(self):
+        """
+        Return serwer name from url
+        """
+        return(re.sub(r'.*\/\/([^\/ ]*).*',r'\1',self.link))
 
     def refTitle(self):
         """Return the <ref> with its new title."""
+        """
         return '<ref%s>[%s %s<!-- %s -->]</ref>' % (self.refname, self.link,
                                                     self.title,
                                                     self.linkComment)
+        """
+        return '<ref%s>{{Cytuj| url=%s | tytuł=%s<!-- %s --> | opublikowany=%s | lang=%s | data dostępu=%s}}</ref>' % (self.refname, self.link,
+                                                    self.title,
+                                                    self.linkComment,
+                                                    self.refPublication(),
+                                                    self.lang,
+                                                    datetime.datetime.now().strftime("%Y-%m-%d"))
+
 
     def refLink(self):
         """No title has been found, return the unbracketed link."""
         return '<ref%s>%s</ref>' % (self.refname, self.link)
+
+    def langCheck(self):
+        # lang
+        pywikibot.output(u'langCheck pre:%s' % self.lang)
+        if not self.lang:
+            self.lang = u''
+        if self.lang == self.site.code:
+            self.lang = u''
+        pywikibot.output(u'langCheck post:%s' % self.lang)
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
@@ -244,6 +270,9 @@ class RefLink(object):
         self.title = self.title.replace('}}', '}&#125;')
         # prevent multiple quotes being interpreted as '' or '''
         self.title = self.title.replace('\'\'', '\'&#39;')
+        # avoid multiple | being interpreted as a template parameter
+        self.title = self.title.replace('|', '&#124;')
+
         self.title = pywikibot.unicode2html(self.title, self.site.encoding())
         # TODO : remove HTML when both opening and closing tags are included
 
@@ -420,7 +449,7 @@ class ReferencesRobot(Bot):
             bad = globalbadtitles
         self.titleBlackList = re.compile(bad, re.I | re.S | re.X)
         self.norefbot = noreferences.NoReferencesBot(None, verbose=False)
-        self.deduplicator = DuplicateReferences()
+        #self.deduplicator = DuplicateReferences()
 
         self.site_stop_page = i18n.translate(self.site, stop_page)
         if self.site_stop_page:
@@ -441,6 +470,8 @@ class ReferencesRobot(Bot):
         self.NON_HTML = re.compile(
             br'(?is)<script[^>]*>.*?</script>|<style[^>]*>.*?</style>|'
             br'<!--.*?-->|<!\[CDATA\[.*?\]\]>')
+        # Extract html language from page
+        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?"|<meta\s*?HTTP-EQUIV\s*?=\s*?"Content-Language"\s*?CONTENT\s*?=\s*?")(?P<lang>.*?)[-"]')
 
         # Authorized mime types for HTML pages
         self.MIME = re.compile(
@@ -681,6 +712,13 @@ class ReferencesRobot(Bot):
                         ref.transform()
                         if ref.title:
                             break
+
+                pagelang = u''
+                langmatch = self.LANG.search(u)
+                if langmatch:
+                    ref.lang = langmatch.group('lang')
+                ref.langCheck()
+                pywikibot.output(u'Page lang:%s' % ref.lang)
 
                 if not ref.title:
                     repl = ref.refLink()
