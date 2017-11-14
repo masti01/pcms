@@ -237,12 +237,15 @@ class RefLink(object):
 
     def langCheck(self):
         # lang
+        return
+        """
         #pywikibot.output(u'langCheck pre:%s' % self.lang)
         if not self.lang:
             self.lang = u''
         if self.lang == self.site.code:
             self.lang = u''
         #pywikibot.output(u'langCheck post:%s' % self.lang)
+        """
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
@@ -721,7 +724,6 @@ class ReferencesRobot(Bot):
                         if ref.title:
                             break
 
-                pagelang = u''
                 langmatch = self.LANG.search(u)
                 if langmatch:
                     ref.lang = langmatch.group('lang')
