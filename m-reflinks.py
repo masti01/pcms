@@ -239,6 +239,7 @@ class RefLink(object):
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
+        return(self.refLink())
         tag = i18n.translate(self.site, deadLinkTag)
         if not tag:
             dead_link = self.refLink()
