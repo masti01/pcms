@@ -172,7 +172,7 @@ badtitles = {
 }
 
 # Regex that match bare references
-linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?))\]?<\/ref>')
+linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?)[^\]\.])(\]|\]\.)?<\/ref>')
 """ original wrong regex
     # bracketed URLs
     r'(?i)<ref(?P<name>[^>]*)>\s*\[?(?P<url>(?:http|https)://(?:' +
@@ -289,7 +289,7 @@ class RefLink(object):
         # prevent multiple quotes being interpreted as '' or '''
         self.title = self.title.replace('\'\'', '\'&#39;')
         # avoid multiple | being interpreted as a template parameter
-        self.title = self.title.replace('|', '{{!}}')
+        self.title = self.title.replace('|', '&#124;')
 
         self.title = pywikibot.unicode2html(self.title, self.site.encoding())
         # TODO : remove HTML when both opening and closing tags are included
