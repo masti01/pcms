@@ -172,13 +172,15 @@ badtitles = {
 }
 
 # Regex that match bare references
-linksInRef = re.compile(
+linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?))\]?<\/ref>')
+""" original wrong regex
     # bracketed URLs
     r'(?i)<ref(?P<name>[^>]*)>\s*\[?(?P<url>(?:http|https)://(?:' +
     # unbracketed with()
     r'^\[\]\s<>"]+\([^\[\]\s<>"]+[^\[\]\s\.:;\\,<>\?"]+|' +
     # unbracketed without ()
     r'[^\[\]\s<>"]+[^\[\]\s\)\.:;\\,<>\?"]+|[^\[\]\s<>"]+))[!?,\s]*\]?\s*</ref>')
+"""
 
 # Download this file :
 # http://www.twoevils.org/files/wikipedia/404-links.txt.gz
@@ -249,6 +251,8 @@ class RefLink(object):
     def transformLink(self):
         #convert wrong characters
         self.link = re.sub(ur'\|', '%7C', self.link)
+        #self.link = re.sub(ur'\[', '%5B', self.link)
+        #self.link = re.sub(ur'\]', '%5D', self.link)
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
