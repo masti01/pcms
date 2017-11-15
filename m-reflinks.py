@@ -248,7 +248,7 @@ class RefLink(object):
 
     def transformLink(self):
         #convert wrong characters
-        self.link = re.sub(ur'|', '%7C', self.link)
+        self.link = re.sub(ur'\|', '%7C', self.link)
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
