@@ -216,6 +216,7 @@ class RefLink(object):
                                                     self.title,
                                                     self.linkComment)
         """
+        self.transformLink()
         if self.lang:
             return '<ref%s>{{Cytuj| url=%s | tytuł=%s<!-- %s --> | opublikowany=%s | język=%s | data dostępu=%s}}</ref>' % (self.refname, self.link,
                                                     self.title,
@@ -244,6 +245,10 @@ class RefLink(object):
         #if self.lang == self.site.code:
         #    self.lang = u''
         #pywikibot.output(u'langCheck post:%s' % self.lang)
+
+    def transformLink(self):
+        #convert wrong characters
+        self.link = re.sub(ur'|', '%7C', self.link)
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
@@ -280,7 +285,7 @@ class RefLink(object):
         # prevent multiple quotes being interpreted as '' or '''
         self.title = self.title.replace('\'\'', '\'&#39;')
         # avoid multiple | being interpreted as a template parameter
-        self.title = self.title.replace('|', '&#124;')
+        self.title = self.title.replace('|', '{{!}}')
 
         self.title = pywikibot.unicode2html(self.title, self.site.encoding())
         # TODO : remove HTML when both opening and closing tags are included
@@ -480,7 +485,7 @@ class ReferencesRobot(Bot):
             br'(?is)<script[^>]*>.*?</script>|<style[^>]*>.*?</style>|'
             br'<!--.*?-->|<!\[CDATA\[.*?\]\]>')
         # Extract html language from page
-        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?"|<meta\s*?HTTP-EQUIV\s*?=\s*?"Content-Language"\s*?CONTENT\s*?=\s*?")(?P<lang>.*?)[-"]')
+        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?"|<meta\s*?HTTP-EQUIV\s*?=\s*?"Content-Language"\s*?CONTENT\s*?=\s*?")(?P<lang>.*?)[_-"]')
 
         # Authorized mime types for HTML pages
         self.MIME = re.compile(
