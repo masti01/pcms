@@ -485,7 +485,7 @@ class ReferencesRobot(Bot):
             br'(?is)<script[^>]*>.*?</script>|<style[^>]*>.*?</style>|'
             br'<!--.*?-->|<!\[CDATA\[.*?\]\]>')
         # Extract html language from page
-        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?"|<meta\s*?HTTP-EQUIV\s*?=\s*?"Content-Language"\s*?CONTENT\s*?=\s*?")(?P<lang>.*?)[_-"]')
+        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?"|<meta\s*?HTTP-EQUIV\s*?=\s*?"Content-Language"\s*?CONTENT\s*?=\s*?")(?P<lang>.*?)[\_\-\"]')
 
         # Authorized mime types for HTML pages
         self.MIME = re.compile(
