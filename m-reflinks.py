@@ -76,7 +76,8 @@ docuReplacements = {
     '&params;': pagegenerators.parameterHelp
 }
 
-localized_msg = ('fr', 'it', 'pl')  # localized message at MediaWiki
+#localized_msg = ('fr', 'it', 'pl')  # localized message at MediaWiki
+localized_msg = ('fr', 'it')  # localized message at MediaWiki
 
 # localized message at specific wikipedia site
 # should be moved to MediaWiki Pywikibot manual
@@ -172,7 +173,7 @@ badtitles = {
 }
 
 # Regex that match bare references
-linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?)[^\]\.])(\]|\]\.)?<\/ref>')
+linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?)[^\]\.])(\]|\]\.)?<\/ref>')
 """ original wrong regex
     # bracketed URLs
     r'(?i)<ref(?P<name>[^>]*)>\s*\[?(?P<url>(?:http|https)://(?:' +
@@ -204,12 +205,40 @@ class RefLink(object):
         self.url = re.sub(u'#.*', '', self.link)
         self.title = None
         self.lang = None
+        self.archive = {
+                       'link': '',
+                       'date': '' }
+                       
+    def archiveLink(self,link):
+        #check if the link leads to archive
+        #if yes set archive['link'] & ['date']
+        #return True if archive
+        # treat archive.org, archive.is
+        pywikibot.output(u'ARCH:%s' % link)
+        archived = False
+        archR = re.compile(ur'(?i)https?://[^/]*archive\.(org/web|is)/((?P<year>\d{4})\.?(?P<month>\d{2})\.?(?P<day>\d{2})-?(\d{6})?|[^/]*)/(?P<link>.*)')
 
-    def refPublication(self):
+        match = archR.match(link)
+        if match:
+            archived = True
+            self.archive['link'] = match.group('link')
+            if match.group('year'):
+                self.archive['date'] = u'%s-%s-%s' % (match.group('year'),match.group('month'),match.group('day'))
+        pywikibot.output(u'ARCHIVED:%s' % archived)
+        return(archived)
+
+    def unknownPublisher(self,link):
+        #check if the site is not archive site without original publisher info
+        archR = re.compile(ur'(?i)https?://[^/]*archive\.(org/web|is)')
+        return(archR.match(link))
+
+
+    def refPublication(self,link):
         """
         Return serwer name from url
         """
-        return(re.sub(r'.*\/\/([^\/ ]*).*',r'\1',self.link))
+        pywikibot.output(u'PUB:%s' % link)
+        return(re.sub(r'.*:\/\/([^\/ ]*).*',r'\1',link))
 
     def refTitle(self):
         """Return the <ref> with its new title."""
@@ -218,21 +247,55 @@ class RefLink(object):
                                                     self.title,
                                                     self.linkComment)
         """
+        
+        pywikibot.output(u'PRETRANSFORM:%s' % self.link)
         self.transformLink()
+        pywikibot.output(u'POST:%s' % self.link)
+
+        langtxt = ''
+        urltxt = ''
+        archtxt = ''
+        archdatatxt = ''
+        pubtxt = ''
+        
+
+        if self.lang:
+            langtxt = ' | język=%s' % self.lang
+
+        if self.archiveLink(self.link):
+            urltxt = ' | url=%s' % self.archive['link']
+            archtxt = ' | archiwum=%s' % self.link
+            pubtxt = ' | opublikowany=%s' % self.refPublication(self.archive['link'])
+            if self.archive['date']:
+                archdatatxt = ' | zarchiwizowano=%s' % self.archive['date']
+        else:
+            urltxt = ' | url=%s' % self.link
+            if not self.unknownPublisher(self.link):
+                pubtxt = ' | opublikowany=%s' % self.refPublication(self.link)
+
+        return '<ref%s>{{Cytuj%s | tytuł=%s<!-- %s -->%s%s%s%s | data dostępu=%s}}</ref>' % (self.refname, urltxt,
+                       self.title,
+                       self.linkComment,
+                       pubtxt,
+                       langtxt,
+                       archtxt,
+                       archdatatxt,
+                       datetime.datetime.now().strftime("%Y-%m-%d"))
+        """
         if self.lang:
             return '<ref%s>{{Cytuj| url=%s | tytuł=%s<!-- %s --> | opublikowany=%s | język=%s | data dostępu=%s}}</ref>' % (self.refname, self.link,
                                                     self.title,
                                                     self.linkComment,
-                                                    self.refPublication(),
+                                                    self.refPublication(self.link),
                                                     self.lang,
                                                     datetime.datetime.now().strftime("%Y-%m-%d"))
         else:
             return '<ref%s>{{Cytuj| url=%s | tytuł=%s<!-- %s --> | opublikowany=%s | data dostępu=%s}}</ref>' % (self.refname, self.link,
                                                     self.title,
                                                     self.linkComment,
-                                                    self.refPublication(),
+                                                    self.refPublication(self.link),
                                                     datetime.datetime.now().strftime("%Y-%m-%d"))
-
+        """
 
     def refLink(self):
         """No title has been found, return the unbracketed link."""
@@ -447,7 +510,8 @@ class ReferencesRobot(Bot):
         self.site = pywikibot.Site()
         self._use_fake_user_agent = config.fake_user_agent_default.get('reflinks', False)
         # Check
-        manual = 'mw:Manual:Pywikibot/refLinks'
+        #manual = 'mw:Manual:Pywikibot/refLinks'
+        manual = 'Wikipedysta:MastiBot/refLinks'
         code = None
         for alt in [self.site.code] + i18n._altlang(self.site.code):
             if alt in localized_msg:
@@ -489,7 +553,7 @@ class ReferencesRobot(Bot):
             br'(?is)<script[^>]*>.*?</script>|<style[^>]*>.*?</style>|'
             br'<!--.*?-->|<!\[CDATA\[.*?\]\]>')
         # Extract html language from page
-        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?"|<meta\s*?HTTP-EQUIV\s*?=\s*?"Content-Language"\s*?CONTENT\s*?=\s*?")(?P<lang>.*?)[\_\-\"]')
+        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?|<meta\s*?HTTP-EQUIV\s*?=\s*?\"Content-Language\"\s*?CONTENT\s*?=\s*?|<meta property\s*?=\s*?\"og:locale\"\s*?content\s*?=\s*?)\"(?P<lang>.*?)[\_\-\"]|')
 
         # Authorized mime types for HTML pages
         self.MIME = re.compile(
