@@ -248,9 +248,9 @@ class RefLink(object):
                                                     self.linkComment)
         """
         
-        pywikibot.output(u'PRETRANSFORM:%s' % self.link)
+        #pywikibot.output(u'PRETRANSFORM:%s' % self.link)
         self.transformLink()
-        pywikibot.output(u'POST:%s' % self.link)
+        #pywikibot.output(u'POST:%s' % self.link)
 
         langtxt = ''
         urltxt = ''
@@ -553,7 +553,7 @@ class ReferencesRobot(Bot):
             br'(?is)<script[^>]*>.*?</script>|<style[^>]*>.*?</style>|'
             br'<!--.*?-->|<!\[CDATA\[.*?\]\]>')
         # Extract html language from page
-        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?|<meta\s*?HTTP-EQUIV\s*?=\s*?\"Content-Language\"\s*?CONTENT\s*?=\s*?|<meta property\s*?=\s*?\"og:locale\"\s*?content\s*?=\s*?)\"(?P<lang>.*?)[\_\-\"]|')
+        self.LANG = re.compile(r'(?i)(<html[^>]*?lang\s*?=\s*?|<meta\s*?HTTP-EQUIV\s*?=\s*?\"Content-Language\"\s*?CONTENT\s*?=\s*?|<meta property\s*?=\s*?\"og:locale\"\s*?content\s*?=\s*?)\"(?P<lang>.*?)[\_\-\"]')
 
         # Authorized mime types for HTML pages
         self.MIME = re.compile(
@@ -799,9 +799,10 @@ class ReferencesRobot(Bot):
                 langmatch = self.LANG.search(u)
                 if langmatch:
                     ref.lang = langmatch.group('lang')
+                    #pywikibot.output(u'LANGMATCH:%s' % langmatch.group('lang'))
                 ref.langCheck()
-                #pywikibot.output(u'Page lang:%s' % ref.lang)
-                #pywikibot.output(u)
+                pywikibot.output(u'Page lang:%s' % ref.lang)
+                pywikibot.output(u)
 
                 if not ref.title:
                     repl = ref.refLink()
