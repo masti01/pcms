@@ -802,7 +802,7 @@ class ReferencesRobot(Bot):
                     #pywikibot.output(u'LANGMATCH:%s' % langmatch.group('lang'))
                 ref.langCheck()
                 pywikibot.output(u'Page lang:%s' % ref.lang)
-                pywikibot.output(u)
+                #pywikibot.output(u)
 
                 if not ref.title:
                     repl = ref.refLink()
