@@ -147,6 +147,12 @@ class BasicBot(
         pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
 
         header = u'Strona zawiera listę pierwszych %s stron z błędną kolejnością sekcji końcowych.\n\n' % self.getOption('maxlines')
+        header += u'Prawidłowa kolejność sekcji (za [[Pomoc:Jak napisać doskonały artykuł#Kolejność i wymagalność sekcji końcowych]]:\n'
+        header += u'*Zobacz też\n'
+        header += u'*Uwagi\n'
+        header += u'*Przypisy\n'
+        header += u'*Bibliografia\n'
+        header += u'*Linki zewnętrzne\n\n'
         header += u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
 	header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
 
