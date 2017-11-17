@@ -720,9 +720,9 @@ class ReferencesRobot(Bot):
                     pywikibot.output(u'EXCEPTION: Can\'t retrieve page %s : %s'
                                      % (ref.url, e))
                     continue
-                except:
-                    pywikibot.output(u'EXCEPTION: Uknown error %s' % ref.url)
-                    continue
+                #except:
+                #    pywikibot.output(u'EXCEPTION: Uknown error %s' % ref.url)
+                #    continue
 
                 # remove <script>/<style>/comments/CDATA tags
                 linkedpagetext = self.NON_HTML.sub(b'', linkedpagetext)
