@@ -12,7 +12,7 @@ from time import strftime
 
 i18 = {
 'pl' : {
-    'head' : u'Licznik artykułów pl.wikipedia - ostatnie 100 pozycji - tools.wikimedia.pl',
+    'head' : u'pl.wikipedia - Ostatnie nowe artykuły - tools.wikimedia.pl',
     'heading' : u'Ostatnie nowe artykuły',
     'line1' : u'Strona przedstawia numerację ostatnio utworzonych 100 artykułów z głównej przestrzeni nazw.',
     'legend' : u'Rodzaj: <b>A</b> (artykuł), <b>R</b> (przekierowanie), <b>M</b> (przeniesiony)',
@@ -25,7 +25,7 @@ i18 = {
     'htitle' : u'Tytuł',
     'htarget' : u'Cel' },
 'tr' : {
-    'head' : u'tr.wikipedia Madde sayacı - son 100 madde',
+    'head' : u'tr.wikipedia - Madde sayacı - son 100 madde',
     'heading' : u'Son yeni maddeler',
     'line1' : u"Sayfa, belirtilen dil sürümündeki son 100 makalenin makale ID'lerini gösterir",
     'legend' : u'Tür: <b>A</b> (madde), <b>R</b> (yönlendirme)',
