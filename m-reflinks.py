@@ -716,7 +716,8 @@ class ReferencesRobot(Bot):
                         IOError,
                         httplib.error,
                         pywikibot.FatalServerError,
-                        pywikibot.Server504Error) as e:
+                        pywikibot.Server504Error,
+                        LookupError) as e:
                     pywikibot.output(u'EXCEPTION: Can\'t retrieve page %s : %s'
                                      % (ref.url, e))
                     continue
