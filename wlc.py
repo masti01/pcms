@@ -312,6 +312,7 @@ ignorelist = [
     re.compile('.*[\./@]rehden\.de'),  # bot rejected on site (masti)
     re.compile('.*[\./@]horneburg\.de'),  # bot rejected on site (masti)
     re.compile('.*[\./@]zdw\.lublin\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]torun\.pl'),  # bot rejected on site (masti)
 
 ]
 
