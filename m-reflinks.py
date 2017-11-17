@@ -642,7 +642,6 @@ class ReferencesRobot(Bot):
                 f = None
 
                 try:
-                    pywikibot.output(u'URL:%s',ref.url)
                     f = comms.http.fetch(
                         ref.url, use_fake_user_agent=self._use_fake_user_agent)
 
