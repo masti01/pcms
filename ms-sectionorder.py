@@ -227,8 +227,13 @@ class BasicBot(
         sections = []
 
         # skip redirects and disambigs
-        if page.isRedirectPage() or page.isDisambig():
-            return(None)
+        try:
+            if page.isRedirectPage():
+                return(None)
+        except:
+           pywikibot.output('MW timeout')
+           time.sleep(120)
+           return(None)
 
         sl = self.sectionList(page)
         
