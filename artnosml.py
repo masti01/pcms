@@ -161,9 +161,7 @@ def linkcolor(page,lang):
        else:
            return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + page.title()).encode('UTF-8')) + u'">' + page.title() + u'</a>')
     else:
-        return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/w/index.php?title=' + page.title()).encode('UTF-8')) + u'&amp;action=edit&amp;redlink=1 " style="color:#CC2200">' + page.title() + u'</a>')
-
-
+        return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/w/index.php?title=' + page.title()).encode('UTF-8')) + u'&action=edit " style="color:#CC2200">' + page.title() + u'</a>')
     
 
 def main(*args):
