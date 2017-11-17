@@ -611,6 +611,7 @@ class ReferencesRobot(Bot):
 
         editedpages = 0
         for page in self.generator:
+            pywikibot.output(u'Treating: %s' % page.title())
             try:
                 # Load the page's text from the wiki
                 new_text = page.get()
@@ -641,6 +642,7 @@ class ReferencesRobot(Bot):
                 f = None
 
                 try:
+                    pywikibot.output(u'URL:%s',ref.url)
                     f = comms.http.fetch(
                         ref.url, use_fake_user_agent=self._use_fake_user_agent)
 
@@ -715,8 +717,11 @@ class ReferencesRobot(Bot):
                         httplib.error,
                         pywikibot.FatalServerError,
                         pywikibot.Server504Error) as e:
-                    pywikibot.output(u'Can\'t retrieve page %s : %s'
+                    pywikibot.output(u'EXCEPTION: Can\'t retrieve page %s : %s'
                                      % (ref.url, e))
+                    continue
+                except:
+                    pywikibot.output(u'EXCEPTION: Uknown error %s' % ref.url)
                     continue
 
                 # remove <script>/<style>/comments/CDATA tags
