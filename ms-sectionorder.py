@@ -156,8 +156,8 @@ class BasicBot(
 
         for page in self.generator:
             counter += 1
-            if self.getOption('test'):
-                pywikibot.output(u'Treating #%i (marked:%i): %s' % (counter, marked, page.title()))
+            #if self.getOption('test'):
+            pywikibot.output(u'Treating #%i (marked:%i): %s' % (counter, marked, page.title()))
             t = self.treat(page)
             if t:
                 marked += 1
@@ -188,7 +188,8 @@ class BasicBot(
         #if self.getOption('test'):
         #    pywikibot.output(etext)
         for s in sectionR.finditer(etext):
-            pywikibot.output(u'>>>%s<<<' % s.group('section').strip())
+            if self.getOption('test'):
+                pywikibot.output(u'>>>%s<<<' % s.group('section').strip())
             sections.append(s.group('section').strip())
 
         return(sections)
