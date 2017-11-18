@@ -257,7 +257,8 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        finalpage = header
+        if not self.getOption('append'):
+            finalpage = header
         for i in redirlist.keys():
             sections = redirlist[i]
             finalpage += u'\n# [[%s]] ==> ' % i
@@ -267,7 +268,11 @@ class BasicBot(
         finalpage += footer
 
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
-        outpage.text = finalpage
+        if self.getOption('append'):
+            outpage.text = finalpage
+        else:
+            outpage.text += finalpage
+
         outpage.save(summary=self.getOption('summary'))
         
         if self.getOption('test'):
