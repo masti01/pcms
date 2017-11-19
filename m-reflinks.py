@@ -656,7 +656,7 @@ class ReferencesRobot(Bot):
 
                 link = match.group(u'url')
                 # debugging purpose
-                print link
+                #print link
                 if u'jstor.org' in link:
                     # TODO: Clean URL blacklist
                     continue
