@@ -151,12 +151,12 @@ class BasicBot(
 
         if not self.getOption('append'):
             header = u'Strona zawiera listę pierwszych %s stron z błędną kolejnością sekcji końcowych.\n\n' % self.getOption('maxlines')
-            header += u'Prawidłowa kolejność sekcji (za [[Pomoc:Jak napisać doskonały artykuł#Kolejność i wymagalność sekcji końcowych]]:\n'
+            header += u'<small>Prawidłowa kolejność sekcji (za [[Pomoc:Jak napisać doskonały artykuł#Kolejność i wymagalność sekcji końcowych]]):\n'
             header += u'*Zobacz też\n'
             header += u'*Uwagi\n'
             header += u'*Przypisy\n'
             header += u'*Bibliografia\n'
-            header += u'*Linki zewnętrzne\n\n'
+            header += u'*Linki zewnętrzne</small>\n\n'
             header += u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
 	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
         else:
@@ -257,9 +257,10 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
+        finalpage = ''
         if not self.getOption('append'):
             finalpage = header
-        for i in redirlist.keys():
+        for i in sorted(redirlist.keys()):
             sections = redirlist[i]
             finalpage += u'\n# [[%s]] ==> ' % i
             for s in sections:
@@ -269,9 +270,9 @@ class BasicBot(
 
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         if self.getOption('append'):
-            outpage.text = finalpage
-        else:
             outpage.text += finalpage
+        else:
+            outpage.text = finalpage
 
         outpage.save(summary=self.getOption('summary'))
         
