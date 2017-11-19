@@ -173,7 +173,7 @@ badtitles = {
 }
 
 # Regex that match bare references
-linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?)[^\]\.])(\]|\]\.)?<\/ref>')
+linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
 """ original wrong regex
     # bracketed URLs
     r'(?i)<ref(?P<name>[^>]*)>\s*\[?(?P<url>(?:http|https)://(?:' +
@@ -656,7 +656,7 @@ class ReferencesRobot(Bot):
 
                 link = match.group(u'url')
                 # debugging purpose
-                # print link
+                print link
                 if u'jstor.org' in link:
                     # TODO: Clean URL blacklist
                     continue
