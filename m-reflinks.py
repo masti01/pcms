@@ -742,8 +742,8 @@ class ReferencesRobot(Bot):
                         pywikibot.Server504Error,
                         LookupError,
                         ValueError) as e:
-                    pywikibot.output(u'EXCEPTION: Can\'t retrieve page %s : %s'
-                                     % (ref.url, e))
+                    pywikibot.output(u'EXCEPTION on page %s: Can\'t retrieve page %s : %s'
+                                     % (page.title(asLink=True),ref.url, e))
                     continue
                 #except:
                 #    pywikibot.output(u'EXCEPTION: Uknown error %s' % ref.url)
