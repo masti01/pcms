@@ -205,6 +205,7 @@ class RefLink(object):
         self.url = re.sub(u'#.*', '', self.link)
         self.title = None
         self.lang = None
+        self.validlangs = ()
         self.archive = {
                        'link': '',
                        'date': '' }
@@ -303,6 +304,12 @@ class RefLink(object):
 
     def langCheck(self):
         # lang
+        if not self.lang:
+            return
+        elif self.lang not in self.validlangs:
+            #pywikibot.output(u'langCheck INVALID lang:%s' % self.lang)
+            self.lang = None
+        #pywikibot.output(u'langCheck valid lang:%s' % self.lang)
         return
         #pywikibot.output(u'langCheck pre:%s' % self.lang)
         #if not self.lang:
@@ -598,6 +605,21 @@ class ReferencesRobot(Bot):
             urlobj.close()
             os.unlink(infile)
 
+    def validlangs(self):
+        #create list of valid params for {{lang}}
+        #from [[Moduł:Lang/data]]
+        langs = []
+        langR = re.compile(ur'\["(?P<lang>\w*)"]\s*=\s*?\{')
+
+        pywikibot.output('VALIDLANGS')
+        source = pywikibot.Page(pywikibot.Site(),"Module:Lang/data")
+        text = source.text
+        for l in langR.finditer(text):
+            langs.append(l.group('lang'))
+        pywikibot.output(langs)
+        return(langs)
+        
+
     def run(self):
         """Run the Bot."""
         try:
@@ -610,6 +632,7 @@ class ReferencesRobot(Bot):
                 'and to unzip it in the same directory')
 
         editedpages = 0
+        validlangs = self.validlangs()
         for page in self.generator:
             pywikibot.output(u'Treating: %s' % page.title())
             try:
@@ -639,6 +662,7 @@ class ReferencesRobot(Bot):
                     continue
 
                 ref = RefLink(link, match.group('name'))
+                ref.validlangs = validlangs
                 f = None
 
                 try:
