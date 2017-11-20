@@ -863,9 +863,14 @@ class ReferencesRobot(Bot):
                 new_text = new_text.replace(match.group(), repl)
 
             # Add <references/> when needed, but ignore templates !
+            #
+            # Skip adding references tag
+            #
+            """
             if page.namespace != 10:
                 if self.norefbot.lacksReferences(new_text):
                     new_text = self.norefbot.addReferences(new_text)
+            """
 
             #new_text = self.deduplicator.process(new_text)
             old_text = page.text
