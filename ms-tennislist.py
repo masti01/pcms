@@ -148,7 +148,7 @@ class BasicBot(
             if self.getOption('test') and reflinks[page.title()]['country']:
                 pywikibot.output(u'{{Flaga|%s}} [[%s]]' % (reflinks[page.title()]['country'],page.title()))
 
-        result = self.generateresultspage(reflinks,self.getOption('outpage'),u'',u'')
+        result = self.generateresultspage(reflinks,self.getOption('outpage'),u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n",u'')
 
     def treat(self, page):
         """
