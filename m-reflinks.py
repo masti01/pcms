@@ -173,7 +173,7 @@ badtitles = {
 }
 
 # Regex that match bare references
-linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
+linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
 """ original wrong regex
     # bracketed URLs
     r'(?i)<ref(?P<name>[^>]*)>\s*\[?(?P<url>(?:http|https)://(?:' +
