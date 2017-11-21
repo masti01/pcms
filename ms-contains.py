@@ -26,7 +26,8 @@ The following parameters are supported:
 -summary:         Set the action summary message for the edit.
 -negative:        mark if text not in page
 -regex:           treat text as regex - should contain <result> group. if not whole match will be used
--multiline:       '^' and '$' will now match begin and end of each line.
+-multi:           return all results for -regex not only first match
+-flags:           list of regex flags: i,m,g,s etc.
 -edit:            link thru template:edytuj instead of wikilink
 -cite:            cite search results
 -nowiki:          put citation in <nowiki> tags
@@ -103,7 +104,8 @@ class BasicBot(
             'append': False, #append results to page
             'section': None, #section title
             'title': False, #check in title not text
-            'multiline': False, #'^' and '$' will now match begin and end of each line.
+            'multi': False, #'^' and '$' will now match begin and end of each line.
+            'flags': None, #list of regex flags
             'edit': False, #link thru template:edytuj instead of wikilink
             'cite': False, #cite search results
             'nowiki': False, #put citation in <nowiki> tags
@@ -210,10 +212,21 @@ class BasicBot(
             else:
                 finalpage += u'\n:' + linenumber + u' ' + re.sub(ur'\[\[',u'[[:',title, count=1)
             if self.getOption('regex') and self.getOption('cite') and not self.getOption('negative'):
-                if self.getOption('nowiki'):
-                    finalpage += u' - <nowiki>' + link + u'</nowiki>'
+                if self.getOption('multi'):
+                    #results are list
+                    if self.getOption('nowiki'):
+                        finalpage += u' - <nowiki>'
+                    for r in link:
+                        finalpage += r + ','
+                    if self.getOption('nowiki'):
+                        finalpage += u'</nowiki>'
                 else:
-                    finalpage += u' - ' + link
+                    #results are single string
+                    #TODO convert all results to lists
+                    if self.getOption('nowiki'):
+                        finalpage += u' - <nowiki>' + link + u'</nowiki>'
+                    else:
+                        finalpage += u' - ' + link
             itemcount += 1
 
             if itemcount > int(self.getOption('maxlines'))-1:
@@ -308,16 +321,25 @@ class BasicBot(
                 resultR =  self.getOption('text')
             else:
                 resultR = u'(?P<result>' + self.getOption('text') + u')'
+            if self.getOption('flags'):
+                resultR = u'(?' + self.getOption('flags') + u')' + resultR
             if self.getOption('test'):
                 pywikibot.output(resultR)
-            if self.getOption('multiline'):
-                match = re.search(resultR, source,re.M)
-            else:
-                match = re.search(resultR, source)
+
+            match = re.search(resultR, source)
+
             if not match and self.getOption('negative'):
                 return(page.title(asLink=True,forceInterwiki=True, textlink=True))
             elif match and not self.getOption('negative'):
-                return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
+                if self.getOption('multi'):
+                    #return all found results
+                    resultslist = []
+                    for r in re.finditer(resultR,source):
+                        resultslist.append(r.group('result'))
+                    return(page.title(asLink=True,forceInterwiki=True, textlink=True),resultslist)
+                else:
+                    #return just first match
+                    return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
             return(None)
             
         else:  
@@ -358,7 +380,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage', 'maxlines', 'section'):
+        if option in ('summary', 'text', 'outpage', 'maxlines', 'section','flags'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
