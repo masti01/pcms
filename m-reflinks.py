@@ -665,7 +665,7 @@ class ReferencesRobot(Bot):
                 pagetext = page.get()
             else:
                 pagetext = textlib.removeDisabledParts(page.get())
-            for match in linksInRef.finditer(pagetext):
+            for match in self.linksInRef.finditer(pagetext):
 
                 link = match.group(u'url')
                 # debugging purpose
