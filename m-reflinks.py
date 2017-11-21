@@ -174,7 +174,7 @@ badtitles = {
 
 # Regex that match bare references
 if self.getOption('repair'):
-    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.]) (.*?<!-- Tytuł wygenerowany przez bota -->\])<\/ref>')
+    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.]) (.*?<!-- Tytuł wygenerowany przez bota -->[ \t]*\])[ \t]*<\/ref>')
 else:
     linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
 """ original wrong regex
