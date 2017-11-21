@@ -173,7 +173,10 @@ badtitles = {
 }
 
 # Regex that match bare references
-linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
+if self.getOption('repair'):
+    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.]) (.*?<!-- Tytuł wygenerowany przez bota -->\])<\/ref>')
+else:
+    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
 """ original wrong regex
     # bracketed URLs
     r'(?i)<ref(?P<name>[^>]*)>\s*\[?(?P<url>(?:http|https)://(?:' +
@@ -508,6 +511,7 @@ class ReferencesRobot(Bot):
         """- generator : Page generator."""
         self.availableOptions.update({
             'ignorepdf': False,  # boolean
+            'repair': False,  # boolean
             'limit': None,  # int, stop after n modified pages
             'summary': None,
         })
@@ -651,8 +655,11 @@ class ReferencesRobot(Bot):
                 continue
 
             # for each link to change
-            for match in linksInRef.finditer(
-                    textlib.removeDisabledParts(page.get())):
+            if self.getOption('repair'):
+                pagetext = page.get()
+            else:
+                pagetext = textlib.removeDisabledParts(page.get())
+            for match in linksInRef.finditer(pagetext):
 
                 link = match.group(u'url')
                 # debugging purpose
@@ -926,6 +933,8 @@ def main(*args):
             options['always'] = True
         elif arg == '-ignorepdf':
             options['ignorepdf'] = True
+        elif arg == '-repair':
+            options['repair'] = True
         elif arg.startswith('-limit:'):
             options['limit'] = int(arg[7:])
         elif arg.startswith('-xmlstart'):
