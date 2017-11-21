@@ -192,7 +192,8 @@ badtitles = {
 listof404pages = '404-links.txt'
 
 XmlDumpPageGenerator = partial(
-    _XMLDumpPageGenerator, text_predicate=linksInRef.search)
+#    _XMLDumpPageGenerator, text_predicate=linksInRef.search)
+    _XMLDumpPageGenerator, text_predicate=ReferencesRobot.linksInRef.search)
 
 
 class RefLink(object):
