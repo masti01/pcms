@@ -173,10 +173,10 @@ badtitles = {
 }
 
 # Regex that match bare references
-if self.getOption('repair'):
-    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.]) (.*?<!-- Tytuł wygenerowany przez bota -->[ \t]*\])[ \t]*<\/ref>')
-else:
-    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
+#if self.getOption('repair'):
+#    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.]) (.*?<!-- Tytuł wygenerowany przez bota -->[ \t]*\])[ \t]*<\/ref>')
+#else:
+#    linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
 """ original wrong regex
     # bracketed URLs
     r'(?i)<ref(?P<name>[^>]*)>\s*\[?(?P<url>(?:http|https)://(?:' +
@@ -552,6 +552,12 @@ class ReferencesRobot(Bot):
             else:
                 pywikibot.warning('The stop page %s does not exist'
                                   % self.stop_page.title(asLink=True))
+
+        # Regex that match bare references
+            if self.getOption('repair'):
+                linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.]) (.*?<!-- Tytuł wygenerowany przez bota -->[ \t]*\])[ \t]*<\/ref>')
+            else:
+                linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
 
         # Regex to grasp content-type meta HTML tag in HTML source
         self.META_CONTENT = re.compile(br'(?i)<meta[^>]*content\-type[^>]*>')
