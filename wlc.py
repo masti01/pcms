@@ -853,9 +853,9 @@ class History(object):
                 try:
                     archiveURL = get_archive_url(url)
                 except Exception as e:
-                    #pywikibot.warning(
-                    #    'get_closest_memento_url({0}) failed: {1}'.format(
-                    #        url, e))
+                    pywikibot.warning(
+                        'get_closest_memento_url({0}) failed: {1}'.format(
+                            url, e))
                     archiveURL = None
                 if archiveURL is None:
                     archiveURL = weblib.getInternetArchiveURL(url)
