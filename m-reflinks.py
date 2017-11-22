@@ -564,7 +564,8 @@ class ReferencesRobot(Bot):
         # Extract the encoding from a charset property (from content-type !)
         self.CHARSET = re.compile(r'(?i)charset\s*=\s*(?P<enc>[^\'",;>/]*)')
         # Extract html title from page
-        self.TITLE = re.compile(r'(?is)(?<=<title>).*?(?=</title>)')
+        #self.TITLE = re.compile(r'(?is)(?<=<title>).*?(?=</title>)')
+        self.TITLE = re.compile(r'(?is)(<title[^>]*?>)(?P<title>.*?)(?=</title>)')
         # Matches content inside <script>/<style>/HTML comments
         self.NON_HTML = re.compile(
             br'(?is)<script[^>]*>.*?</script>|<style[^>]*>.*?</style>|'
@@ -829,10 +830,11 @@ class ReferencesRobot(Bot):
                     pywikibot.output(u'%s : Decoding error - %s' % (ref.link, e))
                     continue
 
-                # Retrieves the first non empty string inside <title> tags
+                # Retrieves the first title group string inside <title> tags
                 for m in self.TITLE.finditer(u):
-                    t = m.group()
+                    t = m.group('title')
                     if t:
+                        pywikibot.output('<title>:%s' % t)
                         ref.title = t
                         ref.transform()
                         if ref.title:
