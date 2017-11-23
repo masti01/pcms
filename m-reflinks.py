@@ -232,8 +232,8 @@ class RefLink(object):
         return(archived)
 
     def unknownPublisher(self,link):
-        #check if the site is not archive site without original publisher info
-        archR = re.compile(ur'(?i)https?://[^/]*archive\.(org/web|is)')
+        #check if the site is archive site without original publisher info
+        archR = re.compile(ur'(?i)https?://[^/]*(webcitation|archive)\.(org/web|is)')
         return(archR.match(link))
 
 
