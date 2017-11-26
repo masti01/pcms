@@ -311,7 +311,7 @@ class BasicBot(
 
         #choose proer source - title or text
         if self.getOption('title'):
-            source = page.title
+            source = page.title()
         else:
             source = page.text
 
