@@ -155,12 +155,16 @@ class BasicBot(
             header = u'\n\n'
         
         reflinks = [] #initiate list
-        licznik = 0
+        pagecounter = 0
+        duplicates = 0
         marked = 0
         for page in self.generator:
-	    licznik += 1
+	    pagecounter += 1
             if self.getOption('test') or self.getOption('progress'):
-                pywikibot.output(u'Treating #%i (marked:%i): %s' % (licznik, marked, page.title()))
+                pywikibot.output(u'Treating #%i (marked:%i, duplicates:%i): %s' % (pagecounter, marked, duplicates, page.title()))
+            if page.title() in reflinks:
+                duplicates += 1
+                continue
             refs = self.treat(page) # get (name)
             if refs:
                 if not refs in reflinks:
@@ -174,7 +178,7 @@ class BasicBot(
                     if self.getOption('test'):
                         pywikibot.output(u'Already marked')
 
-        footer = u'\n\nPrzetworzono ' + str(licznik) + u' stron.'
+        footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
 
         outputpage = self.getOption('outpage')
 
