@@ -161,7 +161,7 @@ class BasicBot(
         for page in self.generator:
 	    pagecounter += 1
             if self.getOption('test') or self.getOption('progress'):
-                pywikibot.output(u'Treating #%i (marked:%i, duplicates:%i): %s' % (pagecounter, marked, duplicates, page.title()))
+                pywikibot.output(u'[%s] Treating #%i (marked:%i, duplicates:%i): %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),pagecounter, marked, duplicates, page.title()))
             if page.title() in reflinks:
                 duplicates += 1
                 continue
