@@ -148,7 +148,7 @@ class BasicBot(
         for i in wd.iterlinks(family='wikipedia'):
             #print i.title(asLink=True)
             results[i.site] = i.title()
-            #pywikibot.output('%s:%s' % (i.site, results[i.site]))
+            pywikibot.output('%s:%s' % (i.site, results[i.site]))
         return(len(results.keys())>1)
 
         text = self.current_page.text
