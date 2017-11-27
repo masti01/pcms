@@ -32,6 +32,7 @@ The following parameters are supported:
 -cite:            cite search results
 -nowiki:          put citation in <nowiki> tags
 -navi:            add navigation template {{Wikipedysta:MastiBot/Nawigacja|Wikipedysta:mastiBot/test|Wikipedysta:mastiBot/test 2}}
+-progress:        report progress
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -111,6 +112,7 @@ class BasicBot(
             'nowiki': False, #put citation in <nowiki> tags
             'count': False, #count pages only
             'navi': False, # add navigation template
+            'progress': False, # report progress
         })
 
         # call constructor of the super class
@@ -157,7 +159,7 @@ class BasicBot(
         marked = 0
         for page in self.generator:
 	    licznik += 1
-            if self.getOption('test'):
+            if self.getOption('test') or self.getOption('progress'):
                 pywikibot.output(u'Treating #%i (marked:%i): %s' % (licznik, marked, page.title()))
             refs = self.treat(page) # get (name)
             if refs:
