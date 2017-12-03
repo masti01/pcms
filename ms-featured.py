@@ -267,7 +267,7 @@ class BasicBot(
         lang = cat.site.code
         for a in cat.articles():
             if self.getOption('test'):
-                pywikibot.output(u'[%s] %s.wiki: [%i/%i] %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),lang,count,marked,a.title(asLink=True,forceInterwiki=True)))
+                pywikibot.output(u'[%s] %s.wiki: [%i of %i] %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),lang,marked,count,a.title(asLink=True,forceInterwiki=True)))
             count += 1
             if a.namespace() == 1:
                 a = a.toggleTalkPage()
