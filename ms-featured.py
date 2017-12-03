@@ -210,10 +210,13 @@ class BasicBot(
         for i in wdpage['sitelinks']:
             if i.endswith('wiki'):
                 lang = i[:-4]
-                if namespace == 14:
-                    yield pywikibot.Category(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
-                else:
-                    yield pywikibot.Page(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
+                try:
+                    if namespace == 14:
+                        yield pywikibot.Category(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
+                    else:
+                        yield pywikibot.Page(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
+                except:
+                    pywikibot.output('ERROR: site %s does not exist!' % lang)
 
     def checkInterwiki(self,page,lang):
         """Load the given page, do some changes, and save it."""
