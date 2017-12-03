@@ -148,7 +148,7 @@ class BasicBot(
         result = {}
 
         outputpage = self.getOption('outpage')
-        pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
+        #pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
         for p in self.generator:
             if self.getOption('test'):
                 pywikibot.output(u'Treating: %s' % p.title())
@@ -210,7 +210,6 @@ class BasicBot(
         for i in wdpage['sitelinks']:
             if i.endswith('wiki'):
                 lang = i[:-4]
-                print lang
                 if namespace == 14:
                     yield pywikibot.Category(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
                 else:
@@ -240,11 +239,12 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(wdcontent['sitelinks'].keys())
         except:
-            pywikibot.output('WikiData page do not exists')
+            pywikibot.output('WikiData page for %s do not exists' % page.title(asLink=True))
             return(None)
 
         for c in self.interwikiGenerator(wdcontent,namespace=14):
-            pywikibot.output(c.title())
+            if self.getOption('test'):
+                pywikibot.output(c.title())
             lang = c.site.lang
             if self.getOption('test2'):
                 if lang not in ('pt','tt'):
