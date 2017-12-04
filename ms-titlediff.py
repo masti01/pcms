@@ -151,7 +151,7 @@ class BasicBot(
 
         if not self.getOption('append'):
 	    #header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-            header = u"Ostatnia aktualizacja: '''{{subst:#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}'''.\n\n"
+            header = u"Ostatnia aktualizacja: '''~~~~~'''.\n\n"
 	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
         else:
             header = u'\n\n'
@@ -164,10 +164,7 @@ class BasicBot(
 	    pagecounter += 1
             if self.getOption('test') or self.getOption('progress'):
                 pywikibot.output(u'[%s] Treating #%i (marked:%i, duplicates:%i): %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),pagecounter, marked, duplicates, page.title()))
-            if page.title() in reflinks:
-                duplicates += 1
-                continue
-            refs = self.treat(page) # get (name)
+             refs = self.treat(page) # get (name)
             if refs:
                 if not refs in reflinks:
                     #test
@@ -179,6 +176,7 @@ class BasicBot(
                     #test
                     if self.getOption('test'):
                         pywikibot.output(u'Already marked')
+                        duplicates += 1
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
 
