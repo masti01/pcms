@@ -316,7 +316,13 @@ class BasicBot(
             if self.getOption('test'):
                  pywikibot.output('fp:%s npt:%s' % (fp.group('firstpar'),npt.group('npt').strip()))
             if npt.group('npt').strip() != fp.group('firstpar'):
-                return(page.title(asLink=True),fp.group('firstpar'))
+                if self.getOption('text'):
+                    if not re.search(self.getOption('text'),source):
+                        if self.getOption('test'):
+                            pywikibot.output('SKIPPING: regex matched')
+                        return(page.title(asLink=True),fp.group('firstpar'))
+                else:
+                    return(page.title(asLink=True),fp.group('firstpar'))
         return(None)
 
 def main(*args):
