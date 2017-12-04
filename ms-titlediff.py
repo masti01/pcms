@@ -151,7 +151,7 @@ class BasicBot(
 
         if not self.getOption('append'):
 	    #header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-            header = u"Ostatnia aktualizacja: '''{{subst:#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}'''.\n\n"
+            header = u"Ostatnia aktualizacja: '''~~~~~'''.\n\n"
 	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
         else:
             header = u'\n\n'
