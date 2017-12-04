@@ -329,7 +329,7 @@ class BasicBot(
             if self.getOption('test'):
                  pywikibot.output('fp:%s npt:%s' % (fp.group('firstpar'),npt.group('npt').strip()))
             if npt.group('npt').strip() != fp.group('firstpar'):
-                return(page.title(asLink=True),fp.group('firstpar')
+                return(page.title(asLink=True),fp.group('firstpar'))
         return(None)
 
 def main(*args):
