@@ -151,7 +151,7 @@ class BasicBot(
 
         if not self.getOption('append'):
 	    #header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-            header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+            header = u"Ostatnia aktualizacja: '''{{subst:#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}'''.\n\n"
 	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
         else:
             header = u'\n\n'
@@ -219,22 +219,10 @@ class BasicBot(
                 finalpage += u'\n:' + linenumber + ' {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
             else:
                 finalpage += u'\n:' + linenumber + u' ' + re.sub(ur'\[\[',u'[[:',title, count=1)
-            if self.getOption('regex') and self.getOption('cite') and not self.getOption('negative'):
-                if self.getOption('multi'):
-                    #results are list
-                    if self.getOption('nowiki'):
-                        finalpage += u' - <nowiki>'
-                    for r in link:
-                        finalpage += r + ','
-                    if self.getOption('nowiki'):
-                        finalpage += u'</nowiki>'
-                else:
-                    #results are single string
-                    #TODO convert all results to lists
-                    if self.getOption('nowiki'):
-                        finalpage += u' - <nowiki>' + link + u'</nowiki>'
-                    else:
-                        finalpage += u' - ' + link
+            if self.getOption('nowiki'):
+                finalpage += u' - <nowiki>' + link + u'</nowiki>'
+            else:
+                finalpage += u" - '''" + link + "'''"
             itemcount += 1
 
             if itemcount > int(self.getOption('maxlines'))-1:
@@ -305,6 +293,7 @@ class BasicBot(
 
         if self.getOption('test'):
             pywikibot.output(outpage.title())
+            pywikibot.output(outpage.text)
         
         success = outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
@@ -319,7 +308,7 @@ class BasicBot(
 
         source = page.text
 
-        firstparR = re.compile(ur"^({{[^{}]*({{[^{}]*({{[^{}]*}}[^{}]*)*}}[^{}]*)*}}[ \t]*\n*)+'''(?P<firstpar>[^']*?)'''")
+        firstparR = re.compile(ur"^({{[^{}]*({{[^{}]*({{[^{}]*}}[^{}]*)*}}[^{}]*)*}}[ \t]*\n*)+'''(?P<firstpar>[^'<]*?)(<ref[^']*)*'''")
         nopartitleR = re.compile(ur'(?P<npt>.[^\(]*)')
 
         fp = firstparR.match(source)
