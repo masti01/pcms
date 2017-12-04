@@ -219,7 +219,7 @@ class BasicBot(
                     pywikibot.output('ERROR: site %s does not exist!' % lang)
 
     def checkInterwiki(self,page,lang):
-        """Load the given page, do some changes, and save it."""
+        """Check if lang is in list of interwikis"""
         if self.getOption('test3'):
             pywikibot.output(u'[%s] Treating (checkInterwiki): %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),page.title()))
         try:
@@ -227,7 +227,7 @@ class BasicBot(
             wdcontent = wd.get()
             return (lang in wdcontent['sitelinks'].keys())
         except pywikibot.NoPage:
-            return(True)
+            return(False)
 
     def treat(self,page):
         result = {}
@@ -274,7 +274,7 @@ class BasicBot(
             count += 1
             if a.namespace() == 1:
                 a = a.toggleTalkPage()
-            if self.checkInterwiki(a,'plwiki'):
+            if not self.checkInterwiki(a,'plwiki'):
                 result.append(a.title())
                 marked += 1
                 if self.getOption('test3'):
