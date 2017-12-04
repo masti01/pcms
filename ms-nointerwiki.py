@@ -4,7 +4,7 @@
 An incomplete sample script by masti for creating statistics/listings pages
 Creates a list of articles without interwiki
 Call:
-    python pwb.py masti/ms-nointerwiki.py -page:"Kategoria:Artykuły na medal" -outpage:"Wikiprojekt:Polski kanon Wikipedii/bez interwiki" -summary:"Bot aktualizuje listę"
+    python pwb.py masti/ms-nointerwiki.py -catr:"Hasła kanonu polskiej Wikipedii" -outpage:"Wikiprojekt:Polski kanon Wikipedii/bez interwiki" -summary:"Bot aktualizuje listę"
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
