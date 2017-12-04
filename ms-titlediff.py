@@ -318,9 +318,11 @@ class BasicBot(
             if npt.group('npt').strip() != fp.group('firstpar'):
                 if self.getOption('text'):
                     if not re.search(self.getOption('text'),source):
+                        return(page.title(asLink=True),fp.group('firstpar'))
+                    else:
                         if self.getOption('test'):
                             pywikibot.output('SKIPPING: regex matched')
-                        return(page.title(asLink=True),fp.group('firstpar'))
+
                 else:
                     return(page.title(asLink=True),fp.group('firstpar'))
         return(None)
