@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ~/pw/core
+python pwb.py masti/artnosml.py -lang:tr
+cp ~/pw/core/masti/artykulytr.html ~/public_html/tr.articles.html
