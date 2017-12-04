@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ~/pw/core
+python pwb.py masti/ms-artnos.py
+#cat ~/pw/core/masti/artnosheader.html ~/pw/core/masti/artnosbody.html ~/pw/core/masti/artnosfooter.html >~/pw/core/masti/artykuly.html
+cp ~/pw/core/masti/artykuly.html ~/public_html/articles.html
