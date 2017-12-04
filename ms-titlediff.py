@@ -208,7 +208,7 @@ class BasicBot(
             return(1)
         
         for i in res:
-            if self.getOption('regex') and not self.getOption('negative'):
+            if self.getOption('cite') or (self.getOption('regex') and not self.getOption('negative')):
                 title, link = i
             else:
                 title = i
