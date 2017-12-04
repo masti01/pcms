@@ -164,10 +164,7 @@ class BasicBot(
 	    pagecounter += 1
             if self.getOption('test') or self.getOption('progress'):
                 pywikibot.output(u'[%s] Treating #%i (marked:%i, duplicates:%i): %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),pagecounter, marked, duplicates, page.title()))
-            if page.title() in reflinks:
-                duplicates += 1
-                continue
-            refs = self.treat(page) # get (name)
+             refs = self.treat(page) # get (name)
             if refs:
                 if not refs in reflinks:
                     #test
@@ -179,6 +176,7 @@ class BasicBot(
                     #test
                     if self.getOption('test'):
                         pywikibot.output(u'Already marked')
+                        duplicates += 1
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
 
