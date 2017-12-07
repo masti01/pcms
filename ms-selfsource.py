@@ -11,12 +11,8 @@ will be done.
 Bot to create list of articles containing Wikipedia as source excluding links to images
 
 Call:
-	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" \
-		-summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
-	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
-		-summary:"Bot uaktualnia tabelę" -text:"http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*" -ns:0 -regex
-	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
-		-summary:"Bot uaktualnia tabelę" -text:"(?P<result>http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*)" -ns:0 -regex
+	python pwb.py masti/ms-selfsource.py -start:'! -limit:10000 -progress -cite -wikipedia -maxresults:1000 -outpage:"Wikipedysta:mastiBot/wikirefs" -summary:"Bot uaktualnia listę"
+
 The following parameters are supported:
 &params;
 -always           If used, the bot won't ask if it should file the message
