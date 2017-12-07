@@ -151,7 +151,8 @@ class BasicBot(
 
         if not self.getOption('append'):
 	    #header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-            header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+            #header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+            header = u"Ostatnia aktualizacja: '''~~~~~'''.\n\n"
 	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
 
         header += '\n\n{| class="wikitable sortable" style="text-align:center"'
@@ -324,9 +325,9 @@ class BasicBot(
         """
 
         if self.getOption('wikipedia'):
-            resultR = re.compile(ur'(?i)(?P<result>https?://(?P<lang>[^\.]*?)\.(?P<project>wikipedia)\.org/wiki/[^\s\|<]*)')
+            resultR = re.compile(ur'(?i)(?P<result>https?://(?P<lang>[^\.]*?)\.(?P<project>wikipedia)\.org/wiki/[^\s\|<\]\}]*)')
         else:
-            resultR = re.compile(ur'(?i)(?P<result>https?://(?P<lang>[^\.]*?)\.(?P<project>wikipedia|wikisource|wiktionary|wikivoyage)\.org/wiki/[^\s\|<]*)')
+            resultR = re.compile(ur'(?i)(?P<result>https?://(?P<lang>[^\.]*?)\.(?P<project>wikipedia|wikisource|wiktionary|wikivoyage)\.org/wiki/[^\s\|<\]\}]*)')
         # allowed filtypes: svg, png, jpeg, tiff, gif, xcf
         imageR = re.compile(ur'(?i).*\.(svg|png|jpeg|jpg|tiff|tif|gif|xcf)$')
 
