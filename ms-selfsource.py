@@ -11,7 +11,7 @@ will be done.
 Bot to create list of articles containing Wikipedia as source excluding links to images
 
 Call:
-	python pwb.py masti/ms-selfsource.py -start:'! -limit:10000 -progress -cite -wikipedia -maxresults:1000 -outpage:"Wikipedia:Strony zawierające linki webowe do innych Wikipedii" -summary:"Bot uaktualnia listę"
+	python pwb.py masti/ms-selfsource.py -start:'!' -limit:10000 -progress -cite -navi -wikipedia -maxresults:1000 -outpage:"Wikipedia:Strony zawierające linki webowe do innych Wikipedii" -summary:"Bot uaktualnia listę"
 
 The following parameters are supported:
 &params;
