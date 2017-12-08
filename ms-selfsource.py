@@ -50,6 +50,7 @@ from pywikibot import pagegenerators
 from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
+from pywikibot import textlib
 import re
 import urllib2
 import datetime
