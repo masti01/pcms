@@ -152,8 +152,10 @@ class BasicBot(
         if not self.getOption('append'):
 	    #header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
             #header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
-            header = u"Ostatnia aktualizacja: '''~~~~~'''.\n\n"
-	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
+            header = u"Ostatnia aktualizacja: '''~~~~~'''."
+	    header += u"\n\nWszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
+            header += u"\n:Lista stron zawierających linki do innych Wikipedii w postaci linku webowego - często uzywane jako nieprawidłowe źródło."
+            header += u"\n:Pominięto linki do grafik."
 
         header += '\n\n{| class="wikitable sortable" style="text-align:center"'
         header += '\n! Lp.'
