@@ -225,7 +225,7 @@ class BasicBot(
             #finalpage += u'\n# [[' + title + u']]'
             linenumber = pagecount * int(self.getOption('maxlines')) + itemcount + 1
             if self.getOption('edit'):
-                finalpage += u'\n|-\n| %i || {{Edytuj| %s | %s }} || %i ' % (linenumber,title,title,len(link))
+                finalpage += u'\n|-\n| %i || {{Edytuj| %s | %s }} || %i || ' % (linenumber,title,title,len(link))
             else:
                 finalpage += u'\n|-\n| %i || [[%s]] || %i || ' % (linenumber, title,len(link))
             if self.getOption('cite') and not self.getOption('negative'):
