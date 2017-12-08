@@ -194,7 +194,7 @@ class BasicBot(
                 break
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
-        footer += u'\n\n[[Kategoria:Sprzątanie Wikipedii|Webowe wikilinki]]'
+        footer += u'\n\n[[Kategoria:Wikiprojekt Strony zawierające linki webowe do innych Wikipedii]]'
 
         outputpage = self.getOption('outpage')
 
