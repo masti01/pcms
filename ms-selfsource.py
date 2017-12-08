@@ -157,7 +157,7 @@ class BasicBot(
 	    header += u"\n\nWszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
             header += u"\n:Lista stron zawierających linki do innych Wikipedii w postaci linku webowego - często uzywane jako nieprawidłowe źródło."
             header += u"\n:Pominięto linki do grafik."
-            header += U"\n\n{{Wikipedia:Strony zawierające linki webowe do innych Wikipedii/Nagłówek}}"
+            header += U"\n\n{{Wikiprojekt:Strony zawierające linki webowe do innych Wikipedii/Nagłówek}}"
 
         header += '\n\n{| class="wikitable sortable" style="text-align:center"'
         header += '\n! Lp.'
