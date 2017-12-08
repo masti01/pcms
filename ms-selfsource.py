@@ -11,7 +11,7 @@ will be done.
 Bot to create list of articles containing Wikipedia as source excluding links to images
 
 Call:
-	python pwb.py masti/ms-selfsource.py -start:'! -limit:10000 -progress -cite -wikipedia -maxresults:1000 -outpage:"Wikipedysta:mastiBot/wikirefs" -summary:"Bot uaktualnia listę"
+	python pwb.py masti/ms-selfsource.py -start:'! -limit:10000 -progress -cite -wikipedia -maxresults:1000 -outpage:"Wikipedia:Strony zawierające linki webowe do innych Wikipedii" -summary:"Bot uaktualnia listę"
 
 The following parameters are supported:
 &params;
@@ -190,6 +190,7 @@ class BasicBot(
                 break
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
+        footer += u'\n\n[[Kategoria:Sprzątanie Wikipedii|Webowe wikilinki]]'
 
         outputpage = self.getOption('outpage')
 
@@ -331,7 +332,7 @@ class BasicBot(
         # allowed filtypes: svg, png, jpeg, tiff, gif, xcf
         imageR = re.compile(ur'(?i).*\.(svg|png|jpeg|jpg|tiff|tif|gif|xcf)$')
 
-        source = page.text
+        source = textlib.removeDisabledParts(page.text)
 
         #return all found results
         resultslist = []
