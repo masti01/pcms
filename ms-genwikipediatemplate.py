@@ -274,7 +274,7 @@ class BasicBot(
         self.generator = generator
 
     def _handle_dry_param(self, **kwargs):
-        """
+        """	
         Read the dry parameter and set the simulate variable instead.
         This is a private method. It prints a deprecation warning for old
         -dry paramter and sets the global simulate variable and informs
@@ -314,6 +314,13 @@ class BasicBot(
         
         return
 
+    def wikipedia(self,lang):
+        #return link to article on pl.wiki
+        if lang in self.wikipedias.keys():
+            return(self.wikipedias[lang])
+        else:
+            return(u'')
+
     def datepl(self):
         #return string for pl date
         months = ['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','wrzesnia','października','listopada','grudnia']
@@ -321,7 +328,7 @@ class BasicBot(
 
     def assemblepage(self,artslists):
         # generate final page
-        sections = ['5 000 000+', '2 000 000+', '1 000 000+', '500 000+', '200 000+', '100 000+', '50 000+', '25 000+', '10 000+' ]
+        sections = ['5 000 000+', '2 000 000+', '1 000 000+', '500 000+', '200 000+', '100 000+', '50 000+', '25 000+', '10 000+', 'pozostałe' ]
 
 
         #finalpage = header
@@ -358,8 +365,8 @@ class BasicBot(
         Output page is pagename
         """
 
-        limits = [ 5000000, 2000000, 1000000, 500000, 200000, 100000, 50000, 25000, 10000 ]
-        artlists = {0:[],1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[]}
+        limits = [ 5000000, 2000000, 1000000, 500000, 200000, 100000, 50000, 25000, 10000, 0 ]
+        artlists = {0:[],1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]}
 
         #pywikibot.output(finalpage)
 
@@ -372,9 +379,9 @@ class BasicBot(
             #pywikibot.output('w:%s:%i' % (self.wikipedias[w],redirlist[w]))
             if redirlist[w] < limits[section]:
                 section +=1
-            if section > 8:
-                break
-            artlists[section].append('%s ([[:%s:]])' % (self.wikipedias[w],w))
+            #if section > 8:
+            #    break
+            artlists[section].append('%s ([[:%s:]])' % (self.wikipedia(w),w))
         
         if self.getOption('test'):
             pywikibot.output(artlists)
@@ -407,17 +414,13 @@ class BasicBot(
         for w in wikiR.finditer(text):
             lang = w.group('lang')
             size = int(re.sub(ur',','',w.group('size')))
-            if lang in self.wikipedias.keys():
-                wiki = self.wikipedias[lang]
-            else:
-                wiki = '[**********]'
-                unknownwiki.append(lang)
+            wiki = self.wikipedia(lang)
             result[lang] = size
             if self.getOption('test'):
                 pywikibot.output(u'[%s][%i]L:%s W:%s S:%i' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), count, lang, wiki, size ))
             count += 1
         if self.getOption('test'):
-            pywikibot.output(unknownwiki)
+            #pywikibot.output(unknownwiki)
             pywikibot.output('Wikipedias:%i' % count)
         return(result)
 
