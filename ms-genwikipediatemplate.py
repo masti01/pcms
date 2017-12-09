@@ -334,7 +334,7 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(sections[i])
             finalpage += '\n\n| opis%i = %s' % (i+1, sections[i])
-            finalpage += '\n| spis%i = <div>' % (i+1)
+            finalpage += '\n| spis%i = ' % (i+1)
             first = True
             for a in artslists[i]:
                 if self.getOption('test'):
@@ -344,7 +344,6 @@ class BasicBot(
                 else:
                     finalpage += ' • '
                 finalpage += a
-            finalpage += '</div>'
             i += 1
 
         finalpage += u'\n\n| kategoria = '
@@ -375,8 +374,6 @@ class BasicBot(
                 section +=1
             if section > 8:
                 break
-            if w == 'pl':
-                pywikibot.output('POLSKI %s' % w)
             artlists[section].append('%s ([[:%s:]])' % (self.wikipedias[w],w))
         
         if self.getOption('test'):
@@ -385,7 +382,8 @@ class BasicBot(
         #pywikibot.output(self.assemblepage(artlists))
 
         #save results
-        pywikibot.output(u'***** saving results *****')
+        if self.getOption('test'):
+            pywikibot.output(u'***** saving results *****')
         outpage = pywikibot.Page(pywikibot.Site(), self.getOption('outpage'))
         outpage.text = self.assemblepage(artlists)
 
