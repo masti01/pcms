@@ -1,37 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-An incomplete sample script by masti for creating statistics/listings pages
-This is not a complete bot; rather, it is a template from which simple
-bots can be made. You can rename it to mybot.py, then edit it in
-whatever way you want.
+Bot tu update {{Wikipedie}} on pl.wiki
+
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
 Call:
-	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" \
-		-summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
-	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
-		-summary:"Bot uaktualnia tabelę" -text:"http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*" -ns:0 -regex
-	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
-		-summary:"Bot uaktualnia tabelę" -text:"(?P<result>http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*)" -ns:0 -regex
+    python pwb.py masti/ms-genwikipediatemplate.py -page:'Szablon:Wikipedie' -outpage:'Szablon:Wikipedie' -summary:'Bot uakktualnia stronę' -pt:0 -cosmeticchanges:No
+
 The following parameters are supported:
 &params;
 -always           If used, the bot won't ask if it should file the message
                   onto user talk page.   
 -outpage          Results page; otherwise "Wikipedysta:mastiBot/test" is used
--maxlines         Max number of entries before new subpage is created; default 1000
--text:            Use this text to be added; otherwise 'Test' is used
--replace:         Dont add text but replace it
--top              Place additional text on top of the page
 -summary:         Set the action summary message for the edit.
--negative:        mark if text not in page
--regex:           treat text as regex - should contain <result> group. if not whole match will be used
--multi:           return all results for -regex not only first match
--flags:           list of regex flags: i,m,g,s etc.
--edit:            link thru template:edytuj instead of wikilink
--cite:            cite search results
--nowiki:          put citation in <nowiki> tags
--navi:            add navigation template {{Wikipedysta:MastiBot/Nawigacja|Wikipedysta:mastiBot/test|Wikipedysta:mastiBot/test 2}}
 -progress:        report progress
 """
 #
@@ -241,26 +223,10 @@ class BasicBot(
         # Add your own options to the bot and set their defaults
         # -always option is predefined by BaseBot class
         self.availableOptions.update({
-            'replace': False,  # delete old text and write the new text
             'summary': None,  # your own bot summary
-            'text': 'Test',  #default search string 'Test' is default
-            'top': False,  # append text on top of the page
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
-            'maxlines': 1000, #default number of entries per page
-            'negative': False, #if True mark pages that DO NOT contain search string
             'test': False, #switch on test functionality
-            'regex': False, #use text as regex
-            'aslink': False, #put links as wikilinks
-            'append': False, #append results to page
-            'section': None, #section title
-            'title': False, #check in title not text
-            'multi': False, #'^' and '$' will now match begin and end of each line.
-            'flags': None, #list of regex flags
             'edit': False, #link thru template:edytuj instead of wikilink
-            'cite': False, #cite search results
-            'nowiki': False, #put citation in <nowiki> tags
-            'count': False, #count pages only
-            'navi': False, # add navigation template
             'progress': False, # report progress
         })
 
