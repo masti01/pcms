@@ -159,11 +159,12 @@ class BasicBot(
         header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
         header +=u'\n|-'
         header +=u'\n!Nr'
-        header +=u'\n!Rozmiar'
+        header +=u'\n!Artykuł'
         header +=u'\n!Data utworzenia'
         header +=u'\n!Autor'
         header +=u'\n!Data modyfikacji'
         header +=u'\n!Autor modyfikacji'
+        header +=u'\n!Rozmiar'
         header +=u'\n!Linkujące'
 
 
@@ -217,10 +218,8 @@ class BasicBot(
 
             itemcount += 1
 
-            finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + u"'''brak'''" + u' || [[' + title + u']] || '
-
-            finalpage += u' || ' + str(size) + u' || ' + creationdate + u' || [[Wikipedysta:' + creator + u'|' + creator + u']] || ' + lastedit
-            finalpage += u' || [[Wikipedysta:' + lasteditor + u'|' + lasteditor + u']] || ' + self.linknumber(title,refscount) + u'\n'
+            finalpage += u'\n\n| %i || [[%s]] || %s || [[Wikipedysta:%s|%s]] || %s || [[Wikipedysta:%s|%s]] || %i || %s' % 
+                         ( itemcount, title, creationdate, creator,creator, lastedit, lasteditor, lasteditor, size, self.linknumber(title,refscount) )
 
         finalpage += footer 
         
