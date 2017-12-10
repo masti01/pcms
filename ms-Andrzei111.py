@@ -273,7 +273,7 @@ class BasicBot(
 
         if self.getOption('test'):
             pywikibot.output(u'lastedit:%s' % lastedit)
-            pywikibot.output(u'ident:%s' % ident)
+            pywikibot.output(u'creationDate:%s' % timestamp)
             pywikibot.output(u'refsCount:%s' % refsCount)
             pywikibot.output(u'lastEditor:%s' % lastEditor)
             pywikibot.output(u'size:%s' % size)
