@@ -218,8 +218,8 @@ class BasicBot(
 
             itemcount += 1
 
-            finalpage += u'\n\n| %i || [[%s]] || %s || [[Wikipedysta:%s|%s]] || %s || [[Wikipedysta:%s|%s]] || %i || %s' % 
-                         ( itemcount, title, creationdate, creator,creator, lastedit, lasteditor, lasteditor, size, self.linknumber(title,refscount) )
+            finalpage += u'\n\n| %i || [[%s]] || %s || [[Wikipedysta:%s|%s]] || %s || [[Wikipedysta:%s|%s]] || %i || %s' % \
+                      ( itemcount, title, creationdate, creator,creator, lastedit, lasteditor, lasteditor, size, self.linknumber(title,refscount) )
 
         finalpage += footer 
         
