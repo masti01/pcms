@@ -13,7 +13,7 @@ will be done.
 This bot creates a pages with links to tennis players.
 
 Call:
-	python pwb.py masti/ms-kneset.py -transcludes:Kneset -outpage:"Wikipedysta:Andrzei111/Izrael/lista" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
+	python pwb.py masti/ms-Andrzei111.py -page:"Wikipedysta:Andrzei111" -outpage:"Wikipedysta:Andrzei111/lista artykułów" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
 
 The following parameters are supported:
 
