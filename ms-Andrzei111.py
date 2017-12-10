@@ -188,7 +188,6 @@ class BasicBot(
                     pywikibot.output(refs)
                 reflinks.append(refs)
 
-        return
         footer = u'\n|}'
         footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
 
