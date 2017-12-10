@@ -189,7 +189,7 @@ class BasicBot(
                 reflinks.append(refs)
 
         footer = u'\n|}'
-        footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
+        #footer += u'\n\nPrzetworzono ' + str(counter) + u' stron'
 
         outputpage = self.getOption('outpage')
 
