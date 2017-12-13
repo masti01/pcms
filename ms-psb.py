@@ -306,9 +306,15 @@ class BasicBot(
                 if pid == 'P21':
                      obj.sex = sex[trg.title()]
                 if pid == 'P569':
-                    obj.dob = '%d-%02d-%02d' % (trg.year,trg.month,trg.day)
+                    try:
+                        obj.dob = '%d-%02d-%02d' % (trg.year,trg.month,trg.day)
+                    except:
+                        obj.dob = ''
                 if pid == 'P570':
-                    obj.dod = '%d-%02d-%02d' % (trg.year,trg.month,trg.day)
+                    try:
+                        obj.dod = '%d-%02d-%02d' % (trg.year,trg.month,trg.day)
+                    except:
+                        obj.dod = ''
                 if pid == 'P106':
                     obj.occupation.append(self.getLabel(trg,['pl','en']))
 
