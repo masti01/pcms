@@ -337,12 +337,13 @@ class BasicBot(
             
             if self.getOption('test'):
                 pywikibot.output(u'Treat:[%s][%i][%i]:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), actionCounters['total'], count, p.title() ))
-            if not page.exists():
+            if not p.exists():
                 actionCounters['red'] += 1
             else:
                 actionCounters['blue'] += 1
             pp = p
             while pp.isRedirectPage():
+                actionCounters['redirs'] += 1
                 pp = pp.getRedirectTarget()
                 if self.getOption('test'):
                     pywikibot.output(u'Redirect:[%s]:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pp.title() ))
@@ -393,6 +394,7 @@ class BasicBot(
         finalpage += '\n\n=== Statystyka ==='
         finalpage += '\n* Istniejące: %i' % actionCounters['blue']
         finalpage += '\n* Nieistniejące: %i' % actionCounters['red']
+        finalpage += '\n* Przekierowania: %i' % actionCounters['redirs']
         finalpage += '\n* Ujednoznacznienia: %i' % actionCounters['disambigs']
         
         if self.getOption('test'):
