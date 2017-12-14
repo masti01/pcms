@@ -367,12 +367,12 @@ class BasicBot(
                 obj = self.getData(pp)
                 obj.instanceof = 'strona ujednoznaczniająca'
                 obj.title = pp.title()
-                obj.wdexist = False
+                obj.wdexists = False
                 if self.getOption('test'):
                     pywikibot.output(u'Disambig:[%s][#%i]:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),actionCounters['disambigs'], pp.title() ))
             else:
                 obj = self.getData(pp)
-                obj.wdexist = True
+                obj.wdexists = True
 
 
             obj.link = p.title()
@@ -408,7 +408,7 @@ class BasicBot(
                 finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
             else:
-                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s | colspan=4 | {{tabela-nie|<brak danych>}} || %s' % \
+                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s | colspan=4 | <brak danych> || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.description )
 
         finalpage += footer 
