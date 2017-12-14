@@ -106,6 +106,8 @@ class Person(object):
             return(self.sex)
         elif self.instanceof:
             return(self.instanceof)
+        elif self.disambig:
+            return('strona ujednoznaczniająca')
         else:
             return('<brak danych>')
 
@@ -412,7 +414,7 @@ class BasicBot(
             itemcount += 1
             if i.WDexists():
                 if i.isDisambig:
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:Sienna" | %s|| %s' % \
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:Sienna" | %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description )
                 else:
                     finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
