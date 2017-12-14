@@ -415,7 +415,7 @@ class BasicBot(
             itemcount += 1
             if i.WDexists():
                 if i.isDisambig():
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:BurlyWood; text-align:center;" | %s || %s' % \
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:NavajoWhite; text-align:center;" | %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description )
                 else:
                     finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
