@@ -95,10 +95,10 @@ class Person(object):
         return(self.WDexists)
 
     def whatIs(self):
-        if self.instanceof:
-            return(self.instanceof)
-        elif self.sex:
+        if self.sex:
             return(self.sex)
+        elif self.instanceof:
+            return(self.instanceof)
         else:
             return('<brak danych>')
 
@@ -305,6 +305,8 @@ class BasicBot(
                         pywikibot.output('P:%s, V:%s' % (self.getLabel(prp,['pl','en']),trg))
                 if pid == 'P21':
                      obj.sex = sex[trg.title()]
+                if pid == 'P31':
+                     obj.instanceof = self.getLabel(trg,['pl','en'])
                 if pid == 'P569':
                     try:
                         obj.dob = '%d-%02d-%02d' % (trg.year,trg.month,trg.day)
