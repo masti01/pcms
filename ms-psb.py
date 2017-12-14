@@ -408,7 +408,7 @@ class BasicBot(
                 finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
             else:
-                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s | colspan=4 | <brak danych> || %s' % \
+                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue" | <brak danych> || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.description )
 
         finalpage += footer 
