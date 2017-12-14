@@ -162,9 +162,10 @@ class BasicBot(
             'maxlines': 1000, #default number of entries per page
             'test': False, #test options
             'listscount': 1000, #max number of processed lists
-            'labels': False,
-            'object': False,
-            'testcount': 10,
+            'labels': False, #show labels in WD Item
+            'object': False, #show object content
+            'testcount': 10, #process only testcount items from input page
+            'renew': False, #use original or generated pages as input
         })
 
         # call constructor of the super class
@@ -231,9 +232,9 @@ class BasicBot(
                 yield page,t
 
     def header(self):
-	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
-        header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
+	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja '''~~~~~'''."
+	header += u"\n\nWszelkie uwagi proszę zgłaszać w [[Dyskusja wikipedysty:Masti|dyskusji operatora]]."
+        header +=u'\n\n{| class="wikitable sortable" style="font-size:85%;"'
         header +=u'\n|-'
         header +=u'\n!Nr'
         header +=u'\n!Link'
@@ -346,13 +347,16 @@ class BasicBot(
 
     def treat(self, page):
         #treat all links on page
-        linkR = re.compile(ur'# \[\[(?P<title>[^|\]]*?)(\|.*?)?\]\]\s*?(?P<description>.*)')
+        if self.getOption('renew'):
+            linkR = ur'\|[ \d]*?\|\|\s*?\[\[(?P<title>[^\]]*)\]\](\s*?\|\|.*?)*\|\|\s*(?P<description>.*)'
+        else:
+            linkR = ur'# \[\[(?P<title>[^|\]]*?)(\|.*?)?\]\]\s*?(?P<description>.*)'
         result = []
 
         text = page.text
 
         count = 0
-        for p,t in self.genpages(text,rgx=ur'# \[\[(?P<title>[^|\]]*?)(\|.*?)?\]\]\s*?(?P<description>.*)'):
+        for p,t in self.genpages(text,rgx=linkR):
             count += 1
             if count > int(self.getOption('testcount')):
                 break
@@ -391,7 +395,10 @@ class BasicBot(
                 obj.personPrint()
             result.append(obj)
 
-        self.generateresultspage(result,page.title()+'/Tabela',self.header(),self.footer())
+        if self.getOption('renew'):
+            self.generateresultspage(result,page.title(),self.header(),self.footer())
+        else:
+            self.generateresultspage(result,page.title()+'/Tabela',self.header(),self.footer())
 
     def generateresultspage(self, redirlist, pagename, header, footer):
         """
