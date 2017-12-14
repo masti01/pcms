@@ -76,14 +76,16 @@ class Person(object):
         self.dod = '' #Date of death
         self.occupation = [] #list of occupations
         self.instanceof = None
-        self.description = None
+        self.wditem = ''
+        self.description = ''
         self.sex = None
-        self.WDexist = None
+        self.wdexists = False
         self.link = None
 
     def personPrint(self):
         pywikibot.output('Link:%s' % self.link)
         pywikibot.output('Title:%s' % self.title)
+        pywikibot.output('Wikidata item:%s' % self.wditem)
         pywikibot.output('Is instance of:%s' % self.instanceof)
         pywikibot.output('Date of birth:%s' % self.dob)
         pywikibot.output('Date of death:%s' % self.dod)
@@ -92,7 +94,7 @@ class Person(object):
         pywikibot.output('Description:%s' % self.description)
 
     def WDexists(self):
-        return(self.WDexists)
+        return(self.wdexists)
 
     def whatIs(self):
         if self.sex:
@@ -228,6 +230,7 @@ class BasicBot(
         header +=u'\n!Nr'
         header +=u'\n!Link'
         header +=u'\n!Artykuł'
+        header +=u'\n!Wikidane'
         header +=u'\n!Jest to'
         header +=u'\n!Data urodzenia'
         header +=u'\n!Data śmierci'
@@ -238,6 +241,13 @@ class BasicBot(
     def footer(self):
         footer = u'\n|}'
         return(footer)
+
+    def resetCounters(self):
+        actionCounters['total'] = 0
+        actionCounters['blue'] = 0
+        actionCounters['red'] = 0
+        actionCounters['redirs'] = 0
+        actionCounters['disambigs'] = 0
 
     def run(self):
 
@@ -264,7 +274,8 @@ class BasicBot(
                 refs = self.treat(p) # get (name, id, creator, lastedit)
                 #if self.getOption('test'):
                 #    pywikibot.output(refs)
-                #reflinks.append(refs)
+                reflinks.append(refs)
+                self.resetCounters()
 
 
         #footer += u'\n\nPrzetworzono ' + str(counter) + u' stron'
@@ -284,6 +295,7 @@ class BasicBot(
         try:
             wd = pywikibot.ItemPage.fromPage(page)
             wdcontent = wd.get()
+            obj.wditem = '[[:d:%s]]' % wd.title()
             if self.getOption('labels'):
                 pywikibot.output(wdcontent['claims'].keys())
         except:
@@ -309,12 +321,12 @@ class BasicBot(
                      obj.instanceof = self.getLabel(trg,['pl','en'])
                 if pid == 'P569':
                     try:
-                        obj.dob = '%d-%02d-%02d' % (trg.year,trg.month,trg.day)
+                        obj.dob = '{{L|%d}}' % trg.year
                     except:
                         obj.dob = ''
                 if pid == 'P570':
                     try:
-                        obj.dod = '%d-%02d-%02d' % (trg.year,trg.month,trg.day)
+                        obj.dod = '{{L|%d}}' % trg.year
                     except:
                         obj.dod = ''
                 if pid == 'P106':
@@ -352,11 +364,16 @@ class BasicBot(
 
             if pp.isDisambig():
                 actionCounters['disambigs'] += 1
+                obj = self.getData(pp)
+                obj.instanceof = 'strona ujednoznaczniająca'
                 obj.title = pp.title()
+                obj.wdexist = False
                 if self.getOption('test'):
                     pywikibot.output(u'Disambig:[%s][#%i]:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),actionCounters['disambigs'], pp.title() ))
             else:
                 obj = self.getData(pp)
+                obj.wdexist = True
+
 
             obj.link = p.title()
             obj.description = t.group('description')
@@ -387,9 +404,12 @@ class BasicBot(
                 #pywikibot.output(i)
                 i.personPrint()
             itemcount += 1
-
-            finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s' % \
-                      ( itemcount, i.link, i.title, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
+            if i.WDexists():
+                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
+                      ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
+            else:
+                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s | colspan=4 | {{tabela-nie|<brak danych>}} || %s' % \
+                      ( itemcount, i.link, i.title, i.wditem, i.description )
 
         finalpage += footer 
 
