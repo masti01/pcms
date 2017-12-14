@@ -106,7 +106,7 @@ class Person(object):
         if self.sex:
             return(self.sex)
         elif self.disambig:
-            return('strona ujednoznaczniająca')
+            return('<strona ujednoznaczniająca>')
         elif self.instanceof:
             return(self.instanceof)
         else:
@@ -375,7 +375,7 @@ class BasicBot(
             if pp.isDisambig():
                 actionCounters['disambigs'] += 1
                 obj = self.getData(pp)
-                obj.instanceof = 'strona ujednoznaczniająca'
+                obj.instanceof = '<strona ujednoznaczniająca>'
                 obj.disambig = True
                 obj.title = pp.title()
                 if self.getOption('test'):
@@ -415,13 +415,13 @@ class BasicBot(
             itemcount += 1
             if i.WDexists():
                 if i.isDisambig():
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:Sienna" | %s || %s' % \
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:BurlyWood; text-align:center;" | %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description )
                 else:
                     finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
             else:
-                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue" | <brak danych> || %s' % \
+                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue; text-align:center;" | <brak danych> || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.description )
 
         finalpage += footer 
