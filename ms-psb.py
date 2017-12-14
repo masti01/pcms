@@ -86,6 +86,7 @@ class Person(object):
     def personPrint(self):
         pywikibot.output('Link:%s' % self.link)
         pywikibot.output('Title:%s' % self.title)
+        pywikibot.output('Wikidata exists:%s' % self.wdexists)
         pywikibot.output('Wikidata item:%s' % self.wditem)
         pywikibot.output('Is disambig:%s' % self.disambig)
         pywikibot.output('Is instance of:%s' % self.instanceof)
@@ -104,10 +105,10 @@ class Person(object):
     def whatIs(self):
         if self.sex:
             return(self.sex)
-        elif self.instanceof:
-            return(self.instanceof)
         elif self.disambig:
             return('strona ujednoznaczniająca')
+        elif self.instanceof:
+            return(self.instanceof)
         else:
             return('<brak danych>')
 
@@ -303,10 +304,12 @@ class BasicBot(
             wd = pywikibot.ItemPage.fromPage(page)
             wdcontent = wd.get()
             obj.wditem = '[[:d:%s]]' % wd.title()
+            obj.wdexists = True
             if self.getOption('labels'):
                 pywikibot.output(wdcontent['claims'].keys())
         except:
             pywikibot.output('WikiData page do not exists')
+            obj.wdexists = False
             return(obj)
 
         wbs = pywikibot.Site('wikidata','wikidata')
@@ -375,12 +378,10 @@ class BasicBot(
                 obj.instanceof = 'strona ujednoznaczniająca'
                 obj.disambig = True
                 obj.title = pp.title()
-                obj.wdexists = False
                 if self.getOption('test'):
                     pywikibot.output(u'Disambig:[%s][#%i]:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),actionCounters['disambigs'], pp.title() ))
             else:
                 obj = self.getData(pp)
-                obj.wdexists = True
 
 
             obj.link = p.title()
@@ -413,7 +414,7 @@ class BasicBot(
                 i.personPrint()
             itemcount += 1
             if i.WDexists():
-                if i.isDisambig:
+                if i.isDisambig():
                     finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:Sienna" | %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description )
                 else:
