@@ -77,6 +77,7 @@ class Person(object):
         self.occupation = [] #list of occupations
         self.instanceof = None
         self.wditem = ''
+        self.disambig = False
         self.description = ''
         self.sex = None
         self.wdexists = False
@@ -86,6 +87,7 @@ class Person(object):
         pywikibot.output('Link:%s' % self.link)
         pywikibot.output('Title:%s' % self.title)
         pywikibot.output('Wikidata item:%s' % self.wditem)
+        pywikibot.output('Is disambig:%s' % self.disambig)
         pywikibot.output('Is instance of:%s' % self.instanceof)
         pywikibot.output('Date of birth:%s' % self.dob)
         pywikibot.output('Date of death:%s' % self.dod)
@@ -95,6 +97,9 @@ class Person(object):
 
     def WDexists(self):
         return(self.wdexists)
+
+    def isDisambig(self):
+        return(self.disambig)
 
     def whatIs(self):
         if self.sex:
@@ -366,6 +371,7 @@ class BasicBot(
                 actionCounters['disambigs'] += 1
                 obj = self.getData(pp)
                 obj.instanceof = 'strona ujednoznaczniająca'
+                obj.disambig = True
                 obj.title = pp.title()
                 obj.wdexists = False
                 if self.getOption('test'):
@@ -405,7 +411,11 @@ class BasicBot(
                 i.personPrint()
             itemcount += 1
             if i.WDexists():
-                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
+                if i.isDisambig:
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:Sienna" | %s|| %s' % \
+                      ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description )
+                else:
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
             else:
                 finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue" | <brak danych> || %s' % \
