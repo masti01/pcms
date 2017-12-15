@@ -245,6 +245,7 @@ class BasicBot(
         header +=u'\n!Data śmierci'
         header +=u'\n!Zajęcie'
         header +=u'\n!Opis'
+        header +=u'\n!Uwagi'
         return(header)
 
     def footer(self):
@@ -422,10 +423,10 @@ class BasicBot(
             itemcount += 1
             if i.WDexists():
                 if i.isDisambig():
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:NavajoWhite; text-align:center;" | %s || %s' % \
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:NavajoWhite; text-align:center;" | %s || %s ||' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description )
                 else:
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s' % \
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s ||' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
             else:
                 finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue; text-align:center;" | <brak danych> || %s' % \
