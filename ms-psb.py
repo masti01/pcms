@@ -93,7 +93,10 @@ class Person(object):
         pywikibot.output('Date of birth:%s' % self.dob)
         pywikibot.output('Date of death:%s' % self.dod)
         pywikibot.output('Sex:%s' % self.sex)
-        pywikibot.output('Occupation:%s' % ",".join(self.occupation))
+        try:
+            pywikibot.output('Occupation:%s' % ",".join(self.occupation))
+        except:
+            pywikibot.output('Occupation: ERROR')
         pywikibot.output('Description:%s' % self.description)
 
     def WDexists(self):
@@ -166,6 +169,7 @@ class BasicBot(
             'object': False, #show object content
             'testcount': 10000, #process only testcount items from input page
             'renew': False, #use original or generated pages as input
+            'skip': 0, #skip that many first pages
         })
 
         # call constructor of the super class
@@ -276,11 +280,13 @@ class BasicBot(
             count = 0
             for p,t in self.genpages(text,ns=2):
                 count += 1
+                if count <= int(self.getOption('skip')): 
+                    continue
                 if count > int(self.getOption('listscount')):
                     break
                 if self.getOption('test'):
                     pywikibot.output(u'[%s][%i]L:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), count, p.title() ))
-                refs = self.treat(p) # get (name, id, creator, lastedit)
+                refs = self.treat(p) 
                 #if self.getOption('test'):
                 #    pywikibot.output(refs)
                 reflinks.append(refs)
@@ -341,7 +347,9 @@ class BasicBot(
                     except:
                         obj.dod = ''
                 if pid == 'P106':
-                    obj.occupation.append(self.getLabel(trg,['pl','en']))
+                    lbl = self.getLabel(trg,['pl','en'])
+                    if lbl:
+                        obj.occupation.append(lbl)
 
         return(obj)
 
@@ -482,7 +490,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage', 'maxlines', 'listscount', 'testcount'):
+        if option in ('summary', 'text', 'outpage', 'maxlines', 'listscount', 'testcount', 'skip'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
