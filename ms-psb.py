@@ -253,7 +253,6 @@ class BasicBot(
         return(footer)
 
     def resetCounters(self):
-        actionCounters['total'] = 0
         actionCounters['blue'] = 0
         actionCounters['red'] = 0
         actionCounters['redirs'] = 0
