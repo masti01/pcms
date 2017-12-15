@@ -164,7 +164,7 @@ class BasicBot(
             'listscount': 1000, #max number of processed lists
             'labels': False, #show labels in WD Item
             'object': False, #show object content
-            'testcount': 10, #process only testcount items from input page
+            'testcount': 10000, #process only testcount items from input page
             'renew': False, #use original or generated pages as input
         })
 
