@@ -14,6 +14,7 @@ This bot creates a pages with links to tennis players.
 
 Call:
 	python pwb.py masti/ms-psb.py -page:"Wikipedysta:PuchaczTrado/PSB" -maxlines:10000 -summary:"Bot uaktualnia tabelę"
+	python pwb.py masti/ms-psb.py -page:"Wikipedysta:PuchaczTrado/PSB/Tabela" -maxlines:10000 -renew -summary:"Bot uaktualnia tabelę"
 
 The following parameters are supported:
 
