@@ -82,6 +82,7 @@ class Person(object):
         self.sex = None
         self.wdexists = False
         self.link = None
+        self.comment = None
 
     def personPrint(self):
         pywikibot.output('Link:%s' % self.link)
@@ -98,6 +99,7 @@ class Person(object):
         except:
             pywikibot.output('Occupation: ERROR')
         pywikibot.output('Description:%s' % self.description)
+        pywikibot.output('Comment:%s' % self.comment)
 
     def WDexists(self):
         return(self.wdexists)
@@ -238,6 +240,8 @@ class BasicBot(
     def header(self):
 	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja '''~~~~~'''."
 	header += u"\n\nWszelkie uwagi proszę zgłaszać w [[Dyskusja wikipedysty:Masti|dyskusji operatora]]."
+	header += u"\n:<small>Znalezione artykuły proszę wpisywać w kolumnie ''Link''</small>"
+	header += u"\n:<small>Uwagi i komentarze kolumnie ''Uwagi''</small>"
         header +=u'\n\n{| class="wikitable sortable" style="font-size:85%;"'
         header +=u'\n|-'
         header +=u'\n!Nr'
@@ -356,7 +360,7 @@ class BasicBot(
     def treat(self, page):
         #treat all links on page
         if self.getOption('renew'):
-            linkR = ur'\|[ \d]*?\|\|\s*?\[\[(?P<title>[^\]]*)\]\](\s*?\|\|.*?)*\|\|\s*(?P<description>.*)'
+            linkR = ur'\|[ \d]*?\|\| *?\[\[(?P<title>[^\]]*)\]\]( *?\|\|.*?)*\|\| *(?P<description>.*)\|\|[ \t]*(?P<comment>.*)'
         else:
             linkR = ur'# \[\[(?P<title>[^|\]]*?)(\|.*?)?\]\]\s*?(?P<description>.*)'
         result = []
@@ -398,6 +402,8 @@ class BasicBot(
 
             obj.link = p.title()
             obj.description = t.group('description')
+            if self.getOption('renew'):
+                obj.comment = t.group('comment')
 
             if self.getOption('object'):
                 obj.personPrint()
@@ -430,14 +436,14 @@ class BasicBot(
             itemcount += 1
             if i.WDexists():
                 if i.isDisambig():
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:NavajoWhite; text-align:center;" | %s || %s ||' % \
-                      ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description )
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:NavajoWhite; text-align:center;" | %s || %s || %s' % \
+                      ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description, i.comment )
                 else:
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s ||' % \
-                      ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description )
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s || %s' % \
+                      ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description, i.comment )
             else:
-                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue; text-align:center;" | <brak danych> || %s ||' % \
-                      ( itemcount, i.link, i.title, i.wditem, i.description )
+                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue; text-align:center;" | <brak danych> || %s || %s' % \
+                      ( itemcount, i.link, i.title, i.wditem, i.description, i.comment )
 
         finalpage += footer 
 
