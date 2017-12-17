@@ -437,13 +437,13 @@ class BasicBot(
             itemcount += 1
             if i.WDexists():
                 if i.isDisambig():
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:NavajoWhite; text-align:center;" | %s || %s || %s' % \
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:NavajoWhite; text-align:center;" | %s || %s|| %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.description, i.comment )
                 else:
-                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s || %s' % \
+                    finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || %s || %s || %s || %s || %s|| %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.whatIs(), i.DoB(), i.DoD(), i.Occupation(), i.description, i.comment )
             else:
-                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue; text-align:center;" | <brak danych> || %s || %s' % \
+                finalpage += u'\n|-\n| %i || [[%s]] || [[%s]] || %s || colspan=4 style="background-color:LightSteelBlue; text-align:center;" | <brak danych> || %s|| %s' % \
                       ( itemcount, i.link, i.title, i.wditem, i.description, i.comment )
 
         finalpage += footer 
