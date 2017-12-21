@@ -14,7 +14,7 @@ This bot creates a pages with links to tennis players.
 
 Call:
 	python pwb.py masti/ms-psb.py -page:"Wikipedysta:PuchaczTrado/PSB" -maxlines:10000 -summary:"Bot uaktualnia tabelę"
-	python pwb.py masti/ms-psb.py -page:"Wikipedysta:PuchaczTrado/PSB/Tabela" -maxlines:10000 -renew -summary:"Bot uaktualnia tabelę"
+	python pwb.py masti/ms-psb.py -page:"Wikipedysta:mastiBot/PSB/Tabela" -maxlines:10000 -renew -summary:"Bot uaktualnia tabelę"
 
 The following parameters are supported:
 
@@ -75,6 +75,8 @@ class Person(object):
         self.title = None
         self.dob = '' #Date of birth
         self.dod = '' #Date of death
+        self.dobprecision = 11 #date precision for birth
+        self.dodprecision = 11 #date precision for death
         self.occupation = [] #list of occupations
         self.instanceof = None
         self.wditem = ''
@@ -89,16 +91,19 @@ class Person(object):
         pywikibot.output('Link:%s' % self.link)
         pywikibot.output('Title:%s' % self.title)
         pywikibot.output('Wikidata exists:%s' % self.wdexists)
-        pywikibot.output('Wikidata item:%s' % self.wditem)
-        pywikibot.output('Is disambig:%s' % self.disambig)
-        pywikibot.output('Is instance of:%s' % self.instanceof)
-        pywikibot.output('Date of birth:%s' % self.dob)
-        pywikibot.output('Date of death:%s' % self.dod)
-        pywikibot.output('Sex:%s' % self.sex)
-        try:
-            pywikibot.output('Occupation:%s' % ",".join(self.occupation))
-        except:
-            pywikibot.output('Occupation: ERROR')
+        if self.wdexists:
+            pywikibot.output('Wikidata item:%s' % self.wditem)
+            pywikibot.output('Is disambig:%s' % self.disambig)
+            pywikibot.output('Is instance of:%s' % self.instanceof)
+            pywikibot.output('Date of birth:%s' % self.dob)
+            pywikibot.output('Date of birth precision:%s' % self.precision(self.dobprecision))
+            pywikibot.output('Date of death:%s' % self.dod)
+            pywikibot.output('Date of death precision:%s' % self.precision(self.dodprecision))
+            pywikibot.output('Sex:%s' % self.sex)
+            try:
+                pywikibot.output('Occupation:%s' % ",".join(self.occupation))
+            except:
+                pywikibot.output('Occupation: ERROR')
         pywikibot.output('Description:%s' % self.description)
         pywikibot.output('Comment:%s' % self.comment)
 
@@ -126,6 +131,102 @@ class Person(object):
 
     def Occupation(self):
         return(",".join(self.occupation))
+
+    def centuryDecade(self,date): 
+        #return decade of century i.e. 'lata 20. 20 wieku'
+        if date > 0:
+            return(pywikibot.date.formats['DecadeAD']['pl'](date))
+        else:
+            return(pywikibot.date.formats['DecadeBC']['pl'](date))
+
+    def centuryFromDate(self,date):
+        #return century from give wbTime
+        year = date.year
+        if year % 100:
+            return(int(1+year/100))
+        else:
+            return(int(year/100))
+
+    def millenniumFromDate(self,date):
+        #return century from give wbTime
+        year = date.year
+        if year % 1000:
+            return(int(1+year/1000))
+        else:
+            return(int(year/1000))
+
+    def millennium(self,date):
+        #return millennium i.e. '20 wieku'
+        mill = self.millenniumFromDate(date)
+        if mill > 0:
+            return('%i tysiąclecie' % mill)
+        else:
+            return('%i tysiąclecie p.n.e.' % -1*mill)
+
+    def century(self,date):
+        #return century i.e. '20 wieku'
+        if date > 0:
+            return(pywikibot.date.formats['CenturyAD']['pl'](self.centuryFromDate(date)))
+        else:
+            return(pywikibot.date.formats['CenturyBC']['pl'](self.centuryFromDate(date)))
+
+    def formatDate(self,date,maxPrecision=None):
+        #return date formatted according to date.precision
+        #pywikibot.output('Format Date:%i' % date.precision)
+        if maxPrecision:
+            prec = min(maxPrecision,date.precision)
+        else:
+            prec = date.precision
+        if prec == 11: #days
+            return('%d-%02d-%02d' % (date.year,date.month,date.day))
+        elif prec == 10: #months
+            return('%d-%02d' % (date.year,date.month))
+        elif prec == 9: #years
+            return('{{L|%d}}' % date.year)
+        elif prec == 8: #10 years
+            return(self.centuryDecade(date))
+        elif prec == 7: #100 years
+            return(self.century(date))
+        elif prec == 6: #1000 years
+            return(self.millennium(date))
+        return(date)
+
+    def setDoB(self,date):
+        try:
+            self.dob = self.formatDate(date,maxPrecision=9)
+            self.dobprecision = date.precision
+        except:
+            self.dob = ''
+
+    def setDoD(self,date):
+        try:
+            self.dod = self.formatDate(date,maxPrecision=9)
+            self.dodprecision = date.precision
+        except:
+            self.dod = ''
+        
+
+    def precision(self,prec):
+        #return precision text from numeric value prec
+        datePrecision = {
+		0:'miliard lat',
+		1:'100 milionów lat',
+		2:'10 milionów lat',
+		3:'milion lat',
+		4:'100.000 lat',
+		5:'10.000 lat',
+		6:'1000 lat',
+		7:'100 lat',
+		8:'10 lat',
+		9:'rok',
+		10:'miesiąc',
+		11:'dzień',
+		12:'godzina',
+		13:'minuta',
+		14:'sekunda',
+        }
+        return(datePrecision[prec])
+
 
 class BasicBot(
     # Refer pywikobot.bot for generic bot classes
@@ -270,18 +371,27 @@ class BasicBot(
     def run(self):
 
         reflinks = [] #initiate list
-        gencount = 0
+        count = 0
         for tpage in self.generator:
-	    gencount += 1
+	    count += 1
             if self.getOption('test'):
-                pywikibot.output(u'[%s]Treating #%i: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), gencount, tpage.title()))
-
-            #text = self.extractsection(tpage,'Artykuły zapoczątkowane przeze mnie',2)
-            #if self.getOption('test'):
-            #    pywikibot.output(u'[%s]L:%s T:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), tpage.title(),text ))
+                pywikibot.output(u'[%s]Treating #%i: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), count, tpage.title()))
 
             text = tpage.text
 
+            if count <= int(self.getOption('skip')): 
+                continue
+            if count > int(self.getOption('listscount')):
+                break
+            if self.getOption('test'):
+                pywikibot.output(u'[%s][%i]L:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), count, tpage.title() ))
+            refs = self.treat(tpage) 
+            #if self.getOption('test'):
+            #    pywikibot.output(refs)
+            reflinks.append(refs)
+            self.resetCounters()
+
+        """
             count = 0
             for p,t in self.genpages(text,ns=2):
                 count += 1
@@ -297,6 +407,7 @@ class BasicBot(
                 reflinks.append(refs)
                 self.resetCounters()
 
+        """
 
         #footer += u'\n\nPrzetworzono ' + str(counter) + u' stron'
 
@@ -342,15 +453,9 @@ class BasicBot(
                 if pid == 'P31':
                      obj.instanceof = self.getLabel(trg,['pl','en'])
                 if pid == 'P569':
-                    try:
-                        obj.dob = '{{L|%d}}' % trg.year
-                    except:
-                        obj.dob = ''
+                    obj.setDoB(trg)
                 if pid == 'P570':
-                    try:
-                        obj.dod = '{{L|%d}}' % trg.year
-                    except:
-                        obj.dod = ''
+                    obj.setDoD(trg)
                 if pid == 'P106':
                     lbl = self.getLabel(trg,['pl','en'])
                     if lbl:
