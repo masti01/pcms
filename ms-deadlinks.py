@@ -28,6 +28,7 @@ The following parameters are supported:
 -summary:         Set the action summary message for the edit.
 
 -includes:        Link to be searched for
+-progress:        Display progress
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -97,6 +98,7 @@ class BasicBot(
             'outpage': u'Wikipedysta:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
             'test': False, #test options
+            'progress':False, #display progress
             'includes' : False, #only include links that include this text
         })
 
@@ -153,68 +155,139 @@ class BasicBot(
 
         deadlinksf = {} #full links
         deadlinkss = {} #summary links
+        deadlinksfuse = {} #full links
+        deadlinkssuse = {} #summary links
         licznik = 0
         for page in self.generator:
 	    licznik += 1
-            if self.getOption('test'):
-                pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
-            refs = self.treat(page, False) # get list of weblinks
-            for ref in refs:
+            if self.getOption('progress'):
+                pywikibot.output(u'[%s]Treating #%i: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),licznik, page.title()))
+            refs = self.treat(page) # get list of weblinks
+            for ref,rcount in refs:
+                #if self.getOption('test'):
+                #    pywikibot.output('REFS: %s' % refs)
                 if ref in deadlinksf:
                    deadlinksf[ref] += 1
+                   deadlinksfuse[ref] += rcount
 	        else:
 	           deadlinksf[ref] = 1
+                   deadlinksfuse[ref] = rcount 
                 if self.getOption('test'):
                     pywikibot.output(u'%s - %i' % (ref,deadlinksf[ref]))
+            """ sitch of -domains option
+            #TODO get domain form analysis of previous step
             refs = self.treat(page, True) # get list of weblinks
-            for ref in refs:
+            for ref,rcount in refs:
                 if ref in deadlinkss:
                    deadlinkss[ref] += 1
+                   deadlinkssuse[ref] += rcount
 	        else:
 	           deadlinkss[ref] = 1
+                   deadlinkssuse[ref] = rcount
                 if self.getOption('test'):
                     pywikibot.output(u'%s - %i' % (ref,deadlinkss[ref]))
-
+            """
             #if licznik > self.maxlines-1:
             #    pywikibot.output(u'*** Breaking outer loop ***')
             #    break
 
+        deadlinkss,deadlinkssuse = self.getDomainStats(deadlinksf,deadlinksfuse)
+
         footer = u'Przetworzono: ' + str(licznik) + u' stron'        
 
-        result = self.generateresultspage(deadlinksf,self.getOption('outpage'),headerfull,footer)
-        # skip domains gouping if looking for specific text
-        if not self.getOption('includes'):
-            result = self.generateresultspage(deadlinkss,self.getOption('outpage')+u'/ogólne',headersum,footer)
+        result = self.generateresultspage(deadlinksf,deadlinksfuse,self.getOption('outpage'),headerfull,footer)
+        # skip domains grouping if looking for specific text
+        #if not self.getOption('includes'):
+        result = self.generateresultspage(deadlinkss,deadlinkssuse,self.getOption('outpage')+u'/ogólne',headersum,footer)
 
-    def treat(self, page, domains):
+    def getDomainStats(self,dl,dluse):
+        deadlinksf = {}
+        deadlinksfuse = {}
+        domainR = re.compile(ur'(?P<domain>https?://[^\/]*)')
+
+        for l in dl.keys():
+            dom = domainR.match(l).group('domain')
+            if self.getOption('test'):
+                pywikibot.output('Domain:link:%s' % dom)
+            if dom in deadlinksf.keys():
+                deadlinksf[dom] += dl[l]
+                deadlinksfuse[dom] += dluse[l]
+            else:
+                deadlinksf[dom] = dl[l]
+                deadlinksfuse[dom] = dluse[l]
+
+        return(deadlinksf,deadlinksfuse)           
+
+    def getRefsNumber(self,weblink,text):
+        #find how many times link is referenced on the page
+        # ref names including group
+        #refR = re.compile(ur'(?i)<ref (group *?= *?"?(?P<group>[^>"]*)"?)?(name *?= *?"?(?P<name>[^>"]*)"?)?>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s<]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
+        refR = re.compile(ur'(?im)<ref (group *?= *?"?(?P<group>[^>"]*)"?)?(name *?= *?"?(?P<name>[^>"]*)"?)?>.*?%s.*?<\/ref>' % re.escape(weblink).strip())
+
         """
-        Creates a tuple (title, id, name, creator, lastedit)
+        opcje wywołania: <ref name="BVL2006" /> {{u|BVL2006}} {{r|BVL2006}}
+        """
+
+        #check if weblink is in named ref
+        linkscount = 0
+        #for r in refR.finditer(text):
+        r = refR.search(text)
+        if r:
+            if r.group('name'):
+                if self.getOption('test'):
+                    pywikibot.output('Treat:NamedRef:%s' % r.group('name'))
+                #template to catch note/ref with {{u}} or {{r}}
+                ruR = re.compile(ur'(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % r.group('name').strip())
+                if self.getOption('test'):
+                    pywikibot.output('Treat:Regex:(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % r.group('name').strip())
+                match = ruR.findall(text)
+                linkscount += len(match)
+                if self.getOption('test'):
+                    pywikibot.output('Treat:Templates matched:%s' % match)
+        if self.getOption('test'):
+            pywikibot.output('Treat:links count:%s' % linkscount)
+
+        #catch unnamed links
+        match = re.findall(re.escape(weblink),text)
+        linkscount += len(match)
+        if self.getOption('test'):
+            pywikibot.output('Treat:Loose links matched:%s' % match)
+            pywikibot.output('Treat:links count:%s' % linkscount)
+
+        return(linkscount)
+
+    def treat(self, page):
+        """
+        Creates a list of weblinks
         """
         refs = []
         tempR = re.compile(ur'(?P<template>\{\{Martwy link dyskusja[^}]*?}}\n*?)')
-        if domains:
-            weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>.*?://[^ \n\(/]*)')
-            if self.getOption('test'):
-                pywikibot.output(u'domains=True')
-        else:
-            weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
-            if self.getOption('test'):
-                pywikibot.output(u'domains=False')
+        #weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
+        weblinkR = re.compile(ur'link *?= *?\*? (?P<weblink>[^\n ]*)')
+        if self.getOption('test'):
+            pywikibot.output(u'domains=False')
         links = u''
+        art = page.toggleTalkPage()
+        arttext = art.text
         templs = tempR.finditer(page.text)
         for link in templs:
             template = link.group('template').strip()
-	    #pywikibot.output(template)
-            try:
-                weblink = re.search(weblinkR,template).group('weblink').strip()
-                refs.append(weblink)
-            except:
-                pywikibot.output(u'Error in page %s' % page.title(asLink=True))
+            if self.getOption('test'):
+	        pywikibot.output(template)
+            #try:
+            weblink = re.search(weblinkR,template).group('weblink').strip()
+            linkscount = self.getRefsNumber(weblink,arttext)
+            refs.append( (weblink,linkscount) )
+            if self.getOption('test'):
+                    pywikibot.output('Treat Weblink:%s' % weblink)
+                    pywikibot.output('Treat Usage:%i' % linkscount)
+            #except:
+            #    pywikibot.output(u'Error in page %s' % page.title(asLink=True))
 
         return(refs)
         
 
-    def generateresultspage(self, redirlist, pagename, header, footer):
+    def generateresultspage(self, redirlist, redirlistuse, pagename, header, footer):
         """
         Generates results page from redirlist
         Starting with header, ending with footer
@@ -227,7 +300,9 @@ class BasicBot(
         finalpage +=u'\n|-'
         finalpage +=u'\n!Nr'
         finalpage +=u'\n!Link'
-        finalpage +=u'\n!Linkujące'
+        finalpage +=u'\n!Liczba stron'
+        finalpage +=u'\n!Liczba odnośników'
+
 
 
         res = sorted(redirlist, key=redirlist.__getitem__, reverse=True)
@@ -245,7 +320,8 @@ class BasicBot(
             #finalpage += u'#' + i + u' ([{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u'])\n'
             if self.getOption('test'):
                 pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
-            finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']\n'
+            finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
+            finalpage += u' || %i' % redirlistuse[i]
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
                 break
