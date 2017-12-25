@@ -274,8 +274,10 @@ class BasicBot(
             template = link.group('template').strip()
             if self.getOption('test'):
 	        pywikibot.output(template)
-            #try:
-            weblink = re.search(weblinkR,template).group('weblink').strip()
+            try:
+                weblink = re.search(weblinkR,template).group('weblink').strip()
+            except:
+                continue
             linkscount = self.getRefsNumber(weblink,arttext)
             refs.append( (weblink,linkscount) )
             if self.getOption('test'):
