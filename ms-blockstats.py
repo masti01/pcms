@@ -163,15 +163,20 @@ class BasicBot(
         blocks = {}
         count = 0
 
-        for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(days=days), reverse=True, logtype='block'):
+        #for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(days=days), reverse=True, logtype='block'):
+        for le in self.site.blocks(starttime=starttime-datetime.timedelta(days=days), endtime=starttime, reverse=True):
             count += 1
             if self.getOption('test'):
-                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),le.comment()))
+                 pywikibot.output(le)
+                 pywikibot.output(u'%i>>%s>>%s>>%s>>%s' % (count, le['timestamp'], le['by'], le['reason'], le['expiry']))
+                 #blocks log entry example:
+                 #{u'rangeend': u'113.83.216.254', u'timestamp': u'2017-11-27T08:30:36Z', u'userid': 0, u'expiry': u'2018-05-27T07:30:36Z', u'reason': u'[[WP:OP|open proxy]]', u'anononly': u'', u'user': u'113.83.216.254', u'id': 1449599, u'rangestart': u'113.83.216.254', u'by': u'MalarzBOT.admin', u'nocreate': u''}
+
             #b = self.addreview(reviews,le.user(),le.action())
-            if le.comment() in blocks.keys():
-                blocks[le.comment()] += 1
+            if le['reason'] in blocks.keys():
+                blocks[le['reason']] += 1
             else:
-                blocks[le.comment()] = 1
+                blocks[le['reason']] = 1
 
         return(blocks)
 
@@ -183,15 +188,16 @@ class BasicBot(
         blocks = {}
         count = 0
 
-        for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(days=days), reverse=True, logtype='block'):
+        #for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(days=days), reverse=True, logtype='block'):
+        for le in self.site.blocks(starttime=starttime-datetime.timedelta(days=days), endtime=starttime, reverse=True):
             count += 1
             if self.getOption('test'):
-                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),le.comment()))
-            #b = self.addreview(reviews,le.user(),le.action())
-            if le.user() in blocks.keys():
-                blocks[le.user()] += 1
+                pywikibot.output(u'%i>>%s>>%s>>%s>>%s' % (count, le['timestamp'], le['by'], le['reason'], le['expiry']))
+
+            if le['by'] in blocks.keys():
+                blocks[le['by']] += 1
             else:
-                blocks[le.user()] = 1
+                blocks[le['by']] = 1
 
         return(blocks)
 
