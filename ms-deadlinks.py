@@ -237,9 +237,9 @@ class BasicBot(
                 if self.getOption('test'):
                     pywikibot.output('Treat:NamedRef:%s' % r.group('name'))
                 #template to catch note/ref with {{u}} or {{r}}
-                ruR = re.compile(ur'(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % r.group('name').strip())
+                ruR = re.compile(ur'(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % re.escape(r.group('name').strip()))
                 if self.getOption('test'):
-                    pywikibot.output('Treat:Regex:(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % r.group('name').strip())
+                    pywikibot.output('Treat:Regex:(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % re.escape(r.group('name').strip()))
                 match = ruR.findall(text)
                 linkscount += len(match)
                 if self.getOption('test'):
