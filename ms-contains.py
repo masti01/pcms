@@ -33,6 +33,7 @@ The following parameters are supported:
 -nowiki:          put citation in <nowiki> tags
 -navi:            add navigation template {{Wikipedysta:MastiBot/Nawigacja|Wikipedysta:mastiBot/test|Wikipedysta:mastiBot/test 2}}
 -progress:        report progress
+-table:           present results in table
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -113,6 +114,7 @@ class BasicBot(
             'count': False, #count pages only
             'navi': False, # add navigation template
             'progress': False, # report progress
+            'table': False, #present results in a table
         })
 
         # call constructor of the super class
@@ -148,9 +150,17 @@ class BasicBot(
     def run(self):
 
         if not self.getOption('append'):
-	    #header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-            header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
-	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
+            if self.getOption('table'):
+                header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+	        header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
+                header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
+                header +=u'\n|-'
+                header +=u'\n!Nr'
+                header +=u'\n!Artykuł'
+                header +=u'\n!Wyniki'
+            else:
+                header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+	        header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
         else:
             header = u'\n\n'
         
@@ -178,7 +188,12 @@ class BasicBot(
                     if self.getOption('test'):
                         pywikibot.output(u'Already marked')
 
-        footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
+        
+        if self.getOption('table'):
+            footer = u'\n|}'
+            footer += u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
+        else:
+            footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
 
         outputpage = self.getOption('outpage')
 
@@ -212,27 +227,42 @@ class BasicBot(
                 title = i
             #finalpage += u'\n# [[' + title + u']]'
             linenumber = str(pagecount * int(self.getOption('maxlines')) + itemcount + 1) + u'.'
-            if self.getOption('edit'):
-                nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
-                finalpage += u'\n:' + linenumber + ' {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
+            if self.getOption('table'):
+                finalpage += u'\n|-\n| %i || ' % linenumber
+                if self.getOption('edit'):
+                    nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
+                    finalpage += u'{{Edytuj|%s|%s}}' % ( nakedtitle,nakedtitle)
+                else:
+                    finalpage += re.sub(ur'\[\[',u'[[:',title, count=1)
             else:
-                finalpage += u'\n:' + linenumber + u' ' + re.sub(ur'\[\[',u'[[:',title, count=1)
+                if self.getOption('edit'):
+                    nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
+                    finalpage += u'\n:' + linenumber + ' {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
+                else:
+                    finalpage += u'\n:' + linenumber + u' ' + re.sub(ur'\[\[',u'[[:',title, count=1)
+            finalpage += u' || '
             if self.getOption('regex') and self.getOption('cite') and not self.getOption('negative'):
                 if self.getOption('multi'):
                     #results are list
                     if self.getOption('nowiki'):
-                        finalpage += u' - <nowiki>'
+                        if self.getOption('table'):
+                            finalpage += u'<nowiki>'
+                        else:
+                            finalpage += u' – <nowiki>'
                     for r in link:
-                        finalpage += r + ','
+                        if self.getOption('table'):
+                            finalpage += r + '<br />'
+                        else:
+                            finalpage += r + ','
                     if self.getOption('nowiki'):
                         finalpage += u'</nowiki>'
                 else:
                     #results are single string
                     #TODO convert all results to lists
                     if self.getOption('nowiki'):
-                        finalpage += u' - <nowiki>' + link + u'</nowiki>'
+                        finalpage += u' – <nowiki>' + link + u'</nowiki>' if not self.getOption('table') else u'<nowiki>' + link + u'</nowiki>'
                     else:
-                        finalpage += u' - ' + link
+                        finalpage += u' – ' + link if not self.getOption('table') else link
             itemcount += 1
 
             if itemcount > int(self.getOption('maxlines'))-1:
