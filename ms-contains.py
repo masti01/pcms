@@ -188,12 +188,7 @@ class BasicBot(
                     if self.getOption('test'):
                         pywikibot.output(u'Already marked')
 
-        
-        if self.getOption('table'):
-            footer = u'\n|}'
-            footer += u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
-        else:
-            footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
+        footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron.'
 
         outputpage = self.getOption('outpage')
 
@@ -228,7 +223,7 @@ class BasicBot(
             #finalpage += u'\n# [[' + title + u']]'
             linenumber = str(pagecount * int(self.getOption('maxlines')) + itemcount + 1) + u'.'
             if self.getOption('table'):
-                finalpage += u'\n|-\n| %i || ' % linenumber
+                finalpage += u'\n|-\n| %s || ' % linenumber
                 if self.getOption('edit'):
                     nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
                     finalpage += u'{{Edytuj|%s|%s}}' % ( nakedtitle,nakedtitle)
@@ -246,16 +241,10 @@ class BasicBot(
                     #results are list
                     if self.getOption('nowiki'):
                         if self.getOption('table'):
-                            finalpage += u'<nowiki>'
+                            for r in link:
+                                finalpage += u'<nowiki>%s</nowiki><br />' % r
                         else:
-                            finalpage += u' – <nowiki>'
-                    for r in link:
-                        if self.getOption('table'):
-                            finalpage += r + '<br />'
-                        else:
-                            finalpage += r + ','
-                    if self.getOption('nowiki'):
-                        finalpage += u'</nowiki>'
+                            finalpage += u' – <nowiki>' + ', '.join(link) + u'</nowiki><br />'
                 else:
                     #results are single string
                     #TODO convert all results to lists
@@ -287,6 +276,8 @@ class BasicBot(
             pywikibot.output(u'***** GENERATING PREFOOTER page '+ pagename + u' ' + str(pagecount) + u' *****')
         result = u''
 
+        if self.getOption('test'):
+            result += u'\n|}'
         # if no results found to be reported
         if not totalcount:
             result += u"\n\n'''Brak wyników'''\n\n"
