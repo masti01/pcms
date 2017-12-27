@@ -311,7 +311,7 @@ class BasicBot(
             #pywikibot.output(finalpage)
 
         if self.getOption('navi'):
-            finalpage = header + self.navigation(pagename,pagecount) + pagepart + footer + self.navigation(pagename,pagecount) 
+            finalpage = self.navigation(pagename,pagecount) + header + pagepart + footer + self.navigation(pagename,pagecount) 
         else:
             finalpage = header + pagepart + footer
 
