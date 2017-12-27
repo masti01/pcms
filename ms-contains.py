@@ -151,8 +151,10 @@ class BasicBot(
 
         if not self.getOption('append'):
             if self.getOption('table'):
-                header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
-	        header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
+                header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''."
+	        header += u"\n\nWszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
+                if self.getOption('regex'):
+                    header += '\n\nregex: <code><nowiki>%s</nowiki></code>\n'
                 header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
                 header +=u'\n|-'
                 header +=u'\n!Nr'
@@ -161,6 +163,9 @@ class BasicBot(
             else:
                 header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
 	        header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
+                if self.getOption('regex'):
+                    header += '\n\nregex: <code><nowiki>%s</nowiki></code>\n'
+
         else:
             header = u'\n\n'
         
