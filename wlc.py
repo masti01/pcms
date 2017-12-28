@@ -755,7 +755,13 @@ class LinkCheckThread(threading.Thread):
             #raise
             #return
         #test output
-        #pywikibot.output('HTTPignore:%s' % self.HTTPignore)
+        """
+        pywikibot.output('HTTPignore:%s' % self.HTTPignore)
+        if '403' in self.HTTPignore:
+            pywikibot.output('ignore STRING')
+        if 403 in self.HTTPignore:
+            pywikibot.output('ignore number')
+        """
         #pywikibot.output('REQUESTS codes OK:%s' % requests.codes.ok)
         if not exception:
             pywikibot.output('R.status:%s in [%s - %s]' % (r.status,self.page.title(),self.url)) 
@@ -764,7 +770,10 @@ class LinkCheckThread(threading.Thread):
                 #str(r.status) not in self.HTTPignore):
                 r.status not in self.HTTPignore):
                 #test output
-                pywikibot.output(u'CODE [%s] OK or ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
+                #if r.status == requests.codes.ok:
+                #    pywikibot.output(u'CODE [%s] OK in [%s - %s]' % (r.status,self.page.title(),self.url))
+                if r.status not in self.HTTPignore:
+                    pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
                 ok = True
             else:
                 #test output
