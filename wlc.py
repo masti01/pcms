@@ -868,6 +868,8 @@ class History(object):
         #test output
         pywikibot.output('setLinkDead: SEM acquire [%s][%s][%s]' % (url,page.title(),error))
         self.semaphore.acquire()
+        #test output
+        pywikibot.output('setLinkDead: SEM acc DONE [%s][%s][%s]' % (url,page.title(),error))
         now = time.time()
         if url in self.historyDict:
             timeSinceFirstFound = now - self.historyDict[url][0][1]
@@ -882,6 +884,8 @@ class History(object):
             if timeSinceFirstFound > 60 * 60 * 24 * weblink_dead_days:
                 # search for archived page
                 try:
+                    #test output
+                    pywikibot.output('setlinkDead: Archive [%s]' % url)
                     archiveURL = get_archive_url(url)
                 except Exception as e:
                     pywikibot.warning(
@@ -889,8 +893,12 @@ class History(object):
                             url, e))
                     archiveURL = None
                 if archiveURL is None:
+                    #test output
+                    pywikibot.output('setlinkDead: InternetArchive [%s]' % url)
                     archiveURL = weblib.getInternetArchiveURL(url)
                 if archiveURL is None:
+                    #test output
+                    pywikibot.output('setlinkDead: WebCitation [%s]' % url)
                     archiveURL = weblib.getWebCitationURL(url)
                 self.log(url, error, page, archiveURL)
         else:
@@ -898,6 +906,8 @@ class History(object):
         #test output
         pywikibot.output('setlinkDead: SEM release [%s][%s][%s]' % (url,page.title(),error))
         self.semaphore.release()
+        #test output
+        pywikibot.output('setlinkDead: SEM rel DONE [%s][%s][%s]' % (url,page.title(),error))
 
     def setLinkAlive(self, url):
         """
@@ -908,12 +918,16 @@ class History(object):
         @return: True if previously found dead, else returns False.
         """
         if url in self.historyDict:
+            #test output
+            pywikibot.output('setLinkAlive: SEM acquire [%s]' % url)
             self.semaphore.acquire()
             try:
                 del self.historyDict[url]
             except KeyError:
                 # Not sure why this can happen, but I guess we can ignore this.
                 pass
+            #test output
+            pywikibot.output('setLinkAlive: SEM release [%s]' % url)
             self.semaphore.release()
             return True
         else:
