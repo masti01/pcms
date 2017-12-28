@@ -414,7 +414,7 @@ def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
     linkR = re.compile(ur'(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s;<>\"\|\)]*))(?:[\]\s\.:;,<>\"\|\)])')
     for m in linkR.finditer(text):
         if m.group('url'):
-            pywikibot.output('URL to YIELD:%s' % m.group('url'))
+            #pywikibot.output('URL to YIELD:%s' % m.group('url'))
             yield m.group('url')
         #else:
         #    yield m.group('urlb')
@@ -737,6 +737,7 @@ class LinkCheckThread(threading.Thread):
         """Run the bot."""
         ok = False
         exception = False
+        ignore = False
         try:
             header = self.header
             r = comms.http.fetch(
@@ -755,8 +756,8 @@ class LinkCheckThread(threading.Thread):
             #raise
             #return
         #test output
-        """
         pywikibot.output('HTTPignore:%s' % self.HTTPignore)
+        """
         if '403' in self.HTTPignore:
             pywikibot.output('ignore STRING')
         if 403 in self.HTTPignore:
@@ -767,15 +768,12 @@ class LinkCheckThread(threading.Thread):
             #test output
             #pywikibot.output('R.status:%s in [%s - %s]' % (r.status,self.page.title(),self.url)) 
 
-            if (r.status == requests.codes.ok and
-                #str(r.status) not in self.HTTPignore):
-                r.status not in self.HTTPignore):
-                #test output
-                #if r.status == requests.codes.ok:
-                #    pywikibot.output(u'CODE [%s] OK in [%s - %s]' % (r.status,self.page.title(),self.url))
-                if r.status != requests.codes.ok and r.status in self.HTTPignore:
-                    pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
+            if (r.status == requests.codes.ok or r.status not in self.HTTPignore):
                 ok = True
+            elif r.status in self.HTTPignore:
+                ignore = True
+                #test output
+                #pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
             else:
                 #test output
                 pywikibot.output(u'CODE [%s] rejected in [%s - %s]' % (r.status,self.page.title(),self.url))
@@ -784,6 +782,8 @@ class LinkCheckThread(threading.Thread):
             if self.history.setLinkAlive(self.url):
                 pywikibot.output('*Link to %s in [[%s]] is back alive.'
                                  % (self.url, self.page.title()))
+        elif ignore:
+            pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
         else:
             pywikibot.output('*[[%s]] links to %s - %s.'
                              % (self.page.title(), self.url, message))
