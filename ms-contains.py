@@ -281,7 +281,7 @@ class BasicBot(
             pywikibot.output(u'***** GENERATING PREFOOTER page '+ pagename + u' ' + str(pagecount) + u' *****')
         result = u''
 
-        if self.getOption('test'):
+        if self.getOption('table'):
             result += u'\n|}'
         # if no results found to be reported
         if not totalcount:
