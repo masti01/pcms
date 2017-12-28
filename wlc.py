@@ -755,30 +755,22 @@ class LinkCheckThread(threading.Thread):
             message = 'Exception while connecting.'
             #raise
             #return
-        #test output
-        """
-        pywikibot.output('HTTPignore:%s' % self.HTTPignore)
-        if '403' in self.HTTPignore:
-            pywikibot.output('ignore STRING')
-        if 403 in self.HTTPignore:
-            pywikibot.output('ignore number')
-        """
-        #pywikibot.output('REQUESTS codes OK:%s' % requests.codes.ok)
+
         if not exception:
             #test output
             pywikibot.output('R.status:%s in [%s - %s]' % (r.status,self.page.title(),self.url)) 
 
             #if (r.status == requests.codes.ok and str(r.status) not in self.HTTPignore):
             if r.status == requests.codes.ok:
-                pywikibot.output(u'CODE [%s] OK in [%s - %s]' % (r.status,self.page.title(),self.url))
+                #pywikibot.output(u'CODE [%s] OK in [%s - %s]' % (r.status,self.page.title(),self.url))
                 ok = True
             elif r.status in self.HTTPignore:
                 ignore = True
                 #test output
-                pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
+                #pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
             else:
                 #test output
-                pywikibot.output(u'CODE [%s] rejected in [%s - %s]' % (r.status,self.page.title(),self.url))
+                #pywikibot.output(u'CODE [%s] rejected in [%s - %s]' % (r.status,self.page.title(),self.url))
                 message = '{0}'.format(r.status)
         if ok:
             if self.history.setLinkAlive(self.url):
@@ -888,7 +880,7 @@ class History(object):
                 # search for archived page
                 try:
                     #test output
-                    pywikibot.output('setlinkDead: Archive [%s]' % url)
+                    pywikibot.output('setlinkDead: Memento Archive [%s]' % url)
                     archiveURL = get_archive_url(url)
                 except Exception as e:
                     pywikibot.warning(
@@ -903,6 +895,8 @@ class History(object):
                     #test output
                     pywikibot.output('setlinkDead: WebCitation [%s]' % url)
                     archiveURL = weblib.getWebCitationURL(url)
+                #test output
+                pywikibot.output('setlinkDead: ArchiveLink received [%s]' % archiveURL)
                 self.log(url, error, page, archiveURL)
         else:
             self.historyDict[url] = [(page.title(), now, error)]
