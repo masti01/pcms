@@ -869,6 +869,7 @@ class History(object):
         if url in self.historyDict:
             timeSinceFirstFound = now - self.historyDict[url][0][1]
             timeSinceLastFound = now - self.historyDict[url][-1][1]
+            archiveURL = None
             # if the last time we found this dead link is less than an hour
             # ago, we won't save it in the history this time.
             if timeSinceLastFound > 60 * 60:
@@ -878,6 +879,8 @@ class History(object):
             # We'll list it in a file so that it can be removed manually.
             if timeSinceFirstFound > 60 * 60 * 24 * weblink_dead_days:
                 # search for archived page
+                # skip memento search
+                """
                 try:
                     #test output
                     pywikibot.output('setlinkDead: Memento Archive [%s]' % url)
@@ -887,6 +890,7 @@ class History(object):
                         'get_closest_memento_url({0}) failed: {1}'.format(
                             url, e))
                     archiveURL = None
+                """
                 if archiveURL is None:
                     #test output
                     pywikibot.output('setlinkDead: InternetArchive [%s]' % url)
