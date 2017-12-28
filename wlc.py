@@ -897,11 +897,17 @@ class History(object):
                     pywikibot.output('setlinkDead: InternetArchive [%s]' % url)
                     try:
                         archiveURL = weblib.getInternetArchiveURL(url)
+                    except:
+                        pywikibot.output('EXCEPTION setlinkDead: InternetArchive [%s]' % url)
+                        pass
                 if archiveURL is None:
                     #test output
                     pywikibot.output('setlinkDead: WebCitation [%s]' % url)
                     try:
                         archiveURL = weblib.getWebCitationURL(url)
+                    except:
+                        pywikibot.output('setlinkDead: WebCitation [%s]' % url)
+                        pass
                 #test output
                 pywikibot.output('setlinkDead: ArchiveLink received [%s]' % archiveURL)
                 self.log(url, error, page, archiveURL)
