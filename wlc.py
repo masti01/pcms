@@ -948,6 +948,8 @@ class DeadLinkReportThread(threading.Thread):
                 else:
                     time.sleep(0.1)
             else:
+                #test output
+                pywikibot.output('RUN: SEM acquire')
                 self.semaphore.acquire()
                 (url, errorReport, containingPage, archiveURL) = self.queue[0]
                 self.queue = self.queue[1:]
@@ -962,6 +964,8 @@ class DeadLinkReportThread(threading.Thread):
                             '{lightaqua}** Dead link seems to have already '
                             'been reported on {0}{default}',
                             talkPage.title(asLink=True)))
+                        #test output
+                        pywikibot.output('RUN: SEM release')
                         self.semaphore.release()
                         continue
                 except (pywikibot.NoPage, pywikibot.IsRedirectPage):
@@ -1010,7 +1014,8 @@ class DeadLinkReportThread(threading.Thread):
                         '{lightaqua}** SpamfilterError while trying to '
                         'change {0}: {1}{default}',
                         talkPage.title(asLink=True), error.url))
-
+                #test output
+                pywikibot.output('RUN: SEM release')
                 self.semaphore.release()
 
 
