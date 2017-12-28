@@ -772,7 +772,7 @@ class LinkCheckThread(threading.Thread):
                 #test output
                 #if r.status == requests.codes.ok:
                 #    pywikibot.output(u'CODE [%s] OK in [%s - %s]' % (r.status,self.page.title(),self.url))
-                if r.status not in self.HTTPignore:
+                if r.status != requests.codes.ok and r.status not in self.HTTPignore:
                     pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
                 ok = True
             else:
