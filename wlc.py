@@ -384,6 +384,8 @@ def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
 
     # Ignore links in fullurl template
     text = re.sub(r'{{\s?fullurl:.[^}]*}}', '', text)
+    # TODO search for links within cite with filled-in archiwum parameter
+    
 
     # MediaWiki parses templates before parsing external links. Thus, there
     # might be a | or a } directly after a URL which does not belong to
@@ -408,12 +410,14 @@ def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
     # Remove HTML comments in URLs as well as URLs in HTML comments.
     # Also remove text inside nowiki links etc.
     text = textlib.removeDisabledParts(text)
-    linkR = textlib.compileLinkR(withoutBracketed, onlyBracketed)
+    #linkR = textlib.compileLinkR(withoutBracketed, onlyBracketed)
+    linkR = re.compile(ur'(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s;<>\"\|\)]*))(?:[\]\s\.:;,<>\"\|\)])')
     for m in linkR.finditer(text):
         if m.group('url'):
+            pywikibot.output('URL to YIELD:%s' % m.group('url'))
             yield m.group('url')
-        else:
-            yield m.group('urlb')
+        #else:
+        #    yield m.group('urlb')
 
 
 XmlDumpPageGenerator = partial(
@@ -744,11 +748,22 @@ class LinkCheckThread(threading.Thread):
         except:
             pywikibot.output('Exception while processing URL %s in page %s'
                              % (self.url, self.page.title()))
-            raise
+            #raise
+            return
+        #test output
+        #pywikibot.output('HTTPignore:%s' % self.HTTPignore)
+        #pywikibot.output('REQUESTS codes OK:%s' % requests.codes.ok)
+        pywikibot.output('R.status:%s in [%s]' % (r.status, self.name)) 
+
         if (r.status == requests.codes.ok and
-                str(r.status) not in self.HTTPignore):
+                #str(r.status) not in self.HTTPignore):
+                r.status not in self.HTTPignore):
+            #test output
+            pywikibot.output('CODE [%s] OK or ignored in [%s]' % (r.status,self.name))
             ok = True
         else:
+            #test output
+            pywikibot.output('CODE [%s] rejected in [%s]' % (r.status,self.name))
             message = '{0}'.format(r.status)
         if ok:
             if self.history.setLinkAlive(self.url):
@@ -1047,7 +1062,11 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
             if not ignoreUrl:
                 # Limit the number of threads started at the same time. Each
                 # thread will check one page, then die.
+                #test output
+                pywikibot.output(u'STARTING thread #%i' % threading.activeCount())
                 while threading.activeCount() >= config.max_external_links:
+                    #test output
+                    pywikibot.output(u'WAIT %s for thread #%i' % (config.retry_wait,threading.activeCount()))
                     time.sleep(config.retry_wait)
                 thread = LinkCheckThread(page, url, self.history,
                                          self.HTTPignore, self.day)
@@ -1061,6 +1080,9 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                         "max_external_links in your user-config.py or use\n"
                         "'-max_external_links:' option with a smaller value. "
                         "Default is 50.")
+                    raise
+                except request.data:
+                    pywikibot.warning('*** NO DATA received')
                     raise
 
 
