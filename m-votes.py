@@ -442,7 +442,7 @@ class BasicBot(
             pywikibot.output(u'Vote text:\n%s' % text)
 
         # vote counting regexp
-        verR = re.compile(ur'; Sprawdzone przez\s*?\n+(?P<verifiers>.*)', re.S)
+        verR = re.compile(ur'(;|=+) *Sprawdzone przez[^\n]*?\n+(?P<verifiers>.*)', re.S)
         try:
             # count verifiers votes
             votesection = verR.search(text).group('verifiers')
