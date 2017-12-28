@@ -751,7 +751,7 @@ class LinkCheckThread(threading.Thread):
             pywikibot.output('Exception while processing URL %s in page %s'
                              % (self.url, self.page.title()))
             exception = True
-            message = 'Exception while connecting to %s' % self.url
+            message = 'Exception while connecting.'
             #raise
             #return
         #test output
