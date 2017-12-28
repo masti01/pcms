@@ -851,6 +851,8 @@ class History(object):
 
     def setLinkDead(self, url, error, page, weblink_dead_days):
         """Add the fact that the link was found dead to the .dat file."""
+        #test output
+        pywikibot.output('setLinkDead: SEM release')
         self.semaphore.acquire()
         now = time.time()
         if url in self.historyDict:
@@ -879,6 +881,8 @@ class History(object):
                 self.log(url, error, page, archiveURL)
         else:
             self.historyDict[url] = [(page.title(), now, error)]
+        #test output
+        pywikibot.output('setlinkDead: SEM release')
         self.semaphore.release()
 
     def setLinkAlive(self, url):
@@ -949,7 +953,7 @@ class DeadLinkReportThread(threading.Thread):
                     time.sleep(0.1)
             else:
                 #test output
-                pywikibot.output('RUN: SEM acquire')
+                pywikibot.output('DeadLinkReportThread: SEM acquire')
                 self.semaphore.acquire()
                 (url, errorReport, containingPage, archiveURL) = self.queue[0]
                 self.queue = self.queue[1:]
@@ -965,7 +969,7 @@ class DeadLinkReportThread(threading.Thread):
                             'been reported on {0}{default}',
                             talkPage.title(asLink=True)))
                         #test output
-                        pywikibot.output('RUN: SEM release')
+                        pywikibot.output('DeadLinkReportThread: SEM release')
                         self.semaphore.release()
                         continue
                 except (pywikibot.NoPage, pywikibot.IsRedirectPage):
@@ -1015,7 +1019,7 @@ class DeadLinkReportThread(threading.Thread):
                         'change {0}: {1}{default}',
                         talkPage.title(asLink=True), error.url))
                 #test output
-                pywikibot.output('RUN: SEM release')
+                pywikibot.output('DeadLinkReportThread: SEM release')
                 self.semaphore.release()
 
 
