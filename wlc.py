@@ -736,35 +736,40 @@ class LinkCheckThread(threading.Thread):
     def run(self):
         """Run the bot."""
         ok = False
+        exception = False
         try:
             header = self.header
             r = comms.http.fetch(
                 self.url, headers=header,
                 use_fake_user_agent=self._use_fake_user_agent)
         except requests.exceptions.InvalidURL:
+            exception = True
             message = i18n.twtranslate(self.page.site,
                                        'weblinkchecker-badurl_msg',
                                        {'URL': self.url})
         except:
             pywikibot.output('Exception while processing URL %s in page %s'
                              % (self.url, self.page.title()))
+            exception = True
+            message = 'Exception while connecting to %s' % self.url
             #raise
-            return
+            #return
         #test output
         #pywikibot.output('HTTPignore:%s' % self.HTTPignore)
         #pywikibot.output('REQUESTS codes OK:%s' % requests.codes.ok)
-        pywikibot.output('R.status:%s in [%s - %s]' % (r.status,self.page.title(),self.url)) 
+        if not exception:
+            pywikibot.output('R.status:%s in [%s - %s]' % (r.status,self.page.title(),self.url)) 
 
-        if (r.status == requests.codes.ok and
+            if (r.status == requests.codes.ok and
                 #str(r.status) not in self.HTTPignore):
                 r.status not in self.HTTPignore):
-            #test output
-            pywikibot.output(u'CODE [%s] OK or ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
-            ok = True
-        else:
-            #test output
-            pywikibot.output(u'CODE [%s] rejected in [%s - %s]' % (r.status,self.page.title(),self.url))
-            message = '{0}'.format(r.status)
+                #test output
+                pywikibot.output(u'CODE [%s] OK or ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
+                ok = True
+            else:
+                #test output
+                pywikibot.output(u'CODE [%s] rejected in [%s - %s]' % (r.status,self.page.title(),self.url))
+                message = '{0}'.format(r.status)
         if ok:
             if self.history.setLinkAlive(self.url):
                 pywikibot.output('*Link to %s in [[%s]] is back alive.'
