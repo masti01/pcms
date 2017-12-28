@@ -1041,7 +1041,7 @@ class DeadLinkReportThread(threading.Thread):
                 content += u'{{Martwy link dyskusja\n | link=' + errorReport + u'\n | IA=' + archiveMsg + u'\n}}'
 
                 comment = u'[[%s#%s|→]] %s' % \
-                          (talkPage.title(), caption, u'Podany link nie jest prawidłowym adresem URL')
+                          (talkPage.title(), caption, u'Robot zgłasza niedostępny link zewnętrzny')
                            #i18n.twtranslate(containingPage.site,
                            #                 'weblinkchecker-summary'))
                 try:
