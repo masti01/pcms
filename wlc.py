@@ -745,9 +745,10 @@ class LinkCheckThread(threading.Thread):
                 use_fake_user_agent=self._use_fake_user_agent)
         except requests.exceptions.InvalidURL:
             exception = True
-            message = i18n.twtranslate(self.page.site,
-                                       'weblinkchecker-badurl_msg',
-                                       {'URL': self.url})
+            message = u'Podany link nie jest prawidłowym adresem URL'
+            #message = i18n.twtranslate(self.page.site,
+            #                           'weblinkchecker-badurl_msg',
+            #                           {'URL': self.url})
         except:
             pywikibot.output('Exception while processing URL %s in page %s'
                              % (self.url, self.page.title()))
@@ -1019,8 +1020,9 @@ class DeadLinkReportThread(threading.Thread):
                 # The caption will default to "Dead link". But if there is
                 # already such a caption, we'll use "Dead link 2",
                 # "Dead link 3", etc.
-                caption = i18n.twtranslate(containingPage.site,
-                                           'weblinkchecker-caption')
+                caption = u'Martwy link'
+                #caption = i18n.twtranslate(containingPage.site,
+                #                           'weblinkchecker-caption')
                 i = 1
                 count = u''
                 # Check if there is already such a caption on the talk page.
@@ -1039,9 +1041,9 @@ class DeadLinkReportThread(threading.Thread):
                 content += u'{{Martwy link dyskusja\n | link=' + errorReport + u'\n | IA=' + archiveMsg + u'\n}}'
 
                 comment = u'[[%s#%s|→]] %s' % \
-                          (talkPage.title(), caption,
-                           i18n.twtranslate(containingPage.site,
-                                            'weblinkchecker-summary'))
+                          (talkPage.title(), caption, u'Podany link nie jest prawidłowym adresem URL')
+                           #i18n.twtranslate(containingPage.site,
+                           #                 'weblinkchecker-summary'))
                 try:
                     talkPage.put(content, comment)
                 except pywikibot.SpamfilterError as error:
