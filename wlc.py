@@ -852,7 +852,7 @@ class History(object):
     def setLinkDead(self, url, error, page, weblink_dead_days):
         """Add the fact that the link was found dead to the .dat file."""
         #test output
-        pywikibot.output('setLinkDead: SEM release')
+        pywikibot.output('setLinkDead: SEM acquire [%s][%s][%s]' % (url,page.title(),error))
         self.semaphore.acquire()
         now = time.time()
         if url in self.historyDict:
@@ -882,7 +882,7 @@ class History(object):
         else:
             self.historyDict[url] = [(page.title(), now, error)]
         #test output
-        pywikibot.output('setlinkDead: SEM release')
+        pywikibot.output('setlinkDead: SEM release [%s][%s][%s]' % (url,page.title(),error))
         self.semaphore.release()
 
     def setLinkAlive(self, url):
@@ -953,7 +953,7 @@ class DeadLinkReportThread(threading.Thread):
                     time.sleep(0.1)
             else:
                 #test output
-                pywikibot.output('DeadLinkReportThread: SEM acquire')
+                pywikibot.output('DeadLinkReportThread: SEM acquire [%s][%s][%s]' % (url,containingPage.title(),errorReport))
                 self.semaphore.acquire()
                 (url, errorReport, containingPage, archiveURL) = self.queue[0]
                 self.queue = self.queue[1:]
@@ -969,7 +969,7 @@ class DeadLinkReportThread(threading.Thread):
                             'been reported on {0}{default}',
                             talkPage.title(asLink=True)))
                         #test output
-                        pywikibot.output('DeadLinkReportThread: SEM release')
+                        pywikibot.output('DeadLinkReportThread: SEM release [%s][%s][%s]' % (url,containingPage.title(),errorReport))
                         self.semaphore.release()
                         continue
                 except (pywikibot.NoPage, pywikibot.IsRedirectPage):
@@ -1019,7 +1019,7 @@ class DeadLinkReportThread(threading.Thread):
                         'change {0}: {1}{default}',
                         talkPage.title(asLink=True), error.url))
                 #test output
-                pywikibot.output('DeadLinkReportThread: SEM release')
+                pywikibot.output('DeadLinkReportThread: SEM release [%s][%s][%s]' % (url,containingPage.title(),errorReport))
                 self.semaphore.release()
 
 
