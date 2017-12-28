@@ -862,7 +862,7 @@ class History(object):
     def setLinkDead(self, url, error, page, weblink_dead_days):
         """Add the fact that the link was found dead to the .dat file."""
         #test output
-        pywikibot.output('setLinkDead: SEM acquire [%s][%s][%s]' % (url,page.title(),error))
+        #pywikibot.output('setLinkDead: SEM acquire [%s][%s][%s]' % (url,page.title(),error))
         self.semaphore.acquire()
         #test output
         pywikibot.output('setLinkDead: SEM acc DONE [%s][%s][%s]' % (url,page.title(),error))
@@ -895,11 +895,13 @@ class History(object):
                 if archiveURL is None:
                     #test output
                     pywikibot.output('setlinkDead: InternetArchive [%s]' % url)
-                    archiveURL = weblib.getInternetArchiveURL(url)
+                    try:
+                        archiveURL = weblib.getInternetArchiveURL(url)
                 if archiveURL is None:
                     #test output
                     pywikibot.output('setlinkDead: WebCitation [%s]' % url)
-                    archiveURL = weblib.getWebCitationURL(url)
+                    try:
+                        archiveURL = weblib.getWebCitationURL(url)
                 #test output
                 pywikibot.output('setlinkDead: ArchiveLink received [%s]' % archiveURL)
                 self.log(url, error, page, archiveURL)
@@ -984,10 +986,10 @@ class DeadLinkReportThread(threading.Thread):
                 else:
                     time.sleep(0.1)
             else:
-                #test output
-                pywikibot.output('DeadLinkReportThread: SEM acquire [%s][%s][%s]' % (url,containingPage.title(),errorReport))
                 self.semaphore.acquire()
                 (url, errorReport, containingPage, archiveURL) = self.queue[0]
+                #test output
+                pywikibot.output('DeadLinkReportThread: SEM acquire [%s][%s][%s]' % (url,containingPage.title(),errorReport))
                 self.queue = self.queue[1:]
                 talkPage = containingPage.toggleTalkPage()
                 pywikibot.output(color_format(
