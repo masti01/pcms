@@ -759,11 +759,11 @@ class LinkCheckThread(threading.Thread):
                 #str(r.status) not in self.HTTPignore):
                 r.status not in self.HTTPignore):
             #test output
-            pywikibot.output('CODE [%s] OK or ignored in [%s]' % (r.status,self.name))
+            pywikibot.output(u'CODE [%s] OK or ignored in [%s]' % (r.status,self.name))
             ok = True
         else:
             #test output
-            pywikibot.output('CODE [%s] rejected in [%s]' % (r.status,self.name))
+            pywikibot.output(u'CODE [%s] rejected in [%s]' % (r.status,self.name))
             message = '{0}'.format(r.status)
         if ok:
             if self.history.setLinkAlive(self.url):
