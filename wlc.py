@@ -947,7 +947,7 @@ class History(object):
                         pywikibot.output('[%s] EXCEPTION setlinkDead: WebCitation [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
                         pass
                 #test output
-                pywikibot.output('[%s] setlinkDead: ArchiveLink received [%s]' % archiveURL)
+                pywikibot.output('[%s] setlinkDead: ArchiveLink received [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),archiveURL))
                 self.log(url, error, page, archiveURL)
         else:
             self.historyDict[url] = [(page.title(), now, error)]
