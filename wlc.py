@@ -906,7 +906,7 @@ class History(object):
                     try:
                         archiveURL = weblib.getWebCitationURL(url)
                     except:
-                        pywikibot.output('setlinkDead: WebCitation [%s]' % url)
+                        pywikibot.output('EXCEPTION setlinkDead: WebCitation [%s]' % url)
                         pass
                 #test output
                 pywikibot.output('setlinkDead: ArchiveLink received [%s]' % archiveURL)
