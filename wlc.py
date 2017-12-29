@@ -373,6 +373,40 @@ def get_archive_url(url):
         archive = archive.replace('http://', 'https://', 1)
     return archive
 
+def citeArchivedLink(link, text):
+        """
+        check if link is within {{cytuj...}} template with filled archiwum= field or within this field
+	conditions on link removal:
+	    link in url/tytuł field + archiwum not empty
+	    link in archiwum field
+        return True if link archived
+
+        adapted from: m-removedeadlinktemplates.py
+        """
+        citetempR = re.compile(ur'(?P<citetemplate>\{\{[cC]ytuj.*?\|[^}]*?\}\})')
+        urlfieldR = re.compile(ur'(url|tytuł)\s*?=(?P<url>[^\|\}]*)')
+        archfieldR = re.compile(ur'archiwum\s*?=\s*?(?P<arch>[^\|\}]*)')
+        archived = False
+        
+        cites = citetempR.finditer(text)
+        for c in cites:
+            citetemplate = c.group('citetemplate').strip()
+            try:
+                urlfield = re.search(urlfieldR,citetemplate).group('url').strip()
+            except AttributeError:
+                continue
+            #pywikibot.output(u'URL:%s' % urlfield) 
+            try:
+                archfield = re.search(archfieldR,citetemplate).group('arch').strip()
+            except AttributeError:
+                continue
+            if link in urlfield:
+                if (len(archfield) > 0):
+                    archived = True
+                    #pywikibot.input('link [%s] found in:%s' % (link,c.group('citetemplate')))
+
+        return(archived)
+
 
 def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
     """
@@ -415,7 +449,11 @@ def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
     for m in linkR.finditer(text):
         if m.group('url'):
             #pywikibot.output('URL to YIELD:%s' % m.group('url'))
-            yield m.group('url')
+            if not citeArchivedLink(m.group('url'),text):
+                yield m.group('url')
+            else:
+                #test output
+                pywikibot.output('[%s] WebLinksIn: link skipped:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),m.group('url')))
         #else:
         #    yield m.group('urlb')
 
@@ -750,8 +788,8 @@ class LinkCheckThread(threading.Thread):
             #                           'weblinkchecker-badurl_msg',
             #                           {'URL': self.url})
         except:
-            pywikibot.output('Exception while processing URL %s in page %s'
-                             % (self.url, self.page.title()))
+            pywikibot.output('[%s] Exception while processing URL %s in page %s'
+                             % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),self.url, self.page.title()))
             exception = True
             message = 'Exception while connecting.'
             #raise
@@ -759,29 +797,29 @@ class LinkCheckThread(threading.Thread):
 
         if not exception:
             #test output
-            pywikibot.output('R.status:%s in [%s - %s]' % (r.status,self.page.title(),self.url)) 
+            pywikibot.output('[%s] HTTP status:%s in [%s - %s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),r.status,self.page.title(),self.url)) 
 
             #if (r.status == requests.codes.ok and str(r.status) not in self.HTTPignore):
             if r.status == requests.codes.ok:
-                #pywikibot.output(u'CODE [%s] OK in [%s - %s]' % (r.status,self.page.title(),self.url))
+                #pywikibot.output(u'[%s] CODE [%s] OK in [%s - %s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),r.status,self.page.title(),self.url))
                 ok = True
             elif r.status in self.HTTPignore:
                 ignore = True
                 #test output
-                #pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
+                #pywikibot.output(u'[%s] CODE [%s] ignored in [%s - %s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),r.status,self.page.title(),self.url))
             else:
                 #test output
-                #pywikibot.output(u'CODE [%s] rejected in [%s - %s]' % (r.status,self.page.title(),self.url))
+                #pywikibot.output(u'[%s] CODE [%s] rejected in [%s - %s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),r.status,self.page.title(),self.url))
                 message = '{0}'.format(r.status)
         if ok:
             if self.history.setLinkAlive(self.url):
-                pywikibot.output('*Link to %s in [[%s]] is back alive.'
-                                 % (self.url, self.page.title()))
+                pywikibot.output('[%s] *Link to %s in [[%s]] is back alive.'
+                                 % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),self.url, self.page.title()))
         elif ignore:
-            pywikibot.output(u'CODE [%s] ignored in [%s - %s]' % (r.status,self.page.title(),self.url))
+            pywikibot.output(u'[%s] CODE [%s] ignored in [%s - %s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),r.status,self.page.title(),self.url))
         else:
-            pywikibot.output('*[[%s]] links to %s - %s.'
-                             % (self.page.title(), self.url, message))
+            pywikibot.output('[%s] *[[%s]] links to %s - %s.'
+                             % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), self.page.title(), self.url, message))
             self.history.setLinkDead(self.url, message, self.page,
                                      config.weblink_dead_days)
 
@@ -865,7 +903,7 @@ class History(object):
         #pywikibot.output('setLinkDead: SEM acquire [%s][%s][%s]' % (url,page.title(),error))
         self.semaphore.acquire()
         #test output
-        pywikibot.output('setLinkDead: SEM acc DONE [%s][%s][%s]' % (url,page.title(),error))
+        pywikibot.output('[%s] setLinkDead: SEM acc DONE [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), url, page.title(), error))
         now = time.time()
         if url in self.historyDict:
             timeSinceFirstFound = now - self.historyDict[url][0][1]
@@ -894,30 +932,30 @@ class History(object):
                 """
                 if archiveURL is None:
                     #test output
-                    pywikibot.output('setlinkDead: InternetArchive [%s]' % url)
+                    pywikibot.output('[%s] setlinkDead: InternetArchive [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), url))
                     try:
                         archiveURL = weblib.getInternetArchiveURL(url)
                     except:
-                        pywikibot.output('EXCEPTION setlinkDead: InternetArchive [%s]' % url)
+                        pywikibot.output('[%s] EXCEPTION setlinkDead: InternetArchive [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), url))
                         pass
                 if archiveURL is None:
                     #test output
-                    pywikibot.output('setlinkDead: WebCitation [%s]' % url)
+                    pywikibot.output('[%s] setlinkDead: WebCitation [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
                     try:
                         archiveURL = weblib.getWebCitationURL(url)
                     except:
-                        pywikibot.output('EXCEPTION setlinkDead: WebCitation [%s]' % url)
+                        pywikibot.output('[%s] EXCEPTION setlinkDead: WebCitation [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
                         pass
                 #test output
-                pywikibot.output('setlinkDead: ArchiveLink received [%s]' % archiveURL)
+                pywikibot.output('[%s] setlinkDead: ArchiveLink received [%s]' % archiveURL)
                 self.log(url, error, page, archiveURL)
         else:
             self.historyDict[url] = [(page.title(), now, error)]
         #test output
-        pywikibot.output('setlinkDead: SEM release [%s][%s][%s]' % (url,page.title(),error))
+        pywikibot.output('[%s] setlinkDead: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,page.title(),error))
         self.semaphore.release()
         #test output
-        pywikibot.output('setlinkDead: SEM rel DONE [%s][%s][%s]' % (url,page.title(),error))
+        pywikibot.output('[%s] setlinkDead: SEM rel DONE [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,page.title(),error))
 
     def setLinkAlive(self, url):
         """
@@ -929,7 +967,7 @@ class History(object):
         """
         if url in self.historyDict:
             #test output
-            pywikibot.output('setLinkAlive: SEM acquire [%s]' % url)
+            pywikibot.output('[%s] setLinkAlive: SEM acquire [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
             self.semaphore.acquire()
             try:
                 del self.historyDict[url]
@@ -937,7 +975,7 @@ class History(object):
                 # Not sure why this can happen, but I guess we can ignore this.
                 pass
             #test output
-            pywikibot.output('setLinkAlive: SEM release [%s]' % url)
+            pywikibot.output('[%s] setLinkAlive: SEM release [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
             self.semaphore.release()
             return True
         else:
@@ -995,7 +1033,7 @@ class DeadLinkReportThread(threading.Thread):
                 self.semaphore.acquire()
                 (url, errorReport, containingPage, archiveURL) = self.queue[0]
                 #test output
-                pywikibot.output('DeadLinkReportThread: SEM acquire [%s][%s][%s]' % (url,containingPage.title(),errorReport))
+                pywikibot.output('[%s] DeadLinkReportThread: SEM acquire [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
                 self.queue = self.queue[1:]
                 talkPage = containingPage.toggleTalkPage()
                 pywikibot.output(color_format(
@@ -1009,7 +1047,7 @@ class DeadLinkReportThread(threading.Thread):
                             'been reported on {0}{default}',
                             talkPage.title(asLink=True)))
                         #test output
-                        pywikibot.output('DeadLinkReportThread: SEM release [%s][%s][%s]' % (url,containingPage.title(),errorReport))
+                        pywikibot.output('[%s] DeadLinkReportThread: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
                         self.semaphore.release()
                         continue
                 except (pywikibot.NoPage, pywikibot.IsRedirectPage):
@@ -1060,7 +1098,7 @@ class DeadLinkReportThread(threading.Thread):
                         'change {0}: {1}{default}',
                         talkPage.title(asLink=True), error.url))
                 #test output
-                pywikibot.output('DeadLinkReportThread: SEM release [%s][%s][%s]' % (url,containingPage.title(),errorReport))
+                pywikibot.output('[%s] DeadLinkReportThread: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
                 self.semaphore.release()
 
 
@@ -1098,9 +1136,9 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
         text = page.get()
 
         """report  page.title and time"""
-        now = datetime.datetime.now()
+        #now = datetime.datetime.now()
         try:
-            pywikibot.output(u'P:%s >>>%s' % (page.title(), now))
+            pywikibot.output(u'P:%s >>>%s' % (page.title(), datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         except:
             pass
 
