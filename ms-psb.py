@@ -344,6 +344,7 @@ class BasicBot(
 	header += u"\n\nWszelkie uwagi proszę zgłaszać w [[Dyskusja wikipedysty:Masti|dyskusji operatora]]."
 	header += u"\n:<small>Znalezione artykuły proszę wpisywać w kolumnie ''Link''</small>"
 	header += u"\n:<small>Uwagi i komentarze kolumnie ''Uwagi''</small>"
+        header += u"\n:<small>Pozostałę kolumny są aktualizowane automatycznie i zmiany w nich nie zostaną zachowane</small>"
         header +=u'\n\n{| class="wikitable sortable" style="font-size:85%;"'
         header +=u'\n|-'
         header +=u'\n!Nr'
