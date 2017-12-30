@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-An incomplete sample script by masti for creating statistics/listings pages
+Bot to list potential disambigs and disambig errors
+Call;
+python pwb.py masti/ms-disambigs.py -start:'!' -outpage:'Wikipedysta:mastiBot/Ujednoznacznienia' -progress -summary:'Bot aktulizuje tabelę ujednoznacznień' -pt:0
 
-This is not a complete bot; rather, it is a template from which simple
-bots can be made. You can rename it to mybot.py, then edit it in
-whatever way you want.
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
