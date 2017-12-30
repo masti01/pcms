@@ -209,7 +209,7 @@ class BasicBot(
         # yield a list of categories based on wikidata sitelinks
         for i in wdpage['sitelinks']:
             if i.endswith('wiki'):
-                lang = i[:-4]
+                lang = self.wikiLangTranslate(i[:-4])
                 try:
                     if namespace == 14:
                         yield pywikibot.Category(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
@@ -241,6 +241,7 @@ class BasicBot(
             'zh-cn': 'zh',
             'nl_nds': 'nl-nds',
             'be-x-old': 'be-tarask',
+            'be_x_old': 'be-tarask',
         }
 
         if lang in tranlateTable.keys():
@@ -270,9 +271,9 @@ class BasicBot(
         for c in self.interwikiGenerator(wdcontent,namespace=14):
             if self.getOption('test'):
                 pywikibot.output(c.title())
-            lang = self.wikiLangTranslate(c.site.lang)
+            lang = c.site.lang
             if self.getOption('test2'):
-                if lang not in ('pt','tt'):
+                if lang not in ('be-tarask','tt'):
                     continue
             if self.getOption('test'):
                 pywikibot.output(u'P:%s' % c.title(asLink=True,forceInterwiki=True))
