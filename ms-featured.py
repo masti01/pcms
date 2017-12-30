@@ -162,7 +162,7 @@ class BasicBot(
         else:
             header += 'Artykuły na Medal'
 
-        header += ' w innych Wikipediach, których brakuje w polskiej Wikipedii\n\n'
+        header += ' w innych Wikipediach, które nie mają odpowiednika w polskiej Wikipedii\n\n'
         header += 'Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|bota]].\n\n'
         header += "Ostatnia aktualizacja: '''" + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S (CEST)") +"'''.\n\n"
         header += 'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
@@ -229,6 +229,28 @@ class BasicBot(
         except pywikibot.NoPage:
             return(False)
 
+    def wikiLangTranslate(self,lang):
+        #change lang in case of common errors, renames etc.
+        tranlateTable = {
+            'dk': 'da',  # Wikipedia, Wikibooks and Wiktionary only.
+            'jp': 'ja',
+            'nb': 'no',  # T86924
+            'minnan': 'zh-min-nan',
+            'nan': 'zh-min-nan',
+            'zh-tw': 'zh',
+            'zh-cn': 'zh',
+            'nl_nds': 'nl-nds',
+            'be-x-old': 'be-tarask',
+        }
+
+        if lang in tranlateTable.keys():
+            pywikibot.output('Translated [%s] -> [%s]' % (lang,tranlateTable[lang]))
+            return (tranlateTable[lang])
+        else:
+            pywikibot.output('unTranslated [%s]' % lang)
+            return(lang)
+
+
     def treat(self,page):
         result = {}
         txt = page.text
@@ -248,7 +270,7 @@ class BasicBot(
         for c in self.interwikiGenerator(wdcontent,namespace=14):
             if self.getOption('test'):
                 pywikibot.output(c.title())
-            lang = c.site.lang
+            lang = self.wikiLangTranslate(c.site.lang)
             if self.getOption('test2'):
                 if lang not in ('pt','tt'):
                     continue
