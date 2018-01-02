@@ -154,7 +154,7 @@ class BasicBot(
                 header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''."
 	        header += u"\n\nWszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
                 if self.getOption('regex'):
-                    header += '\n\nregex: <code><nowiki>%s</nowiki></code>\n' % self.getOption('text')
+                    header += '\n\nregex: <code><nowiki>\'%s\'</nowiki></code>\n' % self.getOption('text')
                 header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
                 header +=u'\n|-'
                 header +=u'\n!Nr'
@@ -164,8 +164,7 @@ class BasicBot(
                 header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
 	        header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
                 if self.getOption('regex'):
-                    header += '\n\nregex: <code><nowiki>%s</nowiki></code>\n'
-
+                    header += '\n\nregex: <code><nowiki>\'%s\'</nowiki></code>\n' % self.getOption('text')
         else:
             header = u'\n\n'
         
@@ -355,10 +354,12 @@ class BasicBot(
                 resultR = u'(?P<result>' + self.getOption('text') + u')'
             if self.getOption('flags'):
                 resultR = u'(?' + self.getOption('flags') + u')' + resultR
+
             if self.getOption('test'):
                 pywikibot.output(resultR)
+            resultR = re.compile(resultR)
 
-            match = re.search(resultR, source)
+            match = resultR.search(source)
 
             if not match and self.getOption('negative'):
                 return(page.title(asLink=True,forceInterwiki=True, textlink=True))
