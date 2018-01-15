@@ -905,7 +905,7 @@ class History(object):
         #pywikibot.output('setLinkDead: SEM acquire [%s][%s][%s]' % (url,page.title(),error))
         self.semaphore.acquire()
         #test output
-        pywikibot.output('[%s] setLinkDead: SEM acc DONE [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), url, page.title(), error))
+        #pywikibot.output('[%s] setLinkDead: SEM acc DONE [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), url, page.title(), error))
         now = time.time()
         if url in self.historyDict:
             timeSinceFirstFound = now - self.historyDict[url][0][1]
@@ -954,10 +954,10 @@ class History(object):
         else:
             self.historyDict[url] = [(page.title(), now, error)]
         #test output
-        pywikibot.output('[%s] setlinkDead: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,page.title(),error))
+        #pywikibot.output('[%s] setlinkDead: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,page.title(),error))
         self.semaphore.release()
         #test output
-        pywikibot.output('[%s] setlinkDead: SEM rel DONE [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,page.title(),error))
+        #pywikibot.output('[%s] setlinkDead: SEM rel DONE [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,page.title(),error))
 
     def setLinkAlive(self, url):
         """
@@ -969,7 +969,7 @@ class History(object):
         """
         if url in self.historyDict:
             #test output
-            pywikibot.output('[%s] setLinkAlive: SEM acquire [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
+            #pywikibot.output('[%s] setLinkAlive: SEM acquire [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
             self.semaphore.acquire()
             try:
                 del self.historyDict[url]
@@ -977,7 +977,7 @@ class History(object):
                 # Not sure why this can happen, but I guess we can ignore this.
                 pass
             #test output
-            pywikibot.output('[%s] setLinkAlive: SEM release [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
+            #pywikibot.output('[%s] setLinkAlive: SEM release [%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url))
             self.semaphore.release()
             return True
         else:
@@ -1035,7 +1035,7 @@ class DeadLinkReportThread(threading.Thread):
                 self.semaphore.acquire()
                 (url, errorReport, containingPage, archiveURL) = self.queue[0]
                 #test output
-                pywikibot.output('[%s] DeadLinkReportThread: SEM acquire [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
+                #pywikibot.output('[%s] DeadLinkReportThread: SEM acquire [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
                 self.queue = self.queue[1:]
                 talkPage = containingPage.toggleTalkPage()
                 pywikibot.output(color_format(
@@ -1049,7 +1049,7 @@ class DeadLinkReportThread(threading.Thread):
                             'been reported on {0}{default}',
                             talkPage.title(asLink=True)))
                         #test output
-                        pywikibot.output('[%s] DeadLinkReportThread: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
+                        #pywikibot.output('[%s] DeadLinkReportThread: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
                         self.semaphore.release()
                         continue
                 except (pywikibot.NoPage, pywikibot.IsRedirectPage):
@@ -1100,7 +1100,7 @@ class DeadLinkReportThread(threading.Thread):
                         'change {0}: {1}{default}',
                         talkPage.title(asLink=True), error.url))
                 #test output
-                pywikibot.output('[%s] DeadLinkReportThread: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
+                #pywikibot.output('[%s] DeadLinkReportThread: SEM release [%s][%s][%s]' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),url,containingPage.title(),errorReport))
                 self.semaphore.release()
 
 
