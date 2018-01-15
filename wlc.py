@@ -874,7 +874,7 @@ class History(object):
     def log(self, url, error, containingPage, archiveURL):
         """Log an error report to a text file in the deadlinks subdirectory."""
         if archiveURL:
-            errorReport = u'* %s ([%s archive])\n' % (url, archiveURL)
+            errorReport = u'* %s ([%s archiwum])\n' % (url, archiveURL)
         else:
             errorReport = u'* %s\n' % url
         for (pageTitle, date, error) in self.historyDict[url]:
