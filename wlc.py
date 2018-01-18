@@ -314,7 +314,7 @@ ignorelist = [
     re.compile('.*[\./@]zdw\.lublin\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]torun\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]dovidka\.com\.ua'),  # bot rejected on site (masti)
-
+    re.compile('.*[\./@]minorplanetcenter\.net'),  # bot rejected on site (masti)
 ]
 
 
