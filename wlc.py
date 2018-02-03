@@ -376,6 +376,35 @@ def get_archive_url(url):
     return archive
 
 def citeArchivedLink(link, text):
+        #look if link is in cite template with non empty archive param
+        #or link itself is an archive
+        # return True in this cases
+
+        temppars = textlib.extract_templates_and_params(text,remove_disabled_parts=True, strip=True)
+
+        for (t,p) in temppars:
+            if t.lower().startswith("cytuj"):
+                #pywikibot.output(u'T:%s\nP:%s' % (t,p))
+                arch = False
+                urlin = False
+                if 'archiwum' in p.keys():
+                    if p['archiwum'].startswith(link):
+                        #skip archive links
+                        pywikibot.output('[%s] citeArchivedLink is archive:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),link))
+                        return(True)
+                    arch = len(p['archiwum'])
+                    #if arch:
+                    #    pywikibot.output('[%s] citeArchivedLink archive found:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),link))
+                if 'url' in p.keys():
+                    urlin = p['url'].startswith(link)
+                    #pywikibot.output('[%s] citeArchivedLink link found:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),link))
+                if arch and urlin:
+                    pywikibot.output('[%s] citeArchivedLink link archived:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),link))
+                    return(True)
+        return(False)
+
+'''
+def citeArchivedLink(link, text):
         """
         check if link is within {{cytuj...}} template with filled archiwum= field or within this field
 	conditions on link removal:
@@ -408,7 +437,7 @@ def citeArchivedLink(link, text):
                     #pywikibot.input('link [%s] found in:%s' % (link,c.group('citetemplate')))
 
         return(archived)
-
+'''
 
 def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
     """
