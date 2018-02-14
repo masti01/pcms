@@ -5,7 +5,10 @@ An incomplete sample script.
 
 This is a bot to check for orphaned pages adding {{Sierotka|{{subst:#time:Y-m}}}} templates to it's discussion page.
 Call:
+mark:
    python pwb.py masti/m-orphan.py -start:'!' -summary:"Bot oznacza [[:Kategoria:Artykuły_osierocone|artykuł osierocony]]" -pt:0
+remove:
+   python pwb.py masti/m-orphan.py -catr:"Artykuły osierocone" -cleanup -summary:"Bot usuwa oznaczenie [[:Kategoria:Artykuły_osierocone|artykułu osieroconego]]" -pt:0
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
@@ -24,6 +27,8 @@ The following parameters are supported:
 -top              Place additional text on top of the page
 
 -summary:         Set the action summary message for the edit.
+
+-cleanup:        Remove template if no longer needed
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -35,6 +40,7 @@ from __future__ import absolute_import, unicode_literals
 __version__ = '$Id: c1795dd2fb2de670c0b4bddb289ea9d13b1e9b3f $'
 #
 
+import re
 import pywikibot
 from pywikibot import pagegenerators
 
@@ -60,8 +66,6 @@ class BasicBot(
 ):
 
     """
-    An incomplete sample bot.
-
     @ivar summary_key: Edit summary message key. The message that should be used
         is placed on /i18n subdirectory. The file containing these messages
         should have the same name as the caller script (i.e. basic.py in this
@@ -87,6 +91,7 @@ class BasicBot(
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
             'test': False, #switch on test functionality
+            'cleanup': False, #remove template if no longer needed
         })
 
         # call constructor of the super class
@@ -128,24 +133,35 @@ class BasicBot(
         for page in self.generator:
             pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))
             counter += 1
-            if page.isDisambig():
-                if self.getOption('test'):
-                    pywikibot.output('Skipping disambig...')
-            elif self.checkOrphan(page):
-                marked += 1
+            if self.getOption('cleanup'):
+                if not page.namespace() == 1:
+                    if self.getOption('test'):
+                        pywikibot.output('Skipping nondiscussion...')
+                    continue
+                if not self.checkOrphan(page.toggleTalkPage()):
+                    marked += 1
+                    self.unmarkOrphan(page)
+            else:
+                if page.isDisambig():
+                    if self.getOption('test'):
+                        pywikibot.output('Skipping disambig...')
+                elif self.checkOrphan(page):
+                    marked += 1
+                    self.markOrphan(page)
 
     def checkOrphan(self, page):
         """
         check if the page is linked from other articles
         if not place {{Sierotka|data={{subst:#time:Y-m}}}} in talk page
         """
+        if page.namespace() == 1:
+            page = page.toggleTalkPage()
         refs = list(page.getReferences(namespaces=0))
         if self.getOption('test'):
             pywikibot.output(u'refs#:%i' % len(refs))
         if not len(refs):
             if self.getOption('test'):
                 pywikibot.input('Waiting...')
-            self.markOrphan(page)
             return(True)
         return(False)
 
@@ -156,6 +172,16 @@ class BasicBot(
         talkPage = page.toggleTalkPage()
         if not u'{{Sierotka' in page.text:
             page.text = u'{{Sierotka|data={{subst:#time:Y-m}}}}\n' + page.text
+            if self.getOption('test'):
+                pywikibot.output(page.text)
+            page.save(summary=self.getOption('summary'))
+
+    def unmarkOrphan(self, page):
+        '''
+        if {{Sierotka}} present remove it
+        '''
+        if u'{{Sierotka' in page.text:
+            page.text = re.sub(ur'(?i)\{\{sierotka.*?\}\}\n*','',page.text)
             if self.getOption('test'):
                 pywikibot.output(page.text)
             page.save(summary=self.getOption('summary'))
