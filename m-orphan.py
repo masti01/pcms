@@ -145,6 +145,9 @@ class BasicBot(
                 if page.isDisambig():
                     if self.getOption('test'):
                         pywikibot.output('Skipping disambig...')
+                elif page.isRedirectPage():
+                    if self.getOption('test'):
+                        pywikibot.output('Skipping redirect...')
                 elif self.checkOrphan(page):
                     marked += 1
                     self.markOrphan(page)
@@ -159,10 +162,18 @@ class BasicBot(
         refs = list(page.getReferences(namespaces=0))
         if self.getOption('test'):
             pywikibot.output(u'refs#:%i' % len(refs))
-        if not len(refs):
-            if self.getOption('test'):
-                pywikibot.input('Waiting...')
-            return(True)
+        if self.getOption('cleanup'):
+            return(not len(refs) or (len(refs) == 1 and self.selfRef(page,refs)))
+        else:
+            return(not len(refs))
+
+    def selfRef(self,page,refs):
+        #check if page is selfreferenced
+        for p in refs:
+            if p.title() == page.title():
+                if self.getOption('test'):
+                    pywikibot.output('SelfReference found...')
+                return(True)
         return(False)
 
     def markOrphan(self, page):
