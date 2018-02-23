@@ -111,14 +111,14 @@ def footer(lang):
     footer += u'<script type="text/javascript">\n'
     footer += u'  var _paq = _paq || [];\n'
     footer += u'  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */\n'
-    footer += u'  _paq.push(['trackPageView']);\n'
-    footer += u'  _paq.push(['enableLinkTracking']);\n'
+    footer += u"  _paq.push(['trackPageView']);\n"
+    footer += u"  _paq.push(['enableLinkTracking']);\n"
     footer += u'  (function() {\n'
     footer += u'    var u="//s.wikimedia.pl/";\n'
-    footer += u'    _paq.push(['setTrackerUrl', u+'piwik.php']);\n'
-    footer += u'    _paq.push(['setSiteId', '4']);\n'
-    footer += u'    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];\n'
-    footer += u'    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);\n'
+    footer += u"    _paq.push(['setTrackerUrl', u+'piwik.php']);\n"
+    footer += u"    _paq.push(['setSiteId', '4']);\n'\"
+    footer += u"    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];\n"
+    footer += u"    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);\n"
     footer += u'  })();\n'
     footer += u'</script>\n'
     footer += u'<noscript><p><img src="//s.wikimedia.pl/piwik.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>\n'
