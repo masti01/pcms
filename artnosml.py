@@ -116,7 +116,7 @@ def footer(lang):
     footer += u'  (function() {\n'
     footer += u'    var u="//s.wikimedia.pl/";\n'
     footer += u"    _paq.push(['setTrackerUrl', u+'piwik.php']);\n"
-    footer += u"    _paq.push(['setSiteId', '4']);\n'\"
+    footer += u"    _paq.push(['setSiteId', '4']);\n"
     footer += u"    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];\n"
     footer += u"    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);\n"
     footer += u'  })();\n'
