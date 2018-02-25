@@ -154,8 +154,12 @@ def outputRow(logline,lang):
     result += u'\t\t\t\t<td>' + linkcolor(page,lang) + u'</td>\n'
     if page.exists():
         if page.isRedirectPage():
-            tpage = page.getRedirectTarget()
-            result += u'\t\t\t\t<td>' + linkcolor(tpage,lang) + u'</td>\n'
+            try:
+                tpage = page.getRedirectTarget()
+                result += u'\t\t\t\t<td>' + linkcolor(tpage,lang) + u'</td>\n'
+            except pywikibot.exceptions.CircularRedirect:
+                tpage = None
+                result += u'\t\t\t\t<td></td>\n'
         else:
             result += u'\t\t\t\t<td></td>\n'
     else:
