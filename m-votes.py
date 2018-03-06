@@ -830,8 +830,8 @@ class BasicBot(
 
     def KAheader(self):
         header = u'	<h2><a name="ka"></a>Komitet Arbitrażowy</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/' + self.getOption('KAmonth') + u'" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'">Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'</a>.</i>\n'
-        header += u'    Liczba miejsc do obsadzenia: %s</div>\n' % self.getOption('KAplaces')
+        header += u'	<p><div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/' + self.getOption('KAmonth') + u'" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'">Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'</a>.</i></p>\n'
+        header += u'<p>    Liczba miejsc do obsadzenia: %s</p></div>' % self.getOption('KAplaces')
 
         return(header)
 
