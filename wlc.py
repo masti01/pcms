@@ -320,6 +320,8 @@ ignorelist = [
     re.compile('.*[\./@]leparisien\.fr'),  # bot rejected on site (masti)
     re.compile('.*[\./@]msz\.gov\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]usps\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]norden\.org'),  # slow site (masti)
+    re.compile('.*[\./@]tulospalvelu\.vaalit\.fi'),  # slow site (masti)
 
 ]
 
