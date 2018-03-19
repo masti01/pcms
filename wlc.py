@@ -323,6 +323,7 @@ ignorelist = [
     re.compile('.*[\./@]norden\.org'),  # slow site (masti)
     re.compile('.*[\./@]tulospalvelu\.vaalit\.fi'),  # slow site (masti)
     re.compile('.*[\./@]nasipolitici\.cz'),  # slow site (masti)
+    re.compile('.*[\./@]senat\.ro'),  # slow site (masti)
 ]
 
 
