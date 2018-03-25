@@ -80,9 +80,9 @@ countryNames = {
 'ro':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbaidjan':'Azerbaijan', 'Bașchiria':'Bashkortostan', 'Belarus':'Belarus', 'Bulgaria':'Bulgaria', 'Armenia':'Armenia', 'Bosnia și Herțegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Georgia':'Georgia', 'Cehia':'Czechia', 'Croația':'Croatia', 'Kosovo':'Kosovo', 'Crimeea':'Crimean Tatars', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Ungaria':'Hungary', 'Macedonia':'Macedonia', 'Republica Moldova':'Moldova', 'Polonia':'Poland', 'Rusia':'Russia', 'România':'Romania', 'Republika Srpska':'Serbia', 'Serbia':'Serbia', 'Slovacia':'Slovakia', 'Turcia':'Turkey', 'Ucraina':'Ukraine', 'Grecia':'Greece', 'Kazahstan':'Kazakhstan', 'Erzia':'Erzia'},
 'ru':{ 'Албания':'Albania', 'Австрия':'Austria', 'Азербайджан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Беларусь':'Belarus', 'Белоруссия':'Belarus', 'Болгария':'Bulgaria', 'Армения':'Armenia', 'Босния и Герцеговина':'Bosnia and Herzegovina', 'Эрзя':'Erzia', 'Эсперантида':'Esperanto', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово':'Kosovo', 'Крымские татары':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Венгрия':'Hungary', 'Республика Македония':'Macedonia', 'Македония':'Macedonia', 'Молдавия':'Moldova', 'Польша':'Poland', 'Россия':'Russia', 'Румыния':'Romania', 'Сербская Республика':'Serbia', 'Республика Сербская':'Serbia', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Турция':'Turkey', 'Украина':'Ukraine', 'Греция':'Greece', 'Казахстан':'Kazakhstan', },
 'sq':{ 'Shqipërisë':'Albania', 'Shqipëria':'Albania', 'Austria':'Austria', 'Azerbajxhanit':'Azerbaijan', 'Azerbajxhani':'Azerbaijan', 'Bashkortostani':'Bashkortostan', 'Bjellorusia':'Belarus', 'Bullgaria':'Bulgaria', 'Armenisë':'Armenia', 'Armenia':'Armenia', 'Bosnja dhe Hercegovina':'Bosnia and Herzegovina', 'Gjuha esperanto':'Esperanto', 'Estonia':'Estonia', 'Gjeorgjisë':'Georgia', 'Gjeorgjia':'Georgia', 'Republika Çeke':'Czechia', 'Kroacisë':'Croatia', 'Kroacia':'Croatia', 'Kosovës':'Kosovo', 'Kosova':'Kosovo', 'Lituania':'Lithuania', 'Letonia':'Latvia', 'Hungaria':'Hungary', 'Maqedonisë':'Macedonia', 'Moldavinë':'Moldova', 'Moldavia':'Moldova', 'Polonisë':'Poland', 'Polonia':'Poland', 'Rusisë':'Russia', 'Rusia':'Russia', 'Rumania':'Romania', 'Serbia':'Serbia', 'Sllovakia':'Slovakia', 'Turqisë':'Turkey', 'Turqia':'Turkey', 'Ukraina':'Ukraine', 'Greqisë':'Greece', 'Greqia':'Greece', 'Kazakistanin':'Kazakhstan', 'Kazakistani':'Kazakhstan', },
-'sr':{ 'Албанија':'Albania', 'Аустрија':'Austria', 'Азербејџан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Белорусија':'Belarus', 'Бугарска':'Bulgaria', 'Јерменија':'Armenia', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'Ерзја':'Erzia', 'Есперанто':'Esperanto', 'Естонија':'Estonia', 'Грузија':'Georgia', 'Чешка':'Czechia', 'Хрватска':'Croatia', 'Република Косово':'Kosovo', 'Кримски Татари':'Crimean Tatars', 'Литванија':'Lithuania', 'Летонија':'Latvia', 'Мађарска':'Hungary', 'Република Македонија':'Macedonia', 'Молдавија':'Moldova', 'Пољска':'Poland', 'Русија':'Russia', 'Румунија':'Romania', 'Република Српска':'Serbia', 'Србија':'Serbia', 'Словачка':'Slovakia', 'Турска':'Turkey', 'Украјина':'Ukraine', 'Грчка':'Greece', 'Казахстан':'Kazakhstan', },
+'sr':{ 'Албанија':'Albania', 'Аустрија':'Austria', 'Азербејџан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Белорусија':'Belarus', 'Бугарска':'Bulgaria', 'Јерменија':'Armenia', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'Ерзја':'Erzia', 'Есперанто':'Esperanto', 'Естонија':'Estonia', 'Грузија':'Georgia', 'Чешка':'Czechia', 'Hrvatska':'Croatia', 'Хрватска':'Croatia', 'Република Косово':'Kosovo', 'Кримски Татари':'Crimean Tatars', 'Литванија':'Lithuania', 'Летонија':'Latvia', 'Мађарска':'Hungary', 'Македонија':'Macedonia', 'Република Македонија':'Macedonia', 'Молдавија':'Moldova', 'Пољска':'Poland', 'Русија':'Russia', 'Румунија':'Romania', 'Република Српска':'Serbia', 'Србија':'Serbia', 'Словачка':'Slovakia', 'Турска':'Turkey', 'Украјина':'Ukraine', 'грчка':'Greece', 'Грчка':'Greece', 'Казахстан':'Kazakhstan', },
 'tt':{ 'Албания':'Albania', 'Австрия':'Austria', 'Азәрбайҗан':'Azerbaijan', 'Башкортстан':'Bashkortostan', 'Беларусия':'Belarus', 'Болгария':'Bulgaria', 'Әрмәнстан':'Armenia', 'Босния һәм Герцеговина':'Bosnia and Herzegovina', 'Эрзя':'Erzia', 'Ирзә':'Erzia', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Гөрҗистан':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово Җөмһүрияте':'Kosovo', 'Кырым татарлары':'Crimean Tatars', 'Литва':'Lithuania', 'Latviä':'Latvia', 'Маҗарстан':'Hungary', 'Македония Җөмһүрияте':'Macedonia', 'Македония':'Macedonia', 'Молдова':'Moldova', 'Польша':'Poland', 'РФ':'Russia', 'Русия':'Russia', 'Румыния':'Romania', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Төркия':'Turkey', 'Украина':'Ukraine', 'Греция':'Greece', 'Казакъстан':'Kazakhstan', },
-'tr':{ 'Arnavutluk':'Albania', 'Avusturya':'Austria', 'Azerbaycan':'Azerbaijan', 'Başkurdistan':'Bashkortostan', 'Beyaz Rusya':'Belarus', 'Bulgaristan':'Bulgaria', 'Ermenistan':'Armenia', 'Bosna-Hersek':'Bosnia and Herzegovina', 'Erzya':'Erzia', 'Esperanto':'Esperanto', 'Estonya':'Estonia', 'Gürcistan':'Georgia', 'Çek Cumhuriyeti':'Czechia', 'Hırvatistan':'Croatia', 'Kosova':'Kosovo', 'Kırım Tatar':'Crimean Tatars', 'Kırım Tatarları':'Crimean Tatars', 'Litvanya':'Lithuania', 'Letonya':'Latvia', 'Macaristan':'Hungary', 'Makedonya':'Macedonia', 'Moldova':'Moldova', 'Polonya':'Poland', 'Rusya':'Russia', 'Romanya':'Romania', 'Sırp Cumhuriyeti':'Serbia', 'Sırbistan':'Serbia', 'Slovakya':'Slovakia', 'Türkiye':'Turkey', 'Ukrayna':'Ukraine', 'Yunanistan':'Greece', 'Kazakistan':'Kazakhstan', },
+'tr':{ 'Arnavutluk':'Albania', 'Avusturya':'Austria', 'Azerbaycan':'Azerbaijan', 'Başkurdistan':'Bashkortostan', 'Beyaz Rusya':'Belarus', 'Bulgaristan':'Bulgaria', 'Ermenistan':'Armenia', 'Bosna-Hersek':'Bosnia and Herzegovina', 'Erzya':'Erzia', 'Esperanto':'Esperanto', 'Estonya':'Estonia', 'Gürcistan':'Georgia', 'Çek Cumhuriyeti':'Czechia', 'Hırvatistan':'Croatia', 'Kosova':'Kosovo', 'Kırım Tatar':'Crimean Tatars', 'Kırım Tatarları':'Crimean Tatars', 'Litvanya':'Lithuania', 'Letonya':'Latvia', 'Macaristan':'Hungary', 'Makedonya Cumhuriyeti':'Macedonia', 'Makedonya':'Macedonia', 'Moldova':'Moldova', 'Polonya':'Poland', 'Rusya':'Russia', 'Romanya':'Romania', 'Sırp Cumhuriyeti':'Serbia', 'Sırbistan':'Serbia', 'Slovakya':'Slovakia', 'Türkiye':'Turkey', 'Ukrayna':'Ukraine', 'Yunanistan':'Greece', 'Kazakistan':'Kazakhstan', },
 'uk':{ 'Албанія':'Albania', 'Австрія':'Austria', 'Азербайджан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Білорусь':'Belarus', 'Болгарія':'Bulgaria', 'Вірменія':'Armenia', 'Боснія і Герцеговина':'Bosnia and Herzegovina', 'Ерзя':'Erzia', 'Есперантида':'Esperanto', 'Есперанто':'Esperanto', 'Естонія':'Estonia', 'Грузія':'Georgia', 'Чехія':'Czechia', 'Хорватія':'Croatia', 'Косово':'Kosovo', 'Кримські татари':'Crimean Tatars', 'Литва':'Lithuania', 'Латвія':'Latvia', 'Угорщина':'Hungary', 'Македонія':'Macedonia', 'Молдова':'Moldova', 'Польща':'Poland', 'Російська Федерація':'Russia', 'Росія':'Russia', 'Румунія':'Romania', 'Республіка Сербська':'Serbia', 'Сербія':'Serbia', 'Словаччина':'Slovakia', 'Туреччина':'Turkey', 'Україна':'Ukraine', 'Греція':'Greece', 'Казахстан':'Kazakhstan', },
 'hu':{ 'Albánia':'Albania', 'Ausztria':'Austria', 'Azerbajdzsán':'Azerbaijan', 'Baskirföld':'Bashkortostan', 'Belorusz':'Belarus', 'Bulgária':'Bulgaria', 'Örményország':'Armenia', 'Bosznia és Hercegovina':'Bosnia and Herzegovina', 'Eszperantó':'Esperanto', 'Észtország':'Estonia', 'Grúzia':'Georgia', 'Csehország':'Czechia', 'Horvátország':'Croatia', 'Koszovo':'Kosovo', 'Krími tatárok':'Crimean Tatars', 'Litvánia':'Lithuania', 'Lettország':'Latvia', 'Magyarország':'Hungary', 'Macedónia':'Macedonia', 'Moldávia':'Moldova', 'Lengyelország':'Poland', 'Oroszország':'Russia', 'Románia':'Romania', 'Boszniai Szerb Köztársaság':'Serbia', 'Szerbia':'Serbia', 'Szlovákia':'Slovakia', 'Törökország':'Turkey', 'Ukrajna':'Ukraine', 'Görögország':'Greece', 'Kazahsztán':'Kazakhstan', },
 'kk':{ 'Албания':'Albania', 'Аустрия':'Austria', 'Әзірбайжан':'Azerbaijan', 'Башқұртстан':'Bashkortostan', 'Беларусь':'Belarus', 'Болгария':'Bulgaria', 'Армения':'Armenia', 'Босния және Герцеговина':'Bosnia and Herzegovina', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово':'Kosovo', 'Қырым татарлары':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Мажарстан':'Hungary', 'Македония':'Macedonia', 'Молдова':'Moldova', 'Польша':'Poland', 'Ресей':'Russia', 'Румыния':'Romania', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Түркия':'Turkey', 'Украина':'Ukraine', 'Грекия':'Greece', 'Қазақстан':'Kazakhstan', },
@@ -175,7 +175,8 @@ class BasicBot(
 
     def run(self):
 
-        header = u'{{Wikipedysta:Masti/CEE Spring 2018/Header}}\n\n'
+        #header = u'{{Wikipedysta:Masti/CEE Spring 2018/Header}}\n\n'
+        header = u'{{Wikimedia CEE Spring 2018/Statistics/Header}}\n\n'
         header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
         footer = u''
 
@@ -344,7 +345,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('lv'):
+                    if lang not in ('sr'):
                          continue
 
                 self.templatesList[lang] = i.title()
@@ -523,7 +524,7 @@ class BasicBot(
                 #if self.getOption('test3'):
                 #    pywikibot.output(u'updated art editor %s:%s (T:%s)' % (art.title(asLink=True,forceInterwiki=True),rv['user'],rv['timestamp']))
             #    return(rv['user'],rv['timestamp'])
-            return('unknown user', creationDate)
+            return("'''UNKNOWN USER'''", creationDate)
        
 
     def newArticle(self,art):
@@ -553,6 +554,8 @@ class BasicBot(
                 parlist['user'] = 'dummy'
                 for p in params:
                     named, name, value = self.templateArg(p)
+                    # strip square brackets from value
+                    value = re.sub(ur"\'*\[*([^\]\|\']*).*", r'\1', value)
                     if not named:
                         name = str(paramcount)
                     param[name] = value
@@ -632,11 +635,12 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
+        locpagename = re.sub(ur'.*:','',pagename)
 
         finalpage = header
 
         pywikibot.output(u'**************************')
-        pywikibot.output(u'generateResultCountryTable')
+        pywikibot.output(u'generateOtherCountriesTable')
         pywikibot.output(u'**************************')
 
         for c in self.otherCountriesList.keys():
@@ -660,6 +664,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
+        locpagename = re.sub(ur'.*:','',pagename)
 
         finalpage = header
 
@@ -682,7 +687,7 @@ class BasicBot(
         # generate table rows
         for wiki in res.keys():
             finalpage += u'\n|-'
-            finalpage += u'\n| [[' + pagename + u'/Article list#'+ wiki + u'.wikipedia|' + wiki + u']]'
+            finalpage += u'\n| [[' + locpagename + u'/Article list#'+ wiki + u'.wikipedia|' + wiki + u']]'
             for c in countryList:
                 finalpage += u' || '
                 if u'Other' in c:
@@ -731,6 +736,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
+        locpagename = re.sub(ur'.*:','',pagename)
 
         finalpage = header
         itemcount = 0
@@ -760,6 +766,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
+        locpagename = re.sub(ur'.*:','',pagename)
 
         finalpage = header
         itemcount = 0
@@ -806,6 +813,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
+        locpagename = re.sub(ur'.*:','',pagename)
 
         finalpage = header
         
@@ -813,50 +821,69 @@ class BasicBot(
         #go by language
         for l in res.keys():
             artCount = 0
+            newarts = 0
+            updarts = 0
+
             #print('[[:' + i + u':' + self.templatesList[i] +u'|' + i + u' wikipedia]]')
             if l in self.templatesList.keys():
                 finalpage += u'\n== [[:' + l + ':' + self.templatesList[l] +u'|' + l + u'.wikipedia]] =='
             else:
                 finalpage += u'\n== ' + l + u'.wikipedia =='
             finalpage += u'\n=== ' + l + u'.wikipedia new articles ==='
+            finalpage += u'\n{| class="wikitable"'
+            finalpage += u'\n!#'
+            finalpage += u'\n!Article'
+            finalpage += u'\n!User'
+            finalpage += u'\n!Date'
+            finalpage += u'\n!About'
             updatedArticles = u'\n\n=== ' + l + u'.wikipedia updated articles ==='
+            updatedArticles += u'\n{| class="wikitable"'
+            updatedArticles += u'\n!#'
+            updatedArticles += u'\n!Article'
+            updatedArticles += u'\n!User'
+            updatedArticles += u'\n!About'
             for i in res[l]:
                 if self.getOption('test3'):
                     pywikibot.output(u'Generating line from: %s:' % i )
                 itemcount += 1
                 artCount += 1
                 if i['newarticle']:
-                    #finalpage += u' (NEW)'
-                    artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + str(i['creationDate'])
-                    #artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator']
+                    newarts += 1
+                    artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || %s || '  % (newarts,i['lang'],i['title'],i['creator'],i['creationDate'])
+                    cList = []
                     for a in i['template']['country']:
                         if a in countryList:
-                            artLine +=  u' - ' + a
+                            cList.append(a)
                         else:
-                            artLine +=  u" - '''" + a + u"'''"
-                    finalpage += artLine
+                            cList.append(u"'''" + a + u"'''")
+                    finalpage += artLine + ', '.join(cList)
                     pywikibot.output(artLine + u' (NEW)')
                 else:
                     #finalpage += u" '''(updated)'''"
+                    updarts += 1
                     if i['template']['user']:
-                        artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['template']['user'] 
+                        artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || ' % (updarts,i['lang'],i['title'],i['template']['user'])
                     else:
-                        artLine = u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:uknown'
+                        artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || ' % (updarts,i['lang'],i['title'],"'''unknown'''")
+
+                    uList = []
                     for a in i['template']['country']:
+
                         if a in countryList:
-                            artLine +=  u' - ' + a
+                            uList.append(a)
                         else:
-                            artLine +=  u" - '''" + a + u"'''"
-                    updatedArticles += artLine
+                            uList.append(u"'''" + a + u"'''")
+                    updatedArticles += artLine + ', '.join(uList)
                     pywikibot.output(artLine + u" '''(updated)'''")
 
-                #if self.getOption('test'):
-                #    pywikibot.output(u'\n# [[:' + i['lang'] + u':' + i['title'] + u']] - user:' + i['creator'] + u' date:' + i['creationDate'])
-
-            finalpage += updatedArticles
+            finalpage += u'\n|}'
+            finalpage += updatedArticles + u'\n|}'
             finalpage += u'\nTotal number of articles ' + l + u'.wikipedia:' + str(artCount)
 
-        finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
+        finalpage += u'\n\n== Statistics =='
+        finalpage += u'\n\nNumber of new articles: ' + str(newarts)
+        finalpage += u'\n\nNumber of updated articles: ' + str(updarts)
+        finalpage += u"\n\n'''Total number of articles: " + str(itemcount) + u"'''"
         finalpage += footer
         #pywikibot.output(finalpage)
 
