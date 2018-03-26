@@ -717,9 +717,12 @@ class BasicBot(
         finalpage += u'\n|-'
 
         # generate totals
+        totalTotal = 0
         finalpage += u'\n! Total:'
         for c in countryList:
             finalpage += u' !! ' + str(countryTotals[c])
+            totalTotal += countryTotals[c]
+        finalpage += u" || '''" + str(totalTotal) + "'''"
         # generate table footer
         finalpage += u'\n|}'
 
