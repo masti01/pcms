@@ -683,11 +683,13 @@ class BasicBot(
         finalpage += u'\n! wiki/country'
         for c in countryList:
             finalpage += u' !! ' + c
+        finalpage += u' !! Total'
         
         # generate table rows
         for wiki in res.keys():
             finalpage += u'\n|-'
             finalpage += u'\n| [[' + locpagename + u'/Article list#'+ wiki + u'.wikipedia|' + wiki + u']]'
+            wikiTotal = 0 # get the row total
             for c in countryList:
                 finalpage += u' || '
                 if u'Other' in c:
@@ -701,12 +703,16 @@ class BasicBot(
                                pywikibot.output(u'country:%s ** otherCountry=%i+%i=%i' % (country,otherCountry,res[wiki][country],otherCountry+res[wiki][country]))
                            otherCountry += res[wiki][country]
                     finalpage += str(otherCountry)
+                    wikiTotal += otherCountry # add to wiki total
                     countryTotals[c] += otherCountry
                 else:
                     if c in res[wiki].keys():
                         if res[wiki][c]:
                             finalpage += str(res[wiki][c])
+                            wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
+            # add row (wiki) total to table
+            finalpage += u" || '''" + str(wikiTotal) + "'''"
             
         finalpage += u'\n|-'
 
