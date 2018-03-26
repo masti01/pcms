@@ -176,7 +176,8 @@ class BasicBot(
     def run(self):
 
         #header = u'{{Wikipedysta:Masti/CEE Spring 2018/Header}}\n\n'
-        header = u'{{Wikimedia CEE Spring 2018/Statistics/Header}}\n\n'
+        header = u'{{TNT|Wikimedia CEE Spring 2018 navbar}}\n\n'
+        header += u'{{Wikimedia CEE Spring 2018/Statistics/Header}}\n\n'
         header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
         footer = u''
 
