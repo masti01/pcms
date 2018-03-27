@@ -485,7 +485,7 @@ def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
     text = textlib.removeDisabledParts(text)
     #linkR = textlib.compileLinkR(withoutBracketed, onlyBracketed)
     #linkR = re.compile(ur'(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s;<>\"\|\)]*))(?:[\]\s\.:;,<>\"\|\)])')
-    linkR = re.compile(ur'(?P<url>http[s]?:(\/\/[^\s\?]+?)(\??[^\s<\|\}]*))(?:[\] \t\.<\|\}]|\]\n)')
+    linkR = re.compile(ur'(?m)(?P<url>http[s]?:(\/\/[^\s\?]+?)(\??[^\s<\|\}]*))(?:[\] \t\.<\|\}]|\]\n)')
     for m in linkR.finditer(text):
         if m.group('url'):
             #pywikibot.output('URL to YIELD:%s' % m.group('url'))
