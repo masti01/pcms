@@ -87,7 +87,7 @@ countryNames = {
 'hu':{ 'Albánia':'Albania', 'Ausztria':'Austria', 'Azerbajdzsán':'Azerbaijan', 'Baskirföld':'Bashkortostan', 'Belorusz':'Belarus', 'Bulgária':'Bulgaria', 'Örményország':'Armenia', 'Bosznia és Hercegovina':'Bosnia and Herzegovina', 'Eszperantó':'Esperanto', 'Észtország':'Estonia', 'Grúzia':'Georgia', 'Csehország':'Czechia', 'Horvátország':'Croatia', 'Koszovo':'Kosovo', 'Krími tatárok':'Crimean Tatars', 'Litvánia':'Lithuania', 'Lettország':'Latvia', 'Magyarország':'Hungary', 'Macedónia':'Macedonia', 'Moldávia':'Moldova', 'Lengyelország':'Poland', 'Oroszország':'Russia', 'Románia':'Romania', 'Boszniai Szerb Köztársaság':'Serbia', 'Szerbia':'Serbia', 'Szlovákia':'Slovakia', 'Törökország':'Turkey', 'Ukrajna':'Ukraine', 'Görögország':'Greece', 'Kazahsztán':'Kazakhstan', },
 'kk':{ 'Албания':'Albania', 'Аустрия':'Austria', 'Әзірбайжан':'Azerbaijan', 'Башқұртстан':'Bashkortostan', 'Беларусь':'Belarus', 'Болгария':'Bulgaria', 'Армения':'Armenia', 'Босния және Герцеговина':'Bosnia and Herzegovina', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово':'Kosovo', 'Қырым татарлары':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Мажарстан':'Hungary', 'Македония':'Macedonia', 'Молдова':'Moldova', 'Польша':'Poland', 'Ресей':'Russia', 'Румыния':'Romania', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Түркия':'Turkey', 'Украина':'Ukraine', 'Грекия':'Greece', 'Қазақстан':'Kazakhstan', },
 'et':{ 'Albaania':'Albania', 'Austria':'Austria', 'Aserbaidžaan':'Azerbaijan', 'Baškortostan':'Bashkortostan', 'Valgevene':'Belarus', 'Bulgaaria':'Bulgaria', 'Armeenia':'Armenia', 'Bosnia ja Hertsegoviina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Eesti':'Estonia', 'Gruusia':'Georgia', 'Tšehhi':'Czechia', 'Horvaatia':'Croatia', 'Kosovo':'Kosovo', 'Krimski Tatari':'Crimean Tatars', 'Leedu':'Lithuania', 'Läti':'Latvia', 'Ungari':'Hungary', 'Makedoonia':'Macedonia', 'Moldova':'Moldova', 'Poola':'Poland', 'Venemaa':'Russia', 'Rumeenia':'Romania', 'Republika Srpska':'Serbia', 'Serbia':'Serbia', 'Slovakkia':'Slovakia', 'Türgi':'Turkey', 'Ukraina':'Ukraine', 'Kreeka':'Greece', 'Kasahstan':'Kazakhstan', 'Ersa':'Erzia'},
-'hr':{ 'Albanija':'Albania', 'Austrija':'Austria', 'Azerbajdžan':'Azerbaijan', 'Baškirska':'Bashkortostan', 'Bjelorusija':'Belarus', 'Bugarska':'Bulgaria', 'Armenija':'Armenia', 'Bosna i Hercegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonija':'Estonia', 'Gruzija':'Georgia', 'Češka':'Czechia', 'Hrvatska':'Croatia', 'Kosovo':'Kosovo', 'Krimski Tatari':'Crimean Tatars', 'Litva':'Lithuania', 'Latvija':'Latvia', 'Mađarska':'Hungary', 'Makedonija':'Macedonia', 'Moldavija':'Moldova', 'Poljska':'Poland', 'Rusija':'Russia', 'Rumunjska':'Romania', 'Republika Srpska':'Serbia', 'Srbija':'Serbia', 'Slovačka':'Slovakia', 'Turska':'Turkey', 'Ukrajina':'Ukraine', 'Grčka':'Greece', 'Kazahstan':'Kazakhstan', 'Erzya':'Erzia'},
+'hr':{ 'Albanija':'Albania', 'Austrija':'Austria', 'Azerbajdžan':'Azerbaijan', 'Baškirska':'Bashkortostan', 'Bjelorusiji':'Belarus', 'Bjelorusija':'Belarus', 'Bugarska':'Bulgaria', 'Armenija':'Armenia', 'Bosna i Hercegovina':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estonija':'Estonia', 'Gruzija':'Georgia', 'Češka':'Czechia', 'Hrvatska':'Croatia', 'Kosovo':'Kosovo', 'Krimski Tatari':'Crimean Tatars', 'Litva':'Lithuania', 'Latvija':'Latvia', 'Mađarska':'Hungary', 'Makedonija':'Macedonia', 'Moldavija':'Moldova', 'Poljska':'Poland', 'Rusija':'Russia', 'Rumunjska':'Romania', 'Republika Srpska':'Serbia', 'Srbija':'Serbia', 'Slovačka':'Slovakia', 'Turska':'Turkey', 'Ukrajina':'Ukraine', 'Grčka':'Greece', 'Kazahstan':'Kazakhstan', 'Erzya':'Erzia'},
 }
 class BasicBot(
     # Refer pywikobot.bot for generic bot classes
@@ -124,16 +124,16 @@ class BasicBot(
              'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'Be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'el':'country', \
                  'myv':'мастор', 'eo':'country', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'ro':'țară', 'ru':'страна', 'sq':'country', \
-                 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна' }
+                 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
     topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'Be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', \
              'myv':'тема', 'eo':'topic', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
-             'tt':'тема', 'tr':'konu', 'uk':'тема'}
+             'tt':'тема', 'tr':'konu', 'uk':'тема', 'hr':'tema', 'hy':'Թուրքիա|թեմա'}
     womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'Be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', \
               'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
-               'uk':'жінки', 'hu':'nők'}
+               'uk':'жінки', 'hu':'nők', 'hr':'Žene', 'hy':'Կանայք'}
     userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'Be-tarask':'удзельнік', 'bg':'потребител', 'hu':'szerkesztő',\
              'de':'benutzer','crh':'qullanıcı','el':'user', 'myv':'сёрмадыця', 'eo':'user', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
-             'mk':'корисник', 'ro':'utilizator', 'ru':'участник', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', 'uk':'користувач' }
+             'mk':'корисник', 'ro':'utilizator', 'ru':'участник', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', 'uk':'користувач', 'hr':'suradnik', 'hy':'մասնակից' }
 
     def __init__(self, generator, **kwargs):
         """
