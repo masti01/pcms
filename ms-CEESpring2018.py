@@ -46,6 +46,7 @@ __version__ = '$Id: c1795dd2fb2de670c0b4bddb289ea9d13b1e9b3f $'
 import pywikibot
 from pywikibot import pagegenerators
 import re
+from pywikibot import textlib
 from datetime import datetime
 
 from pywikibot.bot import (
@@ -175,10 +176,9 @@ class BasicBot(
 
     def run(self):
 
-        #header = u'{{Wikipedysta:Masti/CEE Spring 2018/Header}}\n\n'
         header = u'{{TNT|Wikimedia CEE Spring 2018 navbar}}\n\n'
         header += u'{{Wikimedia CEE Spring 2018/Statistics/Header}}\n\n'
-        header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+        header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
         footer = u''
 
         #generate dictionary of articles
@@ -224,6 +224,7 @@ class BasicBot(
         self.generateResultArticleList(self.springList,self.getOption('outpage')+u'/Article list',header,footer)
         self.generateResultAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
         self.generateResultWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
+        #self.generateResultLengthPage(self.springList,self.getOption('outpage')+u'/Article length',header,footer)
 
         return
 
@@ -410,6 +411,14 @@ class BasicBot(
                     pywikibot.output(a)
         return
 
+    def getWordCount(self,text):
+        # get a word count for text
+        return(len(text.split()))
+
+    def getArtLength(self,text):
+        # get article length
+        return(len(text))
+
     def getArtInfo(self,art):
         #get article language, creator, creation date
         artParams = {}
@@ -424,6 +433,10 @@ class BasicBot(
             artParams['creator'] = creator
             artParams['creationDate'] = creationDate
             artParams['newarticle'] = self.newArticle(art)
+            cleantext = textlib.removeDisabledParts(art.text)
+            artParams['charcount'] = self.getArtLength(cleantext)
+            artParams['wordcount'] = self.getWordCount(cleantext)
+
             artParams['template'] = {u'country':[], 'user':creator, 'woman':woman}
 
 
@@ -765,6 +778,35 @@ class BasicBot(
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         if self.getOption('test'):
             pywikibot.output(u'WomenPage:%s' % outpage.title())
+        outpage.text = finalpage
+        outpage.save(summary=self.getOption('summary'))
+        return
+
+    def generateResultLengthPage(self, res, pagename, header, footer):
+        """
+        Generates results page from res
+        Starting with header, ending with footer
+        Output page is pagename
+        """
+        locpagename = re.sub(ur'.*:','',pagename)
+
+        finalpage = header
+        itemcount = 0
+        finalpage += u'\n== Article length ==\n'
+        #ath = sorted(self.authors, reverse=True)
+        ath = sorted(res, key=res.__getitem__, reverse=True)
+        for a in ath:
+            finalpage += u'\n# ' + a + u' - ' + str(res[a])
+            itemcount += res[a]
+
+        finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
+        finalpage += footer
+
+        #pywikibot.output(finalpage)
+
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'LengthPage:%s' % outpage.title())
         outpage.text = finalpage
         outpage.save(summary=self.getOption('summary'))
         return
