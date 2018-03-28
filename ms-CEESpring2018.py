@@ -118,9 +118,9 @@ class BasicBot(
     missingCount = {}
     pagesCount = {}
     countryTable = {}
-    otherCountriesList = {'pl':[], 'az':[], 'ba':[], 'be':[], 'be-tarask':[], 'bg':[], 'de':[], 'crh':[], 'el':[], 'myv':[], 'eo':[], 'hy':[], 'ka':[], 'lv':[], 'lt':[], \
+    otherCountriesList = {'pl':[], 'az':[], 'ba':[], 'be':[], 'be-tarask':[], 'bg':[], 'de':[], 'crh':[], 'el':[], 'myv':[], 'eo':[], 'hr':[], 'hy':[], 'ka':[], 'lv':[], 'lt':[], \
              'mk':[], 'ro':[], 'ru':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
-    women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'myv':0, 'eo':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
+    women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'myv':0, 'eo':0, 'hr':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
              'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'Be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'el':'country', \
                  'myv':'мастор', 'eo':'country', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'ro':'țară', 'ru':'страна', 'sq':'country', \
