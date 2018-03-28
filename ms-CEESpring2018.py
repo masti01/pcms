@@ -58,7 +58,7 @@ from pywikibot.tools import issue_deprecation_warning
 docuReplacements = {
     '&params;': pagegenerators.parameterHelp
 }
-CEEtemplates = {'pl' : 'Szablon:CEE Spring 2018', 'az' : 'Şablon:Vikibahar 2018', 'ba' : 'Ҡалып:Вики-яҙ 2018', 'be' : 'Шаблон:CEE Spring 2018', 'Be-tarask' : 'Шаблён:Артыкул ВікіВясны-2018', 'bg' : 'Шаблон:CEE Spring 2018', 'de' : 'Vorlage:CEE Spring 2018', 'el' : 'Πρότυπο:CEE Spring 2018', 'et' : 'Mall:CEE Spring 2018', 'hr' : 'Predložak:CEE proljeće 2018.', 'hy' : 'Կաղապար:CEE Spring 2018', 'ka' : 'თარგი:ვიკიგაზაფხული 2018', 'lv' : 'Veidne:CEE Spring 2018', 'lt' : 'Šablonas:VRE 2018', 'mk' : 'Шаблон:СИЕ Пролет 2018', 'ro' : 'Format:Wikimedia CEE Spring 2018', 'ru' : 'Шаблон:Вики-весна 2018', 'sr' : 'Шаблон:ЦЕЕ пролеће 2018', 'tr' : 'Şablon:Vikibahar 2018', 'uk' : 'Шаблон:CEE Spring 2018' }
+CEEtemplates = {'pl' : 'Szablon:CEE Spring 2018', 'az' : 'Şablon:Vikibahar 2018', 'ba' : 'Ҡалып:Вики-яҙ 2018', 'be' : 'Шаблон:CEE Spring 2018', 'be-tarask' : 'Шаблён:Артыкул ВікіВясны-2018', 'bg' : 'Шаблон:CEE Spring 2018', 'de' : 'Vorlage:CEE Spring 2018', 'el' : 'Πρότυπο:CEE Spring 2018', 'et' : 'Mall:CEE Spring 2018', 'hr' : 'Predložak:CEE proljeće 2018.', 'hy' : 'Կաղապար:CEE Spring 2018', 'ka' : 'თარგი:ვიკიგაზაფხული 2018', 'lv' : 'Veidne:CEE Spring 2018', 'lt' : 'Šablonas:VRE 2018', 'mk' : 'Шаблон:СИЕ Пролет 2018', 'ro' : 'Format:Wikimedia CEE Spring 2018', 'ru' : 'Шаблон:Вики-весна 2018', 'sr' : 'Шаблон:ЦЕЕ пролеће 2018', 'tr' : 'Şablon:Vikibahar 2018', 'uk' : 'Шаблон:CEE Spring 2018' }
 countryList =[ u'Albania', u'Armenia', u'Austria', u'Azerbaijan', u'Bashkortostan', u'Belarus', u'Bosnia and Herzegovina', u'Bulgaria', u'Crimean Tatars', u'Croatia', u'Czechia', u'Erzia', u'Esperanto', u'Estonia', u'Georgia', u'Greece', u'Hungary', u'Kazakhstan', u'Kosovo', u'Latvia', u'Lithuania', u'Macedonia', u'Moldova', u'Poland', u'Romania', u'Russia', u'Serbia', u'Slovakia', u'Turkey', u'Ukraine', u'Other' ]
 countryNames = {
 'pl':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbejdżan':'Azerbaijan', 'Baszkortostan':'Bashkortostan', 'Białoruś':'Belarus', 'Bułgaria':'Bulgaria', 'Armenia':'Armenia', 'Bośnia i Hercegowina':'Bosnia and Herzegovina', 'Erzja':'Erzia', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Gruzja':'Georgia', 'Czechy':'Czechia', 'Chorwacja':'Croatia', 'Kosowo':'Kosovo', 'Tatarzy krymscy':'Crimean Tatars', 'Litwa':'Lithuania', 'Łotwa':'Latvia', 'Węgry':'Hungary', 'Macedonia':'Macedonia', 'Mołdawia':'Moldova', 'Polska':'Poland', 'Rosja':'Russia', 'Rumunia':'Romania', 'Republika Serbska':'Serbia', 'Serbia':'Serbia', 'Słowacja':'Slovakia', 'Turcja':'Turkey', 'Ukraina':'Ukraine', 'Grecja':'Greece', 'Kazachstan':'Kazakhstan', },
@@ -122,16 +122,16 @@ class BasicBot(
              'mk':[], 'ro':[], 'ru':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'myv':0, 'eo':0, 'hr':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
              'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
-    countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'Be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'el':'country', \
+    countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'el':'country', \
                  'myv':'мастор', 'eo':'country', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'ro':'țară', 'ru':'страна', 'sq':'country', \
                  'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
-    topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'Be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', \
+    topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', \
              'myv':'тема', 'eo':'topic', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
              'tt':'тема', 'tr':'konu', 'uk':'тема', 'hr':'tema', 'hy':'Թուրքիա|թեմա'}
-    womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'Be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', \
+    womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', \
               'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
                'uk':'жінки', 'hu':'nők', 'hr':'Žene', 'hy':'Կանայք'}
-    userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'Be-tarask':'удзельнік', 'bg':'потребител', 'hu':'szerkesztő',\
+    userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'be-tarask':'удзельнік', 'bg':'потребител', 'hu':'szerkesztő',\
              'de':'benutzer','crh':'qullanıcı','el':'user', 'myv':'сёрмадыця', 'eo':'user', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
              'mk':'корисник', 'ro':'utilizator', 'ru':'участник', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', 'uk':'користувач', 'hr':'suradnik', 'hy':'մասնակից' }
 
