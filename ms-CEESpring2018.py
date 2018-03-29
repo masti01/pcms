@@ -119,6 +119,7 @@ class BasicBot(
     missingCount = {}
     pagesCount = {}
     countryTable = {}
+    lengthTable = {}
     otherCountriesList = {'pl':[], 'az':[], 'ba':[], 'be':[], 'be-tarask':[], 'bg':[], 'de':[], 'crh':[], 'el':[], 'et':[], 'myv':[], 'eo':[], 'hr':[], 'hy':[], 'ka':[], 'lv':[], 'lt':[], \
              'mk':[], 'ro':[], 'ru':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'et':0, 'myv':0, 'eo':0, 'hr':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
@@ -162,6 +163,7 @@ class BasicBot(
             'testartinfo': False, # make verbose output
             'testwomen': False, # make verbose output for women table
             'testnewbie': False, # make verbose output for newbies
+            'testlength': False, # make verbose output for article length
             'short': False, # make short run
             'append': False, 
 
@@ -218,6 +220,7 @@ class BasicBot(
 
         self.createCountryTable(self.springList) #generate results for pages about countries 
         self.createWomenTable(self.springList) #generate results for pages about women
+        self.createLengthTable(self.springList) #generate results for pages length
 
         self.generateOtherCountriesTable(self.otherCountriesList,self.getOption('outpage')+u'/Other countries',header,footer)
         self.generateResultCountryTable(self.countryTable,self.getOption('outpage'),header,footer)
@@ -328,6 +331,33 @@ class BasicBot(
             pywikibot.output('self.women')
             pywikibot.output('**********')
             pywikibot.output(self.women)
+        return
+
+    def createLengthTable(self,aList):
+        #creat dictionary with la:country article counts
+        if self.getOption('test') or self.getOption('testwomen'):
+            pywikibot.output(u'createLengthTable')
+            pywikibot.output(self.lenghtTable)
+        artCount = 0
+        countryCount = 0
+        for l in aList.keys():
+            for a in aList[l]:
+                if a['newarticle']:
+                    artCount += 1
+                    lang = a['lang'] #source language
+                    title = lang + ':' + a['title'] #art title
+
+                    if self.getOption('testlength'):
+                        pywikibot.output('Title:%s' % title)
+                    self.lengthTable[title] = (a['charcount'],a['wordcount'])
+                    if self.getOption('testlength'):
+                        pywikibot.output('self.lengthtable[%s]:%s' % (title,self.lengthTable[title]))
+
+        if self.getOption('testlength'):
+            pywikibot.output('**********')
+            pywikibot.output('self.lengthTable')
+            pywikibot.output('**********')
+            pywikibot.output(self.lengthTable)
         return
 
 
@@ -795,6 +825,14 @@ class BasicBot(
         finalpage += u'\n== Article length ==\n'
         #ath = sorted(self.authors, reverse=True)
         ath = sorted(res, key=res.__getitem__, reverse=True)
+ 
+       finalpage += u'\n{| class="wikitable"'
+       finalpage += u'\n!#'
+       finalpage += u'\n!Article'
+       finalpage += u'\n!Character count'
+       finalpage += u'\n!Word count'
+      
+
         for a in ath:
             finalpage += u'\n# ' + a + u' - ' + str(res[a])
             itemcount += res[a]
@@ -870,11 +908,11 @@ class BasicBot(
         finalpage = header
         
         itemcount = 0
+        newarts = 0
+        updarts = 0
         #go by language
         for l in res.keys():
             artCount = 0
-            newarts = 0
-            updarts = 0
 
             #print('[[:' + i + u':' + self.templatesList[i] +u'|' + i + u' wikipedia]]')
             if l in self.templatesList.keys():
@@ -909,7 +947,8 @@ class BasicBot(
                         else:
                             cList.append(u"'''" + a + u"'''")
                     finalpage += artLine + ', '.join(cList)
-                    pywikibot.output(artLine + u' (NEW)')
+                    if self.getOption('test3'):
+                        pywikibot.output(artLine + u' (NEW)')
                 else:
                     #finalpage += u" '''(updated)'''"
                     updarts += 1
@@ -926,7 +965,8 @@ class BasicBot(
                         else:
                             uList.append(u"'''" + a + u"'''")
                     updatedArticles += artLine + ', '.join(uList)
-                    pywikibot.output(artLine + u" '''(updated)'''")
+                    if self.getOption('test3'):
+                        pywikibot.output(artLine + u" '''(updated)'''")
 
             finalpage += u'\n|}'
             finalpage += updatedArticles + u'\n|}'
