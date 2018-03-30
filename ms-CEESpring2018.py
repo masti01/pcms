@@ -837,7 +837,7 @@ class BasicBot(
 
         for a in ath:
             ccount,wcount = res[a]
-            finalpage += u'\n|-\n %i. || %s || %i || %i'% (itemcount,a,ccount,wcount)
+            finalpage += u'\n|-\n| %i. || %s || %i || %i'% (itemcount,a,ccount,wcount)
             if self.getOption('testlength'):
                 pywikibot.output(u'\n|-\n %i. || %s || %i || %i'% (itemcount,a,ccount,wcount))
             itemcount += 1
