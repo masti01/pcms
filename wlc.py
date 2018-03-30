@@ -324,6 +324,13 @@ ignorelist = [
     re.compile('.*[\./@]tulospalvelu\.vaalit\.fi'),  # slow site (masti)
     re.compile('.*[\./@]nasipolitici\.cz'),  # slow site (masti)
     re.compile('.*[\./@]senat\.ro'),  # slow site (masti)
+    re.compile('.*[\./@]euroferroviarios\.net'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]rozklad\.zdkium\.walbrzych\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]wysokosc\.mapa\.info\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]contraloria\.gob\.pa'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]rsssf\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]stare-babice\.pl/sites/default/files/attachment/ludnosc_w_podziale_na_miejscowosci_2010_2015.pdf'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]mpu\.bydgoszcz\.pl'),  # bot rejected on site (masti)
 ]
 
 
