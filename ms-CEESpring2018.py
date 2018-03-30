@@ -985,7 +985,7 @@ class BasicBot(
             finalpage += u'\nTotal number of articles ' + l + u'.wikipedia:' + str(artCount)
 
         finalpage += u'\n\n== Statistics =='
-        finalpage += u'\n\nNumber of new articles: ' + str(newartscunt)
+        finalpage += u'\n\nNumber of new articles: ' + str(newartscount)
         finalpage += u'\n\nNumber of updated articles: ' + str(updartscount)
         finalpage += u"\n\n'''Total number of articles: " + str(itemcount) + u"'''"
         finalpage += footer
