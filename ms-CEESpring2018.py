@@ -337,7 +337,7 @@ class BasicBot(
         #creat dictionary with la:country article counts
         if self.getOption('test') or self.getOption('testwomen'):
             pywikibot.output(u'createLengthTable')
-            pywikibot.output(self.lenghtTable)
+            pywikibot.output(self.lengthTable)
         artCount = 0
         countryCount = 0
         for l in aList.keys():
