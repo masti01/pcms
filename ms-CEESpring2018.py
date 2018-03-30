@@ -829,7 +829,7 @@ class BasicBot(
         if self.getOption('testlength'):
             pywikibot.output(u'LengthPage:%s' % ath)
  
-        finalpage += u'\n{| class="wikitable"'
+        finalpage += u'\n{| class="wikitable sortable"'
         finalpage += u'\n!#'
         finalpage += u'\n!Article'
         finalpage += u'\n!Character count'
