@@ -227,7 +227,7 @@ class BasicBot(
         self.generateResultArticleList(self.springList,self.getOption('outpage')+u'/Article list',header,footer)
         self.generateResultAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
         self.generateResultWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
-        #self.generateResultLengthPage(self.springList,self.getOption('outpage')+u'/Article length',header,footer)
+        self.generateResultLengthPage(self.lengthTable,self.getOption('outpage')+u'/Article length',header,footer)
 
         return
 
@@ -377,7 +377,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('sr'):
+                    if lang not in ('ro'):
                          continue
 
                 self.templatesList[lang] = i.title()
@@ -825,17 +825,24 @@ class BasicBot(
         finalpage += u'\n== Article length ==\n'
         #ath = sorted(self.authors, reverse=True)
         ath = sorted(res, key=res.__getitem__, reverse=True)
+        if self.getOption('testlength'):
+            pywikibot.output(u'LengthPage:%s' % ath)
  
-       finalpage += u'\n{| class="wikitable"'
-       finalpage += u'\n!#'
-       finalpage += u'\n!Article'
-       finalpage += u'\n!Character count'
-       finalpage += u'\n!Word count'
+        finalpage += u'\n{| class="wikitable"'
+        finalpage += u'\n!#'
+        finalpage += u'\n!Article'
+        finalpage += u'\n!Character count'
+        finalpage += u'\n!Word count'
       
 
         for a in ath:
-            finalpage += u'\n# ' + a + u' - ' + str(res[a])
-            itemcount += res[a]
+            ccount,wcount = res[a]
+            finalpage += u'\n|-\n %i. || %s || %i || %i'% (itemcount,a,ccount,wcount)
+            if self.getOption('testlength'):
+                pywikibot.output(u'\n|-\n %i. || %s || %i || %i'% (itemcount,a,ccount,wcount))
+            itemcount += 1
+
+        finalpage += u'\n|}'
 
         finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
         finalpage += footer
