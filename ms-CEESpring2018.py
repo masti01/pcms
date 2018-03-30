@@ -837,11 +837,11 @@ class BasicBot(
       
 
         for a in ath:
+            itemcount += 1
             ccount,wcount = res[a]
             finalpage += u'\n|-\n| %i. || [[:%s]] || %i || %i'% (itemcount,a,ccount,wcount)
             if self.getOption('testlength'):
                 pywikibot.output(u'\n|-\n| %i. || [[:%s]] || %i || %i'% (itemcount,a,ccount,wcount))
-            itemcount += 1
 
         finalpage += u'\n|}'
 
@@ -916,11 +916,13 @@ class BasicBot(
         finalpage = header
         
         itemcount = 0
-        newarts = 0
-        updarts = 0
+        newartscount = 0
+        updartscount = 0
         #go by language
         for l in res.keys():
             artCount = 0
+            newarts = 0
+            updarts = 0
 
             #print('[[:' + i + u':' + self.templatesList[i] +u'|' + i + u' wikipedia]]')
             if l in self.templatesList.keys():
@@ -947,6 +949,7 @@ class BasicBot(
                 artCount += 1
                 if i['newarticle']:
                     newarts += 1
+                    newartscount += 1
                     artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || %s || '  % (newarts,i['lang'],i['title'],i['creator'],i['creationDate'])
                     cList = []
                     for a in i['template']['country']:
@@ -960,6 +963,7 @@ class BasicBot(
                 else:
                     #finalpage += u" '''(updated)'''"
                     updarts += 1
+                    updartscount += 1
                     if i['template']['user']:
                         artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || ' % (updarts,i['lang'],i['title'],i['template']['user'])
                     else:
@@ -981,8 +985,8 @@ class BasicBot(
             finalpage += u'\nTotal number of articles ' + l + u'.wikipedia:' + str(artCount)
 
         finalpage += u'\n\n== Statistics =='
-        finalpage += u'\n\nNumber of new articles: ' + str(newarts)
-        finalpage += u'\n\nNumber of updated articles: ' + str(updarts)
+        finalpage += u'\n\nNumber of new articles: ' + str(newartscunt)
+        finalpage += u'\n\nNumber of updated articles: ' + str(updartscount)
         finalpage += u"\n\n'''Total number of articles: " + str(itemcount) + u"'''"
         finalpage += footer
         #pywikibot.output(finalpage)
