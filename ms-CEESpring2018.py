@@ -822,7 +822,7 @@ class BasicBot(
 
         finalpage = header
         itemcount = 0
-        finalpage += u'\n\nLength of new articles excluding disabled parts in text. Word count approximated."
+        finalpage += u'\n\nLength of new articles excluding disabled parts in text. Word count approximated.'
         finalpage += u'\n== Article length ==\n'
         #ath = sorted(self.authors, reverse=True)
         ath = sorted(res, key=res.__getitem__, reverse=True)
