@@ -331,6 +331,8 @@ ignorelist = [
     re.compile('.*[\./@]rsssf\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]stare-babice\.pl/sites/default/files/attachment/ludnosc_w_podziale_na_miejscowosci_2010_2015.pdf'),  # bot rejected on site (masti)
     re.compile('.*[\./@]mpu\.bydgoszcz\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]boxrec\.com'),  # bot rejected on site (masti)
+
 ]
 
 
