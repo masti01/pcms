@@ -60,7 +60,7 @@ docuReplacements = {
     '&params;': pagegenerators.parameterHelp
 }
 CEEtemplates = {'pl' : 'Szablon:CEE Spring 2018', 'az' : 'Şablon:Vikibahar 2018', 'ba' : 'Ҡалып:Вики-яҙ 2018', 'be' : 'Шаблон:CEE Spring 2018', 'be-tarask' : 'Шаблён:Артыкул ВікіВясны-2018', 'bg' : 'Шаблон:CEE Spring 2018', 'de' : 'Vorlage:CEE Spring 2018', 'el' : 'Πρότυπο:CEE Spring 2018', 'et' : 'Mall:CEE Spring 2018', 'hr' : 'Predložak:CEE proljeće 2018.', 'hy' : 'Կաղապար:CEE Spring 2018', 'ka' : 'თარგი:ვიკიგაზაფხული 2018', 'lv' : 'Veidne:CEE Spring 2018', 'lt' : 'Šablonas:VRE 2018', 'mk' : 'Шаблон:СИЕ Пролет 2018', 'ro' : 'Format:Wikimedia CEE Spring 2018', 'ru' : 'Шаблон:Вики-весна 2018', 'sr' : 'Шаблон:ЦЕЕ пролеће 2018', 'tr' : 'Şablon:Vikibahar 2018', 'uk' : 'Шаблон:CEE Spring 2018' }
-countryList =[ u'Albania', u'Armenia', u'Austria', u'Azerbaijan', u'Bashkortostan', u'Belarus', u'Bosnia and Herzegovina', u'Bulgaria', u'Crimean Tatars', u'Croatia', u'Czechia', u'Erzia', u'Esperanto', u'Estonia', u'Georgia', u'Greece', u'Hungary', u'Kazakhstan', u'Kosovo', u'Latvia', u'Lithuania', u'Macedonia', u'Moldova', u'Poland', u'Romania', u'Russia', u'Serbia', u'Slovakia', u'Turkey', u'Ukraine', u'Other' ]
+countryList =[ u'Albania', u'Armenia', u'Austria', u'Azerbaijan', u'Bashkortostan', u'Belarus', u'Bosnia and Herzegovina', u'Bulgaria', u'Crimean Tatars', u'Croatia', u'Czechia', u'Erzia', u'Esperanto', u'Estonia', u'Georgia', u'Greece', u'Hungary', u'Kazakhstan', u'Kosovo', u'Latvia', u'Lithuania', u'Macedonia', u'Moldova', u'Poland', u'Romania', u'Russia', u'Serbia', u'Slovakia', u'Turkey', u'Ukraine', u'Other', u'Empty' ]
 countryNames = {
 'pl':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbejdżan':'Azerbaijan', 'Baszkortostan':'Bashkortostan', 'Białoruś':'Belarus', 'Bułgaria':'Bulgaria', 'Armenia':'Armenia', 'Bośnia i Hercegowina':'Bosnia and Herzegovina', 'Erzja':'Erzia', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Gruzja':'Georgia', 'Czechy':'Czechia', 'Chorwacja':'Croatia', 'Kosowo':'Kosovo', 'Tatarzy krymscy':'Crimean Tatars', 'Litwa':'Lithuania', 'Łotwa':'Latvia', 'Węgry':'Hungary', 'Macedonia':'Macedonia', 'Mołdawia':'Moldova', 'Polska':'Poland', 'Rosja':'Russia', 'Rumunia':'Romania', 'Republika Serbska':'Serbia', 'Serbia':'Serbia', 'Słowacja':'Slovakia', 'Turcja':'Turkey', 'Ukraina':'Ukraine', 'Grecja':'Greece', 'Kazachstan':'Kazakhstan', },
 'az':{ 'Albaniya':'Albania', 'Avstriya':'Austria', 'Azərbaycan':'Azerbaijan', 'Başqırdıstan':'Bashkortostan', 'Belarus':'Belarus', 'Bolqarıstan':'Bulgaria', 'Ermənistan':'Armenia', 'Bosniya və Herseqovina':'Bosnia and Herzegovina', 'Erzya':'Erzia', 'Esperantida':'Esperanto', 'Estoniya':'Estonia', 'Gürcüstan':'Georgia', 'Çexiya':'Czechia', 'Xorvatiya':'Croatia', 'Kosovo':'Kosovo', 'Krımtatar':'Crimean Tatars', 'Krım tatarları':'Crimean Tatars', 'Krım-Tatar':'Crimean Tatars', 'Litva':'Lithuania', 'Latviya':'Latvia', 'Macarıstan':'Hungary', 'Makedoniya':'Macedonia', 'Moldova':'Moldova', 'Polşa':'Poland', 'Rusiya':'Russia', 'Rumıniya':'Romania', 'Serb Respublikası':'Serbia', 'Serbiya':'Serbia', 'Slovakiya':'Slovakia', 'Türkiyə':'Turkey', 'Ukrayna':'Ukraine', 'Yunanıstan':'Greece', 'Qazaxıstan':'Kazakhstan', },
@@ -180,7 +180,8 @@ class BasicBot(
 
         header = u'{{TNT|Wikimedia CEE Spring 2018 navbar}}\n\n'
         header += u'{{Wikimedia CEE Spring 2018/Statistics/Header}}\n\n'
-        header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
+        #header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
+        header += u"Last update: '''~~~~~'''.\n\n"
         footer = u''
 
         #generate dictionary of articles
@@ -281,20 +282,28 @@ class BasicBot(
                 #print a
                 artCount += 1
                 lang = a['lang'] #source language
-                tmpl = a['template'] #template data {country:[clist], women:T/F}
+                tmpl = a['template'] #template data {country:[clist], women:T/F, nocountry:T/F}
+                if self.getOption('test2'):
+                    pywikibot.output('tmpl:%s' % tmpl)
                 if u'country' in tmpl.keys():
                     cList = tmpl['country']
                 else:
                     continue
                 if lang not in self.countryTable.keys():
                         self.countryTable[lang] = {}
-                for c in cList:
-                    if c not in self.countryTable[lang].keys():
-                        self.countryTable[lang][c] = 0
-                    self.countryTable[lang][c] += 1
-                    countryCount += 1
-                    if self.getOption('test'):
-                        pywikibot.output(u'art:%i coutry:%i, [[%s:%s]]' % (artCount, countryCount, lang, a['title']))
+                if tmpl['nocountry']:
+                    if 'Empty' in self.countryTable[lang].keys():
+                        self.countryTable[lang]['Empty'] += 1
+                    else:
+                        self.countryTable[lang]['Empty'] = 1
+                else:
+                    for c in cList:
+                        if c not in self.countryTable[lang].keys():
+                            self.countryTable[lang][c] = 0
+                        self.countryTable[lang][c] += 1
+                        countryCount += 1
+                        if self.getOption('test2'):
+                            pywikibot.output(u'art:%i coutry:%i, [[%s:%s]]' % (artCount, countryCount, lang, a['title']))
         return
 
     def createWomenTable(self,aList):
@@ -377,7 +386,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('ro'):
+                    if lang not in ('el'):
                          continue
 
                 self.templatesList[lang] = i.title()
@@ -467,14 +476,15 @@ class BasicBot(
             artParams['charcount'] = self.getArtLength(cleantext)
             artParams['wordcount'] = self.getWordCount(cleantext)
 
-            artParams['template'] = {u'country':[], 'user':creator, 'woman':woman}
-
+            artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':False}
 
             if lang in CEEtemplates.keys() and talk.exists():
                 TmplInfo = self.getTemplateInfo(talk, CEEtemplates[lang], lang)
                 artParams['template'] = TmplInfo
             if not artParams['template']['woman']:
                 artParams['template']['woman'] = woman
+            if not len(artParams['template']['country']):
+                artParams['template']['nocountry'] = True
             '''
             #hack for languages without templates
             countryEN = ''
@@ -507,13 +517,15 @@ class BasicBot(
             '''
 
             if u'template' not in artParams.keys():
-                artParams['template'] = {u'country':[], 'user':creator, 'woman':woman}
+                artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':True}
             if not artParams['newarticle'] : 
                 artParams['template']['user'] = creator
                 #artParams['creator'] = u'unknown'
 
 
             #print artParams
+            if self.getOption('test2'):
+                pywikibot.output('artParams:%s' % artParams)
         return(artParams)
 
     def checkWomen(self,art):
@@ -582,7 +594,7 @@ class BasicBot(
     def getTemplateInfo(self,page,template,lang):
         param = {}
         #author, creationDate = self.getUpdater(page)
-        parlist = {'country':[],'user':'dummy','woman':False}
+        parlist = {'country':[],'user':'dummy','woman':False, 'nocountry':False}
         #return dictionary with template params
         for t in page.templatesWithParams():
             title, params = t
@@ -590,9 +602,10 @@ class BasicBot(
             #print(params)
             tt = re.sub(ur'\[\[.*?:(.*?)\]\]', r'\1', title.title())
             if self.getOption('test2'):
-                pywikibot.output(u'tml:%s = %s = %s' % (title,tt,template) )
+                pywikibot.output(u'tml:%s * %s * %s' % (title,tt,template) )
             if tt == template:
                 paramcount = 1
+                countryDef = False # check if country defintion exists
                 parlist['woman'] = False
                 parlist['country'] = []
                 parlist['user'] = 'dummy'
@@ -604,7 +617,7 @@ class BasicBot(
                         name = str(paramcount)
                     param[name] = value
                     paramcount += 1
-                    if self.getOption('test'):
+                    if self.getOption('test2'):
                         pywikibot.output(u'p:%s' % p )
                     #check username in template
                     if lang in self.userp.keys() and name.lower().startswith(self.userp[lang].lower()):
@@ -615,7 +628,7 @@ class BasicBot(
                         parlist['user'] = value
                     #check article about women
                     if lang in self.topicp.keys() and name.lower().startswith(self.topicp[lang].lower()):
-                        if self.getOption('test'):
+                        if self.getOption('test2'):
                             pywikibot.output(u'topic:%s:%s' % (name,value))
                         if lang in self.womenp.keys() and value.lower().startswith(self.womenp[lang].lower()):
                             #self.women[lang] += 1
@@ -625,6 +638,7 @@ class BasicBot(
                         if self.getOption('test2'):
                             pywikibot.output(u'country:%s:%s' % (name,value))
                         if len(value)>0:
+                            countryDef = True
                             if lang in countryNames.keys() and value in (countryNames[lang].keys()):
                                 countryEN = countryNames[lang][value]
                                 parlist['country'].append(countryEN)
@@ -769,6 +783,9 @@ class BasicBot(
         finalpage += u" || '''" + str(totalTotal) + "'''"
         # generate table footer
         finalpage += u'\n|}'
+
+        finalpage += u"\n\n'''NOTE:''' the table counts references to respective countries. Arcticle can reference more than 1 country"
+
 
         finalpage += footer
 
