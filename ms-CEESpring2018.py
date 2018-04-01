@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Call:
-	python pwb.py masti/ms-CEESpring2018.py -page:"Szablon:CEE Spring 2018" -outpage:"Wikipedysta:Masti/CEE Spring 2018" -summary:"Bot uaktualnia tabelę"
+	python pwb.py masti/ms-CEESpring2018.py -page:"Szablon:CEE Spring 2018" -outpage:"meta:Wikimedia CEE Spring 2018/Statistics" -summary:"Bot updates statistics"
 
 
 Use global -simulate option for test purposes. No changes to live wiki
