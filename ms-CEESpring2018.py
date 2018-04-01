@@ -810,12 +810,24 @@ class BasicBot(
 
         finalpage = header
         itemcount = 0
+        artcount = 0
         finalpage += u'\n== Articles about women ==\n'
+
+        finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
+        finalpage += u'\n!#'
+        finalpage += u'\n!Wikipedia'
+        finalpage += u'\n!Articles'
+
         #ath = sorted(self.authors, reverse=True)
         ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
-            finalpage += u'\n# ' + a + u' - ' + str(res[a])
-            itemcount += res[a]
+            itemcount += 1
+            finalpage += u'\n|-\n| %i. || %s || %i' % (itemcount,a,res[a])
+            artcount += res[a]
+        # generate totals
+        finalpage += u'\n|-\n! !! Total: !! %i' % itemcount
+
+        finalpage += u'\n|}'
 
         finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
         finalpage += footer
