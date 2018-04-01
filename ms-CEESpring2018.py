@@ -889,21 +889,35 @@ class BasicBot(
         women = 0
         newbies = 0
         finalpage += u'\n== Authors ==\n'
+        finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
+        finalpage += u'\n!#'
+        finalpage += u'\n!User'
+        finalpage += u'\n!Articles'
+        finalpage += u'\n!New user'
+        finalpage += u'\n!Female'
+
         #ath = sorted(self.authors, reverse=True)
         ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
+            itemcount += 1
+            if 'UNKNOWN USER' in a:
+                finalpage += u'\n|-\n| %i. || %s || %i || ' % (itemcount,a,res[a])
+            else:
+                finalpage += u'\n|-\n| %i. || [[user:%s|%s]] || %i || ' % (itemcount,a,a,res[a])
             if self.authorsData[a]['newbie']: 
                 newbies += 1
-            finalpage += u'\n# ' + a + u' - ' + str(res[a])
-            if self.authorsData[a]['newbie']: 
-                newbies += 1
-                finalpage += u" - '''new editor'''"
+                finalpage += u'[[File:Noto Emoji Oreo 1f476 1f3fb.svg|25px]] || '
+            else:
+                finalpage += u'|| '
             if self.authorsData[a]['gender'] == u'female': 
                 women += 1
-                finalpage += u" - '''female editor'''"
+                finalpage += u'[[File:Noto Emoji Oreo 2640.svg|25px]]'
+
             if self.authorsData[a]['anon']:
                 anon += 1 
-            itemcount += 1
+
+        finalpage += u'\n|}'
+
 
         finalpage += u'\n\n== Statistics =='
         finalpage += u'\n* Number of authors: ' + str(itemcount)
