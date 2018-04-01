@@ -333,6 +333,7 @@ ignorelist = [
     re.compile('.*[\./@]mpu\.bydgoszcz\.pl'),  # bot rejected on site (masti)
     re.compile('.*[\./@]boxrec\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]leyendablanca\.galeon\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]journals\.indexcopernicus\.com'),  # slow site (masti)
 ]
 
 
