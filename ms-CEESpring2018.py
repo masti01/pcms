@@ -825,11 +825,11 @@ class BasicBot(
             finalpage += u'\n|-\n| %i. || %s || %i' % (itemcount,a,res[a])
             artcount += res[a]
         # generate totals
-        finalpage += u'\n|-\n! !! Total: !! %i' % itemcount
+        finalpage += u'\n|-\n! !! Total: !! %i' % artcount
 
         finalpage += u'\n|}'
 
-        finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
+        finalpage += u'\n\nTotal number of articles: ' + str(artcount)
         finalpage += footer
 
         #pywikibot.output(finalpage)
@@ -928,6 +928,7 @@ class BasicBot(
             if self.authorsData[a]['anon']:
                 anon += 1 
 
+        finalpage += u'\n|-\n! !! Total: !! !! %i !! %i' % (newbies,women)
         finalpage += u'\n|}'
 
 
