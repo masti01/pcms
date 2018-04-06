@@ -48,6 +48,10 @@ from pywikibot import pagegenerators
 import re
 from pywikibot import textlib
 from datetime import datetime
+import pickle
+from pywikibot import (
+    config, config2,
+)
 
 from pywikibot.bot import (
     MultipleSitesBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
@@ -164,8 +168,10 @@ class BasicBot(
             'testwomen': False, # make verbose output for women table
             'testnewbie': False, # make verbose output for newbies
             'testlength': False, # make verbose output for article length
+            'testpickle': False, # make verbose output for article list load/save
             'short': False, # make short run
             'append': False, 
+            'reset': False, # rebuild database from scratch
 
         })
 
@@ -176,6 +182,22 @@ class BasicBot(
         # assign the generator to the bot
         self.generator = generator
 
+    def articleExists(self,art):
+        #check if article already in springList
+        result = False
+        lang = art.site.code
+        title = art.title()
+        if self.getOption('testpickle'):
+            pywikibot.output('testing existence: [%s:%s]' % (lang,title))
+        if lang in self.springList.keys():
+            for a in self.springList[lang]:
+                if self.getOption('testpickle'):
+                    pywikibot.output('checking existence: [%s:%s]==%s' % (lang,title,a['title']))
+                if a['title'] == title:
+                    result = True
+                    return(result)
+        return(result)
+
     def run(self):
 
         header = u'{{TNT|Wikimedia CEE Spring 2018 navbar}}\n\n'
@@ -183,6 +205,10 @@ class BasicBot(
         #header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
         header += u"Last update: '''~~~~~'''.\n\n"
         footer = u''
+
+        #load springList from previous run
+        self.springList = self.loadArticleList()
+
 
         #generate dictionary of articles
         # article[pl:title] = pageobject
@@ -192,6 +218,10 @@ class BasicBot(
         pywikibot.output(u'ART INFO')
         count = 1
         for a in ceeArticles:
+            if self.articleExists(a):
+                if self.getOption('testpickle'):
+                    pywikibot.output('SKIPPING: [%s:%s]' % (a.site.code,a.title()))
+                continue
             aInfo = self.getArtInfo(a)
             if self.getOption('test'):
                 pywikibot.output(aInfo)
@@ -218,6 +248,10 @@ class BasicBot(
 
         self.printArtInfo(self.springList)
         #print self.springList
+
+        # save list for the future
+        self.saveArticleList(self.springList)
+
 
         self.createCountryTable(self.springList) #generate results for pages about countries 
         self.createWomenTable(self.springList) #generate results for pages about women
@@ -369,6 +403,34 @@ class BasicBot(
             pywikibot.output(self.lengthTable)
         return
 
+    def loadArticleList(self):
+        #load article list form pickled dictionary
+        result = {}
+        if self.getOption('reset'):
+            if self.getOption('testpickle'):
+                pywikibot.output('PICKLING SKIPPED at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        else:
+            if self.getOption('testpickle'):
+                pywikibot.output('PICKLING LOAD at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            try:
+                with open('masti/CEESpring2018.dat', 'rb') as datfile:
+                    result = pickle.load(datfile)
+            except (IOError, EOFError):
+                # no saved history exists yet, or history dump broken
+                if self.getOption('testpickle'):
+                    pywikibot.output('PICKLING FILE NOT FOUND')
+                result = {}
+        if self.getOption('testpickle'):
+            pywikibot.output('PICKLING RESULT:%s' % result)
+        return(result)
+
+    def saveArticleList(self,artList):
+        #save list as pickle file
+        if self.getOption('testpickle'):
+            pywikibot.output('PICKLING SAVE at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        with open('masti/CEESpring2018.dat', 'wb') as f:
+            pickle.dump(artList, f, protocol=config.pickle_protocol)
+
 
     def getArticleList(self):
         #generate article list
@@ -485,42 +547,11 @@ class BasicBot(
                 artParams['template']['woman'] = woman
             if not len(artParams['template']['country']):
                 artParams['template']['nocountry'] = True
-            '''
-            #hack for languages without templates
-            countryEN = ''
-            if lang == 'et':
-                countryET = etArticles[artParams['title']]
-                #if self.getOption('test2'):
-                #    pywikibot.output(u'countryET:%s' % countryET)
-                if countryET:
-                    if countryET in countryNames['et'].keys():
-                        countryEN = countryNames['et'][countryET]
-                    else:
-                        countryEN = countryET
-                #if self.getOption('test2'):
-                #    pywikibot.output(u'countryEN:%s' % countryEN)
-                artParams['template'] = {'country':[countryEN], 'user':etAuthors[artParams['title']], 'woman':woman}
-            if lang == 'hr':
-                countryHR = hrArticles[artParams['title']]
-                #if self.getOption('test2'):
-                #    pywikibot.output(u'countryHR:%s' % countryHR)
-                if countryHR:
-                    if countryHR in countryNames['hr'].keys():
-                        countryEN = countryNames['hr'][countryHR]
-                    else:
-                        countryEN = countryHR
-                #if self.getOption('test2'):
-                #    pywikibot.output(u'countryEN:%s' % countryEN)
-                artParams['template'] = {'country':[countryEN], 'user':creator, 'woman':woman}
-                if self.getOption('test2'):
-                    pywikibot.output(u'artParams[template]:%s' % artParams['template'])
-            '''
 
             if u'template' not in artParams.keys():
                 artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':True}
             if not artParams['newarticle'] : 
                 artParams['template']['user'] = creator
-                #artParams['creator'] = u'unknown'
 
 
             #print artParams
