@@ -221,10 +221,10 @@ class BasicBot(
             if self.articleExists(a):
                 if self.getOption('testpickle'):
                     pywikibot.output('SKIPPING: [%s:%s]' % (a.site.code,a.title()))
-                continue
-            aInfo = self.getArtInfo(a)
-            if self.getOption('test'):
-                pywikibot.output(aInfo)
+            else:    
+                aInfo = self.getArtInfo(a)
+                if self.getOption('test'):
+                    pywikibot.output(aInfo)
             count += 1
             #populate article list per language
             if aInfo['lang'] not in self.springList.keys():
@@ -270,8 +270,8 @@ class BasicBot(
     def newbie(self,lang,user):
         #check if user is a newbie
         newbieLimit =  datetime.strptime("2017-12-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
-        #if self.getOption('testnewbie'):
-        #    pywikibot.output('NEWBIE:%s' % self.authorsData)
+        if self.getOption('testnewbie'):
+            pywikibot.output('NEWBIE:%s' % self.authorsData)
         if user in self.authorsData.keys():
             if lang not in self.authorsData[user]['wikis']:
                 self.authorsData[user]['wikis'].append(lang)
