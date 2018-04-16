@@ -543,14 +543,14 @@ class BasicBot(
             woman = self.checkWomen(art)            
             artParams['title'] = art.title()
             artParams['lang'] = lang
-            artParams['creator'] = creator
+            artParams['creator'] = self.cleanUsername(creator)
             artParams['creationDate'] = creationDate
             artParams['newarticle'] = self.newArticle(art)
             cleantext = textlib.removeDisabledParts(art.text)
             artParams['charcount'] = self.getArtLength(cleantext)
             artParams['wordcount'] = self.getWordCount(cleantext)
 
-            artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':False}
+            artParams['template'] = {u'country':[], 'user':self.cleanUsername(creator), 'woman':woman, 'nocountry':False}
 
             if lang in CEEtemplates.keys() and talk.exists():
                 TmplInfo = self.getTemplateInfo(talk, CEEtemplates[lang], lang)
@@ -563,7 +563,7 @@ class BasicBot(
             if u'template' not in artParams.keys():
                 artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':True}
             if not artParams['newarticle'] : 
-                artParams['template']['user'] = creator
+                artParams['template']['user'] = self.cleanUsername(creator)
 
 
             #print artParams
