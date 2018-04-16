@@ -233,12 +233,16 @@ class BasicBot(
             #populate authors list
             if aInfo['newarticle']:
                 user = aInfo['creator']
+                if self.getOption('testnewbie'):
+                    pywikibot.output('NEWBIE CREATOR:%s' % user)
                 if aInfo['creator'] not in self.authors.keys():
                     self.authors[aInfo['creator']] = 1
                 else:
                     self.authors[aInfo['creator']] += 1
             else:
                 user = aInfo['template']['user']
+                if self.getOption('testnewbie'):
+                    pywikibot.output('NEWBIE FROM TEMPLATE:%s' % user)
                 if aInfo['template']['user'] not in self.authors.keys():
                     self.authors[aInfo['template']['user']] = 1
                 else:
