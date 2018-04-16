@@ -284,6 +284,8 @@ class BasicBot(
         userpage = u'user:' + user
         site = pywikibot.Site(lang,fam='wikipedia')
         #page = pywikibot.Page(site,userpage)
+        if self.getOption('testnewbie'):
+            pywikibot.output('GETTING USER DATA:[[:%s:%s]]' % (lang,userpage))
         userdata = pywikibot.User(site,userpage)
         self.authorsData[user]['anon'] = userdata.isAnonymous()
         if self.authorsData[user]['anon']:
