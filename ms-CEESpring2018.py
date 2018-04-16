@@ -526,6 +526,12 @@ class BasicBot(
         # get article length
         return(len(text))
 
+    def cleanUsername(self,user):
+        # remove lang> from username
+        if '>' in user:
+            user = re.sub(r'.*\>','',user)
+        return(user)        
+
     def getArtInfo(self,art):
         #get article language, creator, creation date
         artParams = {}
