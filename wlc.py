@@ -334,6 +334,19 @@ ignorelist = [
     re.compile('.*[\./@]boxrec\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]leyendablanca\.galeon\.com'),  # bot rejected on site (masti)
     re.compile('.*[\./@]journals\.indexcopernicus\.com'),  # slow site (masti)
+    re.compile('.*[\./@]pingzhen\.tycg\.gov\.tw'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]demografia\.stat\.gov\.pl/bazademografia/Tables\.aspx'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]dlibra\.umcs\.lublin\.pl/dlibra/plain-content\?id=3251'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]spsarnow\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]kloczew\.eurzad\.eu'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]skisprungschanzen\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]esbl\.ee/biograafia'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]gimnazjum\.bystrzyca\.eu'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]liceum1\.bystrzyca\.eu'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]zso\.bystrzyca\.eu'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]genealogics\.org/getperson\.php'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]orzeczenia\.nsa\.gov\.pl/doc/'),  # bot rejected on site (masti)
+
 ]
 
 
