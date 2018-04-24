@@ -87,6 +87,7 @@ class BasicBot(
         'weeks':{},
         'days':{},
         'incdays':{},
+        'positions':{},
     }
 
     def __init__(self, generator, **kwargs):
@@ -115,6 +116,7 @@ class BasicBot(
             'testweeks': False, # make verbose output for weekly results
             'testincdays': False, # make verbose output for incremental days results
             'testiw': False, # make verbose output for interwikis
+            'testchange': False, # make verbose output for position changes
 
         })
 
@@ -203,11 +205,21 @@ class BasicBot(
             pywikibot.output('WIKICHALLENGE')
             pywikibot.output(self.wikichallenge)
 
+        self.resetCounters()
         self.countDayResults()
         self.countWeekResults()
         self.printSortedDays()
         self.countIncDayResults()
         self.printSortedIncDays()
+        self.countPositions()
+
+    def resetCounters(self):
+        #reset all counters after getting info on articles
+        self.wikichallenge['users'] = {}
+        self.wikichallenge['weeks'] = {}
+        self.wikichallenge['days'] = {}
+        self.wikichallenge['incdays'] = {}
+        self.wikichallenge['positions'] = {}
 
     def printSortedDays(self):
         for i in sorted(self.wikichallenge['days'].keys()):
@@ -298,7 +310,7 @@ class BasicBot(
         for au in auR.finditer(text):
             count += 1
             #pywikibot.output('Art:[[%s]], User:%s' % (au.group('title'),au.group('user')))
-            result.append((au.group('title'),au.group('user')))
+            result.append((au.group('title'),au.group('user').strip()))
         return(result)
 
     def wikiweek(self,day):
@@ -424,12 +436,13 @@ class BasicBot(
             finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
             finalpage += u'\n|-'
             finalpage += u'\n! #'
+            finalpage += u'\n! Zmiana'
             finalpage += u'\n! Autor'
             finalpage += u'\n! Punkty'
             for u,p in sorted(incDays[i].items(), key=operator.itemgetter(1), reverse=True):
                 count += 1
                 finalpage += u'\n|-\n| '
-                finalpage += '%i. || [[Wikipedysta:%s|%s]] || %i' % (count, u, u, p)
+                finalpage += '%i. || %s || [[Wikipedysta:%s|%s]] || %i' % (res['positions'][i][u], self.posDiff(u,i), u, u, p)
             finalpage += u'\n|}'
 
 
@@ -439,7 +452,7 @@ class BasicBot(
 
         finalpage += '\n== Wyniki konkursów 6-dniowych =='
         for i in sorted(weeks.keys(),reverse=True):
-            finalpage += '\n=== Konkurs %s. ===' % i
+            finalpage += '\n=== Konkurs %i. (%s - %s) dzień %i. ===' % (i,self.numberToDay(i*6-5),self.numberToDay(i*6)) 
             count = 0
             finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
             finalpage += u'\n|-'
@@ -459,8 +472,6 @@ class BasicBot(
             pywikibot.output(u'ArticleList:%s' % outpage.title())
         outpage.text = finalpage
         outpage.save(summary=self.getOption('summary'))
-
-        
 
     def countIncDayResults(self):
         #count result incrementaly
@@ -498,25 +509,9 @@ class BasicBot(
                         pywikibot.output('incDays setting: %s=%i' % (u,p))
                     self.wikichallenge['incdays'][i][u] = p
                 
-            ''''
-                for u,p in list(self.wikichallenge['incdays'][i-1]):
-                    pywikibot.output('u:%s, p:%s' % (u,p))
-                    self.wikichallenge['incdays'][i][u] = p
-            pywikibot.output('incDays: i:%s***%s' % (i,self.wikichallenge['incdays'][i]))
-
-            
-            for u,p in currDay:
-                pywikibot.output('a:%s>>>%s' % (u,p))
-                if i == 1 or u not in self.wikichallenge['incdays'][i].keys():
-                    self.wikichallenge['incdays'][i][a][u] = p
-                else:
-                    self.wikichallenge['incdays'][i][a][u] += p
-            '''
         if self.getOption('testincdays'):
             pywikibot.output('CHALLENGE INCDAYS:%s' % self.wikichallenge['incdays'])
           
-
-
     def countDayResults(self):
         #count result per each day
         for a in self.wikichallenge['articles'].keys():
@@ -545,6 +540,56 @@ class BasicBot(
                 self.wikichallenge['weeks'][currArtN][currArt['author']] = currArt['points']
         if self.getOption('testweeks'):
             pywikibot.output('CHALLENGE WEEKS:%s' % self.wikichallenge['weeks'])
+
+    def countPositions(self):
+        #count user positions in contest
+        days = self.wikichallenge['incdays']
+        for d in days.keys():
+            results = days[d]
+            if self.getOption('testchange'):
+                pywikibot.output('POS RESULTS:%s' % results)
+            positions = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
+            if self.getOption('testchange'):
+                pywikibot.output('POSITIONS:%s' % positions)
+            count = 0
+            self.wikichallenge['positions'][d] = {}
+            pos = self.wikichallenge['positions'][d]
+            for u,p in positions:
+                if not count:
+                    count += 1
+                    pos[u] = count
+                    oldpoints = p
+                    oldcount = count
+                else:
+                    count += 1
+                    if p == oldpoints:
+                        pos[u] = oldcount
+                    else:
+                        pos[u] = count
+                        oldpoints = p
+                        oldcount = count
+            if self.getOption('testchange'):
+                pywikibot.output('POSITIONS CALCULATED:%s' % sorted(pos.items(), key=operator.itemgetter(1)))
+
+    def posDiff(self,user,currday):
+        #calculate change position in user position
+        # return {{zmiana|wzrost|2}} or '''N'''
+        prevday = currday - 1
+        if not prevday:
+            return("'''N'''")
+        pday = self.wikichallenge['positions'][prevday]
+        cday = self.wikichallenge['positions'][currday]
+        if user in pday.keys():
+            diff = pday[user] - cday[user]
+            if diff < 0:
+               return('{{zmiana|spadek}} %i' % diff)
+            elif diff > 0:
+               return('{{zmiana|wzrost}} +%i' % diff)
+            else:
+               return('{{zmiana|stagnacja}}')
+        else:
+            return("'''N'''")
+                       
 
 
 def templateWithNamedParams(self):
