@@ -156,7 +156,8 @@ class BasicBot(
     def run(self):
 
         header = '{{Wikipedia:Wikiwyzwanie/nawigacja}}\n\n'
-        header += "Ostatnia aktualizacja przez bota: '''~~~~~'''.\n\n"
+        header += "Ostatnia aktualizacja przez bota: '''~~~~~'''.\n"
+        header += "*<small>'''Uwaga:''' aktualizacje codziennie po północy.\n\n"
         header += "{{Spis treści}}\n\n"
 
 
