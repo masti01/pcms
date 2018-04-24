@@ -157,7 +157,7 @@ class BasicBot(
 
         header = '{{Wikipedia:Wikiwyzwanie/nawigacja}}\n\n'
         header += "Ostatnia aktualizacja przez bota: '''~~~~~'''.\n"
-        header += "*<small>'''Uwaga:''' aktualizacje codziennie po północy.\n\n"
+        header += "*<small>'''Uwaga:''' aktualizacje codziennie po północy.</small>\n\n"
         header += "{{Spis treści}}\n\n"
 
 
