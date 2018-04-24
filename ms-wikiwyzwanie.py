@@ -452,7 +452,7 @@ class BasicBot(
 
         finalpage += '\n== Wyniki konkursów 6-dniowych =='
         for i in sorted(weeks.keys(),reverse=True):
-            finalpage += '\n=== Konkurs %i. (%s - %s) dzień %i. ===' % (i,self.numberToDay(i*6-5),self.numberToDay(i*6)) 
+            finalpage += '\n=== Konkurs %i. (%s - %s) ===' % (i,self.numberToDay(i*6-5),self.numberToDay(i*6)) 
             count = 0
             finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
             finalpage += u'\n|-'
