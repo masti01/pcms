@@ -233,13 +233,13 @@ class BasicBot(
                     finalpage += u'{{Edytuj|%s|%s}}' % ( nakedtitle,nakedtitle)
                 else:
                     finalpage += re.sub(ur'\[\[',u'[[:',title, count=1)
+            finalpage += u' || '
             else:
                 if self.getOption('edit'):
                     nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
                     finalpage += u'\n:' + linenumber + ' {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
                 else:
                     finalpage += u'\n:' + linenumber + u' ' + re.sub(ur'\[\[',u'[[:',title, count=1)
-            finalpage += u' || '
             if self.getOption('regex') and self.getOption('cite') and not self.getOption('negative'):
                 if self.getOption('multi'):
                     #results are list
@@ -328,6 +328,7 @@ class BasicBot(
 
         if self.getOption('test'):
             pywikibot.output(outpage.title())
+            pywikibot.output(outpage.text)
         
         success = outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
