@@ -221,7 +221,10 @@ class BasicBot(
                 result.append(p.title())
                 disambcounter += 1
         if len(result):
-            return(result)
+            if len(result) < int(self.getOption('minlinks')):
+                return(None)
+            else: 
+                return(result)
         else:
             return(None)
 
@@ -254,7 +257,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage', 'maxlines'):
+        if option in ('summary', 'text', 'outpage', 'maxlines','minlinks'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
