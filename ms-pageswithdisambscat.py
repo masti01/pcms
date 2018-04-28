@@ -4,7 +4,7 @@
 This bot creates a page with list of pages with most linked disambigs:
 Wikiprojekt:Strony ujednoznaczniające z linkami/Wiele linków z pojedynczych artykułów
 
-Call: python pwb.py masti/ms-pageswithdisambs.py -start:'!' -summary:"Bot aktualizuje stronę" -outpage:'Wikiprojekt:Strony ujednoznaczniające z linkami/Wiele linków z pojedynczych artykułów'
+Call: python pwb.py masti/ms-pageswithdisambscat.py -cat:'Strony ujednoznaczniające' -summary:"Bot aktualizuje stronę" -outpage:'Wikiprojekt:Strony ujednoznaczniające z linkami/Wiele linków z pojedynczych artykułów'
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
