@@ -102,6 +102,7 @@ class BasicBot(
             'test': False, #test printouts
             'testlinks': False, #test printouts
             'progress': False, #show progress
+            'resprogress': False, #show progress in generating results
             'minlinks': 50, #print only >minlinks results
 
         })
@@ -141,7 +142,7 @@ class BasicBot(
 
     def run(self):
         #prepare new page
-        header = u'Poniżej znajduje się lista artykułów najbardziej linkujących do [[:Kategoria:Strony ujednoznaczniające|stron ujednoznaczniających]].\n\n'
+        header = u'Poniżej znajduje się lista artykułów linkujących do conajmniej %s [[:Kategoria:Strony ujednoznaczniające|stron ujednoznaczniających]].\n\n' % self.getOption('minlinks')
 	#header += u':<small>Pominięto strony z szablonem {{s|Inne znaczenia}}</small>\n\n'
 	header += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja przez bota: '''~~~~~'''. \n"
 	header += u'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
@@ -153,7 +154,9 @@ class BasicBot(
         for page in self.generator:
             if self.getOption('progress'):
                 pywikibot.output(u'%s #%i (%i) Treating:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, refscounter, page.title(asLink=True)) )
-            self.treat(page)
+            refs = self.treat(page)
+            if self.getOption('progress'):
+                pywikibot.output('%s #%i refs found:%i' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, refs))
             counter += 1
 
         result = self.generateresultspage(self.results,self.getOption('outpage'),header,footer)
@@ -181,7 +184,7 @@ class BasicBot(
         for i in res:
             count = self.redirCount(redirlist[i])
             l = redirlist[i]['list']
-            if self.getOption('test'):
+            if self.getOption('resprogress'):
                 pywikibot.output('i:[[%s]], count:%i, l:%s' % (i,count,l))
 
             if count < int(self.getOption('minlinks')):
@@ -226,7 +229,7 @@ class BasicBot(
             if self.getOption('testlinks'):
                 pywikibot.output(u'%s #%i (%i) In %s checking:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, disambcounter,page.title(asLink=True), p.title(asLink=True)) )
             self.addResult(page.title(),p.title())
-        return
+        return(counter)
 
 def main(*args):
     """
