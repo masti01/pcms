@@ -186,7 +186,7 @@ class BasicBot(
             # d is day number
             artUsers = self.getArtsUsers(days[d]['body'])
             for t,u in artUsers:
-                if t in self.wikichallenge['articles'].keys() and not t in ['Ruggero Franceschini']:
+                if t in self.wikichallenge['articles'].keys():
                     pywikibot.output('SKIPPING:[[%s]]' % t)
                     continue
                 interwiki = self.countInterwiki(t)
