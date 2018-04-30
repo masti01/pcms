@@ -259,7 +259,7 @@ class BasicBot(
         for p in linkR.finditer(page.text):
             counter += 1
             t = p.group('title')
-            if t in checkedpages:
+            if t in checkedpages or t == '':
                 continue
             checkedpages.append(t)
             rp = pywikibot.Page(pywikibot.Site(),t)
