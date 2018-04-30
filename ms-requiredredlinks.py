@@ -192,7 +192,7 @@ class BasicBot(
             strcount = str(count)
             if count == 1:
                  suffix = u''
-            elif strcount[len(strcount)-1] in (u'2',u'3',u'4') and count>20 :
+            elif strcount[len(strcount)-1] in (u'2',u'3',u'4') and (count>20 or count<10) :
                  suffix = u'i'
             else:
                  suffix = u'ów'
@@ -222,15 +222,24 @@ class BasicBot(
     def treat(self, page):
         #get all linkedPages
         # check for disambigs
+        linkR = re.compile(ur'\[\[(?P<title>.*?)(#(?P<section>.*?))?(\|(?P<label>.*?))?\]\]')
         counter = 0
         reqcounter = 0
-        for p in page.getReferences(namespaces=0):
+        checkedpages = []
+        for p in linkR.finditer(page.text):
             counter += 1
+            t = p.group('title')
+            if t in checkedpages:
+                continue
+            checkedpages.append(t)
+            rp = pywikibot.Page(pywikibot.Site(),t)
+            if not rp.namespace()==0:
+                continue
             if self.getOption('testlinks'):
-                pywikibot.output(u'%s #%i (%i) In %s checking:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, reqcounter,page.title(asLink=True), p.title(asLink=True)) )
-            if not p.exists():
+                pywikibot.output(u'%s #%i (%i) In %s checking:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, reqcounter,page.title(asLink=True), rp.title(asLink=True)) )
+            if not rp.exists():
                 reqcounter += 1
-                self.addResult(page.title(),p.title())
+                self.addResult(page.title(),rp.title())
         return(reqcounter)
 
 def main(*args):
