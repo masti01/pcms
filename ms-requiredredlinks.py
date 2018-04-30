@@ -79,6 +79,22 @@ class BasicBot(
 
     summary_key = 'basic-changing'
     results = {}
+    ranges = [(100,'100+'), 
+        (50,'50-99'),
+        (40,'40-49'),
+        (30, '30-39'),
+        (25, '25-29'),
+        (22, '22-24'),
+        (20, '20-21'),
+        (18, '18-19'),
+        (16, '16-17'),
+        (15, '15'),
+        (14, '14'),
+        (13, '13'),
+        (12, '12'),
+        (11, '11'),
+        (10, '10')
+    ]
 
     def __init__(self, generator, **kwargs):
         """
@@ -142,11 +158,13 @@ class BasicBot(
 
     def run(self):
         #prepare new page
-        header = 'Na tej stronie znajdują się najbardziej potrzebne strony, do których linki pojawiają się na 100+ stronach.\n\n' 
-	#header += u':<small>Pominięto strony z szablonem {{s|Inne znaczenia}}</small>\n\n'
-	header += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja przez bota: '''~~~~~'''. \n"
+        # replace @@ with number of pages
+        header = 'Na tej stronie znajdują się najbardziej potrzebne strony, do których linki pojawiają się na @@ stronach.\n\n'
+        header += 'Po prawej podana jest liczba dolinkowanych. Niebieskie linki do wycięcia. Czerwone do ewentualnego przenoszenia na podstrony [[Wikipedia:Brakujące hasła|brakujących haseł]].\n\n' 
+	header += "Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja przez bota: '''~~~~~'''. \n\n"
 	header += u'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
-        footer = u'\n\n[[[[Kategoria:Najbardziej potrzebne strony]]'
+        #footer = u'\n\n[[Kategoria:Najbardziej potrzebne strony]]'
+        footer = ''
 
         counter = 1
         refscounter = 0
@@ -173,7 +191,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        finalpage = header
+        finalpage = ''
         res = sorted(redirlist, key=redirlist.__getitem__, reverse=True)
         if self.getOption('test'):
             pywikibot.output('***** INPUT *****')
@@ -181,32 +199,43 @@ class BasicBot(
             pywikibot.output('***** RESULT *****')
             pywikibot.output(res)
         linkcount = 0
+        rangenumber = 0
+        limit,subpage = self.ranges[rangenumber]
         for i in res:
             count = self.redirCount(redirlist[i])
             l = redirlist[i]['list']
             if self.getOption('resprogress'):
                 pywikibot.output('i:[[%s]], count:%i, l:%s' % (i,count,l))
 
-            #if count < int(self.getOption('minlinks')):
-            #      continue
+            if count < int(self.getOption('minlinks')):
+                  return
+            if count < limit:
+                self.savepart(finalpage,subpage,self.getOption('outpage')+'/'+subpage,header,footer)
+                rangenumber += 1
+                limit,subpage = self.ranges[rangenumber]
+                finalpage += ''
+
+            #finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])  &larr; [[%s]]' % (i,i,str(count),suffix,']], [['.join(l))
+            finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%i link%s]])' % (i,i,count,self.suffix(count))
+            
+
+    def suffix(self,count):
             strcount = str(count)
             if count == 1:
-                 suffix = u''
+                 return('')
             elif strcount[len(strcount)-1] in (u'2',u'3',u'4') and (count>20 or count<10) :
-                 suffix = u'i'
+                 return('i')
             else:
-                 suffix = u'ów'
-            #finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])  &larr; [[%s]]' % (i,i,str(count),suffix,']], [['.join(l))
-            finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])' % (i,i,str(count),suffix)
+                 return('ów')
 
-        finalpage += footer
 
+    def savepart(self, body, suffix, pagename, header, footer):
         if self.getOption('test'):
             pywikibot.output('***** FINALPAGE *****')
-            pywikibot.output(finalpage)
+            pywikibot.output(body)
 
-        outpage = pywikibot.Page(pywikibot.Site(), pagename)
-        outpage.text = finalpage
+        outpage = pywikibot.Page(pywikibot.Site(), pagename+'/'+suffix)
+        outpage.text = re.sub(r'@@',suffix,header) + body + footer
         outpage.save(summary=self.getOption('summary'))
 
         #if self.getOption('test'):
