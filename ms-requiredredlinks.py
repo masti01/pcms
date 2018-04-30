@@ -196,7 +196,8 @@ class BasicBot(
                  suffix = u'i'
             else:
                  suffix = u'ów'
-            finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])  &rarr; [[%s]]' % (i,i,str(count),suffix,']], [['.join(l))
+            #finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])  &larr; [[%s]]' % (i,i,str(count),suffix,']], [['.join(l))
+            finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])' % (i,i,str(count),suffix)
 
         finalpage += footer
 
