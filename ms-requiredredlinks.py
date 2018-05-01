@@ -256,7 +256,7 @@ class BasicBot(
         counter = 0
         reqcounter = 0
         checkedpages = []
-        for p in linkR.finditer(page.text):
+        for p in linkR.finditer(textlib.removeDisabledParts(page.text)):
             counter += 1
             t = p.group('title')
             if t in checkedpages or t == '':
