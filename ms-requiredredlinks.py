@@ -262,9 +262,12 @@ class BasicBot(
             t = p.group('title')
             if t in checkedpages or t == '':
                 continue
-            checkedpages.append(t)
-            rp = pywikibot.Page(pywikibot.Site(),t)
-            if not rp.namespace()==0:
+            try:
+                rp = pywikibot.Page(pywikibot.Site(),t)
+                if not rp.namespace()==0:
+                    continue
+                checkedpages.append(t)
+            except:
                 continue
             if self.getOption('testlinks'):
                 pywikibot.output(u'%s #%i (%i) In %s checking:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, reqcounter,page.title(asLink=True), rp.title(asLink=True)) )
