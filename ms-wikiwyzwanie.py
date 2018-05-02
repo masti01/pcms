@@ -168,6 +168,9 @@ class BasicBot(
         #load articleList from previous run
         self.loadArticleList()
 
+        # tempporary - remove duplicated entry
+        del self.wikichallenge['articles']['Tritemiusz']
+
         for p in self.generator:
             pywikibot.output(u'Treating: %s' % p.title())
             self.treat(p)
