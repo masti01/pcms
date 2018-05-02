@@ -266,14 +266,14 @@ class BasicBot(
                 rp = pywikibot.Page(pywikibot.Site(),t)
                 if not rp.namespace()==0:
                     continue
+                if self.getOption('testlinks'):
+                    pywikibot.output(u'%s #%i (%i) In %s checking:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, reqcounter,page.title(asLink=True), rp.title(asLink=True)) )
+                if not rp.exists():
+                    reqcounter += 1
+                    self.addResult(page.title(),rp.title())
                 checkedpages.append(t)
             except:
                 continue
-            if self.getOption('testlinks'):
-                pywikibot.output(u'%s #%i (%i) In %s checking:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, reqcounter,page.title(asLink=True), rp.title(asLink=True)) )
-            if not rp.exists():
-                reqcounter += 1
-                self.addResult(page.title(),rp.title())
         return(reqcounter)
 
 def main(*args):
