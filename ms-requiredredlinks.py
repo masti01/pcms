@@ -95,6 +95,7 @@ class BasicBot(
         (12, '12'),
         (11, '11'),
         (10, '10')
+        (5, '5+'),
     ]
 
     def __init__(self, generator, **kwargs):
@@ -218,6 +219,7 @@ class BasicBot(
 
             #finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])  &larr; [[%s]]' % (i,i,str(count),suffix,']], [['.join(l))
             finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%i link%s]])' % (i,i,count,self.suffix(count))
+        return
             
 
     def suffix(self,count):
@@ -241,7 +243,7 @@ class BasicBot(
 
         #if self.getOption('test'):
         #    pywikibot.output(redirlist)
-        return(res)
+        return
       
     def addResult(self,what,where):
         if not where in self.results.keys():
