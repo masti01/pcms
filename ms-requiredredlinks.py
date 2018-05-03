@@ -162,7 +162,7 @@ class BasicBot(
         #prepare new page
         # replace @@ with number of pages
         header = 'Na tej stronie znajdują się najbardziej potrzebne strony, do których linki pojawiają się na @@ stronach.\n\n'
-        header += 'Po prawej podana jest liczba dolinkowanych. Niebieskie linki do wycięcia. Czerwone do ewentualnego przenoszenia na podstrony [[Wikipedia:Brakujące hasła|brakujących haseł]].\n\n' 
+        header += 'Po prawej podana jest liczba dolinkowanych. Niebieskie linki do wycięcia. Czerwone do ewentualnego przenoszenia na podstrony [[Wikipedia:Prpozycje tematów|propozycji tematów]].\n\n' 
 	header += "Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja przez bota: '''~~~~~'''. \n\n"
 	header += u'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
         #footer = u'\n\n[[Kategoria:Najbardziej potrzebne strony]]'
