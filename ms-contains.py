@@ -233,7 +233,7 @@ class BasicBot(
                     finalpage += u'{{Edytuj|%s|%s}}' % ( nakedtitle,nakedtitle)
                 else:
                     finalpage += re.sub(ur'\[\[',u'[[:',title, count=1)
-            finalpage += u' || '
+                finalpage += u' || '
             else:
                 if self.getOption('edit'):
                     nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
