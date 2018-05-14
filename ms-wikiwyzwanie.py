@@ -170,6 +170,8 @@ class BasicBot(
 
         # tempporary - remove duplicated entry
         #del self.wikichallenge['articles']['Tritemiusz']
+        for t in ['Buttwil', 'Raron', 'Moosleerau', 'Antonio Sacchini']:
+            del self.wikichallenge['articles'][t]
 
         for p in self.generator:
             pywikibot.output(u'Treating: %s' % p.title())
