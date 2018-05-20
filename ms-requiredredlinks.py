@@ -211,11 +211,12 @@ class BasicBot(
 
             if count < int(self.getOption('minlinks')):
                   return
-            if count < limit:
-                self.savepart(finalpage,subpage,self.getOption('outpage')+'/'+subpage,header,footer)
+            while count < limit:
+                self.savepart(finalpage,subpage,self.getOption('outpage'),header,footer)
                 rangenumber += 1
                 limit,subpage = self.ranges[rangenumber]
-                finalpage += ''
+                finalpage = ''
+                continue
 
             #finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])  &larr; [[%s]]' % (i,i,str(count),suffix,']], [['.join(l))
             finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%i link%s]])' % (i,i,count,self.suffix(count))
