@@ -216,7 +216,7 @@ class BasicBot(
                 rangenumber += 1
                 limit,subpage = self.ranges[rangenumber]
                 finalpage = ''
-                continue
+
 
             #finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%s link%s]])  &larr; [[%s]]' % (i,i,str(count),suffix,']], [['.join(l))
             finalpage += u'\n# [[%s]] ([[Specjalna:Linkujące/%s|%i link%s]])' % (i,i,count,self.suffix(count))
