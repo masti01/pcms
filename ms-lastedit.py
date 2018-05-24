@@ -154,11 +154,14 @@ class BasicBot(
         for tpage in self.generator:
             if tpage.namespace() == 1:
                 pywikibot.output('TOGGLING')
-                tpage = tpage.toggleTalkPage()
+                checkpage = tpage.toggleTalkPage()
+            else:
+                pywikibot.output('NOT TOGGLING')
+                checkpage = tpage
 	    licznik += 1
             if self.getOption('test'):
-                pywikibot.output(u'Treating #%i: %s' % (licznik, tpage.title()))
-            refs = self.treat(tpage) # get (name, id, creator, lastedit)
+                pywikibot.output(u'Treating #%i: %s' % (licznik, checkpage.title()))
+            refs = self.treat(checkpage) # get (name, id, creator, lastedit)
             if self.getOption('test'):
                 pywikibot.output(refs)
             reflinks.append(refs)
