@@ -50,6 +50,10 @@ from pywikibot.tools import issue_deprecation_warning
 
 import re
 import datetime
+import pickle
+from pywikibot import (
+    comms, i18n, config, pagegenerators, textlib, weblib, config2,
+)
 
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
@@ -122,6 +126,7 @@ class BasicBot(
             'progress': False, #show progress
             'resprogress': False, #show progress in generating results
             'minlinks': 50, #print only >minlinks results
+            'reset': False, #reset saved data
 
         })
 
@@ -133,6 +138,17 @@ class BasicBot(
 
         # assign the generator to the bot
         self.generator = generator
+
+        if not self.getOption('reset'):
+            try:
+                pywikibot.output('READING PICKLE at %s' % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                with open('masti/reqlinks.dat', 'rb') as datfile:
+                    self.results = pickle.load(datfile)
+            except (IOError, EOFError):
+                # no saved history exists yet, or history dump broken
+                pywikibot.output('NO SAVED FILE at %s' % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                self.results = {}
+
 
     def _handle_dry_param(self, **kwargs):
         """
@@ -175,9 +191,16 @@ class BasicBot(
             if self.getOption('progress'):
                 pywikibot.output(u'%s #%i Treating:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, page.title(asLink=True)) )
             refs = self.treat(page)
+            if refs == 'STOP':
+                return
             if self.getOption('progress'):
                 pywikibot.output('%s #%i refs found:%i' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, refs))
             counter += 1
+
+        # pickle before generating result
+        pywikibot.output('END PICKLING at %s' % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        with open('masti/reqlinks.dat', 'wb') as f:
+            pickle.dump(self.results, f, protocol=config.pickle_protocol)
 
         result = self.generateresultspage(self.results,self.getOption('outpage'),header,footer)
 
@@ -275,6 +298,11 @@ class BasicBot(
                     reqcounter += 1
                     self.addResult(page.title(),rp.title())
                 checkedpages.append(t)
+            except KeyboardInterrupt:
+                pywikibot.output('PICKLING at %s' % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                with open('masti/reqlinks.dat', 'wb') as f:
+                    pickle.dump(self.results, f, protocol=config.pickle_protocol)
+                return('STOP')
             except:
                 continue
         return(reqcounter)
@@ -324,6 +352,7 @@ def main(*args):
         # pass generator and private options to the bot
         bot = BasicBot(gen, **options)
         bot.run()  # guess what it does
+
         return True
     else:
         pywikibot.bot.suggest_help(missing_generator=True)
