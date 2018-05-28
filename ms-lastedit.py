@@ -154,12 +154,12 @@ class BasicBot(
         for page in self.generator:
             pywikibot.output(u'[%s] Processing #%i :%s' % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"),licznik, page.title(asLink=True)))            
 
-            if tpage.namespace() == 1:
+            if page.namespace() == 1:
                 pywikibot.output('TOGGLING')
-                checkpage = tpage.toggleTalkPage()
+                checkpage = page.toggleTalkPage()
             else:
                 pywikibot.output('NOT TOGGLING')
-                checkpage = tpage
+                checkpage = page
 
 	    licznik += 1
             if self.getOption('test'):
