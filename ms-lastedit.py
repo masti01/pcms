@@ -151,9 +151,9 @@ class BasicBot(
         pywikibot.output('RUN')
         reflinks = [] #initiate list
         licznik = 0
-        for tpage in self.generator:
-            pywikibot.output('TOGGLING')
-            checkpage = tpage.toggleTalkPage()
+        for page in self.generator:
+            pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))            pywikibot.output('TOGGLING')
+            checkpage = page.toggleTalkPage()
             """
             if tpage.namespace() == 1:
                 pywikibot.output('TOGGLING')
