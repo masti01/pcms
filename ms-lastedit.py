@@ -152,16 +152,15 @@ class BasicBot(
         reflinks = [] #initiate list
         licznik = 0
         for page in self.generator:
-            pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))            pywikibot.output('TOGGLING')
-            checkpage = page.toggleTalkPage()
-            """
+            pywikibot.output(u'Processing #%i (%i marked):%s' % (counter, marked, page.title(asLink=True)))            
+
             if tpage.namespace() == 1:
                 pywikibot.output('TOGGLING')
                 checkpage = tpage.toggleTalkPage()
             else:
                 pywikibot.output('NOT TOGGLING')
                 checkpage = tpage
-            """
+
 	    licznik += 1
             if self.getOption('test'):
                 pywikibot.output(u'Treating #%i: %s' % (licznik, checkpage.title()))
@@ -222,8 +221,9 @@ class BasicBot(
         outpage.text = finalpage
 
         if self.getOption('test'):
-            pywikibot.output(outpage.title())
-        
+            pywikibot.output('OUTPAGE:%s' % outpage.title())
+            pywikibot.output('PAGESIZE: %i' % len(finalpage))
+            pywikibot.output('START SAVING: %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         outpage.save(summary=self.getOption('summary'))
         #if not outpage.save(finalpage, outpage, self.summary):
         #   pywikibot.output(u'Page %s not saved.' % outpage.title(asLink=True))
