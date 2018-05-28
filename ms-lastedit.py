@@ -148,16 +148,20 @@ class BasicBot(
         header +=u'\n!Autor modyfikacji'
         header +=u'\n!Linkujące'
 
-
+        pywikibot.output('RUN')
         reflinks = [] #initiate list
         licznik = 0
         for tpage in self.generator:
+            pywikibot.output('TOGGLING')
+            checkpage = tpage.toggleTalkPage()
+            """
             if tpage.namespace() == 1:
                 pywikibot.output('TOGGLING')
                 checkpage = tpage.toggleTalkPage()
             else:
                 pywikibot.output('NOT TOGGLING')
                 checkpage = tpage
+            """
 	    licznik += 1
             if self.getOption('test'):
                 pywikibot.output(u'Treating #%i: %s' % (licznik, checkpage.title()))
@@ -169,6 +173,8 @@ class BasicBot(
         footer = u'\n|}'
         footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
 
+
+        pywkibot.output('Przetworzono %i stron' % licznik)
         outputpage = self.getOption('outpage')
 
         result = self.generateresultspage(reflinks,outputpage,header,footer)
@@ -254,7 +260,6 @@ class BasicBot(
         #get articlke size
         size = len(tpage.text)
 
-
         if self.getOption('test'):
             pywikibot.output(u'lastedit:%s' % lastedit)
             pywikibot.output(u'refsCount:%s' % refsCount)
@@ -271,7 +276,6 @@ class BasicBot(
             return (match.group("short").strip())
         else:
             return(t)
-
 
     def linking(self, page):
         """ get number of references """
