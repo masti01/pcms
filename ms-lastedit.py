@@ -152,7 +152,7 @@ class BasicBot(
         reflinks = [] #initiate list
         licznik = 0
         for page in self.generator:
-            pywikibot.output(u'[%s] Processing #%i :%s' % (licznik, page.title(asLink=True),datetime.now().strftime("%Y-%m-%d %H:%M:%S")))            
+            pywikibot.output(u'[%s] Processing #%i :%s' % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"),licznik, page.title(asLink=True)))            
 
             if tpage.namespace() == 1:
                 pywikibot.output('TOGGLING')
