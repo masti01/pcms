@@ -174,7 +174,7 @@ class BasicBot(
         footer += u'\n\nPrzetworzono ' + str(licznik) + u' stron'
 
 
-        pywkibot.output('Przetworzono %i stron' % licznik)
+        pywikibot.output('Przetworzono %i stron' % licznik)
         outputpage = self.getOption('outpage')
 
         result = self.generateresultspage(reflinks,outputpage,header,footer)
