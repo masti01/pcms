@@ -455,7 +455,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('de'):
+                    if lang not in ('hu'):
                          continue
 
                 self.templatesList[lang] = i.title()
@@ -565,9 +565,10 @@ class BasicBot(
             if u'template' not in artParams.keys():
                 artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':True}
             #if not artParams['newarticle'] : 
-            if artParams['newarticle'] : 
-                artParams['template']['user'] = creator
-
+            #if artParams['newarticle'] : 
+            #    artParams['template']['user'] = creator
+            if artParams['template']['user'] : 
+                artParams['creator'] = artParams['template']['user']
 
             #print artParams
             if self.getOption('test2'):
@@ -897,6 +898,7 @@ class BasicBot(
         """
         locpagename = re.sub(ur'.*:','',pagename)
 
+        csvpage = ''
         finalpage = header
         itemcount = 0
         finalpage += u'\n\nLength of new articles excluding disabled parts in text. Word count approximated.'
@@ -917,8 +919,9 @@ class BasicBot(
             itemcount += 1
             ccount,wcount = res[a]
             finalpage += u'\n|-\n| %i. || [[:%s]] || %i || %i'% (itemcount,a,ccount,wcount)
+            csvpage += u'\n#;[[:%s]];%i;%i'% (a,ccount,wcount)
             if self.getOption('testlength'):
-                pywikibot.output(u'\n|-\n| %i. || [[:%s]] || %i || %i'% (itemcount,a,ccount,wcount))
+                pywikibot.output(u'\n|-\n| %i. || [[:%s]] || %i || %i'% (itemcount, a,ccount,wcount))
 
         finalpage += u'\n|}'
 
@@ -932,6 +935,14 @@ class BasicBot(
             pywikibot.output(u'LengthPage:%s' % outpage.title())
         outpage.text = finalpage
         outpage.save(summary=self.getOption('summary'))
+
+        # save csv version
+        outpage = pywikibot.Page(pywikibot.Site(), pagename+'/csv')
+        pywikibot.output(u'CSVLengthPage:%s' % pagename+'/csv')
+        pywikibot.output(csvpage)
+        outpage.text = csvpage
+        outpage.save(summary=self.getOption('summary'))
+
         return
 
 
