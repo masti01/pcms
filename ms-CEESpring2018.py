@@ -121,6 +121,7 @@ class BasicBot(
     templatesList = {}
     authors = {}
     authorsData = {}
+    authorsArticles = {}
     missingCount = {}
     pagesCount = {}
     countryTable = {}
@@ -170,6 +171,7 @@ class BasicBot(
             'testnewbie': False, # make verbose output for newbies
             'testlength': False, # make verbose output for article length
             'testpickle': False, # make verbose output for article list load/save
+            'testauthorwiki': False, # make verbose output for author/wiki 
             'short': False, # make short run
             'append': False, 
             'reset': False, # rebuild database from scratch
@@ -261,11 +263,13 @@ class BasicBot(
         self.createCountryTable(self.springList) #generate results for pages about countries 
         self.createWomenTable(self.springList) #generate results for pages about women
         self.createLengthTable(self.springList) #generate results for pages length
+        self.createAuthorsArticles(self.springList) #generate list of articles per author/wiki
 
         self.generateOtherCountriesTable(self.otherCountriesList,self.getOption('outpage')+u'/Other countries',header,footer)
         self.generateResultCountryTable(self.countryTable,self.getOption('outpage'),header,footer)
         self.generateResultArticleList(self.springList,self.getOption('outpage')+u'/Article list',header,footer)
         self.generateResultAuthorsPage(self.authors,self.getOption('outpage')+u'/Authors list',header,footer)
+        self.generateAuthorsCountryTable(self.authorsArticles,self.getOption('outpage')+u'/Authors list/per wiki',header,footer)
         self.generateResultWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
         self.generateResultLengthPage(self.lengthTable,self.getOption('outpage')+u'/Article length',header,footer)
 
@@ -409,6 +413,34 @@ class BasicBot(
             pywikibot.output('**********')
             pywikibot.output(self.lengthTable)
         return
+
+    def createAuthorsArticles(self,aList):
+        #creat dictionary with author:wiki:{count,[artlist]} in self.authorsArticles
+        if self.getOption('test') or self.getOption('testauthorwiki'):
+            pywikibot.output(u'createAuthorsArticles')
+
+        wikilist = list(aList.keys())
+
+        artCount = 0
+        countryCount = 0
+        for l in aList.keys():
+            for a in aList[l]:
+                author = a['creator']
+                if author not in self.authorsArticles.keys():
+                    self.authorsArticles[author] = {}
+                    for lang in wikilist:
+                        self.authorsArticles[author][lang] = {'count':0, 'list':[]}
+
+                self.authorsArticles[author][l]['count'] += 1    
+                self.authorsArticles[author][l]['list'].append(a['title'])
+
+        if self.getOption('testauthorwiki'):
+            pywikibot.output('**********')
+            pywikibot.output('createAuthorsArticles')
+            pywikibot.output('**********')
+            pywikibot.output(self.authorsArticles)
+        return
+
 
     def loadArticleList(self):
         #load article list form pickled dictionary
@@ -849,6 +881,81 @@ class BasicBot(
 
         return
 
+    def generateAuthorsCountryTable(self, res, pagename, header, footer):
+        """
+        Generates results page from res
+        Starting with header, ending with footer
+        Output page is pagename
+        """
+        locpagename = re.sub(ur'.*:','',pagename)
+
+        finalpage = header
+
+        pywikibot.output(u'***************************')
+        pywikibot.output(u'generateAuthorsCountryTable')
+        pywikibot.output(u'***************************')
+
+        #total counters
+        wikiTotals = {}
+        wikiList = list(self.otherCountriesList.keys())
+        for a in wikiList:
+            wikiTotals[a] = 0
+
+        # generate table header
+        finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
+        finalpage += u'\n|-'
+        finalpage += u'\n! author/wiki'
+        finalpage += u' !! Total'
+        for w in wikiList:
+            finalpage += u' !! ' + w
+        finalpage += u' !! Total'
+        
+        # generate table rows
+        for author in res.keys():
+            finalpage += u'\n|-'
+            finalpage += u'\n| [[user:%s|%s]]' % (author,author)
+            authorTotal = 0 # get the row total
+            newline = '' # keep info for the table row
+            for w in wikiList:
+                newline += u' || '
+                if w in res[author].keys():
+                    if res[author][w]:
+                        newline += str(res[author][w]['count'])
+                        authorTotal += res[author][w]['count'] # add to author total (horizontal)
+                        wikiTotals[w] += res[author][w]['count'] # add to wiki total {verical)
+
+            # add row (wiki) total to table
+            finalpage += u" || '''" + str(authorTotal) + "'''" + newline + u" || '''" + str(authorTotal) + "'''"
+            
+        finalpage += u'\n|-'
+
+        # generate totals
+        totalTotal = 0
+        finalpage += u"\n! Total: !! '''" + str(totalTotal) + "'''"
+        for w in wikiList:
+            finalpage += u' !! ' + str(wikiTotals[w])
+            totalTotal += wikiTotals[w]
+        finalpage += u" || '''" + str(totalTotal) + "'''"
+        # generate table footer
+        finalpage += u'\n|}'
+
+        finalpage += u"\n\n'''NOTE:''' the table counts all articles per author: both new and updated"
+
+
+        finalpage += footer
+
+        if self.getOption('testauthorwiki'):
+            pywikibot.output(finalpage)
+
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        if self.getOption('testauthorwiki'):
+            pywikibot.output(u'authorListperWiki:%s' % outpage.title())
+        outpage.text = finalpage
+        outpage.save(summary=self.getOption('summary'))
+
+        return
+
+
     def generateResultWomenPage(self, res, pagename, header, footer):
         """
         Generates results page from res
@@ -939,7 +1046,7 @@ class BasicBot(
         # save csv version
         outpage = pywikibot.Page(pywikibot.Site(), pagename+'/csv')
         pywikibot.output(u'CSVLengthPage:%s' % pagename+'/csv')
-        pywikibot.output(csvpage)
+        #pywikibot.output(csvpage)
         outpage.text = csvpage
         outpage.save(summary=self.getOption('summary'))
 
