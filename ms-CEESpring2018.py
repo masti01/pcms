@@ -1017,7 +1017,7 @@ class BasicBot(
         """
         locpagename = re.sub(ur'.*:','',pagename)
 
-        csvpage = ''
+        csvpage = '<pre>'
         finalpage = header
         itemcount = 0
         finalpage += u'\n\nLength of new articles excluding disabled parts in text. Word count approximated.'
@@ -1038,7 +1038,7 @@ class BasicBot(
             itemcount += 1
             ccount,wcount = res[a]
             finalpage += u'\n|-\n| %i. || [[:%s]] || %i || %i'% (itemcount,a,ccount,wcount)
-            csvpage += u'\n#;[[:%s]];%i;%i'% (a,ccount,wcount)
+            csvpage += u'\n[[:%s]];%i;%i'% (a,ccount,wcount)
             if self.getOption('testlength'):
                 pywikibot.output(u'\n|-\n| %i. || [[:%s]] || %i || %i'% (itemcount, a,ccount,wcount))
 
@@ -1046,6 +1046,7 @@ class BasicBot(
 
         finalpage += u'\n\nTotal number of articles: ' + str(itemcount)
         finalpage += footer
+        csvpage += '\n</pre>'
 
         #pywikibot.output(finalpage)
 
