@@ -298,6 +298,7 @@ class BasicBot(
         try:
             userdata = pywikibot.User(site,userpage)
         except:
+            pywikibot.output('NEWBIE Exception: [[%s:user:%s]]' % (lang,user))
             return(False)
         self.authorsData[user]['anon'] = userdata.isAnonymous()
         if self.authorsData[user]['anon']:
