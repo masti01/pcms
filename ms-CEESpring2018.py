@@ -175,6 +175,7 @@ class BasicBot(
             'short': False, # make short run
             'append': False, 
             'reset': False, # rebuild database from scratch
+            'progress': False, #report progress
 
         })
 
@@ -229,6 +230,8 @@ class BasicBot(
                 if self.getOption('test'):
                     pywikibot.output(aInfo)
             count += 1
+            if self.getOption('progress') and not count % 10:
+                pywikibot.output('[%i] Lang:%s Article:%s' % (count,aInfo['lang'],aInfo['title']))
             #populate article list per language
             if aInfo['lang'] not in self.springList.keys():
                 self.springList[aInfo['lang']] = []
@@ -794,10 +797,12 @@ class BasicBot(
 
         finalpage += footer
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
-        if self.getOption('test'):
+        if self.getOption('test') or self.getOption('progress'):
             pywikibot.output(u'OtherCountries:%s' % outpage.title())
         outpage.text = finalpage
         outpage.save(summary=self.getOption('summary'))
+        if self.getOption('test') or self.getOption('progress'):
+            pywikibot.output(u'OtherCountries SAVED')
 
         return
 
