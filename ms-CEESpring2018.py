@@ -295,7 +295,10 @@ class BasicBot(
         #page = pywikibot.Page(site,userpage)
         if self.getOption('testnewbie'):
             pywikibot.output('GETTING USER DATA:[[:%s:%s]]' % (lang,userpage))
-        userdata = pywikibot.User(site,userpage)
+        try:
+            userdata = pywikibot.User(site,userpage)
+        except:
+            return(False)
         self.authorsData[user]['anon'] = userdata.isAnonymous()
         if self.authorsData[user]['anon']:
             return(False)
@@ -487,7 +490,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,forceInterwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('hu'):
+                    if lang not in ('hu','et'):
                          continue
 
                 self.templatesList[lang] = i.title()
@@ -779,10 +782,13 @@ class BasicBot(
         pywikibot.output(u'**************************')
         pywikibot.output(u'generateOtherCountriesTable')
         pywikibot.output(u'**************************')
+        pywikibot.output(u'OtherCountries:%s' % self.otherCountriesList)
 
         for c in self.otherCountriesList.keys():
             finalpage += u'\n== ' + c + u' =='
+            pywikibot.output('== ' + c + u' ==')
             for i in self.otherCountriesList[c]:
+                pywikibot.output('c:%s, i:%s' % (c,i))
                 finalpage += u'\n# <nowiki>' + i + u'</nowiki>'
 
         finalpage += footer
