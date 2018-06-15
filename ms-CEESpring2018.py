@@ -424,7 +424,7 @@ class BasicBot(
                     if self.getOption('test') or self.getOption('testwomenauthors'):
                         pywikibot.output(u'Skipping NOT WOMAN [%i]: [[%s:%s]]' % (artCount,lang,a['title']))
                     continue
-                user = a['template']['user']
+                user = a['creator']
                 if user in self.womenAuthors.keys():
                     self.womenAuthors[user]['count'] += 1
                     self.womenAuthors[user]['list'].append(lang+':'+a['title'])
@@ -651,7 +651,7 @@ class BasicBot(
             #if not artParams['newarticle'] : 
             #if artParams['newarticle'] : 
             #    artParams['template']['user'] = creator
-            if artParams['template']['user'] : 
+            if not artParams['template']['user'] == 'dummy' : 
                 artParams['creator'] = artParams['template']['user']
 
             #print artParams
