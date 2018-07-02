@@ -347,6 +347,7 @@ ignorelist = [
     re.compile('.*[\./@]genealogics\.org/getperson\.php'),  # bot rejected on site (masti)
     re.compile('.*[\./@]orzeczenia\.nsa\.gov\.pl/doc/'),  # bot rejected on site (masti)
     re.compile('.*[\./@]cbssy.sy/new%20web%20site/General_census/census_2004/NH/'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]dziennikustaw\.gov\.pl/DU'),  # bot rejected on site (masti)    http://dziennikustaw.gov.pl/du
     re.compile('.*[\./@]dziennikustaw\.gov\.pl/du'),  # bot rejected on site (masti)    http://dziennikustaw.gov.pl/du
 ]
 
