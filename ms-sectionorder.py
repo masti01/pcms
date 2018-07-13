@@ -12,7 +12,7 @@ Correct section order:
 *Linki zewnętrzne
 
 Call:
-python pwb.py masti/ms-sectionorder.py -start:'!' -outpage:'Wikipedia:Sprzątanie Wikipedii/Artykuły ze złą kolejnością sekcji końcowych' -pt:0 -summary:"Bot aktualizuje tabelę"
+python pwb.py masti/ms-sectionorder.py -start:'!' -outpage:'Wikipedia:Sprzątanie Wikipedii/Artykuły ze złą kolejnością sekcji końcowych' -maxlines:10000 -pt:0 -summary:"Bot aktualizuje tabelę"
 
 
 Use global -simulate option for test purposes. No changes to live wiki
