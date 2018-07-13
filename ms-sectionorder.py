@@ -157,7 +157,7 @@ class BasicBot(
             header += u'*Przypisy\n'
             header += u'*Bibliografia\n'
             header += u'*Linki zewnętrzne</small>\n\n'
-            header += u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
+            header += u"Ostatnia aktualizacja przez bota: '''~~~~~'''.\n\n"
 	    header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
         else:
             header = ''
