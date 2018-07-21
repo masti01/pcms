@@ -349,6 +349,23 @@ ignorelist = [
     re.compile('.*[\./@]cbssy.sy/new%20web%20site/General_census/census_2004/NH/'),  # bot rejected on site (masti)
     re.compile('.*[\./@]dziennikustaw\.gov\.pl/DU'),  # bot rejected on site (masti)    http://dziennikustaw.gov.pl/du
     re.compile('.*[\./@]dziennikustaw\.gov\.pl/du'),  # bot rejected on site (masti)    http://dziennikustaw.gov.pl/du
+    re.compile('.*[\./@]bpi\.co\.uk/bpi-awards/'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]bpi\.co\.uk/brit-certified/'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]lazarus\.elte\.hu/hun/digkonyv/topo/3felmeres\.htm'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]nztop40\.co\.nz/index.php/chart/singles'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]amt-franzburg-richtenberg\.de'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]historialomzy\.pl/orzel-kolno/'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]arquidiocesisdesucre\.org\.bo'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]catholic-hierarchy\.org/'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]catholic-hierarchy\.org/bishop'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]catholic-hierarchy\.org/diocese'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]tokarczuk\.wydawnictwoliterackie\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]edziennik\.poznan\.uw\.gov\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]transport\.gov\.mg'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]eco\.gov\.az/en/67-hydrometeorology'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]get-ligaen\.stats\.pointstreak\.com/scoreboard.html'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]sbc\.org\.pl/publication/11793'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]eosielsko\.pl'),  # bot rejected on site (masti)
 ]
 
 
