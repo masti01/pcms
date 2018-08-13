@@ -366,7 +366,24 @@ ignorelist = [
     re.compile('.*[\./@]get-ligaen\.stats\.pointstreak\.com/scoreboard.html'),  # bot rejected on site (masti)
     re.compile('.*[\./@]sbc\.org\.pl/publication/11793'),  # bot rejected on site (masti)
     re.compile('.*[\./@]eosielsko\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]svencionys\.lt/index.php?3819840680'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]halama\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]kszosiatkowka\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]metro\.gov\.az'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]mini\.sl\.se/sv/travelplanner'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]noweskalmierzyce\.pl/pl/strona/parki-krajobrazowe'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]muzeumgdansk\.pl/o-muzeum-gdanska/zarzad-i-rada-muzeum-gdanska'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]yg-life\.com/archives'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]ostpommern\.de/kr-regenwalde.php'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]ostpommern\.de/kr-schlawe.php'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]vled\.co\.il'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]gcatholic\.org'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]monitorpolski\.gov.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]militaryarchitecture\.com'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]gazetapolska\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]panstwo\.net'),  # bot rejected on site (masti)
 ]
+
 
 
 def _get_closest_memento_url(url, when=None, timegate_uri=None):
