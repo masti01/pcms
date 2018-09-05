@@ -1092,7 +1092,10 @@ class BasicBot(
                     pywikibot.output(sortedVotes)
 
                 ranks = self.ranklist(sortedVotes)
-                lastrank = ranks[int(self.getOption('KAplaces'))-1]
+                if int(self.getOption('KAplaces'))-1 > len(ranks):
+                    lastrank = ranks[len(ranks)]
+                else:
+                    lastrank = ranks[int(self.getOption('KAplaces'))-1]
                 if self.getOption('test'):
                     pywikibot.output(u'Last rank:%i' % lastrank)
 
