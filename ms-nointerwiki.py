@@ -164,7 +164,7 @@ class BasicBot(
         header += 'Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|bota]].\n\n'
         header += "Ostatnia aktualizacja: '''" + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S (CEST)") +"'''.\n\n"
         header += 'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
-        footer = u''
+        footer = u'\n\nPrzetworzono stron:' + str(count)
 
         self.generateresultspage(result,self.getOption('outpage'),header,footer)
         return
@@ -213,6 +213,10 @@ class BasicBot(
         except pywikibot.NoPage:
             pywikibot.output('WikiData page for %s do not exists' % page.title(asLink=True))
             return(None)
+        except NotImplementedError:
+            pywikibot.output('Skipped: WikiData page for %s returns erros' % page.title(asLink=True))
+            return(None)
+
         return(self.checkInterwiki(wdcontent['sitelinks'].keys(),'plwiki'))
 
 def main(*args):
