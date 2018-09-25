@@ -213,9 +213,9 @@ class BasicBot(
         except pywikibot.NoPage:
             pywikibot.output('WikiData page for %s do not exists' % page.title(asLink=True))
             return(None)
-        except NotImplementedError:
-            pywikibot.output('Skipped: WikiData page for %s returns erros' % page.title(asLink=True))
-            return(None)
+        #except NotImplementedError:
+        #    pywikibot.output('Skipped: WikiData page for %s returns erros' % page.title(asLink=True))
+        #    return(None)
 
         return(self.checkInterwiki(wdcontent['sitelinks'].keys(),'plwiki'))
 
