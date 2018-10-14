@@ -789,6 +789,7 @@ ignorelist = [
     re.compile('.*[\./@]\.swr\.de/report/presse/-/id=1197424/nid=1197424/did=2918594/1wxuzhj/index\.html'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]\.pism\.pl/publications/bulletin/no-55-905'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]\.stowarzyszeniekongreskobiet\.pl/pl-PL/text/o_nas/rada_programowa'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]\.shellenicparliament\.gr/en/Vouleftes/Diatelesantes-Vouleftes-Apo-Ti-Metapolitefsi-Os-Simera'),  # bot rejected on site (masti, Elfhelm)
 
 ]
 
