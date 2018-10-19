@@ -192,7 +192,6 @@ ignorelist = [
     re.compile('.*[\./@]cev\.lu(/.*)?'),  # bot rejected on the site
     re.compile('.*[\./@]science\.ksc\.nasa\.gov(/.*)?'),  # very slow response resulting in bot error
     re.compile('.*[\./@]britannica\.com(/.*)?'),  # HTTP redirect loop
-    re.compile('.*[\./@]quickfacts\.census\.gov(/.*)?'),  # bot rejected on the site
     re.compile('.*[\./@]archive\.is(/.*)?'),  # bot rejected on the site (masti)
     re.compile('.*[\./@]archive\.today(/.*)?'),  # bot rejected on the site  (masti)
     re.compile('.*[\./@]archive\.org(/.*)?'),  # bot rejected on the site (masti)
@@ -208,7 +207,7 @@ ignorelist = [
     re.compile('.*[\./@]ak\.org\.pl/download/zywoty_swietych\.pdf(/.*)?'),  # well known missing doc  (masti)
     re.compile('.*[\./@]demographia\.com/db-worldua.pdf(/.*)?'),  # well known missing doc  (masti)
     re.compile('.*[\./@]gutenberg\.org(/.*)?'),  # bot rejected on site  (masti)
-    re.compile('.*[\./@]factfinder\.census\.gov(/.*)?'),  # bot rejected on site  (masti)
+    re.compile('.*[\./@]census\.gov(/.*)?'),  # bot rejected on site  (masti)
     re.compile('.*[\./@]carfolio\.com(/.*)?'),  # site very slow timeouts  (masti)
     re.compile('.*[\./@]geonames\.usgs\.gov(/.*)?'),  # site very slow timeouts  (masti)
     re.compile('.*[\./@]stratigraphy\.org(/.*)?'),  # site very slow timeouts  (masti)
