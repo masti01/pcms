@@ -273,7 +273,8 @@ class BasicBot(
                 pywikibot.output(c.title())
             lang = c.site.lang
             if self.getOption('test2'):
-                if lang not in ('be-tarask','tt'):
+                #if lang not in ('be-tarask','tt'):
+                if lang not in ('en'):
                     continue
             if self.getOption('test'):
                 pywikibot.output(u'P:%s' % c.title(asLink=True,forceInterwiki=True))
