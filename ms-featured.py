@@ -298,7 +298,6 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(u'[%s] %s.wiki: [%i of %i] %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),lang,marked,count,a.title(asLink=True,forceInterwiki=True)))
             count += 1
-            """
             if a.namespace() == 1:
                 a = a.toggleTalkPage()
             if not self.checkInterwiki(a,'plwiki'):
@@ -306,7 +305,6 @@ class BasicBot(
                 marked += 1
                 if self.getOption('test3'):
                     pywikibot.output(u'[%s] appended: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),a.title(asLink=True,forceInterwiki=True)))
-            """
         return({'count':count,'marked':marked,'result':result})
 
 def main(*args):
