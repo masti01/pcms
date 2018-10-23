@@ -278,6 +278,7 @@ class BasicBot(
                     continue
             if self.getOption('test'):
                 pywikibot.output(u'P:%s' % c.title(asLink=True,forceInterwiki=True))
+                pywikibot.output(u'SI:%s' % c.site.siteinfo)
 
             result[lang] = self.getArticles(c)
         if self.getOption('test4'):
