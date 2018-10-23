@@ -231,7 +231,7 @@ class BasicBot(
 
     def wikiLangTranslate(self,lang):
         #change lang in case of common errors, renames etc.
-        tranlateTable = {
+        translateTable = {
             'dk': 'da',  # Wikipedia, Wikibooks and Wiktionary only.
             'jp': 'ja',
             'nb': 'no',  # T86924
@@ -244,9 +244,9 @@ class BasicBot(
             'be_x_old': 'be-tarask',
         }
 
-        if lang in tranlateTable.keys():
-            pywikibot.output('Translated [%s] -> [%s]' % (lang,tranlateTable[lang]))
-            return (tranlateTable[lang])
+        if lang in translateTable.keys():
+            pywikibot.output('Translated [%s] -> [%s]' % (lang,translateTable[lang]))
+            return (translateTable[lang])
         else:
             pywikibot.output('unTranslated [%s]' % lang)
             return(lang)
@@ -271,16 +271,17 @@ class BasicBot(
         for c in self.interwikiGenerator(wdcontent,namespace=14):
             if self.getOption('test'):
                 pywikibot.output(c.title())
-            lang = c.site.lang
+            code = c.site.code
             if self.getOption('test2'):
+                pywikibot.output('Code:%s' % c.site.code)
                 #if lang not in ('be-tarask','tt'):
-                if lang not in ('en'):
+                if code not in ('en'):
                     continue
             if self.getOption('test'):
                 pywikibot.output(u'P:%s' % c.title(asLink=True,forceInterwiki=True))
                 pywikibot.output(u'SI:%s' % c.site.siteinfo)
 
-            result[lang] = self.getArticles(c)
+            result[code] = self.getArticles(c)
         if self.getOption('test4'):
             pywikibot.output(result)
         return(result)
@@ -297,6 +298,7 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(u'[%s] %s.wiki: [%i of %i] %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),lang,marked,count,a.title(asLink=True,forceInterwiki=True)))
             count += 1
+            """
             if a.namespace() == 1:
                 a = a.toggleTalkPage()
             if not self.checkInterwiki(a,'plwiki'):
@@ -304,6 +306,7 @@ class BasicBot(
                 marked += 1
                 if self.getOption('test3'):
                     pywikibot.output(u'[%s] appended: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),a.title(asLink=True,forceInterwiki=True)))
+            """
         return({'count':count,'marked':marked,'result':result})
 
 def main(*args):
