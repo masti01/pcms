@@ -317,13 +317,15 @@ class BasicBot(
             itemcount += 1
             count = redirlist[i]
             strcount = str(count)
-            suffix = self.declination(count, u'wystąpienie', u'wystąpienia', u'wystąpień')
+            #suffix = self.declination(count, u'wystąpienie', u'wystąpienia', u'wystąpień')
+            suffix = self.declination(count, u'strona', u'strony', u'stron')
+            linksuffix = self.declination(redirlistuse[i], u'odnośnik', u'odnośniki', u'odnośników')
 
             #finalpage += u'#' + i + u' ([{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u'])\n'
             if self.getOption('test'):
                 pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
             finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
-            finalpage += u' || %i' % redirlistuse[i]
+            finalpage += u' || %i %s' % (redirlistuse[i],linksuffix)
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
                 break
