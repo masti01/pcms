@@ -184,8 +184,6 @@ class BasicBot(
                 pywikibot.output(u'%s #%i Treating:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, page.title(asLink=True)) )
             refs = self.treat(page)
 
-            if self.getOption('progress'):
-                pywikibot.output('%s #%i refs found:%i' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, refs))
             counter += 1
 
         result = self.generateresultspage(refs,self.getOption('outpage'),header,footer)
@@ -270,7 +268,7 @@ class BasicBot(
                 pywikibot.output(u'S:%s #%i In %s checking:%s - referenced by %i' % 
                     (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), counter, page.title(asLink=True), rps.title(asLink=True), rpscount ))
 
-            res.append({"long":longn,"refl":rpl,"short":shortn,"refs":rps})
+            res.append({"long":longn,"refl":rplcount,"short":shortn,"refs":rpscount})
 
         print res
         return(res)
