@@ -1184,17 +1184,18 @@ class BasicBot(
         if 'PAM' in results.keys():
             output += self.PAMtableheader()
             for p in results['PAM']:
-                (wiki,error, counters) = p
-                output += u'	<tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na medal/' + wiki).encode('utf-8'))
-                output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
-                if not error:
-                    (v, date) = counters
-                    output += u'		<td>' + str(v) + u'</td>'
-                    output += u'		<td>' + date + u'</td>\n' 
-                else:
-                    output += u'		<td colspan="2" style="color:red">nie można odczytać danych</td>\n'
-                output += u'	</tr>\n'
+                try:
+                    (wiki,error, counters) = p
+                    output += u'	<tr>\n'
+                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na medal/' + wiki).encode('utf-8'))
+                    output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
+                    if not error:
+                        (v, date) = counters
+                        output += u'		<td>' + str(v) + u'</td>'
+                        output += u'		<td>' + date + u'</td>\n' 
+                    else:
+                        output += u'		<td colspan="2" style="color:red">nie można odczytać danych</td>\n'
+                    output += u'	</tr>\n'
             output += self.PAMtablefooter()
         else:
             output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
