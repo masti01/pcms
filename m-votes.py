@@ -1196,6 +1196,8 @@ class BasicBot(
                     else:
                         output += u'		<td colspan="2" style="color:red">nie można odczytać danych</td>\n'
                     output += u'	</tr>\n'
+                except:
+                    pass
             output += self.PAMtablefooter()
         else:
             output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
