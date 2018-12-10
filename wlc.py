@@ -1121,6 +1121,7 @@ ignorelist = [
     re.compile('.*[\./@]www\.gcatholic\.org/orders/009\.htm'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]www\.gcatholic\.org/orders/040\.htm'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]www\.gcatholic\.org/orders/237\.htm'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]entsyklopeedia\.ee'),  # bot rejected on site (masti, Szoltys)
 
 ]
 
