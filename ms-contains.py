@@ -274,7 +274,6 @@ class BasicBot(
 
         return(pagecount)
 
-
     def generateprefooter(self,pagename, totalcount, pagecount):
         # generate text to appear before footer
 
@@ -394,6 +393,10 @@ class BasicBot(
                 return(page.title(asLink=True,forceInterwiki=True, textlink=True))
             return(None)
 
+    def listargs(self):
+        #return list of arguments
+        pywikibot.output(options)
+
 def main(*args):
     """
     Process command line arguments and invoke bot.
@@ -429,6 +432,7 @@ def main(*args):
         else:
             options[option] = True
 
+    pywikibot.output(options)
     gen = genFactory.getCombinedGenerator()
     if gen:
         # The preloading generator is responsible for downloading multiple
