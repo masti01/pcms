@@ -34,6 +34,7 @@ The following parameters are supported:
 -navi:            add navigation template {{Wikipedysta:MastiBot/Nawigacja|Wikipedysta:mastiBot/test|Wikipedysta:mastiBot/test 2}}
 -progress:        report progress
 -table:           present results in table
+-nonempty:        show nonempty results only
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -115,6 +116,7 @@ class BasicBot(
             'navi': False, # add navigation template
             'progress': False, # report progress
             'table': False, #present results in a table
+            'nonempty': False, #show nonempty results only
         })
 
         # call constructor of the super class
@@ -369,11 +371,15 @@ class BasicBot(
                     #return all found results
                     resultslist = []
                     for r in re.finditer(resultR,source):
-                        resultslist.append(r.group('result'))
+                        #based on nonempty
+                        if (self.getOption("nonempty") and len(r.group('result').strip())) or not self.getOption("nonempty"):
+                            resultslist.append(r.group('result'))
                     return(page.title(asLink=True,forceInterwiki=True, textlink=True),resultslist)
                 else:
                     #return just first match
-                    return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
+                    #based on nonempty
+                    if (self.getOption("nonempty") and len(match.group('result').strip())) or not self.getOption("nonempty"):
+                        return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
             return(None)
             
         else:  
