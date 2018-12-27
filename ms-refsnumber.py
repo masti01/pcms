@@ -172,7 +172,7 @@ class BasicBot(
 	header += u'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
 
         header += '{| class="wikitable sortable"\n|-\n'
-        header += '! Nr !! krótka nazwa !! odwołania !! nazwa !! odwołania\n|-\n'
+        header += '! Nr !! nazwa !! odwołania !! krótka nazwa !! odwołania\n|-\n'
         #footer = u'\n\n[[Kategoria:Najbardziej potrzebne strony]]'
         footer = '|}\n'
 
