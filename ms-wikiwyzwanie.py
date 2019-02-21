@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Call:
-python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie/Hasła" -outpage:"Wikipedia:Wikiwyzwanie/Ranking" -pt:0 -summary:"Bot uaktualnia statystyki" 
+python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie/Hasła" -outpage:"Wikipedia:Wikiwyzwanie/Ranking" -pt:0 -summary:"Bot uaktualnia statystyki"
 
 
 Use global -simulate option for test purposes. No changes to live wiki
@@ -369,7 +369,7 @@ class BasicBot(
             if self.getOption('testpickle'):
                 pywikibot.output('PICKLING LOAD at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             try:
-                with open('masti/wikiwyzwanie2018.dat', 'rb') as datfile:
+                with open('masti/wikiwyzwanie2019.dat', 'rb') as datfile:
                     self.wikichallenge = pickle.load(datfile)
             except (IOError, EOFError):
                 # no saved history exists yet, or history dump broken
@@ -384,7 +384,7 @@ class BasicBot(
         #save list as pickle file
         if self.getOption('testpickle'):
             pywikibot.output('PICKLING SAVE at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        with open('masti/wikiwyzwanie2018.dat', 'wb') as f:
+        with open('masti/wikiwyzwanie2019.dat', 'wb') as f:
             pickle.dump(artList, f, protocol=config.pickle_protocol)
 
     def saveArticleList(self, res, pagename, header, footer):
