@@ -3,6 +3,8 @@
 """
 Call:
 python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie/Hasła" -outpage:"Wikipedia:Wikiwyzwanie/Ranking" -pt:0 -summary:"Bot uaktualnia statystyki"
+for test:
+python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie/Hasła" -outpage:"Wikipedysta:MastiBot/test" -pt:0 -summary:"Bot uaktualnia statystyki" -reset -test -simulate -testdays -testinc -testweeks -testincdays -testiw -testchange
 
 
 Use global -simulate option for test purposes. No changes to live wiki
