@@ -263,8 +263,10 @@ class BasicBot(
         maxlines = self.getOption('maxlines')
         #pywikibot.output(u'MAXLINES:%s' % maxlines)
         pywikibot.output('Available formats:%s' % pywikibot.date.formats.keys())
+        count = 0
         for p in self.generator:
-            pywikibot.output(u'[%s] Treating: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),p.title()))
+            count += 1
+            pywikibot.output(u'#%i:[%s] Treating: %s' % (count,datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),p.title()))
             #pywikibot.output('INTERWIKI:%i' % self.treat(p))
             if self.treat(p):
                 pywikibot.output('PERSON FOUND:[[%s]]' % p.title())
