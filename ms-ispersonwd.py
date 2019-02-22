@@ -267,7 +267,7 @@ class BasicBot(
         marked = 0
         for p in self.generator:
             count += 1
-            pywikibot.output(u'#%i (%i):[%s] Treating: %s' % (count,datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),p.title()))
+            pywikibot.output(u'#%i (%i):[%s] Treating: %s' % (count,marked,datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),p.title()))
             #pywikibot.output('INTERWIKI:%i' % self.treat(p))
             if self.treat(p):
                 pywikibot.output('PERSON FOUND:[[%s]]' % p.title())
