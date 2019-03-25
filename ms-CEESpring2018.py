@@ -924,7 +924,7 @@ class BasicBot(
         # generate table footer
         finalpage += u'\n|}'
 
-        finalpage += u"\n\n'''NOTE:''' the table counts references to respective countries. Arcticle can reference more than 1 country"
+        finalpage += u"\n\n'''NOTE:''' the table counts references to respective countries. Article can reference more than 1 country"
 
 
         finalpage += footer
