@@ -130,7 +130,7 @@ class Person(object):
         return(self.dod)
 
     def Occupation(self):
-        return(",".join(self.occupation))
+        return(", ".join(self.occupation))
 
     def centuryDecade(self,date): 
         #return decade of century i.e. 'lata 20. 20 wieku'
