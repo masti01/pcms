@@ -690,7 +690,10 @@ class BasicBot(
 
     def getUpdater(self, art):
         #find author and update datetime of the biggest update within CEESpring
-        creator, creationDate = art.getCreator()
+        try:
+            creator, creationDate = art.getCreator()
+        except:
+            return("'''UNKNOWN USER'''", "'''UNKNOWN DATE'''")
         SpringStart =  datetime.strptime("2019-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         if self.newArticle(art):
             if self.getOption('test3'):
