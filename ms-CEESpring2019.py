@@ -277,7 +277,7 @@ class BasicBot(
         self.generateAuthorsCountryTable(self.authorsArticles,self.getOption('outpage')+u'/Authors list/per wiki',header,footer)
         self.generateResultWomenPage(self.women,self.getOption('outpage')+u'/Articles about women',header,footer)
         self.generateResultWomenAuthorsTable(self.womenAuthors,self.getOption('outpage')+u'/Articles about women/Authors',header,footer) #generate results for pages about women
-        #self.generateResultLengthPage(self.lengthTable,self.getOption('outpage')+u'/Article length',header,footer)
+        self.generateResultLengthPage(self.lengthTable,self.getOption('outpage')+u'/Article length',header,footer)
 
         return
 
