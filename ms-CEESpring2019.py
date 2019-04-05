@@ -719,7 +719,10 @@ class BasicBot(
 
     def newArticle(self,art):
         #check if the article was created within CEE Spring
-        creator, creationDate = art.getCreator()
+        try:
+            creator, creationDate = art.getCreator()
+        except:
+            return(False)
         SpringStart =  datetime.strptime("2019-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         SpringEnd = datetime.strptime("2019-06-01T00:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         return ( datetime.strptime(creationDate, "%Y-%m-%dT%H:%M:%SZ") > SpringStart )
