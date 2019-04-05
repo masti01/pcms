@@ -919,11 +919,11 @@ class BasicBot(
 
         # generate totals
         totalTotal = 0
-        finalpage += u"\n! Total: !! '''" + str(totalTotal) + "'''"
+        lastRow = ''
         for c in countryList:
-            finalpage += u' !! ' + str(countryTotals[c])
+            lastRow += u' !! ' + str(countryTotals[c])
             totalTotal += countryTotals[c]
-        finalpage += u" || '''" + str(totalTotal) + "'''"
+        finalpage += u"\n! Total: !! '''" + str(totalTotal) + "'''" + lastRow + u" || '''" + str(totalTotal) + "'''"
         # generate table footer
         finalpage += u'\n|}'
 
