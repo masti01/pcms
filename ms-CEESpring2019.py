@@ -135,12 +135,12 @@ class BasicBot(
                  'myv':'мастор', 'eo':'country', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'myv':'мастор', 'ro':'țară', 'ru':'страна', 'sq':'country', \
                  'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
     topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', 'et':'teema', \
-             'myv':'тема', 'eo':'topic', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
+             'eo':'topic', 'hu':'téma', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
              'tt':'тема', 'tr':'konu', 'uk':'тема', 'hr':'tema', 'hy':'Թուրքիա|թեմա'}
     womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', 'et':'naised', \
               'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
                'uk':'жінки', 'hu':'nők', 'hr':'Žene', 'hy':'Կանայք'}
-    userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'be-tarask':'удзельнік', 'bg':'потребител', 'hu':'szerkesztő',\
+    userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'be-tarask':'удзельнік', 'bg':'потребител',\
              'de':'benutzer','crh':'qullanıcı','el':'user', 'et':'kasutaja', 'hu':'szerkesztő', 'myv':'сёрмадыця', 'eo':'user', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
              'mk':'корисник', 'myv':'сёрмадыця', 'ro':'utilizator', 'ru':'участник', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', 'uk':'користувач', 'hr':'suradnik', 'hy':'մասնակից' }
 
