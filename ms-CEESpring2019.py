@@ -638,8 +638,8 @@ class BasicBot(
 
             artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':False}
 
-            if lang in templatesList.keys() and talk.exists():
-                TmplInfo = self.getTemplateInfo(talk, templatesList[lang], lang)
+            if lang in self.templatesList.keys() and talk.exists():
+                TmplInfo = self.getTemplateInfo(talk, self.templatesList[lang], lang)
                 artParams['template'] = TmplInfo
             if not artParams['template']['woman']:
                 artParams['template']['woman'] = woman
