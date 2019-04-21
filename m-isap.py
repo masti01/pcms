@@ -367,14 +367,15 @@ class BasicBot(
         # update log file defined in outpage
         l = []
         pages = 0
-        replacements = 0
+
+        newline = ''
         for k in self.WUs.keys():
             if not self.WUs[k]['error']:
-                l.append(self.WUs[k]['newTemplate'])
-                pages += len(self.WUs[k]['replacements'])
+                replacements = 0
                 for r in self.WUs[k]['replacements'].keys():
                     replacements += self.WUs[k]['replacements'][r]
-        newline = '\n|-\n| %s || %s || %i || %i \n|}' % (datetime.now().strftime("%Y-%m-%d"), ', '.join(l), pages, replacements)
+                newline += '\n|-\n| %s || %s || %i || %i' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'], len(self.WUs[k]['replacements']), replacements)
+        newline += '\n|}'
 
         page = pywikibot.Page(pywikibot.Site(), self.getOption('outpage'))
         page.text = page.text.replace('\n|}',newline)
@@ -383,8 +384,6 @@ class BasicBot(
         page.save(summary='Bot uaktualnia log')
         return
         
-
-
 def main(*args):
     """
     Process command line arguments and invoke bot.
