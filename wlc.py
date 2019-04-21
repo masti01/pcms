@@ -1149,7 +1149,11 @@ ignorelist = [
     re.compile('.*[\./@]www.gopsusports.com/sports/m-fenc/spec-rel/032402aaa.html'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]www.independent.co.uk/news/world/europe/silvio-berlusconis-heir-angelino-alfano-forms-new-party-in-italy-8943520.html'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]allaboutmusic\.pl'),  # bot rejected on site (masti, edk)
-    re.compile('.*[\./@]yivo.org/yiddishland-topo'),  # Err 201, bot rejected on site (masti, Maitake)
+    re.compile('.*[\./@]yivo\.org/yiddishland-topo'),  # Err 201, bot rejected on site (masti, Maitake)
+    re.compile('.*[\./@]polsteam\.com'),  # bot rejected on site (masti, Wiklol)
+    re.compile('.*[\./@]theplantlist\.org'),  # bot rejected on site (masti, Wiklol)
+    re.compile('.*[\./@]geojournals\.pgi\.gov\.pl/agp/article/view'),  # bot rejected on site (masti, Wiklol)
+    re.compile('.*[\./@]file\.scirp\.org/Html'),  # bot rejected on site (masti, Wiklol)
 
 ]
 
