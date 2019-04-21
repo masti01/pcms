@@ -141,7 +141,6 @@ class BasicBot(
     def run(self):
         """TEST"""
         toReplace = {}
-        pywikibot.output(u'THIS IS A RUN METHOD')
         outputpage = self.getOption('outpage')
         pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
         
@@ -226,12 +225,6 @@ class BasicBot(
             pywikibot.output('getting target page:%s' % quote_page)
         webpage = urllib2.urlopen(quote_page)
         soup = BeautifulSoup(webpage, 'html.parser')
-        """
-        if self.getOption('test'):
-            pywikibot.output('target Web Page:%s' % quote_page)
-            pywikibot.output('target Title:%s' % soup.title.string)
-            print soup.find(id="collapse_11")
-        """
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
         first = True
         for t in soup.find(id="collapse_11").find_all('a'):
@@ -239,7 +232,6 @@ class BasicBot(
                 first = False
             else:
                 ident = idR.search(t.get('href'))
-                #print "tt:%s" % ident.group('id')
                 yield(ident.group('id'))
 
     def decodeDUid(self,ident):
