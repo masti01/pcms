@@ -375,6 +375,7 @@ class BasicBot(
                 for r in self.WUs[k]['replacements'].keys():
                     replacements += self.WUs[k]['replacements'][r]
                 newline += '\n|-\n| %s || %s || %i || %i' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'], len(self.WUs[k]['replacements']), replacements)
+        pywikibot.output('Added log entries:%s' % newline)
         newline += '\n|}'
 
         page = pywikibot.Page(pywikibot.Site(), self.getOption('outpage'))
