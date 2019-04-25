@@ -419,7 +419,7 @@ class BasicBot(
     def getData(self,page):
         #get data from page & WD
         #return Person object
-        sex = { 'Q6581097':'mężczyzna', 'Q6581072':'kobieta'}
+        sex = { 'Q6581097':'mężczyzna', 'Q6581072':'kobieta','Q1097630':'obojnactwo', 'Q2449503':'transmężczyzna', 'Q1052281':'transkobieta', 'Q48270':'genderqueer'}
 
         obj = Person()
         obj.title = page.title()
@@ -450,7 +450,10 @@ class BasicBot(
                     if self.getOption('labels'):
                         pywikibot.output('P:%s, V:%s' % (self.getLabel(prp,['pl','en']),trg))
                 if pid == 'P21':
-                     obj.sex = sex[trg.title()]
+                     try:
+                         obj.sex = sex[trg.title()]
+                     except:
+                         obj.sex = 'inna'
                 if pid == 'P31':
                      obj.instanceof = self.getLabel(trg,['pl','en'])
                 if pid == 'P569':
