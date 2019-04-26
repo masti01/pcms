@@ -890,7 +890,7 @@ class BasicBot(
         finalpage += u' !! Total'
         for c in countryList:
             finalpage += u' !! ' + c
-        finalpage += u' !! Total !! wiki/country''
+        finalpage += u' !! Total !! wiki/country'
         
         # generate table rows
         for wiki in res.keys():
