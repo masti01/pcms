@@ -890,7 +890,7 @@ class BasicBot(
         finalpage += u' !! Total'
         for c in countryList:
             finalpage += u' !! ' + c
-        finalpage += u' !! Total'
+        finalpage += u' !! Total !! wiki/country''
         
         # generate table rows
         for wiki in res.keys():
@@ -921,6 +921,8 @@ class BasicBot(
                             countryTotals[c] += res[wiki][c]
             # add row (wiki) total to table
             finalpage += u" || '''" + str(wikiTotal) + "'''" + newline + u" || '''" + str(wikiTotal) + "'''"
+            finalpage += u' || [[' + locpagename + u'/Article list#'+ wiki + u'.wikipedia|' + wiki + u']]'
+
             
         finalpage += u'\n|-'
 
