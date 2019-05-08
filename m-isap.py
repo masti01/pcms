@@ -288,7 +288,10 @@ class BasicBot(
 
         if page.text != text:
             page.text = text
-            page.save(summary=self.getOption('summary'))
+            try:
+                page.save(summary=self.getOption('summary'))
+            except pywikibot.exceptions.EditConflict:
+                pywikibot.output('ERROR: EditConflict in %s' % page.title)
         return(replCount)
 
 
