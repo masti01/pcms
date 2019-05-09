@@ -231,6 +231,7 @@ class BasicBot(
     def treat_page(self,title):
         """Load the given page, do some changes, and save it."""
         midinitR = re.compile(ur'(?m)^(?P<first>[^\d_ \.]*)_([A-Z]\.)+_(?P<last>[^\d_ \(\n\.]*)($|_\()',re.UNICODE)
+        #midinitR = re.compile(ur'(?m)^(?P<first>[\w\-]+)_([A-Z]\.)+_(?P<last>[\w\-]+)($|_\()',re.UNICODE)
         #pywikibot.output(title)
         match = midinitR.match(title)
         if match:

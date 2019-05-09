@@ -166,8 +166,9 @@ class BasicBot(
         #for le in self.site.logevents(end=starttime, start=starttime-datetime.timedelta(hours=hours), reverse=True):
             #if le.action().startswith('unapprove'):
             count += 1
-            #if self.getOption('test'):
-            #    pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),le.page()))
+            if self.getOption('test'):
+                #pywikibot.output(le)
+                pywikibot.output(u'%i>>%s>>%s>>%s>>%s>>%s>>%s' % (count, le.type(), le.logid(),le.timestamp(),le.action(),le.user(),le.page()))
             r = self.addreview(reviews,le.user(),le.action())
             total, initial, other, unreview = r
             if total != 0:

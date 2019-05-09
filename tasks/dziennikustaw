@@ -87,5 +87,6 @@ python pwb.py replace.py "{{Dziennik Ustaw|rok=2013|numer=0|pozycja=1410}}" "{{D
 python pwb.py replace.py "{{Dziennik Ustaw|2012|145}}" "{{Dziennik Ustaw|2017|1121}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -excepttitle:"Prawo wodne"
 
 2015 r. poz. 1274
-time python pwb.py replace.py "{{Dziennik Ustaw|2016|639}}" "{{Dziennik Ustaw|2017|1414}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -always -excepttitle:"Karta Polaka"
+time python pwb.py replace.py "{{Dziennik Ustaw|2015|1569}}" "{{Dziennik Ustaw|2018|616}}" "{{Dziennik Ustaw|2017|125}}" "{{Dziennik Ustaw|2018|617}}" "{{Dziennik Ustaw|2015|1094}}" "{{Dziennik Ustaw|2018|618}}" "{{Dziennik Ustaw|2017|736}}" "{{Dziennik Ustaw|2018|620}}" "{{Dziennik Ustaw|2017|196}}" "{{Dziennik Ustaw|2018|621}}" "{{Dziennik Ustaw|2017|1127}}" "{{Dziennik Ustaw|2018|622}}" "{{Dziennik Ustaw|2017|786}}" "{{Dziennik Ustaw|2018|623}}" "{{Dziennik Ustaw|2017|146}}" "{{Dziennik Ustaw|2018|624}}" -ns:0 -pt:0 -transcludes:"Dziennik Ustaw" -summary:"Bot poprawia odwołania do ustawy" -always -excepttitle:"Karta Polaka"
+
 

@@ -1,11 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-An incomplete sample script by masti for creating statistics/listings pages
+Call:
+	python pwb.py masti/ms-CEEsTest -page:"Szablon:CEE Spring 2017" -outpage:"Wikipedysta:Masti/CEE Spring 2017"
 
-This is not a complete bot; rather, it is a template from which simple
-bots can be made. You can rename it to mybot.py, then edit it in
-whatever way you want.
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.

@@ -41,9 +41,11 @@ __version__ = '$Id: c1795dd2fb2de670c0b4bddb289ea9d13b1e9b3f $'
 
 import pywikibot
 from pywikibot import pagegenerators
+import re
 
 from pywikibot.bot import (
-    SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
+    MultipleSitesBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
+    #SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 import datetime
 
@@ -56,7 +58,8 @@ docuReplacements = {
 
 class BasicBot(
     # Refer pywikobot.bot for generic bot classes
-    SingleSiteBot,  # A bot only working on one site
+    #SingleSiteBot,  # A bot only working on one site
+    MultipleSitesBot,  # A bot only working on one site
     # CurrentPageBot,  # Sets 'current_page'. Process it in treat_page method.
     #                  # Not needed here because we have subclasses
     ExistingPageBot,  # CurrentPageBot which only treats existing pages
@@ -93,10 +96,12 @@ class BasicBot(
             'top': False,  # append text on top of the page
             'outpage': 'User:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
+            'test' : False,
         })
 
         # call constructor of the super class
-        super(BasicBot, self).__init__(site=True, **kwargs)
+        #super(BasicBot, self).__init__(site=True, **kwargs)
+        super(BasicBot, self).__init__(**kwargs)
 
         # handle old -dry paramter
         self._handle_dry_param(**kwargs)
@@ -139,47 +144,96 @@ class BasicBot(
             pywikibot.output(u'[%s] Treating: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),p.title()))
             #pywikibot.output('INTERWIKI:%i' % self.treat(p))
             if not self.treat(p):
-                pywikibot.output('NO INTERWIKI')
+                pywikibot.output('NO PL INTERWIKI')
 
-    def treat(self,page):
+    """ wersja ze stroną pomocniczą
+    def treat(self, page):
+        results = {} # {lang,catname,{count,listofarticles}}
+        lineR = re.compile(ur'(?m)^# \[\[:(?P<lang>.*?):(?P<cat>.*?):(?P<catname>.*?)\]\]')
+
+        for c in re.finditer(lineR,page.text):
+            count = 0
+            lang = c.group('lang')
+            cat = c.group('cat')
+            catname = c.group('catname')
+            if self.getOption('test'):
+                pywikibot.output('l:%s c:%s n:%s' % (lang,cat,catname))
+
+            site = pywikibot.Site(lang,'wikipedia')
+            remotepage = pywikibot.Category(site,cat+':'+catname)
+            pywikibot.output(remotepage.title(asLink=True))
+            artlist = []
+            for a in remotepage.articles():
+                count += 1
+                if self.getOption('test'):
+                    pywikibot.output(u'[%s][%i] Treating: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),count,a.title(asLink=True)))
+                if not self.treat_page(a):
+                    artlist.append(a.title())
+                    if self.getOption('test'):
+                        pywikibot.output(u'[%s] appended: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),a.title(asLink=True)))
+            pywikibot.output(u'[%s] Wikipedia: %s, count %i, marked:%i' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),lang,count,len(artlist)))
+            results[lang] = {'catname':catname, 'count':count, 'artlist':artlist} 
+        if self.getOption('test'):
+            pywikibot.output(results)
+        return(results)
+    """
+    # wersja bez strony pomocniczej via interwikidata
+
+    def interwikiGenerator(self,wdpage):
+        for i in wdpage['sitelinks']:
+            if i.endswith('wiki'):
+                lang = i[:-4]
+                print lang
+                yield pywikibot.Category(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
+
+    def treat(self, page):
+        results = {} # {lang,catname,{count,listofarticles}}
+        lineR = re.compile(ur'(?m)^# \[\[:(?P<lang>.*?):(?P<cat>.*?):(?P<catname>.*?)\]\]')
+
+        try:
+            wd = pywikibot.ItemPage.fromPage(page)
+            wdcontent = wd.get()
+            pywikibot.output(wdcontent['sitelinks'].keys())
+            #return ('plwiki' in wdcontent['sitelinks'].keys())
+        except:
+            pywikibot.output('WikiData page do not exists')
+            return(None)
+        for c in self.interwikiGenerator(wdcontent):
+            pywikibot.output(c.title())
+            lang = c.site.lang
+
+            #if self.getOption('test'):
+            #    pywikibot.output('l:%s c:%s n:%s' % (lang,cat,catname))
+
+            artlist = []
+            count = 0
+            marked = 0
+            for a in c.articles():
+                count += 1
+                if self.getOption('test'):
+                    pywikibot.output(u'[%s][%i/%i] Treating: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),marked,count,a.title(asLink=True,forceInterwiki=True)))
+                if not self.treat_page(a):
+                    artlist.append(a.title())
+                    marked += 1
+                    if self.getOption('test'):
+                        pywikibot.output(u'[%s] appended: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),a.title(asLink=True,forceInterwiki=True)))
+            pywikibot.output(u'[%s] Wikipedia: %s, count %i, marked:%i' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),lang,count,len(artlist)))
+            results[lang] = {'count':count, 'artlist':artlist} 
+        if self.getOption('test'):
+            pywikibot.output(results)
+        return(results)
+
+
+    def treat_page(self,page):
         """Load the given page, do some changes, and save it."""
         results = {}
-        wd = pywikibot.ItemPage.fromPage(page)
-        for i in wd.iterlinks(family='wikipedia'):
-            #print i.title(asLink=True)
-            results[i.site] = i.title()
-            pywikibot.output('%s:%s' % (i.site, results[i.site]))
-        return(len(results.keys())>1)
-
-        text = self.current_page.text
-
-        ################################################################
-        # NOTE: Here you can modify the text in whatever way you want. #
-        ################################################################
-
-        # If you find out that you do not want to edit this page, just return.
-        # Example: This puts Text on a page.
-
-        # Retrieve your private option
-        # Use your own text or use the default 'Test'
-        text_to_add = self.getOption('text')
-
-        if self.getOption('replace'):
-            # replace the page text
-            text = text_to_add
-
-        elif self.getOption('top'):
-            # put text on top
-            text = text_to_add + text
-
-        else:
-            # put text on bottom
-            text += text_to_add
-
-        # if summary option is None, it takes the default i18n summary from
-        # i18n subdirectory with summary_key as summary key.
-        self.put_current(text, summary=self.getOption('summary'))
-
+        pywikibot.output(u'[%s] Treating: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),page.title()))
+        try:
+            wd = pywikibot.ItemPage.fromPage(page)
+            wdcontent = wd.get()
+            return ('plwiki' in wdcontent['sitelinks'].keys())
+        except pywikibot.NoPage:
+            return(True)
 
 def main(*args):
     """

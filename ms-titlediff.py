@@ -322,7 +322,6 @@ class BasicBot(
                     else:
                         if self.getOption('test'):
                             pywikibot.output('SKIPPING: regex matched')
-
                 else:
                     return(page.title(asLink=True),fp.group('firstpar'))
         return(None)

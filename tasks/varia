@@ -10,10 +10,24 @@ This script creates a list of featured/good/lists articles on various wikis whic
 ~/pw/compat/python test-featured.py -fromall -good -nocache
 ~/pw/compat/python test-featured.py -fromall -lists -nocache
 
-python replace.py "{{Dziennik Ustaw|rok=1964|numer=16|pozycja=93}}" "{{Dziennik Ustaw|2016|380}}" "{{Dziennik Ustaw|1964|16|93}}" "{{Dziennik Ustaw|2016|380}}" -transcludes:"Dziennik Ustaw" -pt:0 -summary:"Bot poprawia odwołania do aktu prawnego"
+python replace.py "{{Dziennik Ustaw|2013|1458}}" "{{Dziennik Ustaw|2017|2128}}" -transcludes:"Dziennik Ustaw" -pt:0 -summary:"Bot poprawia odwołania do aktu prawnego"
 
 python basicdeadlinkslist.py -cat:"Niezweryfikowane martwe linki" -ns:1 -outpage:"Wikipedysta:MastiBot/Statystyka martwych linków" -summary:"Bot uaktualnia stronę" -maxlines:3000
 python basicdeadlinkslist.py -domains -cat:"Niezweryfikowane martwe linki" -ns:1 -outpage:"Wikipedysta:MastiBot/Statystyka martwych linków/ogólne" -summary:"Bot uaktualnia stronę" -maxlines:3000
 
 python basicdisambrefslist.py -catr:"Strony ujednoznaczniające" -summary:"Bot uaktualnie astronę"
 
+python pwb.py masti/wlc.py -ignore:401 -ignore:403 -ignore:451 -ignore:500 -ignore:503 -ignore:429 -talk -pt:0 -start:"Dylaki"
+
+python replace.py "{{Dziennik Ustaw|rok=1964|numer=16|pozycja=93}}" "{{Dziennik Ustaw|2016|380}}" "{{Dziennik Ustaw|1964|16|93}}" "{{Dziennik Ustaw|2016|380}}" -transcludes:"Dziennik Ustaw" -pt:0 -summary:"Bot poprawia odwołania do aktu prawnego"
+
+python pwb.py replace.py -regex "{{dziennik ustaw\s*?\|\s*?rok\s*?=\s*?2007\s*?\|\s*?numer\s*?=\s*?133\s*?\|\s*?pozycja\s*?=\s*?921\s*?}}" "{{Dziennik Ustaw|2017|2132}}" "{{dziennik ustaw\s*?\|\s*?2007\s*?\|\s*?133\s*?\|\s*?921}}" "{{Dziennik Ustaw|2017|2132}}" -nocase -transcludes:"Dziennik Ustaw" -pt:0 -summary:"Bot poprawia odwołania do aktu prawnego"
+
+python pwb.py replace.py -regex "{{dziennik ustaw\s*?\|\s*?2013*?\|\s*?1829}}" "{{Dziennik Ustaw|2017|2168}}" -ns:0 -nocase -transcludes:"Dziennik Ustaw" -pt:0 -summary:"Bot poprawia odwołania do aktu prawnego" -excepttitle:"Ustawa o swobodzie działalności gospodarczej"
+
+python pwb.py masti/m-deleteempty.py -start:'Dyskusja:!' -summary:"Pusta strona dyskusji" -pt:0
+
+python pwb.py masti/m-tematicweek.py -page:"Wikiprojekt:Tygodnie tematyczne/Tydzień Artykułu Egipskiego II" -pt:0 -log:"Tydzień Artykułu Egipskiego II"
+
+artykuły bez infoboksu
+time python pwb.py masti/ms-contains.py -catr:"Kardynałowie" -outpage:"Wikipedysta:Ptjackyll/brudnopis2" -text:"\{\{.*?infobox" -regex -negative -summary:"[[WP:ZDBOT#Lista biogramów]]" -navi -progress

@@ -13,22 +13,14 @@ will be done.
 The following parameters are supported:
 
 &params;
-
 -always           If used, the bot won't ask if it should file the message
                   onto user talk page.   
-
 -outpage          Results page; otherwise "Wikipedysta:mastiBot/test" is used
-
 -maxlines         Max number of entries before new subpage is created; default 1000
-
 -text:            Use this text to be added; otherwise 'Test' is used
-
 -replace:         Dont add text but replace it
-
 -top              Place additional text on top of the page
-
 -summary:         Set the action summary message for the edit.
-
 -negative:        mark if text not in page
 """
 #
