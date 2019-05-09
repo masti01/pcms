@@ -170,7 +170,10 @@ class BasicBot(
             """
             repl.append(self.replEncode(tr))
             repl.append(self.replEncode(tr,labels=True))
-        return(repl)
+        if len(repl):
+            return(repl)
+        else:
+            return(None)
 
 
     def newTemplate(self,docNumber):
@@ -273,18 +276,23 @@ class BasicBot(
 
     def fixPage(self,page):
         #get page, do replacements, save
+        if self.getOption('test'):
+            pywikibot.output('Fixing page: %s' % page.title(asLink=True))
         text = page.text
         replCount = 0
         for k in self.WUs.keys():
-            regex = "|".join(self.WUs[k]['toReplace'])
-            if self.getOption('test'):
-                #pywikibot.output('key:%s' % k)
-                #pywikibot.output('regex:%s' % regex)
-                pass
-            text,count = re.subn(regex,self.WUs[k]['newTemplate'],text)
-            if count: 
-                self.WUs[k]['replacements'][page.title()] = count
-            replCount += count
+            if self.WUs[k]['toReplace']:
+                regex = "|".join(self.WUs[k]['toReplace'])
+                if self.getOption('test'):
+                    #pywikibot.output('key:%s' % k)
+                    #pywikibot.output('regex:%s' % regex)
+                    pass
+                text,count = re.subn(regex,self.WUs[k]['newTemplate'],text)
+                if count: 
+                    self.WUs[k]['replacements'][page.title()] = count
+                replCount += count
+            else:
+                pywikibot.output("ERROR: skiping %s due to no replacements for %s" % (page.title(asLink=True),k))
 
         if page.text != text:
             page.text = text
@@ -319,7 +327,10 @@ class BasicBot(
                 self.WUs[tr]['toReplace'] = self.createReplaceList(self.getInitialWebPage(tr))
             except:
                 self.WUs[tr]['toReplace'] = None
-                self.WUs[tr]['error'] = True
+                self.WUs[tr]['error'] = 'Brak strony w systemie isap'
+            if not self.WUs[tr]['toReplace']:
+                self.WUs[tr]['error'] = 'Brak poprzednich wersji tekstu jednolitego'
+                
 
 
         if self.getOption('test'):
@@ -343,7 +354,8 @@ class BasicBot(
                 rpages += 1
                 rcount += rc
                 if self.getOption('test'):
-                    pywikibot.output('Fixpages WUs:%s' % self.WUs)
+                    #pywikibot.output('Fixpages WUs:%s' % self.WUs)
+                    pywikibot.output('Fixpages WUs:%s' % du.title())
         if self.getOption('test'):
             pywikibot.output('[%s] %i replacements on %i pages after processing %i pages.' % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), rcount, rpages, count-1))
         # generate log
@@ -378,6 +390,8 @@ class BasicBot(
                 for r in self.WUs[k]['replacements'].keys():
                     replacements += self.WUs[k]['replacements'][r]
                 newline += '\n|-\n| %s || %s || %i || %i' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'], len(self.WUs[k]['replacements']), replacements)
+            else:
+                newline += '\n|-\n| %s || %s || colspan=2 | %s' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'],self.WUs[k]['error'])
         pywikibot.output('Added log entries:%s' % newline)
         newline += '\n|}'
 
