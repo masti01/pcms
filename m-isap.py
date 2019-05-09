@@ -391,7 +391,7 @@ class BasicBot(
                     replacements += self.WUs[k]['replacements'][r]
                 newline += '\n|-\n| %s || %s || %i || %i' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'], len(self.WUs[k]['replacements']), replacements)
             else:
-                newline += '\n|-\n| %s || %s || colspan=2 | %s' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'],self.WUs[k]['error'])
+                newline += '\n|-\n| %s || %s || colspan=2 style="background-color:Yellow"| <small>%s</small>' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'],self.WUs[k]['error'])
         pywikibot.output('Added log entries:%s' % newline)
         newline += '\n|}'
 
