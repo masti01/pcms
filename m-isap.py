@@ -141,13 +141,6 @@ class BasicBot(
 
         return
 
-        # get page with list of IDs to replace
-        targetPage = self.getInitialWebPage(self.getOption('id'))
-        if self.getOption('test'):
-            pywikibot.output('target page ID:%s' % targetPage)
-
-        newTemplate = self.newTemplate(self.getOption('id'))
-
     def createReplaceList(self, docNumber):
         # replace a list of regex for replacement
         repl = []
