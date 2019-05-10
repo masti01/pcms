@@ -145,12 +145,6 @@ class BasicBot(
         # replace a list of regex for replacement
         repl = []
         for tr in self.toReplaceIDs(docNumber):
-            """
-            if self.getOption('test'):
-                pywikibot.output('tr:%s' % tr)
-                pywikibot.output('replEncode:%s' % self.replEncode(tr))
-                pywikibot.output('replEncode:%s' % self.replEncode(tr,labels=True))
-            """
             repl.append(self.replEncode(tr))
             repl.append(self.replEncode(tr, labels=True))
         if len(repl):
