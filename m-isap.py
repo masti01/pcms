@@ -204,7 +204,6 @@ class BasicBot(
         if self.getOption('test'):
             pywikibot.output('Web Page:%s' % quote_page)
             pywikibot.output('Title:%s' % soup.title.string)
-            #pywikibot.output('COLLAPSE_7:%s' % soup.find(id="collapse_7"))
 
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
         ident = idR.search(soup.find(id="collapse_7").find('a').get('href'))
@@ -251,7 +250,6 @@ class BasicBot(
         #return isap WU id from {{Dziennik Ustaw}}
         if self.getOption('test'):
             pywikibot.output('DU(WUID):%s' % templ)
-        #duR = re.compile(r'(\*|#) *\{\{Dziennik Ustaw *\| *(?P<one>\d*) *\| *(?P<two>\d*) *(\| *(?P<three>\d*))?}}')
         duR = re.compile(r'\** *\{\{Dziennik Ustaw\s*\|\s*(?P<one>\d*)\s*\|\s*(?P<two>\d*)\s*(\|\s*(?P<three>\d*))?\}\}')
         du = duR.match(templ)
         if du:
@@ -284,7 +282,8 @@ class BasicBot(
                     self.WUs[k]['replacements'][page.title()] = count
                 replCount += count
             else:
-                pywikibot.output("ERROR: skiping %s due to no replacements for %s" % (page.title(asLink=True),k))
+                if self.getOption('test'):
+                    pywikibot.output("ERROR: skiping %s due to no replacements for %s" % (page.title(asLink=True),k))
 
         if page.text != text:
             page.text = text
