@@ -273,10 +273,6 @@ class BasicBot(
         for k in self.WUs.keys():
             if self.WUs[k]['toReplace']:
                 regex = "|".join(self.WUs[k]['toReplace'])
-                if self.getOption('test'):
-                    # pywikibot.output('key:%s' % k)
-                    # pywikibot.output('regex:%s' % regex)
-                    pass
                 text, count = re.subn(regex, self.WUs[k]['newTemplate'], text)
                 if count:
                     self.WUs[k]['replacements'][page.title()] = count
