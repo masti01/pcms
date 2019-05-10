@@ -61,7 +61,6 @@ class BasicBot(
     NoRedirectPageBot,  # CurrentPageBot which only treats non-redirects
     AutomaticTWSummaryBot,  # Automatically defines summary; needs summary_key
 ):
-
     """
     An incomplete sample bot.
 
@@ -73,7 +72,7 @@ class BasicBot(
     """
 
     summary_key = 'basic-changing'
-    WUs = {} #dict to keep info on processed templates 
+    WUs = {}  # dict to keep info on processed templates
 
     def __init__(self, generator, **kwargs):
         """
@@ -90,11 +89,11 @@ class BasicBot(
             'summary': None,  # your own bot summary
             'text': 'Test',  # add this text from option. 'Test' is default
             'top': False,  # append text on top of the page
-            'outpage': u'User:mastiBot/test', #default output page
-            'maxlines': 10000, #default number of entries per page
-            'test': False, # print testoutput
-            'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
-            'id': '20190000506', #starting isap page id - for test only
+            'outpage': u'User:mastiBot/test',  # default output page
+            'maxlines': 10000,  # default number of entries per page
+            'test': False,  # print testoutput
+            'negative': False,  # if True negate behavior i.e. mark pages that DO NOT contain search string
+            'id': '20190000506',  # starting isap page id - for test only
         })
 
         # call constructor of the super class
@@ -135,23 +134,22 @@ class BasicBot(
         toReplace = {}
         outputpage = self.getOption('outpage')
         pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
-        
+
         for p in self.generator:
             pywikibot.output(u'Treating: %s' % p.title())
             self.treat(p)
 
         return
-        
+
         # get page with list of IDs to replace
         targetPage = self.getInitialWebPage(self.getOption('id'))
         if self.getOption('test'):
             pywikibot.output('target page ID:%s' % targetPage)
-        
-        newTemplate= self.newTemplate(self.getOption('id'))
 
+        newTemplate = self.newTemplate(self.getOption('id'))
 
-    def createReplaceList(self,docNumber):
-        #replace a list of regex for replacement
+    def createReplaceList(self, docNumber):
+        # replace a list of regex for replacement
         repl = []
         for tr in self.toReplaceIDs(docNumber):
             """
@@ -161,40 +159,41 @@ class BasicBot(
                 pywikibot.output('replEncode:%s' % self.replEncode(tr,labels=True))
             """
             repl.append(self.replEncode(tr))
-            repl.append(self.replEncode(tr,labels=True))
+            repl.append(self.replEncode(tr, labels=True))
         if len(repl):
-            return(repl)
+            return (repl)
         else:
-            return(None)
+            return (None)
 
-
-    def newTemplate(self,docNumber):
-        #encode DU Number in new {{Dziennik Ustaw}}
-        year,volume,position = self.decodeDUid(docNumber)
+    def newTemplate(self, docNumber):
+        # encode DU Number in new {{Dziennik Ustaw}}
+        year, volume, position = self.decodeDUid(docNumber)
         if year > 2011:
-            return('{{Dziennik Ustaw|%i|%i}}' % (year,position))
+            return ('{{Dziennik Ustaw|%i|%i}}' % (year, position))
         else:
-            return('{{Dziennik Ustaw|%i|%i|%i}}' % (year, volume, position))
+            return ('{{Dziennik Ustaw|%i|%i|%i}}' % (year, volume, position))
 
-    def replEncode(self,docNumber,labels=False):
-        #encode docNumber in replacement string
+    def replEncode(self, docNumber, labels=False):
+        # encode docNumber in replacement string
         # with labels: {{Dziennik Ustaw|rok=1997|numer=88|pozycja=553}} {{Dziennik Ustaw|rok=2016|pozycja=1137}}
         # without labels: {{Dziennik Ustaw|1997|88|553}} {{Dziennik Ustaw|2016|1137}}
-        year,volume,position = self.decodeDUid(docNumber)
+        year, volume, position = self.decodeDUid(docNumber)
 
         if labels:
             if year > 2011:
-                repl = r'{{Dziennik Ustaw\s*\|\s*rok\s*=\s*%s\s*\|\s*numer\s*=\s*\|\s*pozycja\s*=\s*%s\s*}}' % (year,position)
+                repl = r'{{Dziennik Ustaw\s*\|\s*rok\s*=\s*%s\s*\|\s*numer\s*=\s*\|\s*pozycja\s*=\s*%s\s*}}' % (
+                year, position)
             else:
-                repl = r'{{Dziennik Ustaw\s*\|\s*rok\s*=\s*%s\s*\|\s*numer\s*=\s*%s\s*\|\s*pozycja\s*=\s*%s\s*}}' % (year,volume,position)
+                repl = r'{{Dziennik Ustaw\s*\|\s*rok\s*=\s*%s\s*\|\s*numer\s*=\s*%s\s*\|\s*pozycja\s*=\s*%s\s*}}' % (
+                year, volume, position)
         else:
             if year > 2011:
-                repl = r'{{Dziennik Ustaw\s*\|\s*%s\s*\|\s*%s\s*}}' % (year,position)
+                repl = r'{{Dziennik Ustaw\s*\|\s*%s\s*\|\s*%s\s*}}' % (year, position)
             else:
-                repl = r'{{Dziennik Ustaw\s*\|\s*%s\s*\|\s*%s\s*\|\s*%s\s*}}' % (year,volume,position)
-        return(repl)
+                repl = r'{{Dziennik Ustaw\s*\|\s*%s\s*\|\s*%s\s*\|\s*%s\s*}}' % (year, volume, position)
+        return (repl)
 
-    def getInitialWebPage(self,docNumber):
+    def getInitialWebPage(self, docNumber):
         # specify the url
         quote_page = 'http://prawo.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU%s' % docNumber
         if self.getOption('test'):
@@ -208,11 +207,11 @@ class BasicBot(
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
         ident = idR.search(soup.find(id="collapse_7").find('a').get('href'))
 
-        #if self.getOption('test'):
+        # if self.getOption('test'):
         #    pywikibot.output('ID:%s' % ident.group('id'))
-        return(ident.group('id'))
+        return (ident.group('id'))
 
-    def toReplaceIDs(self,docNumber):
+    def toReplaceIDs(self, docNumber):
         # yield a list of IDs to be replaced
         quote_page = 'http://prawo.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU%s' % docNumber
         if self.getOption('test'):
@@ -226,31 +225,32 @@ class BasicBot(
                 first = False
             else:
                 ident = idR.search(t.get('href'))
-                yield(ident.group('id'))
+                yield (ident.group('id'))
 
-    def decodeDUid(self,ident):
+    def decodeDUid(self, ident):
         # convert WDU ID to year,number,position
         dR = re.compile(r'(?P<rok>\d{4})(?P<nr>\d{3})(?P<poz>\d{4})')
         data = dR.match(ident)
-        return((int(data.group('rok')),int(data.group('nr')),int(data.group('poz'))))
+        return ((int(data.group('rok')), int(data.group('nr')), int(data.group('poz'))))
 
-    def encodeDUid(self,year,number,position):
+    def encodeDUid(self, year, number, position):
         # create WDU ID from year,number,position
-        return('%04i%03i%04i' % (year,number,position))
+        return ('%04i%03i%04i' % (year, number, position))
 
-    def getDUTemplateList(self,text):
-        #return list of {{Dziennik Ustaw}} templates from text (page)
+    def getDUTemplateList(self, text):
+        # return list of {{Dziennik Ustaw}} templates from text (page)
         duR = re.compile(r'(?m)^\* \{\{Dziennik Ustaw[^\}]*}}.*$')
-        #duR = re.compile(r'\{\{Dziennik Ustaw[^\}]*}}')
+        # duR = re.compile(r'\{\{Dziennik Ustaw[^\}]*}}')
         if self.getOption('test'):
             pywikibot.output('FindAll:%s' % duR.findall(text))
-        return(duR.findall(text))
+        return (duR.findall(text))
 
-    def WUid(self,templ):
-        #return isap WU id from {{Dziennik Ustaw}}
+    def WUid(self, templ):
+        # return isap WU id from {{Dziennik Ustaw}}
         if self.getOption('test'):
             pywikibot.output('DU(WUID):%s' % templ)
-        duR = re.compile(r'\** *\{\{Dziennik Ustaw\s*\|\s*(?P<one>\d*)\s*\|\s*(?P<two>\d*)\s*(\|\s*(?P<three>\d*))?\}\}')
+        duR = re.compile(
+            r'\** *\{\{Dziennik Ustaw\s*\|\s*(?P<one>\d*)\s*\|\s*(?P<two>\d*)\s*(\|\s*(?P<three>\d*))?\}\}')
         du = duR.match(templ)
         if du:
             year = int(du.group('one'))
@@ -260,12 +260,12 @@ class BasicBot(
             else:
                 pos = int(du.group('three'))
                 vol = int(du.group('two'))
-            return(self.encodeDUid(year,vol,pos))
+            return (self.encodeDUid(year, vol, pos))
         else:
-            return(None)
+            return (None)
 
-    def fixPage(self,page):
-        #get page, do replacements, save
+    def fixPage(self, page):
+        # get page, do replacements, save
         if self.getOption('test'):
             pywikibot.output('Fixing page: %s' % page.title(asLink=True))
         text = page.text
@@ -274,16 +274,16 @@ class BasicBot(
             if self.WUs[k]['toReplace']:
                 regex = "|".join(self.WUs[k]['toReplace'])
                 if self.getOption('test'):
-                    #pywikibot.output('key:%s' % k)
-                    #pywikibot.output('regex:%s' % regex)
+                    # pywikibot.output('key:%s' % k)
+                    # pywikibot.output('regex:%s' % regex)
                     pass
-                text,count = re.subn(regex,self.WUs[k]['newTemplate'],text)
-                if count: 
+                text, count = re.subn(regex, self.WUs[k]['newTemplate'], text)
+                if count:
                     self.WUs[k]['replacements'][page.title()] = count
                 replCount += count
             else:
                 if self.getOption('test'):
-                    pywikibot.output("ERROR: skiping %s due to no replacements for %s" % (page.title(asLink=True),k))
+                    pywikibot.output("ERROR: skiping %s due to no replacements for %s" % (page.title(asLink=True), k))
 
         if page.text != text:
             page.text = text
@@ -291,10 +291,9 @@ class BasicBot(
                 page.save(summary=self.getOption('summary'))
             except pywikibot.exceptions.EditConflict:
                 pywikibot.output('ERROR: EditConflict in %s' % page.title)
-        return(replCount)
+        return (replCount)
 
-
-    def treat(self,page):
+    def treat(self, page):
 
         # get templates from page
 
@@ -305,14 +304,14 @@ class BasicBot(
                 pywikibot.output('DU:%s' % d)
             # generate list of WU ids self.WUid(d
             # save for future cleanup {'line':d}
-            self.WUs[self.WUid(d)] = {'line':d, 'replacements':{},'error':False}
+            self.WUs[self.WUid(d)] = {'line': d, 'replacements': {}, 'error': False}
 
         if self.getOption('test'):
-                pywikibot.output('WUs:%s' % self.WUs)
+            pywikibot.output('WUs:%s' % self.WUs)
 
         # generate replacement dictionary
         for tr in self.WUs.keys():
-            #toReplace[self.newTemplate(tr)] = self.createReplaceList(self.getInitialWebPage(tr))
+            # toReplace[self.newTemplate(tr)] = self.createReplaceList(self.getInitialWebPage(tr))
             self.WUs[tr]['newTemplate'] = self.newTemplate(tr)
             try:
                 self.WUs[tr]['toReplace'] = self.createReplaceList(self.getInitialWebPage(tr))
@@ -321,48 +320,48 @@ class BasicBot(
                 self.WUs[tr]['error'] = 'Brak strony w systemie isap'
             if not self.WUs[tr]['toReplace']:
                 self.WUs[tr]['error'] = 'Brak poprzednich wersji tekstu jednolitego'
-                
-
 
         if self.getOption('test'):
-            #pywikibot.output('toReplace:%s' % toReplace)
+            # pywikibot.output('toReplace:%s' % toReplace)
             pywikibot.output('toReplace:%s' % self.WUs)
 
         # get pages transcluding {{Dziennik Ustaw}}
         duTemplatePage = pywikibot.Page(pywikibot.Site(), 'Szablon:Dziennik Ustaw')
         count = 0
-        rpages = 0 # fixed pages count
-        rcount = 0 # replacements done
-        for du in duTemplatePage.getReferences(only_template_inclusion=True,namespaces=0):
+        rpages = 0  # fixed pages count
+        rcount = 0  # replacements done
+        for du in duTemplatePage.getReferences(only_template_inclusion=True, namespaces=0):
             count += 1
             if count > int(self.getOption('maxlines')):
                 break
             if self.getOption('test'):
-                pywikibot.output('[%s] Page (%i):%s' % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"),count,du.title()))
-        # run replacements
-            rc = self.fixPage(du) # count pages and replacements made
-            if rc :
+                pywikibot.output(
+                    '[%s] Page (%i):%s' % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), count, du.title()))
+            # run replacements
+            rc = self.fixPage(du)  # count pages and replacements made
+            if rc:
                 rpages += 1
                 rcount += rc
                 if self.getOption('test'):
-                    #pywikibot.output('Fixpages WUs:%s' % self.WUs)
+                    # pywikibot.output('Fixpages WUs:%s' % self.WUs)
                     pywikibot.output('Fixpages WUs:%s' % du.title())
         if self.getOption('test'):
-            pywikibot.output('[%s] %i replacements on %i pages after processing %i pages.' % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), rcount, rpages, count-1))
+            pywikibot.output('[%s] %i replacements on %i pages after processing %i pages.' % (
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"), rcount, rpages, count - 1))
         # generate log
         # cleanup 
         self.cleanup(page)
         self.logUpdate()
-        #page.text = header
-        #page.save(summary='Bot czyści stronę po zakończeniu działania (isap)')
-        
+        # page.text = header
+        # page.save(summary='Bot czyści stronę po zakończeniu działania (isap)')
+
         return
 
-    def cleanup(self,page):
+    def cleanup(self, page):
         # cleanup input page - removig used templates
         text = page.text
         for k in self.WUs.keys():
-            text = text.replace(self.WUs[k]['line'],'')
+            text = text.replace(self.WUs[k]['line'], '')
         if self.getOption('test'):
             pywikibot.output('FINALPAGE:%s' % text)
         page.text = text
@@ -380,19 +379,23 @@ class BasicBot(
                 replacements = 0
                 for r in self.WUs[k]['replacements'].keys():
                     replacements += self.WUs[k]['replacements'][r]
-                newline += '\n|-\n| %s || %s || %i || %i' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'], len(self.WUs[k]['replacements']), replacements)
+                newline += '\n|-\n| %s || %s || %i || %i' % (
+                datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'], len(self.WUs[k]['replacements']),
+                replacements)
             else:
-                newline += '\n|-\n| %s || %s || colspan=2 style="background-color:Yellow"| <small>%s</small>' % (datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'],self.WUs[k]['error'])
+                newline += '\n|-\n| %s || %s || colspan=2 style="background-color:Yellow"| <small>%s</small>' % (
+                datetime.now().strftime("%Y-%m-%d"), self.WUs[k]['newTemplate'], self.WUs[k]['error'])
         pywikibot.output('Added log entries:%s' % newline)
         newline += '\n|}'
 
         page = pywikibot.Page(pywikibot.Site(), self.getOption('outpage'))
-        page.text = page.text.replace('\n|}',newline)
+        page.text = page.text.replace('\n|}', newline)
         if self.getOption('test'):
             pywikibot.output('LOG FILE:%s' % page.text)
         page.save(summary='Bot uaktualnia log')
         return
-        
+
+
 def main(*args):
     """
     Process command line arguments and invoke bot.
@@ -421,7 +424,7 @@ def main(*args):
         # Now pick up your own options
         arg, sep, value = arg.partition(':')
         option = arg[1:]
-        if option in ('summary', 'text', 'outpage', 'maxlines','id'):
+        if option in ('summary', 'text', 'outpage', 'maxlines', 'id'):
             if not value:
                 pywikibot.input('Please enter a value for ' + arg)
             options[option] = value
@@ -442,6 +445,7 @@ def main(*args):
     else:
         pywikibot.bot.suggest_help(missing_generator=True)
         return False
+
 
 if __name__ == '__main__':
     main()
