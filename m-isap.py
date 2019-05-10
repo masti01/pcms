@@ -307,7 +307,6 @@ class BasicBot(
 
         # generate replacement dictionary
         for tr in self.WUs.keys():
-            # toReplace[self.newTemplate(tr)] = self.createReplaceList(self.getInitialWebPage(tr))
             self.WUs[tr]['newTemplate'] = self.newTemplate(tr)
             try:
                 self.WUs[tr]['toReplace'] = self.createReplaceList(self.getInitialWebPage(tr))
@@ -318,7 +317,6 @@ class BasicBot(
                 self.WUs[tr]['error'] = 'Brak poprzednich wersji tekstu jednolitego'
 
         if self.getOption('test'):
-            # pywikibot.output('toReplace:%s' % toReplace)
             pywikibot.output('toReplace:%s' % self.WUs)
 
         # get pages transcluding {{Dziennik Ustaw}}
