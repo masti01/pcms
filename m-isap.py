@@ -184,18 +184,25 @@ class BasicBot(
         # specify the url
         quote_page = 'http://prawo.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU%s' % docNumber
         if self.getOption('test'):
-            pywikibot.output('getting:%s' % quote_page)
+            pywikibot.output('getInitialWebPage:%s' % quote_page)
         webpage = urllib2.urlopen(quote_page)
+        if webpage:
+            print "webpage: %s" % webpage
+        else:
+            print "NO WEBPAGE"
+        if self.getOption('test'):
+            pywikibot.output('webpage:%s' % webpage)
         soup = BeautifulSoup(webpage, 'html.parser')
         if self.getOption('test'):
+            pywikibot.output('Soup:%s' % soup)
             pywikibot.output('Web Page:%s' % quote_page)
             pywikibot.output('Title:%s' % soup.title.string)
 
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
         ident = idR.search(soup.find(id="collapse_7").find('a').get('href'))
 
-        # if self.getOption('test'):
-        #    pywikibot.output('ID:%s' % ident.group('id'))
+        if self.getOption('test'):
+            pywikibot.output('ID:%s' % ident.group('id'))
         return (ident.group('id'))
 
     def toReplaceIDs(self, docNumber):
@@ -285,7 +292,7 @@ class BasicBot(
         for d in self.getDUTemplateList(text):
             if self.getOption('test'):
                 pywikibot.output('DU:%s' % d)
-            # generate list of WU ids self.WUid(d
+            # generate list of WU ids self.WUid
             # save for future cleanup {'line':d}
             self.WUs[self.WUid(d)] = {'line': d, 'replacements': {}, 'error': False}
 
@@ -297,10 +304,10 @@ class BasicBot(
             self.WUs[tr]['newTemplate'] = self.newTemplate(tr)
             try:
                 self.WUs[tr]['toReplace'] = self.createReplaceList(self.getInitialWebPage(tr))
-            except:
+            except urllib2.HTTPError:
                 self.WUs[tr]['toReplace'] = None
                 self.WUs[tr]['error'] = 'Brak strony w systemie isap'
-            if not self.WUs[tr]['toReplace']:
+            if not self.WUs[tr]['error'] and not self.WUs[tr]['toReplace']:
                 self.WUs[tr]['error'] = 'Brak poprzednich wersji tekstu jednolitego'
 
         if self.getOption('test'):
@@ -342,7 +349,8 @@ class BasicBot(
         # cleanup input page - removig used templates
         text = page.text
         for k in self.WUs.keys():
-            text = text.replace(self.WUs[k]['line'], '')
+            if not self.WUs[k]['error'] == 'Brak strony w systemie isap':
+                text = text.replace(self.WUs[k]['line'], '')
         if self.getOption('test'):
             pywikibot.output('FINALPAGE:%s' % text)
         page.text = text
