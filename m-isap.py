@@ -362,7 +362,7 @@ class BasicBot(
     def commentSource(self, text, torepl):
         # replace source line 'text' with updated last check datetime
         toreplR = re.compile(r'(\*.*?}}).*')
-        line = toreplR.sub('\\1', torepl) +' <small>(Ostatnie sprawdzenie %s)</small>' % datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        line = toreplR.sub('\\1', torepl) +' <small>(Dokument niedostępny %s)</small>' % datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         text = re.sub(re.escape(torepl),line,text)
         return(text)
 
