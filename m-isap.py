@@ -351,11 +351,20 @@ class BasicBot(
         for k in self.WUs.keys():
             if not self.WUs[k]['error'] == 'Brak strony w systemie isap':
                 text = text.replace(self.WUs[k]['line'], '')
+            else:
+                text = self.commentSource(text, self.WUs[k]['line'])
         if self.getOption('test'):
             pywikibot.output('FINALPAGE:%s' % text)
         page.text = text
         page.save(summary='Bot usuwa wykonane zadania')
         return
+
+    def commentSource(self, text, torepl):
+        # replace source line 'text' with updated last check datetime
+        toreplR = re.compile(r'(\*.*?}}).*')
+        line = toreplR.sub('\\1', torepl) +' <small>(Ostatnie sprawdzenie %s)</small>' % datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        text = re.sub(re.escape(torepl),line,text)
+        return(text)
 
     def logUpdate(self):
         # update log file defined in outpage
