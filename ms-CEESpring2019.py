@@ -159,10 +159,10 @@ class BasicBot(
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'et':0, 'myv':0, 'eo':0, 'hr':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
              'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'eo':'lando', 'el':'country', 'et':'maa', \
-                 'myv':'мастор', 'eo':'country', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'myv':'мастор', 'ro':'țară', 'ru':'страна', 'sq':'country', \
-                 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
-    topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'eo':'temo', 'el':'topic', 'et':'teema', \
-             'eo':'topic', 'hu':'téma', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
+                 'myv':'мастор', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'myv':'мастор', 'ro':'țară', 'ru':'страна',\
+                 'sq':'country', 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
+    topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', 'et':'teema', \
+             'eo':'temo', 'hu':'téma', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
              'tt':'тема', 'tr':'konu', 'uk':'тема', 'hr':'tema', 'hy':'Թուրքիա|թեմա'}
     womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', 'et':'naised', \
               'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
@@ -566,7 +566,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,force_interwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('hu'):
+                    if lang not in ('eo'):
                          continue
 
                 self.templatesList[lang] = i.title()
