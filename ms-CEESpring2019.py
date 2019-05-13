@@ -64,7 +64,7 @@ from pywikibot.tools import issue_deprecation_warning
 docuReplacements = {
     '&params;': pagegenerators.parameterHelp
 }
-CEEtemplates = {'pl' : 'Szablon:CEE Spring 2019', 'az' : 'Şablon:Vikibahar 2019', 'ba' : 'Ҡалып:Вики-яҙ 2019', 'be' : 'Шаблон:CEE Spring 2019', 'be-tarask' : 'Шаблён:Артыкул ВікіВясны-2019', 'bg' : 'Шаблон:CEE Spring 2019', 'de' : 'Vorlage:CEE Spring 2019', 'el' : 'Πρότυπο:CEE Spring 2019', 'et' : 'Mall:CEE Spring 2019', 'hr' : 'Predložak:CEE proljeće 2019.', 'hu':'Sablon:CEE Tavasz 2019', 'hy' : 'Կաղապար:CEE Spring 2019', 'ka' : 'თარგი:ვიკიგაზაფხული 2019', 'lv' : 'Veidne:CEE Spring 2019', 'lt' : 'Šablonas:VRE 2019', 'mk' : 'Шаблон:СИЕ Пролет 2019', 'myk':'Шаблон:СИЕ Пролет 2019', 'ro' : 'Format:Wikimedia CEE Spring 2019', 'ru' : 'Шаблон:Вики-весна 2019', 'sr' : 'Шаблон:ЦЕЕ пролеће 2019', 'tr' : 'Şablon:Vikibahar 2019', 'uk' : 'Шаблон:CEE Spring 2019' }
+CEEtemplates = {'pl' : 'Szablon:CEE Spring 2019', 'az' : 'Şablon:Vikibahar 2019', 'ba' : 'Ҡалып:Вики-яҙ 2019', 'be' : 'Шаблон:CEE Spring 2019', 'be-tarask' : 'Шаблён:Артыкул ВікіВясны-2019', 'bg' : 'Шаблон:CEE Spring 2019', 'de' : 'Vorlage:CEE Spring 2019', 'eo':'Ŝablono:VikiPrintempo COE 2019', 'el' : 'Πρότυπο:CEE Spring 2019', 'et' : 'Mall:CEE Spring 2019', 'hr' : 'Predložak:CEE proljeće 2019.', 'hu':'Sablon:CEE Tavasz 2019', 'hy' : 'Կաղապար:CEE Spring 2019', 'ka' : 'თარგი:ვიკიგაზაფხული 2019', 'lv' : 'Veidne:CEE Spring 2019', 'lt' : 'Šablonas:VRE 2019', 'mk' : 'Шаблон:СИЕ Пролет 2019', 'myk':'Шаблон:СИЕ Пролет 2019', 'ro' : 'Format:Wikimedia CEE Spring 2019', 'ru' : 'Шаблон:Вики-весна 2019', 'sr' : 'Шаблон:ЦЕЕ пролеће 2019', 'tr' : 'Şablon:Vikibahar 2019', 'uk' : 'Шаблон:CEE Spring 2019' }
 countryList =[ u'Albania', u'Armenia', u'Austria', u'Azerbaijan', u'Bashkortostan', u'Belarus', u'Bosnia and Herzegovina', u'Bulgaria', u'Crimean Tatars', u'Don',  u'Croatia', u'Czechia', u'Erzia', u'Esperanto', u'Estonia', u'Georgia', u'Greece', u'Hungary', u'Kazakhstan', u'Kosovo', u'Latvia', u'Lithuania', u'North Macedonia', u'Montenegro', u'Poland', u'Romania and Moldova', u'Republic of Srpska', u'Russia', u'Serbia', u'Sorbia',  u'Slovakia', u'Slovenia', u'Tatarstan', u'Turkey', u'Ukraine', u'Other', u'Empty' ]
 countryNames = {
 #pl countries
@@ -158,17 +158,17 @@ class BasicBot(
              'mk':[], 'ro':[], 'ru':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'et':0, 'myv':0, 'eo':0, 'hr':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
              'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
-    countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'el':'country', 'et':'maa', \
+    countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'eo':'lando', 'el':'country', 'et':'maa', \
                  'myv':'мастор', 'eo':'country', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'myv':'мастор', 'ro':'țară', 'ru':'страна', 'sq':'country', \
                  'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
-    topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', 'et':'teema', \
+    topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'eo':'temo', 'el':'topic', 'et':'teema', \
              'eo':'topic', 'hu':'téma', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sq':'topic', 'sr':'тема', \
              'tt':'тема', 'tr':'konu', 'uk':'тема', 'hr':'tema', 'hy':'Թուրքիա|թեմա'}
     womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', 'et':'naised', \
               'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
                'uk':'жінки', 'hu':'nők', 'hr':'Žene', 'hy':'Կանայք'}
     userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'be-tarask':'удзельнік', 'bg':'потребител',\
-             'de':'benutzer','crh':'qullanıcı','el':'user', 'et':'kasutaja', 'hu':'szerkesztő', 'myv':'сёрмадыця', 'eo':'user', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
+             'de':'benutzer','crh':'qullanıcı','el':'user', 'et':'kasutaja', 'hu':'szerkesztő', 'myv':'сёрмадыця', 'eo':'uzanto', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
              'mk':'корисник', 'myv':'сёрмадыця', 'ro':'utilizator', 'ru':'участник', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', 'uk':'користувач', 'hr':'suradnik', 'hy':'մասնակից' }
 
     def __init__(self, generator, **kwargs):
