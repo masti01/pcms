@@ -146,6 +146,7 @@ class BasicBot(
     summary_key = 'basic-changing'
     springList = {}
     templatesList = {}
+    
     authors = {}
     authorsData = {}
     authorsArticles = {}
@@ -566,11 +567,19 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,force_interwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('eo'):
+                    if lang not in ('uk'):
                          continue
 
-                self.templatesList[lang] = i.title()
+                self.templatesList[lang] = [i.title()]
+                pywikibot.output(u'Getting template redirs to %s Lang:%s' % (i.title(asLink=True,force_interwiki=True), lang) )
+                for p in i.getReferences(namespaces=10,filter_redirects=True):
+                    self.templatesList[lang].append(p.title())
+                    if self.getOption('test2'):
+                        pywikibot.output('REDIR TEMPLATE:%s' % p.title(asLink=True,force_interwiki=True))
+
                 pywikibot.output(u'Getting references to %s Lang:%s' % (i.title(asLink=True,force_interwiki=True), lang) )
+                if self.getOption('test2'):
+                    pywikibot.output('REDIR TEMPLATE LIST:%s' % self.templatesList[lang])
                 countlang = 0
                 for p in i.getReferences(namespaces=1):
                     artParams = {}
@@ -768,7 +777,7 @@ class BasicBot(
             tt = re.sub(ur'\[\[.*?:(.*?)\]\]', r'\1', title.title())
             if self.getOption('test2'):
                 pywikibot.output(u'tml:%s * %s * %s' % (title,tt,template) )
-            if tt == template:
+            if tt in template:
                 paramcount = 1
                 countryDef = False # check if country defintion exists
                 parlist['woman'] = False
@@ -1287,7 +1296,7 @@ class BasicBot(
 
             #print('[[:' + i + u':' + self.templatesList[i] +u'|' + i + u' wikipedia]]')
             if l in self.templatesList.keys():
-                finalpage += u'\n== [[:' + l + ':' + self.templatesList[l] +u'|' + l + u'.wikipedia]] =='
+                finalpage += u'\n== [[:' + l + ':' + self.templatesList[l][0] +u'|' + l + u'.wikipedia]] =='
             else:
                 finalpage += u'\n== ' + l + u'.wikipedia =='
             finalpage += u'\n=== ' + l + u'.wikipedia new articles ==='
