@@ -1154,7 +1154,7 @@ ignorelist = [
     re.compile('.*[\./@]theplantlist\.org'),  # bot rejected on site (masti, Wiklol)
     re.compile('.*[\./@]geojournals\.pgi\.gov\.pl/agp/article/view'),  # bot rejected on site (masti, Wiklol)
     re.compile('.*[\./@]file\.scirp\.org/Html'),  # bot rejected on site (masti, Wiklol)
-
+    re.compile('.*[\./@]diecezja\.wloclawek\.pl'),  # bot rejected on site (masti, Wiktoryn)
 ]
 
 
