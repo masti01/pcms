@@ -1178,6 +1178,7 @@ ignorelist = [
     re.compile('.*[\./@]radawarszawy\.um\.warszawa\.pl/ewidencje/nagroda/Strony/2011rok\.aspx'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]monitorkonstytucyjny\.eu/archiwa/4443'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]independent\.co\.uk'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]ygfamily\.com'),  # bot rejected on site (masti, Camomilla)
 ]
 
 
