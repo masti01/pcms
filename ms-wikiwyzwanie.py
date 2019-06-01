@@ -325,11 +325,11 @@ class BasicBot(
         return(int((day-1)/6)+1)
 
     def dayToNumber(self,day):
-        dtn = { '15 kwietnia':1, '16 kwietnia':2, '17 kwietnia':3, '18 kwietnia':4, '19 kwietnia':5, '20 kwietnia':6, '21 kwietnia':7, '22 kwietnia':8, '23 kwietnia':9, '24 kwietnia':10, '25 kwietnia':11, '26 kwietnia':12, '27 kwietnia':13, '28 kwietnia':14, '29 kwietnia':15, '30 kwietnia':16, '1 maja':17, '2 maja':18, '3 maja':19, '4 maja':20, '5 maja':21, '6 maja':22, '7 maja':23, '8 maja':24, '9 maja':25, '10 maja':26, '11 maja':27, '12 maja':28, '13 maja':29, '14 maja':30 }
+        dtn = { '1 czerwca':1, '2 czerwca':2, '3 czerwca':3, '4 czerwca':4, '5 czerwca':5, '6 czerwca':6, '7 czerwca':7, '8 czerwca':8, '9 czerwca':9, '10 czerwca':10, '11 czerwca':11, '12 czerwca':12, '13 czerwca':13, '14 czerwca':14, '15 czerwca':15, '16 czerwca':16, '17 czerwca':17, '18 czerwca':18, '19 czerwca':19, '20 czerwca':20, '21 czerwca':21, '22 czerwca':22, '23 czerwca':23, '24 czerwca':24, '25 czerwca':25, '26 czerwca':26, '27 czerwca':27, '28 czerwca':28, '29 czerwca':29, '30 czerwca':30 }
         return(dtn[day])
 
     def numberToDay(self,num):
-        ntd = { 1:'15 kwietnia', 2:'16 kwietnia', 3:'17 kwietnia', 4:'18 kwietnia', 5:'19 kwietnia', 6:'20 kwietnia', 7:'21 kwietnia', 8:'22 kwietnia', 9:'23 kwietnia', 10:'24 kwietnia', 11:'25 kwietnia', 12:'26 kwietnia', 13:'27 kwietnia', 14:'28 kwietnia', 15:'29 kwietnia', 16:'30 kwietnia', 17:'1 maja', 18:'2 maja', 19:'3 maja', 20:'4 maja', 21:'5 maja', 22:'6 maja', 23:'7 maja', 24:'8 maja', 25:'9 maja', 26:'10 maja', 27:'11 maja', 28:'12 maja', 29:'13 maja', 30:'14 maja' }
+        ntd = { 1:'1 czerwca', 2:'2 czerwca', 3:'3 czerwca', 4:'4 czerwca', 5:'5 czerwca', 6:'6 czerwca', 7:'7 czerwca', 8:'8 czerwca', 9:'9 czerwca', 10:'10 czerwca', 11:'11 czerwca', 12:'12 czerwca', 13:'13 czerwca', 14:'14 czerwca', 15:'15 czerwca', 16:'16 czerwca', 17:'17 czerwca', 18:'18 czerwca', 19:'19 czerwca', 20:'20 czerwca', 21:'21 czerwca', 22:'22 czerwca', 23:'23 czerwca', 24:'24 czerwca', 25:'25 czerwca', 26:'26 czerwca', 27:'27 czerwca', 28:'28 czerwca', 29:'29 czerwca', 30:'30 czerwca' }
         return(ntd[num])
 
     def getInterwiki(self,page):
