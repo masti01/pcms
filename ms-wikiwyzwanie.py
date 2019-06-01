@@ -289,7 +289,7 @@ class BasicBot(
     
     def getDays(self,text):
         #return list of day sections from text
-        dayR = re.compile(ur'(?P<day>\n=+\s*?(?P<date>\d+\s*?(kwietnia|maja))\s*?=+(\n+#\s*?[^\n]*)*)')
+        dayR = re.compile(ur'(?P<day>\n=+\s*?(?P<date>\d+\s*?(czerwca))\s*?=+(\n+#\s*?[^\n]*)*)')
         count = 0
         result = {}
         for d in dayR.finditer(text):
