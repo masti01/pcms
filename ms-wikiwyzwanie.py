@@ -311,7 +311,7 @@ class BasicBot(
 
     def getArtsUsers(self,text):
         #return list of (art,user)
-        auR = re.compile(ur'#\s*?\[\[(?P<title>[^\|\]]*)\]\]\s*?[–-]\s*(?P<user>.*)')
+        auR = re.compile(ur'#\s*?\[\[(?P<title>[^\|\]]*)[^\]]*\]\]\s*?[–-]\s*(?P<user>.*)')
         count = 0
         result = []
         #pywikibot.output(text)
