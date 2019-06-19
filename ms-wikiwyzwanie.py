@@ -400,6 +400,7 @@ class BasicBot(
         finalpage += u'\n! Artykuł'
         finalpage += u'\n! Autor'
         finalpage += u'\n! Dzień'
+        finalpage += u'\n! Data'
         finalpage += u'\n! Tydzień'
         finalpage += u'\n! Interwiki'
         finalpage += u'\n! Punkty'
@@ -408,7 +409,7 @@ class BasicBot(
         for a in res['articles'].keys():
             count += 1
             finalpage += u'\n|-\n|'
-            finalpage += u'%i. || [[%s]] || [[Wikipedysta:%s|%s]] || %i (%s) || %i || %i || %i' % (count, a,
+            finalpage += u'%i. || [[%s]] || [[Wikipedysta:%s|%s]] || {{L|%i}} || %s || %i || %i || %i' % (count, a,
                res['articles'][a]['author'],
                res['articles'][a]['author'],
                res['articles'][a]['dayN'],
