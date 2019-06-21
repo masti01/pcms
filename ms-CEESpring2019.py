@@ -570,7 +570,7 @@ class BasicBot(
                 lang = self.lang(i.title(asLink=True,force_interwiki=True))
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('sk'):
+                    if lang not in ('be'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
