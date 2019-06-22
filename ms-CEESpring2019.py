@@ -159,9 +159,9 @@ class BasicBot(
     lengthTable = {}
     womenAuthors = {} # authors of articles about women k:author v; (count,[list])
     otherCountriesList = {'pl':[], 'az':[], 'ba':[], 'be':[], 'be-tarask':[], 'bg':[], 'de':[], 'crh':[], 'el':[], 'et':[], 'myv':[], 'eo':[], 'hr':[], 'hy':[], 'ka':[], 'lv':[], 'lt':[], \
-             'mk':[], 'ro':[], 'ru':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
+             'mk':[], 'ro':[], 'ru':[], 'sk':[],'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'et':0, 'myv':0, 'eo':0, 'hr':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
-             'mk':0, 'ro':0, 'ru':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
+             'mk':0, 'ro':0, 'ru':0, 'sk':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'eo':'lando', 'el':'country', 'et':'maa', \
                  'myv':'мастор', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'myv':'мастор', 'ro':'țară', 'ru':'страна',\
                  'sq':'country', 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
@@ -557,9 +557,12 @@ class BasicBot(
     def getArticleList(self):
         #generate article list
         artList = []
-
+        pywikibot.output(u'GETARTICLELIST artList:%s' % artList)
         #use pagegenerator to get articles linking to CEE templates
-        for p in self.generator:
+        plwiki = pywikibot.Site('pl',fam='wikipedia')
+        p = pywikibot.Page( plwiki, "Szablon:CEE Spring 2019" )
+        while True:
+        #for p in self.generator:
             #p = t.toggleTalkPage()
             pywikibot.output(u'Treating: %s' % p.title())
             d = p.data_item()
@@ -568,9 +571,12 @@ class BasicBot(
             count = 0
             for i in self.genInterwiki(p):
                 lang = self.lang(i.title(asLink=True,force_interwiki=True))
+                if self.getOption('test'):
+                    pywikibot.output('Searching for interwiki. Lang:%s' % lang)
+
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('be'):
+                    if lang not in ('hu'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
@@ -593,6 +599,7 @@ class BasicBot(
                         if self.getOption('test'):
                             pywikibot.output(u'#%i/%i:%s:%s' % (count,countlang,lang,art.title()))
                         count += 1
+            break
         '''
         #get et.wiki article list
         if self.getOption('test'):
@@ -716,7 +723,7 @@ class BasicBot(
         try:
             d = art.data_item()
             if self.getOption('test4'):
-                pywikibot.output(u'WD: %s' % d.title() )
+                pywikibot.output(u'WD: %s (checkWomen)' % d.title() )
             dataItem = d.get()
             #pywikibot.output(u'DataItem:%s' % dataItem.keys()  )
             claims = dataItem['claims']
@@ -859,22 +866,36 @@ class BasicBot(
         iw = []
         try:
             d = page.data_item()
-            pywikibot.output(u'WD: %s' % d.title() )
+            pywikibot.output(u'WD: %s (checkInterwiki)' % d.title() )
             dataItem = d.get()
-            #pywikibot.output(u'DataItem:%s' % dataItem.keys()  )
+            pywikibot.output(u'genInterwiki DataItem:%s' % dataItem.keys()  )
             sitelinks = dataItem['sitelinks']
+            pywikibot.output(u'genInterwiki sitelinks:%s' % sitelinks )
             for s in sitelinks:
-                #if self.getOption('test'):
-                #    pywikibot.output(u'SL iw: %s' % d)
+                if self.getOption('test'):
+                    pywikibot.output(u'SL iw: %s' % s)
+                    pywikibot.output(u'SL tit: %s' % sitelinks[s])
+                title = str(sitelinks[s])
+                title = re.sub('\[','',title)
+                title = re.sub('\]','',title)
                 site = re.sub(ur'(.*)wiki$', ur'\1',s)
+                if self.getOption('test'):
+                    pywikibot.output(u'SL site: %s' % site)
                 if site == u'be_x_old':
                     site = u'be-tarask'
+                if self.getOption('test'):
+                    pywikibot.output(u'SL site2: %s' % site)
                 ssite = pywikibot.Site(site,fam='wikipedia')
-                spage = pywikibot.Page( ssite, title=sitelinks[s] )
-                #pywikibot.output(u'gI Page: %s' % spage.title(asLink=True,force_interwiki=True) )
+                if self.getOption('test'):
+                    pywikibot.output(u'SL ssite')
+                spage = pywikibot.Page( ssite, title=title )
+                if self.getOption('test'):
+                    pywikibot.output(u'SL spage')
+                    #pywikibot.output(u'gI Page: %s' % spage.title(force_interwiki=True) )
                 iw.append( spage )
-                #print( iw)
-        except:
+                print( iw)
+        except Exception as e:
+            pywikibot.output('genInterwiki EXCEPTION %s' % str(e))
             pass
         #print(iw)
         return(iw)
