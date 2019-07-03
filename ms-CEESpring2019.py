@@ -559,10 +559,10 @@ class BasicBot(
         artList = []
         pywikibot.output(u'GETARTICLELIST artList:%s' % artList)
         #use pagegenerator to get articles linking to CEE templates
-        plwiki = pywikibot.Site('pl',fam='wikipedia')
-        p = pywikibot.Page( plwiki, "Szablon:CEE Spring 2019" )
-        while True:
-        #for p in self.generator:
+        #plwiki = pywikibot.Site('pl',fam='wikipedia')
+        #p = pywikibot.Page( plwiki, "Szablon:CEE Spring 2019" )
+        #while True:
+        for p in self.generator:
             #p = t.toggleTalkPage()
             pywikibot.output(u'Treating: %s' % p.title())
             d = p.data_item()
@@ -576,7 +576,7 @@ class BasicBot(
 
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('hu'):
+                    if lang not in ('tt'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
@@ -599,7 +599,7 @@ class BasicBot(
                         if self.getOption('test'):
                             pywikibot.output(u'#%i/%i:%s:%s' % (count,countlang,lang,art.title()))
                         count += 1
-            break
+            #break
         '''
         #get et.wiki article list
         if self.getOption('test'):
@@ -871,11 +871,13 @@ class BasicBot(
             pywikibot.output(u'genInterwiki DataItem:%s' % dataItem.keys()  )
             sitelinks = dataItem['sitelinks']
             pywikibot.output(u'genInterwiki sitelinks:%s' % sitelinks )
+            pywikibot.output(u'genInterwiki sitelinks.keys:%s' % sitelinks.keys() )
             for s in sitelinks:
                 if self.getOption('test'):
                     pywikibot.output(u'SL iw: %s' % s)
                     pywikibot.output(u'SL tit: %s' % sitelinks[s])
-                title = str(sitelinks[s])
+                #title = str(sitelinks[s])
+                title = str(str(sitelinks[s]).encode('utf8'))
                 title = re.sub('\[','',title)
                 title = re.sub('\]','',title)
                 site = re.sub(ur'(.*)wiki$', ur'\1',s)
@@ -888,7 +890,7 @@ class BasicBot(
                 ssite = pywikibot.Site(site,fam='wikipedia')
                 if self.getOption('test'):
                     pywikibot.output(u'SL ssite')
-                spage = pywikibot.Page( ssite, title=title )
+                spage = pywikibot.Page( ssite, title=title.decode('utf8') )
                 if self.getOption('test'):
                     pywikibot.output(u'SL spage')
                     #pywikibot.output(u'gI Page: %s' % spage.title(force_interwiki=True) )
