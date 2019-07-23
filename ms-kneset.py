@@ -263,9 +263,15 @@ class BasicBot(
                     if pnamed and pname.startswith('name'):
                         name = pvalue
                     else:
-                        ident = int(pvalue)
-                        if self.getOption('test'):
-                            pywikibot.output(u'ident:%s' % ident)
+                        try:
+                            ident = int(pvalue)
+                            if self.getOption('test'):
+                                pywikibot.output(u'ident:%s' % ident)
+                        except:
+                            ident = 0
+                            if self.getOption('test'):
+                                pywikibot.output(u'ERROR: ident is not integer:%s' % ident)
+
                 if not pnamed or (pnamed and name == sTitle):
                     break
 
