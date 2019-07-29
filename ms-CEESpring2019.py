@@ -251,7 +251,7 @@ class BasicBot(
         #generate dictionary of articles
         # article[pl:title] = pageobject
         ceeArticles = self.getArticleList()
-        self.printArtList(ceeArticles)
+        #self.printArtList(ceeArticles)
 
         pywikibot.output(u'ART INFO')
         count = 1
