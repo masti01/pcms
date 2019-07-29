@@ -205,6 +205,7 @@ class BasicBot(
             'testlength': False, # make verbose output for article length
             'testpickle': False, # make verbose output for article list load/save
             'testauthorwiki': False, # make verbose output for author/wiki 
+            'testinterwiki': False, # make verbose output for interwiki 
             'short': False, # make short run
             'append': False, 
             'reset': False, # rebuild database from scratch
@@ -251,6 +252,7 @@ class BasicBot(
         # article[pl:title] = pageobject
         ceeArticles = self.getArticleList()
         self.printArtList(ceeArticles)
+        return
 
         pywikibot.output(u'ART INFO')
         count = 1
@@ -570,6 +572,11 @@ class BasicBot(
             dataItem = d.get()
             count = 0
             for i in self.genInterwiki(p):
+                if self.getOption('test'):
+                    pywikibot.output('Searching for interwiki. Page:%s, Type:%s' % (i, type(i)))
+                #    pywikibot.output('Searching for interwiki. Page2:%s' % i.title())
+                #    pywikibot.output('Searching for interwiki. Page2:%s' % i.title(asLink=True,force_interwiki=True))
+                #continue
                 lang = self.lang(i.title(asLink=True,force_interwiki=True))
                 if self.getOption('test'):
                     pywikibot.output('Searching for interwiki. Lang:%s' % lang)
@@ -597,7 +604,7 @@ class BasicBot(
                         countlang += 1
                         artList.append(art)
                         if self.getOption('test'):
-                            pywikibot.output(u'#%i/%i:%s:%s' % (count,countlang,lang,art.title()))
+                            pywikibot.output(u'getArticleList #%i/%i:%s:%s' % (count,countlang,lang,art.title()))
                         count += 1
             #break
         '''
@@ -638,7 +645,6 @@ class BasicBot(
                 if self.getOption('test'):
                      pywikibot.output(u'#%i:%s:%s' % (count,lang,skpage.title()))
                 count += 1
-
         return(artList)
 
     def printArtList(self,artList):
@@ -864,6 +870,44 @@ class BasicBot(
     def genInterwiki(self,page):
         # yield interwiki sites generator
         iw = []
+        pageR = re.compile('\[\[(?P<lang>.*?):(?P<title>.*)\]\]')
+        try:
+            for s in page.iterlanglinks():
+                if self.getOption('testinterwiki'):
+                    pywikibot.output(u'SL iw: %s' % s)
+                '''
+                #title = str(sitelinks[s])
+                match = pageR.match(str(s))
+                title = match.group('title')
+                site = match.group('lang')
+                if self.getOption('testinterwiki'):
+                    pywikibot.output(u'SL site: %s' % site)
+                if site == u'be_x_old':
+                    site = u'be-tarask'
+                if self.getOption('testinterwiki'):
+                    pywikibot.output(u'SL site2: %s' % site)
+                ssite = pywikibot.Site(site,fam='wikipedia')
+                if self.getOption('testinterwiki'):
+                    pywikibot.output(u'SL ssite')
+                spage = pywikibot.Page( ssite, title=title )
+                '''
+                spage = pywikibot.Page(s)
+                if self.getOption('testinterwiki'):
+                    pywikibot.output(u'SL spage')
+                    pywikibot.output(u'gI Page: %s' % spage.title(force_interwiki=True) )
+                iw.append( spage )
+                print( iw)
+        except Exception as e:
+            pywikibot.output('genInterwiki EXCEPTION %s' % str(e))
+            pass
+        #print(iw)
+        return(iw)
+
+
+    '''
+    def genInterwiki(self,page):
+        # yield interwiki sites generator
+        iw = []
         try:
             d = page.data_item()
             pywikibot.output(u'WD: %s (checkInterwiki)' % d.title() )
@@ -901,6 +945,7 @@ class BasicBot(
             pass
         #print(iw)
         return(iw)
+    '''
 
     def generateOtherCountriesTable(self, res, pagename, header, footer):
         """
