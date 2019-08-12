@@ -284,18 +284,20 @@ class BasicBot(
             return(None)
         '''
 
+        count = 0
         for c in self.interwikiGenerator(page):
             if self.getOption('test'):
                 pywikibot.output(c.title())
             code = c.site.code
+            count += 1
             if self.getOption('short'):
                 pywikibot.output('Code:%s' % c.site.code)
                 #if lang not in ('be-tarask','tt'):
                 if code not in ('de'):
                     continue
             if self.getOption('test'):
-                pywikibot.output(u'P:%s' % c.title(asLink=True,forceInterwiki=True))
-                pywikibot.output(u'SI:%s' % c.site.siteinfo)
+                pywikibot.output(u'[%i] P:%s' % (count, c.title(asLink=True,forceInterwiki=True)))
+                #pywikibot.output(u'SI:%s' % c.site.siteinfo)
 
             result[code] = self.getArticles(c)
         if self.getOption('test4'):
@@ -316,6 +318,9 @@ class BasicBot(
             count += 1
             if a.namespace() == 1:
                 a = a.toggleTalkPage()
+            if a.namespace():
+                # skip non main articles
+                continue
             if not self.checkInterwiki(a,'plwiki'):
                 result.append(a.title())
                 marked += 1
