@@ -99,13 +99,15 @@ class BasicBot(
             'outpage': u'User:mastiBot/test', #default output page
             'maxlines': 1000, #default number of entries per page
             'test': False, # print testoutput
-            'test2': False, # print testoutput
+            'short': False, # print testoutput
             'test3': False, # print testoutput
             'test4': False, # print testoutput
             'test5': False, # print testoutput
             'negative': False, #if True negate behavior i.e. mark pages that DO NOT contain search string
             'good': False, # work on good articles
             'lists': False, # work on featured lists
+            'testinterwiki': False, # make verbose output for interwiki 
+
 
         })
 
@@ -205,6 +207,19 @@ class BasicBot(
         #   success = False
         return(success)
 
+    def interwikiGenerator(self,page):
+        # yield interwiki sites generator
+        for s in page.iterlanglinks():
+            if self.getOption('testinterwiki'):
+                pywikibot.output(u'SL iw: %s' % s)
+            spage = pywikibot.Category(s)
+            if self.getOption('testinterwiki'):
+                pywikibot.output(u'SL spage')
+                pywikibot.output(u'gI Page: %s' % spage.title(force_interwiki=True) )
+            yield(spage)
+
+
+    '''
     def interwikiGenerator(self,wdpage,namespace=0):
         # yield a list of categories based on wikidata sitelinks
         for i in wdpage['sitelinks']:
@@ -217,6 +232,7 @@ class BasicBot(
                         yield pywikibot.Page(pywikibot.Site(lang,'wikipedia'), wdpage['sitelinks'][i])
                 except:
                     pywikibot.output('ERROR: site %s does not exist!' % lang)
+    '''
 
     def checkInterwiki(self,page,lang):
         """Check if lang is in list of interwikis"""
@@ -225,6 +241,8 @@ class BasicBot(
         try:
             wd = pywikibot.ItemPage.fromPage(page)
             wdcontent = wd.get()
+            if self.getOption('test3'):
+                pywikibot.output(u'[%s] checkInterwiki: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),wdcontent['sitelinks'].keys()))
             return (lang in wdcontent['sitelinks'].keys())
         except pywikibot.NoPage:
             return(False)
@@ -254,11 +272,8 @@ class BasicBot(
 
     def treat(self,page):
         result = {}
-        txt = page.text
-        if self.getOption('test3'):
-            pywikibot.output(u'PAGE:%s' % txt)
 
-        #
+        '''
         try:
             wd = pywikibot.ItemPage.fromPage(page)
             wdcontent = wd.get()
@@ -267,15 +282,16 @@ class BasicBot(
         except:
             pywikibot.output('WikiData page for %s do not exists' % page.title(asLink=True))
             return(None)
+        '''
 
-        for c in self.interwikiGenerator(wdcontent,namespace=14):
+        for c in self.interwikiGenerator(page):
             if self.getOption('test'):
                 pywikibot.output(c.title())
             code = c.site.code
-            if self.getOption('test2'):
+            if self.getOption('short'):
                 pywikibot.output('Code:%s' % c.site.code)
                 #if lang not in ('be-tarask','tt'):
-                if code not in ('en'):
+                if code not in ('de'):
                     continue
             if self.getOption('test'):
                 pywikibot.output(u'P:%s' % c.title(asLink=True,forceInterwiki=True))
