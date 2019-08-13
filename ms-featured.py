@@ -212,7 +212,11 @@ class BasicBot(
         for s in page.iterlanglinks():
             if self.getOption('testinterwiki'):
                 pywikibot.output(u'SL iw: %s' % s)
-            spage = pywikibot.Category(s)
+            try:
+                spage = pywikibot.Category(s)
+            except Exception as e:
+                pywikibot.output('genInterwiki EXCEPTION %s' % str(e))
+                continue
             if self.getOption('testinterwiki'):
                 pywikibot.output(u'SL spage')
                 pywikibot.output(u'gI Page: %s' % spage.title(force_interwiki=True) )
