@@ -215,7 +215,7 @@ class BasicBot(
             try:
                 spage = pywikibot.Category(s)
             except Exception as e:
-                pywikibot.output('genInterwiki EXCEPTION %s' % str(e))
+                pywikibot.output('Category page EXCEPTION %s' % str(e))
                 continue
             if self.getOption('testinterwiki'):
                 pywikibot.output(u'SL spage')
@@ -322,7 +322,7 @@ class BasicBot(
             count += 1
             if a.namespace() == 1:
                 a = a.toggleTalkPage()
-            if a.namespace():
+            if a.namespace() != 0:
                 # skip non main articles
                 continue
             if not self.checkInterwiki(a,'plwiki'):
