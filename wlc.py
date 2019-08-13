@@ -1179,6 +1179,7 @@ ignorelist = [
     re.compile('.*[\./@]monitorkonstytucyjny\.eu/archiwa/4443'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]independent\.co\.uk'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]ygfamily\.com'),  # bot rejected on site (masti, Camomilla)
+    re.compile('.*[\./@]www.researchgate.net/publication'),  # bot rejected on site (masti, Szoltys)
 ]
 
 
