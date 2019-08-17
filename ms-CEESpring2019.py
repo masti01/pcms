@@ -840,7 +840,7 @@ class BasicBot(
     def genInterwiki(self,page):
         # yield interwiki sites generator
         iw = []
-        pageR = re.compile('\[\[(?P<lang>.*?):(?P<title>.*)\]\]')
+        iw.append(page)
         try:
             for s in page.iterlanglinks():
                 if self.getOption('testinterwiki'):
