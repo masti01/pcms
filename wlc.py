@@ -1181,6 +1181,7 @@ ignorelist = [
     re.compile('.*[\./@]ygfamily\.com'),  # bot rejected on site (masti, Camomilla)
     re.compile('.*[\./@]researchgate\.net/publication'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]wybory\.gov\.pl/pe2019'),  # temporary (masti, Elfhelm)
+    re.compile('.*[\./@]justallstar.com/contests/discontinued/legends'),  # bot rejected on site (masti, B-X)
 ]
 
 
