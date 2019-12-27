@@ -1185,6 +1185,11 @@ ignorelist = [
     re.compile('.*[\./@]greghancock\.com'),  # bot rejected on site (masti, Klima)
     re.compile('.*[\./@]samorzad2014\.pkw\.gov\.pl'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]parlament2015\.pkw\.gov\.pl'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]history\.house\.gov/Institution/Party-Divisions/Party-Divisions'),  # (masti, Ptjackyll)
+    re.compile('.*[\./@]iep\.utm\.edu'),  # bot rejected on site (masti, Fiszka)
+    re.compile('.*[\./@]flutopedia\.com'),  # bot rejected on site (masti, Fiszka)
+    re.compile('.*[\./@]redemptor\.pl'),  # bot rejected on site (masti, Fiszka)
+
 ]
 
 
