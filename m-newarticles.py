@@ -141,7 +141,7 @@ class BasicBot(
                 for t in self.current_page.templates(content=True):
                     print t
         else:
-            pywikibot.output(u'[[%s]] A to ciekawe' % self.current_page.title())
+            pywikibot.output(u'[[%s]] A to ciekawe Namespace=%s' % (self.current_page.title(),self.current_page.namespace()))
 
         ################################################################
         # NOTE: Here you can modify the text in whatever way you want. #
