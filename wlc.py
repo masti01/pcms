@@ -1217,6 +1217,7 @@ ignorelist = [
     re.compile('.*[\./@]operone\.de/komponist/stefanijo\.html'),  # bot rejected on site (masti, Fiszka)
     re.compile('.*[\./@]concertorganists\.com/site2009/artist2\.aspx?id=67'),  # bot rejected on site (masti, Fiszka)
     re.compile('.*[\./@]rj\.metropoliaztm\.pl/przystanki/tarnowskie-gory'),  # bot rejected on site (masti, Gabriel3)
+    re.compile('.*[\./@]inews\.co\.uk/news/politics/who-my-mp-won-constituency-area-general-election-2019-results-full-list-mps-1340769'),  # bot rejected on site (masti, Elfhelm)
 
 ]
 
