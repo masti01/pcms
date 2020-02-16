@@ -1237,6 +1237,7 @@ ignorelist = [
     re.compile('.*[\./@]the-athenaeum\.org/art/list\.php?m=a&s=du&aid=1722'),  # bot rejected on site (masti, Fiszka)
     re.compile('.*[\./@]historyofpainters\.com/ralph_blakelock\.htm'),  # bot rejected on site (masti, Fiszka)
     re.compile('.*[\./@]irishcharts\.ie/search/placement'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]bielskpodlaski\.pl/asp/pl_start\.asp?typ=14&sub=3&menu=15&strona=1'),  # bot rejected on site (masti, Szoltys)
 
 ]
 
