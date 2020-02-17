@@ -1238,6 +1238,11 @@ ignorelist = [
     re.compile('.*[\./@]historyofpainters\.com/ralph_blakelock\.htm'),  # bot rejected on site (masti, Fiszka)
     re.compile('.*[\./@]irishcharts\.ie/search/placement'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]bielskpodlaski\.pl/asp/pl_start\.asp?typ=14&sub=3&menu=15&strona=1'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]pzd-srem\.pl/asp/pl_start\.asp?typ=14&menu=1&strona=1'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]geojournals\.pgi\.gov\.pl/pg/article/viewFile/16266/13503'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]geoportal\.cuzk\.cz/mapycuzk'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]rymanow\.pl/asp/pl_start\.asp?typ=14&menu=29&strona=1&sub=9'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]nssdc\.gsfc\.nasa\.gov/nmc/spacecraft/display\.action?id='),  # bot rejected on site (masti, Szoltys)
 
 ]
 
