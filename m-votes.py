@@ -405,7 +405,7 @@ class BasicBot(
             subpage = pda.group('subpage').strip()
             if self.getOption('test'):
                 pywikibot.output(subpage)
-            if (not subpage.startswith(u'przyznawanie')) and (not subpage.startswith(u'weryfikacja')):
+            if (not subpage.startswith(u'przyznawanie')) and (not subpage.startswith(u'weryfikacja') and (not subpage.startswith(u'dyskusje przedłużone')):
                 pdafound = True
                 votesL.append(self.PDASingleVote(subpage, pdapam))
                 if self.getOption('test'):
