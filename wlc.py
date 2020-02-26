@@ -1243,6 +1243,13 @@ ignorelist = [
     re.compile('.*[\./@]geoportal\.cuzk\.cz/mapycuzk'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]rymanow\.pl/asp/pl_start\.asp?typ=14&menu=29&strona=1&sub=9'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]nssdc\.gsfc\.nasa\.gov/nmc/spacecraft/display\.action?id='),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]radioartnet\.net/11/2015/11/01/robert-adrian-smith-1935-2015-the-artist-and-the-media-condition'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]justallstar\.com/nba-all-star-game/coaches'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]sanockabibliotekacyfrowa\.pl'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]usopen\.org/en_US/visit/history/mschamps\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]usopen\.org/index\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]villargordodelcabriel\.es'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]americanskijumping\.com/hof\.htm'),  # bot rejected on site (masti, Szoltys)
 
 ]
 
