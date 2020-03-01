@@ -1,9 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
+
+call:
+    python pwb.py masti/m-check-new-pages.py -ns:0 -newpages -log -pt:0
+
 This is a bot to check new articles:
 * if no categories: add {{Dopracowac|kategoria=YYYY-MM}}
 * if no wikilinks: add {{Dopracować|linki=YYYY-MM}}
+# * if no refs: add {{Dopracować|przypisy=YYYY-MM}}
 
 {{Dopracować}} has to be once per page: combine with already existing
 
@@ -141,7 +146,11 @@ class BasicBot(
         summary = []
 
         if self.current_page.isRedirectPage():
-                pywikibot.output(u'Page is REDIRECT!')
+                pywikibot.output(u'Page %s is REDIRECT!' % self.current_page.title())
+                return
+        elif self.current_page.isDisambig():
+                pywikibot.output(u'Page %s is DISAMBIG!' % self.current_page.title())
+                return
         else:
             if self.getOption('test'):
                 pywikibot.output(u'Title:%s' % self.current_page.title())
@@ -183,16 +192,16 @@ class BasicBot(
             datestr = today.strftime('%Y-%m')
             if self.getOption('test'):
                 pywikibot.output('Date:%s' % datestr)
-            if not (links['links'] and links['cat'] and links['refs']):
+            if not (links['links'] and links['cat']):
                 if not links['links']:
                     p['linki'] = datestr
                     summary.append('linki')
                 if not links['cat']:
                     p['kategoria'] = datestr
                     summary.append('kategorie')
-                if not links['refs']:
-                    p['przypisy'] = datestr
-                    summary.append('przypisy')
+                # if not links['refs']:
+                #    p['przypisy'] = datestr
+                #    summary.append('przypisy')
             cleanupTmpl = (t,p)
 
             if not p:
