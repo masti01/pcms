@@ -169,6 +169,8 @@ class BasicBot(
                 if 'Dopracować' in t or 'dopracować' in t :
                     links['dopracować'] = True
                     cleanupTmpl = (t,p)
+                if 'rok w' in t or 'Rok w' in t:
+                    links['cat'] += 1
             for c in textlib.getCategoryLinks(text) :
                 if self.getOption('test'):
                     pywikibot.output('Category:%s' % c)
