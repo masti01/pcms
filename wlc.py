@@ -1250,6 +1250,12 @@ ignorelist = [
     re.compile('.*[\./@]usopen\.org/index\.html'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]villargordodelcabriel\.es'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]americanskijumping\.com/hof\.htm'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]setkab\.go\.id/11-duta-besar-negara-sahabat-serahkan-surat-kepercayaan-kepada-presiden-jokowi'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]auerbach-erzgebirge\.de'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]caudetedelasfuentes\.es'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]suraz\.pl/asp/pl_start\.asp?typ=14&sub=7&menu=45&strona=1'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]cotes\.es/'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]koeppen-geiger\.vu-wien\.ac\.at/'),  # bot rejected on site (masti, Szoltys)
 
 ]
 
