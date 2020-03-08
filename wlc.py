@@ -1256,6 +1256,18 @@ ignorelist = [
     re.compile('.*[\./@]suraz\.pl/asp/pl_start\.asp?typ=14&sub=7&menu=45&strona=1'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]cotes\.es/'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]koeppen-geiger\.vu-wien\.ac\.at/'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]bip\.bytow\.com\.pl/m,420,solectwa\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]monitorkonstytucyjny\.eu/archiwa'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]other\.birge\.ru'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]grapplerinfo\.pl/amatorski-puchar-ksw'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]prawo\.sejm\.gov\.pl/isap\.nsf/DocDetails\.xsp?id=WDU20120000124'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]delibra\.bg\.polsl\.pl/Content/24007/BCPS_25841_1927_Polskie-Towarzystwo-\.pdf'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]delibra\.bg\.polsl\.pl/Content/25374/BCPS_28917_1927_Podrecznik-inzyniers\.pdf'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]listaptakow\.eko\.uj\.edu\.pl/nonpasserines1\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]listaptakow\.eko\.uj\.edu\.pl/passerines1\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]listaptakow\.eko\.uj\.edu\.pl/passerines2\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]mmanews\.pl'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]ewrc-results\.com/season/\d{4}/6-erc'),  # bot rejected on site (masti, Szoltys)
 
 ]
 
