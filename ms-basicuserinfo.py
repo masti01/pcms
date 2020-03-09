@@ -220,8 +220,8 @@ class BasicBot(
         finalpage += u'\n! rowspan = 2 | #'
         finalpage += u'\n! rowspan = 2 | Użytkownik'
         finalpage += u'\n! rowspan = 2 | Ostatnia edycja'
-        finalpage += u'\n! rowspan = 2 | Strona
-        finalpage += u'\n! colspan = 4 | Liczba edycji
+        finalpage += u'\n! rowspan = 2 | Strona'
+        finalpage += u'\n! colspan = 4 | Liczba edycji'
         finalpage += u'\n! rowspan = 2 | Zablokowany'
         finalpage += u'\n|-'
         finalpage += u'\n! Ogółem'
