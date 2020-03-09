@@ -137,17 +137,17 @@ class BasicBot(
         footer = '\n\n'
 
         result = []
-        pagecount = 0
+        pagec = 0
 
         pywikibot.output(u'THIS IS A RUN METHOD')
         outputpage = self.getOption('outpage')
         pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
 
         for p in self.generator:
-            pagecount += 1
+            pagec += 1
             pywikibot.output(u'Treating: %s' % p.title())
             result.append(self.treat(pywikibot.User(p)))
-            if pagecount >= self.getOption('maxlines'):
+            if pagec > int(self.getOption('maxlines')):
                 break
 
         pywikibot.output(result)
@@ -232,7 +232,8 @@ class BasicBot(
             else:
                 b = ''
             finalpage += u'\n|-\n|'
-            finalpage += u'%i. || [[Wikipedysta:%s|%s]] || %s || %s || %i || %i || %i || %i || %s' % (count, a['user'], a['user'], t, p, a['editCount'], a['edit30d'], ['edit60d'], ['edit360d'], b)
+            finalpage += u'%i. || [[Wikipedysta:%s|%s]] || %s || %s || %i || %i || %i || %i || %s' % (count, a['user'], a['user'], t, p, \
+                         a['editCount'], a['edit30d'], a['edit90d'], a['edit360d'], b)
 
         finalpage += u'\n|}'
         finalpage += footer
