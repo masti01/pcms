@@ -232,7 +232,7 @@ class BasicBot(
             else:
                 b = ''
             finalpage += u'\n|-\n|'
-            finalpage += u'%i. || [[Wikipedysta:%s|%s]] || %s || %s || %i || %i || %i || %i || %s' % (count, a['user'], a['user'], t, p, a['editCount'], a['edit30d'], ['edit360d'], ['edit360d'], b)
+            finalpage += u'%i. || [[Wikipedysta:%s|%s]] || %s || %s || %i || %i || %i || %i || %s' % (count, a['user'], a['user'], t, p, a['editCount'], a['edit30d'], ['edit60d'], ['edit360d'], b)
 
         finalpage += u'\n|}'
         finalpage += footer
