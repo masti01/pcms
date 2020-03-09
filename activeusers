@@ -1,0 +1,10 @@
+#!/bin/bash
+cd ~/pw/core
+time python pwb.py masti/ms-basicuserinfo.py -links:'Wikipedysta:MastiBot/Atlas/Warszawa' -ns:user -summary:"Bot uaktualnia stronę" -pt:0 -outpage:'Wikipedysta:mastiBot/Aktywni/Warszawa'
+time python pwb.py masti/ms-basicuserinfo.py -links:'Wikipedysta:MastiBot/Atlas/Poznań' -ns:user -summary:"Bot uaktualnia stronę" -pt:0 -outpage:'Wikipedysta:mastiBot/Aktywni/Poznań'
+time python pwb.py masti/ms-basicuserinfo.py -links:'Wikipedysta:MastiBot/Atlas/Łódź' -ns:user -summary:"Bot uaktualnia stronę" -pt:0 -outpage:'Wikipedysta:mastiBot/Aktywni/Łódź'
+time python pwb.py masti/ms-basicuserinfo.py -links:'Wikipedysta:MastiBot/Atlas/Wrocław' -ns:user -summary:"Bot uaktualnia stronę" -pt:0 -outpage:'Wikipedysta:mastiBot/Aktywni/Wrocław'
+time python pwb.py masti/ms-basicuserinfo.py -links:'Wikipedysta:MastiBot/Atlas/Katowice' -ns:user -summary:"Bot uaktualnia stronę" -pt:0 -outpage:'Wikipedysta:mastiBot/Aktywni/Katowice'
+time python pwb.py masti/ms-basicuserinfo.py -links:'Wikipedysta:MastiBot/Atlas/Kraków' -ns:user -summary:"Bot uaktualnia stronę" -pt:0 -outpage:'Wikipedysta:mastiBot/Aktywni/Kraków'
+time python pwb.py masti/ms-basicuserinfo.py -links:'Wikipedysta:MastiBot/Atlas/Trójmiasto' -ns:user -summary:"Bot uaktualnia stronę" -pt:0 -outpage:'Wikipedysta:mastiBot/Aktywni/Trójmiasto'
+
