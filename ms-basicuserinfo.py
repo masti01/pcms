@@ -41,6 +41,8 @@ __version__ = '$Id: c1795dd2fb2de670c0b4bddb289ea9d13b1e9b3f $'
 
 import pywikibot
 from pywikibot import pagegenerators
+import datetime
+from pywikibot import Timestamp
 
 from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
@@ -178,6 +180,23 @@ class BasicBot(
         else:
             le = None
         res['lastEdit'] = le
+        # count contributions in last month, 3m & 12m
+        res['edit30d'] = 0
+        res['edit90d'] = 0
+        res['edit360d'] = 0
+        currTime = Timestamp.utcnow()
+	curTime30d = currTime - datetime.timedelta(days=30)
+	curTime90d = currTime - datetime.timedelta(days=90)
+	curTime360d = currTime - datetime.timedelta(days=360)
+        for rp,rid,rt,rc in user.contributions(total=0):
+            if rt > curTime30d:
+                res['edit30d'] += 1
+            if rt > curTime90d:
+                res['edit90d'] += 1
+            if rt > curTime360d:
+                res['edit360d'] += 1
+            else:
+                break
         """
         pywikibot.output("user:%s" % user.username)
         pywikibot.output("register:%s" % user.registration())
@@ -188,7 +207,7 @@ class BasicBot(
         else:
             pywikibot.output("lastEdit: NONE")
         """
-        print(res)
+        pywikibot.output(res)
         return(res)
 
     def saveArticleList(self, res, pagename, header, footer):
@@ -198,12 +217,18 @@ class BasicBot(
         finalpage = header
         finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
         finalpage += u'\n|-'
-        finalpage += u'\n! #'
-        finalpage += u'\n! Użytkownik'
-        finalpage += u'\n! Ostatnia edycja'
-        finalpage += u'\n! Strona'
-        finalpage += u'\n! Liczba edycji'
-        finalpage += u'\n! Zablokowany'
+        finalpage += u'\n! rowspan = 2 | #'
+        finalpage += u'\n! rowspan = 2 | Użytkownik'
+        finalpage += u'\n! rowspan = 2 | Ostatnia edycja'
+        finalpage += u'\n! rowspan = 2 | Strona
+        finalpage += u'\n! colspan = 4 | Liczba edycji
+        finalpage += u'\n! rowspan = 2 | Zablokowany'
+        finalpage += u'\n|-'
+        finalpage += u'\n! Ogółem'
+        finalpage += u'\n! 30 dni'
+        finalpage += u'\n! 90 dni'
+        finalpage += u'\n! 360 dni'
+        finalpage += u'\n|-'
 
         count = 0
         for a in res:
@@ -219,7 +244,7 @@ class BasicBot(
             else:
                 b = ''
             finalpage += u'\n|-\n|'
-            finalpage += u'%i. || [[Wikipedysta:%s|%s]] || %s || %s || %i || %s' % (count, a['user'], a['user'], t, p, a['editCount'], b)
+            finalpage += u'%i. || [[Wikipedysta:%s|%s]] || %s || %s || %i || %i || %i || %i || %s' % (count, a['user'], a['user'], t, p, a['editCount'], a['edit30d'], ['edit360d'], ['edit360d'], b)
 
         finalpage += u'\n|}'
         finalpage += footer
