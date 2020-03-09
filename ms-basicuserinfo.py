@@ -226,7 +226,6 @@ class BasicBot(
         finalpage += u'\n! Liczba edycji<br />90 dni'
         finalpage += u'\n! Liczba edycji<br />360 dni'
         finalpage += u'\n! Zablokowany'
-        finalpage += u'\n|-'
 
         count = 0
         for a in res:
