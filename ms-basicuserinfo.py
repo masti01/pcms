@@ -157,6 +157,14 @@ class BasicBot(
     def treat(self,user):
 
         res = {}
+
+        userSite = pywikibot.Site('pl',fam='wikipedia')
+        userPage = pywikibot.Page(userSite, user.title())
+        while userPage.isRedirectPage():
+            userPage = userPage.getRedirectTarget()
+            pywikibot.output('Redirecting:%s-->%s ' % (user.title(), userPage.title()))
+ 
+        user = pywikibot.User(userPage)
         res['user'] = user.username
         res['regDate'] = user.registration()
         res['editCount'] = user.editCount()
@@ -188,16 +196,7 @@ class BasicBot(
                 res['edit360d'] += 1
             else:
                 break
-        """
-        pywikibot.output("user:%s" % user.username)
-        pywikibot.output("register:%s" % user.registration())
-        pywikibot.output("edits:%i" % user.editCount())
-        pywikibot.output("blocked:%s" % user.isBlocked())
-        if user.last_edit:
-            pywikibot.output("lastEdit:%s revid:%s ts:%s comm:%s" % user.last_edit)  #Page, revid, pywikibot.Timestamp, comment
-        else:
-            pywikibot.output("lastEdit: NONE")
-        """
+
         pywikibot.output(res)
         return(res)
 
