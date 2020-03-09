@@ -137,29 +137,20 @@ class BasicBot(
         footer = '\n\n'
 
         result = []
+        pagecount = 0
 
         pywikibot.output(u'THIS IS A RUN METHOD')
         outputpage = self.getOption('outpage')
         pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
+
         for p in self.generator:
+            pagecount += 1
             pywikibot.output(u'Treating: %s' % p.title())
-            #user = pywikibot.User(p)
             result.append(self.treat(pywikibot.User(p)))
-            """
-            props = user.getprops()
-            print props
-            for p in props.keys():
-                pywikibot.output(u'%s:%s' % (p,props[p]))
-            pywikibot.output("user:%s" % user.username)
-            pywikibot.output("register:%s" % user.registration())
-            pywikibot.output("edits:%i" % user.editCount())
-            pywikibot.output("blocked:%s" % user.isBlocked())
-            if user.last_edit:
-                pywikibot.output("lastEdit:%s revid:%s ts:%s comm:%s" % user.last_edit)  #Page, revid, pywikibot.Timestamp, comment
-            else:
-                pywikibot.output("lastEdit: NONE")
-            """
-        print(result)
+            if pagecount >= self.getOption('maxlines'):
+                break
+
+        pywikibot.output(result)
 
         self.saveArticleList(result,self.getOption('outpage'),header,'')
 
