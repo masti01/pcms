@@ -165,7 +165,7 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(u'PAMvotesResult: %s' % PAMvotesResult)
         
-        INMvotesResult = self.INMvotes(u'Wikipedia:Ilustracja na Medal - propozycje')
+        INMvotesResult = self.INMvotes(u'Wikipedia:Propozycje do Ilustracji na Medal')
         if INMvotesResult:
             voteResults['INM'] = INMvotesResult
             if self.getOption('test'):
@@ -460,7 +460,7 @@ class BasicBot(
     INM related part
     """
     def INMvotes(self, pagename):
-        #generate Wikipedia:Ilustracja na Medal - propozycje page list of voting subpages as list
+        #generate Propozycje do Ilustracji na Medal page list of voting subpages as list
         if self.getOption('test'):
             pywikibot.output(u'***INMvotes')
         votesL = []
@@ -468,7 +468,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        inmR = re.compile(ur'\{\{(Wikipedia:Ilustracja na Medal - propozycje)?\/(?P<subpage>.*?)}}')
+        inmR = re.compile(ur'\{\{(Wikipedia:Propozycje do Ilustracji na Medal)?\/(?P<subpage>.*?)}}')
         inmfound = False
         inmlist = inmR.finditer(text)
         for inm in inmlist:
@@ -487,7 +487,7 @@ class BasicBot(
         #generate Single Vote result as tuple (strona, error, (za, przeciw, netto, procent, data))
         if self.getOption('test'):
             pywikibot.output(u'****generatePDAvoteresult:' + pagename)
-        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Ilustracja na Medal - propozycje/' + pagename)
+        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do Ilustracji na Medal/' + pagename)
         text = votespage.text
         if not text:
             return(None)
@@ -937,8 +937,8 @@ class BasicBot(
     INM section
     '''
     def INMheader(self):
-        header = u'	<h2><a name="gnm"></a>Ilustracja na Medal</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3AIlustracja%20na%20Medal%20-%20propozycje" title="Wikipedia:Ilustracja na Medal - propozycje">Wikipedia:Ilustracja na Medal - propozycje</a>.</i></div>\n'
+        header = u'	<h2><a name="gnm"></a>Propozycje do Ilustracji na Medal</h2>\n'
+        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do Ilustracji%20na%20Medal" title="Wikipedia:Propozycje do Ilustracji na Medal">Wikipedia:Propozycje do Ilustracji na Medal</a>.</i></div>\n'
 
         return(header)
 
@@ -1209,7 +1209,7 @@ class BasicBot(
             for p in results['INM']:
                 (wiki, error, counters) = p
                 output += u'	<tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Ilustracja na Medal - propozycje/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Propozycje do Ilustracji na Medal/' + wiki).encode('utf-8'))
                 output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
