@@ -475,7 +475,7 @@ class BasicBot(
             subpage = inm.group('subpage').strip()
             if self.getOption('test'):
                 pywikibot.output(subpage)
-            if (not subpage.startswith(u'Zasady')) and (not subpage.startswith(u'Instrukcja')):
+            if (not subpage.startswith(u'przyznawanie')) and (not subpage.startswith(u'weryfikacja')) and (not subpage.startswith(u'dyskusje przedłużone')):
                 inmfound = True
                 votesL.append(self.INMSingleVote(subpage))
                 if self.getOption('test'):
