@@ -159,19 +159,19 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(u'PDAvotesResult: %s' % PDAvotesResult)
         
-        PAMvotesResult = self.PDAvotes(u'Wikipedia:Propozycje do Artykułów na medal', u'PAM')
+        PAMvotesResult = self.PDAvotes(u'Wikipedia:Propozycje do Artykułów na Medal', u'PAM')
         if PAMvotesResult:
             voteResults['PAM'] = PAMvotesResult
             if self.getOption('test'):
                 pywikibot.output(u'PAMvotesResult: %s' % PAMvotesResult)
         
-        INMvotesResult = self.INMvotes(u'Wikipedia:Ilustracja na medal - propozycje')
+        INMvotesResult = self.INMvotes(u'Wikipedia:Ilustracja na Medal - propozycje')
         if INMvotesResult:
             voteResults['INM'] = INMvotesResult
             if self.getOption('test'):
                 pywikibot.output(u'INMvotesResult: %s' % INMvotesResult)
 
-        LNMvotesResult = self.LNMvotes(u'Wikipedia:Propozycje do List na medal')
+        LNMvotesResult = self.LNMvotes(u'Wikipedia:Propozycje do List na Medal')
         if LNMvotesResult:
             voteResults['LNM'] = LNMvotesResult
             if self.getOption('test'):
@@ -398,7 +398,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        pdaR = re.compile(ur'\{\{(Wikipedia:Propozycje do Dobrych Artykułów|Wikipedia:Propozycje do Artykułów na medal)?\/(?P<subpage>.*?)}}')
+        pdaR = re.compile(ur'\{\{(Wikipedia:Propozycje do Dobrych Artykułów|Wikipedia:Propozycje do Artykułów na Medal)?\/(?P<subpage>.*?)}}')
         pdafound = False
         pdalist = pdaR.finditer(text)
         for pda in pdalist:
@@ -421,7 +421,7 @@ class BasicBot(
             votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do Dobrych Artykułów/' + pagename)
             #votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedysta:MastiBot/test')
         else:
-            votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do Artykułów na medal/' + pagename)
+            votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do Artykułów na Medal/' + pagename)
         text = votespage.text
         if not text:
             return(None)
@@ -460,7 +460,7 @@ class BasicBot(
     INM related part
     """
     def INMvotes(self, pagename):
-        #generate Wikipedia:Ilustracja na medal - propozycje page list of voting subpages as list
+        #generate Wikipedia:Ilustracja na Medal - propozycje page list of voting subpages as list
         if self.getOption('test'):
             pywikibot.output(u'***INMvotes')
         votesL = []
@@ -468,7 +468,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        inmR = re.compile(ur'\{\{(Wikipedia:Ilustracja na medal - propozycje)?\/(?P<subpage>.*?)}}')
+        inmR = re.compile(ur'\{\{(Wikipedia:Ilustracja na Medal - propozycje)?\/(?P<subpage>.*?)}}')
         inmfound = False
         inmlist = inmR.finditer(text)
         for inm in inmlist:
@@ -487,7 +487,7 @@ class BasicBot(
         #generate Single Vote result as tuple (strona, error, (za, przeciw, netto, procent, data))
         if self.getOption('test'):
             pywikibot.output(u'****generatePDAvoteresult:' + pagename)
-        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Ilustracja na medal - propozycje/' + pagename)
+        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Ilustracja na Medal - propozycje/' + pagename)
         text = votespage.text
         if not text:
             return(None)
@@ -549,7 +549,7 @@ class BasicBot(
     LNM related part
     """
     def LNMvotes(self, pagename):
-        #generate Wikipedia:Propozycje do List na medal page list of voting subpages as list
+        #generate Wikipedia:Propozycje do List na Medal page list of voting subpages as list
         #test
         #pywikibot.output(u'***LNMvotes')
         votesL = []
@@ -559,7 +559,7 @@ class BasicBot(
             return(None)
         #test
         #pywikibot.output(u'*** LNM:\n%s' % text)
-        lnmR = re.compile(ur'\{\{(Wikipedia:Propozycje do List na medal)?\/(?P<subpage>.*?)}}')
+        lnmR = re.compile(ur'\{\{(Wikipedia:Propozycje do List na Medal)?\/(?P<subpage>.*?)}}')
         lmfound = False
         lnmlist = lnmR.finditer(text)
         for lnm in lnmlist:
@@ -578,7 +578,7 @@ class BasicBot(
         #generate Single Vote result as tuple (strona, error, (za, przeciw, netto, procent, data))
         if self.getOption('test'):
             pywikibot.output(u'****generateLNMvoteresult:' + pagename)
-        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do List na medal/' + pagename)
+        votespage = pywikibot.Page(pywikibot.Site(), u'Wikipedia:Propozycje do List na Medal/' + pagename)
         text = votespage.text
         if not text:
             return(None)
@@ -913,8 +913,8 @@ class BasicBot(
     '''
 
     def PAMheader(self):
-        header = u'	<h2><a name="panm"></a>Propozycje do Artykułów na medal</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Artyku%C5%82%C3%B3w%20na%20medal" title="Wikipedia:Propozycje do Artykułów na medal">Wikipedia:Propozycje do Artykułów na medal</a>.</i></div>\n'
+        header = u'	<h2><a name="panm"></a>Propozycje do Artykułów na Medal</h2>\n'
+        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Artyku%C5%82%C3%B3w%20na%20Medal" title="Wikipedia:Propozycje do Artykułów na Medal">Wikipedia:Propozycje do Artykułów na Medal</a>.</i></div>\n'
 
         return(header)
 
@@ -937,8 +937,8 @@ class BasicBot(
     INM section
     '''
     def INMheader(self):
-        header = u'	<h2><a name="gnm"></a>Ilustracja na medal</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3AIlustracja%20na%20medal%20-%20propozycje" title="Wikipedia:Ilustracja na medal - propozycje">Wikipedia:Ilustracja na medal - propozycje</a>.</i></div>\n'
+        header = u'	<h2><a name="gnm"></a>Ilustracja na Medal</h2>\n'
+        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3AIlustracja%20na%20Medal%20-%20propozycje" title="Wikipedia:Ilustracja na Medal - propozycje">Wikipedia:Ilustracja na Medal - propozycje</a>.</i></div>\n'
 
         return(header)
 
@@ -964,8 +964,8 @@ class BasicBot(
     LNM section
     '''
     def LNMheader(self):
-        header = u'	<h2><a name="plnm"></a>Propozycje do List na medal</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20List%20na%20medal" title="Wikipedia:Propozycje do List na medal">Wikipedia:Propozycje do List na medal</a>.</i></div>\n'
+        header = u'	<h2><a name="plnm"></a>Propozycje do List na Medal</h2>\n'
+        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20List%20na%20Medal" title="Wikipedia:Propozycje do List na Medal">Wikipedia:Propozycje do List na Medal</a>.</i></div>\n'
 
         return(header)
 
@@ -1187,7 +1187,7 @@ class BasicBot(
                 try:
                     (wiki,error, counters) = p
                     output += u'	<tr>\n'
-                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na medal/' + wiki).encode('utf-8'))
+                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na Medal/' + wiki).encode('utf-8'))
                     output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
                     if not error:
                         (v, date) = counters
@@ -1209,7 +1209,7 @@ class BasicBot(
             for p in results['INM']:
                 (wiki, error, counters) = p
                 output += u'	<tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Ilustracja na medal - propozycje/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Ilustracja na Medal - propozycje/' + wiki).encode('utf-8'))
                 output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
@@ -1234,7 +1234,7 @@ class BasicBot(
             for p in results['LNM']:
                 (wiki, error, counters) = p
                 output += u'	<tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_List_na_medal/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_List_na_Medal/' + wiki).encode('utf-8'))
                 output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
