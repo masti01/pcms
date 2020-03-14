@@ -1297,8 +1297,8 @@ ignorelist = [
     re.compile('.*[\./@]rymanow\.pl/asp/pl_start\.asp?typ=14&menu=29&strona=1&sub=9'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]kosmonauta\.net'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]gcatholic\.org/dioceses/country/CN\.htm'),  # bot rejected on site (masti, Szoltys)
-    re.compile('.*[\./@]lazarz.pl'),  # bot rejected on site (masti, Four.mg)
-
+    re.compile('.*[\./@]lazarz\.pl'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]wbc\.macbre\.net'),  # bot rejected on site (masti, Four.mg)
 ]
 
 
