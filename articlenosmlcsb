@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ~/pw/core
+python pwb.py masti/artnosml.py -lang:csb
+cp ~/pw/core/masti/artykulycsb.html ~/public_html/csb.articles.html
+cp ~/pw/core/ircbot/artnoscsb.log ~/public_html
