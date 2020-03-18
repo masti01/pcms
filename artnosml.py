@@ -36,7 +36,20 @@ i18 = {
     'hdate' : u'Tarih',
     'htime' : u'Saat',
     'htitle' : u'Başlık',
-    'htarget' : u'Hedef' }
+    'htarget' : u'Hedef' },
+'szl' : {
+    'head' : u'szl.wikipedia - Ostatnie nowe artykuły - tools.wikimedia.pl',
+    'heading' : u'Ostatnie nowe artykuły',
+    'line1' : u'Strona przedstawia numerację ostatnio utworzonych 100 artykułów z głównej przestrzeni nazw.',
+    'legend' : u'Rodzaj: <b>A</b> (artykuł), <b>R</b> (przekierowanie), <b>M</b> (przeniesiony)',
+    'lastupdate' : u'Ostatnia aktualizacja: ',
+    'refresh' : u'Strona uaktualniana co 5 minut. Wyświetlanie od najnowszych.',
+    'hnumber' : u'Numer artykułu',
+    'htype' : u'Rodzaj',
+    'hdate' : u'Data',
+    'htime' : u'Czas',
+    'htitle' : u'Tytuł',
+    'htarget' : u'Cel' }
 }
 
 
