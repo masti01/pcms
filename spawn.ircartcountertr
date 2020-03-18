@@ -20,4 +20,4 @@ my $datestring = strftime "%Y-%m-%d %H:%M:%S", localtime;
 print $log "$datestring DAMN! IRCartcounter.py -lang:tr is dead... reviving...\n";
 close($log);
 
-exec( 'python', 'pwb.py', 'ircbot/IRCartcounter.py', '-lang:tr' ) or die $!;
+exec( 'python', 'pwb.py', 'ircbot/IRCartcounter.py', '-lang:tr -name:mastiBottr' ) or die $!;
