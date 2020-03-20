@@ -646,7 +646,7 @@ ignorelist = [
     re.compile('.*[\./@]gcatholic\.org/hierarchy/data/cardL13-5\.htm'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]gcatholic\.org/dioceses/diocese/amma0\.htm '),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]gcatholic\.org/dioceses/diocese/done0\.htm'),  # bot rejected on site (masti, szoltys)
-    re.compile('.*[\./@]gcatholic\.org/dioceses/diocese/odes1\.htm '),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/dioceses/diocese/odes1\.htm'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]gcatholic\.org/dioceses/diocese/pari2\.htm#50444'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]gcatholic\.org/dioceses/diocese/kolo0\.htm'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]gcatholic\.org/dioceses/diocese/muka0\.htm'),  # bot rejected on site (masti, szoltys)
@@ -1299,6 +1299,23 @@ ignorelist = [
     re.compile('.*[\./@]gcatholic\.org/dioceses/country/CN\.htm'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]lazarz\.pl'),  # bot rejected on site (masti, Four.mg)
     re.compile('.*[\./@]wbc\.macbre\.net'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]ugsiedliszcze\.bip\.e-zeto\.eu/index\.php?type%3D4%26name%3Dbt46%26func%3Dselectsite%26value%255B0%255D%3Dmnu11%26value%255B1%255D%3D6'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]zwierzyniec\.e-biuletyn\.pl/index\.php?id=131'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]sittensen\.de'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]lallameryemtennis\.com'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]inafed\.gob\.mx/work/enciclopedia/EMM27tabasco/index\.html'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]amt-jarmen-tutow\.de'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]waganiec\.biuletyn\.net/?bip=2&cid=37&id=36'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]obc\.opole\.pl/dlibra/publication/edition/6661?id=6661'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]polsteam\.com'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]brzostek\.pl/asp/pl_start\.asp?typ=14&menu=289&strona=1&sub=278#strona'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]rcin\.org\.pl/dlibra/publication/edition/2236?id=2236&from=publication'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]teamusa\.org/USA-Wrestling/Team-USA/World-Team-History'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]rcin\.org\.pl/dlibra/publication/15454'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]bip\.czersk\.pl/2112\.html'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]grodziczno\.pl/asp/pl_start\.asp?typ=14&sub=12&menu=26&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]pod-semaforkiem\.aplus\.pl/gt-chelmno\.php'),  # bot rejected on site (masti, szoltys)
+
 ]
 
 
