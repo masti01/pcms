@@ -161,11 +161,11 @@ class BasicBot(
     lengthTable = {}
     womenAuthors = {} # authors of articles about women k:author v; (count,[list])
     otherCountriesList = {'pl':[], 'az':[], 'ba':[], 'be':[], 'be-tarask':[], 'bg':[], 'de':[], 'crh':[], 'el':[], 'et':[], 'myv':[], 'eo':[], 'hr':[], 'hy':[], 'ka':[], 'lv':[], 'lt':[], \
-             'mk':[], 'ro':[], 'ru':[], 'sk':[], 'sl':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
+             'mk':[], 'mt':[], 'ro':[], 'ru':[], 'sk':[], 'sl':[], 'sq':[], 'sr':[], 'tt':[], 'tr':[], 'uk':[], 'hu':[]}
     women = {'pl':0, 'az':0, 'ba':0, 'be':0, 'be-tarask':0, 'bg':0, 'de':0, 'crh':0, 'el':0, 'et':0, 'myv':0, 'eo':0, 'hr':0, 'hy':0, 'ka':0, 'lv':0, 'lt':0, \
-             'mk':0, 'ro':0, 'ru':0, 'sk':0, 'sl':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
+             'mk':0, 'mt':0, 'ro':0, 'ru':0, 'sk':0, 'sl':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'eo':'lando', 'el':'country', 'et':'maa', \
-                 'myv':'мастор', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'myv':'мастор', 'ro':'țară', 'ru':'страна',\
+                 'myv':'мастор', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'mt':'pajjiż', 'myv':'мастор', 'ro':'țară', 'ru':'страна',\
                  'sl':'država', 'sq':'country', 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր' }
     topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', 'et':'teema', \
              'eo':'temo', 'hu':'téma', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sl':'tema', 'sq':'topic', 'sr':'тема', \
@@ -175,7 +175,7 @@ class BasicBot(
                'uk':'жінки', 'hu':'nők', 'hr':'Žene', 'hy':'Կանայք'}
     userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'be-tarask':'удзельнік', 'bg':'потребител',\
              'de':'benutzer','crh':'qullanıcı','el':'user', 'et':'kasutaja', 'hu':'szerkesztő', 'myv':'сёрмадыця', 'eo':'uzanto', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
-             'mk':'корисник', 'myv':'сёрмадыця', 'ro':'utilizator', 'ru':'участник', 'sl':'uporabnik', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', \
+             'mk':'корисник', 'mt':'utent', 'myv':'сёрмадыця', 'ro':'utilizator', 'ru':'участник', 'sl':'uporabnik', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', \
               'uk':'користувач', 'hr':'suradnik', 'hy':'մասնակից' }
 
     def __init__(self, generator, **kwargs):
