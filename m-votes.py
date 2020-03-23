@@ -1209,7 +1209,7 @@ class BasicBot(
             for p in results['INM']:
                 (wiki, error, counters) = p
                 output += u'	<tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Propozycje do Ilustracji na Medal/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Ilustracji na Medal/' + wiki).encode('utf-8'))
                 output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
