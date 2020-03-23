@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Call:
-	python pwb.py masti/ms-CEESpring2019.py -page:"Szablon:CEE Spring 2019" -outpage:"meta:Wikimedia CEE Spring 2019/Statistics" -summary:"Bot updates statistics"
-        python pwb.py masti/ms-CEESpring2019.py -page:"Szablon:CEE Spring 2019" -outpage:"Wikipedysta:Masti/CEE Spring 2019" -summary:"Bot updates statistics"
+	python pwb.py masti/ms-CEESpring2020.py -page:"Szablon:CEE Spring 2020" -outpage:"meta:Wikimedia CEE Spring 2020/Statistics" -summary:"Bot updates statistics"
+        python pwb.py masti/ms-CEESpring2020.py -page:"Szablon:CEE Spring 2020" -outpage:"Wikipedysta:Masti/CEE Spring 2020" -summary:"Bot updates statistics"
 
 
 Use global -simulate option for test purposes. No changes to live wiki
@@ -64,7 +64,7 @@ from pywikibot.tools import issue_deprecation_warning
 docuReplacements = {
     '&params;': pagegenerators.parameterHelp
 }
-CEEtemplates = {'pl' : 'Szablon:CEE Spring 2019', 'az' : 'Şablon:Vikibahar 2019', 'ba' : 'Ҡалып:Вики-яҙ 2019', 'be' : 'Шаблон:CEE Spring 2019', 'be-tarask' : 'Шаблён:Артыкул ВікіВясны-2019', 'bg' : 'Шаблон:CEE Spring 2019', 'de' : 'Vorlage:CEE Spring 2019', 'eo':'Ŝablono:VikiPrintempo COE 2019', 'el' : 'Πρότυπο:CEE Spring 2019', 'et' : 'Mall:CEE Spring 2019', 'hr' : 'Predložak:CEE proljeće 2019.', 'hu':'Sablon:CEE Tavasz 2019', 'hy' : 'Կաղապար:CEE Spring 2019', 'ka' : 'თარგი:ვიკიგაზაფხული 2019', 'lv' : 'Veidne:CEE Spring 2019', 'lt' : 'Šablonas:VRE 2019', 'mk' : 'Шаблон:СИЕ Пролет 2019', 'myk':'Шаблон:СИЕ Пролет 2019', 'ro' : 'Format:Wikimedia CEE Spring 2019', 'ru' : 'Шаблон:Вики-весна 2019', 'sr' : 'Шаблон:ЦЕЕ пролеће 2019', 'tr' : 'Şablon:Vikibahar 2019', 'uk' : 'Шаблон:CEE Spring 2019' }
+CEEtemplates = {'pl' : 'Szablon:CEE Spring 2020', 'az' : 'Şablon:Vikibahar 2020', 'ba' : 'Ҡалып:Вики-яҙ 2020', 'be' : 'Шаблон:CEE Spring 2020', 'be-tarask' : 'Шаблён:Артыкул ВікіВясны-2020', 'bg' : 'Шаблон:CEE Spring 2020', 'de' : 'Vorlage:CEE Spring 2020', 'eo':'Ŝablono:VikiPrintempo COE 2020', 'el' : 'Πρότυπο:CEE Spring 2020', 'et' : 'Mall:CEE Spring 2020', 'hr' : 'Predložak:CEE proljeće 2020.', 'hu':'Sablon:CEE Tavasz 2020', 'hy' : 'Կաղապար:CEE Spring 2020', 'ka' : 'თარგი:ვიკიგაზაფხული 2020', 'lv' : 'Veidne:CEE Spring 2020', 'lt' : 'Šablonas:VRE 2020', 'mk' : 'Шаблон:СИЕ Пролет 2020', 'myk':'Шаблон:СИЕ Пролет 2020', 'ro' : 'Format:Wikimedia CEE Spring 2020', 'ru' : 'Шаблон:Вики-весна 2020', 'sr' : 'Шаблон:ЦЕЕ пролеће 2020', 'tr' : 'Şablon:Vikibahar 2020', 'uk' : 'Шаблон:CEE Spring 2020' }
 countryList =[ u'Albania', u'Armenia', u'Austria', u'Azerbaijan', u'Bashkortostan', u'Belarus', u'Bosnia and Herzegovina', u'Bulgaria', u'Crimean Tatars', u'Don',  u'Croatia', u'Czechia', u'Erzia', u'Esperanto', u'Estonia', u'Georgia', u'Greece', u'Hungary', u'Kazakhstan', u'Kosovo', u'Latvia', u'Lithuania', u'North Macedonia', u'Montenegro', u'Poland', u'Romania and Moldova', u'Republic of Srpska', u'Russia', u'Serbia', u'Sorbia',  u'Slovakia', u'Slovenia', u'Tatarstan', u'Turkey', u'Ukraine', u'Other', u'Empty' ]
 countryNames = {
 #pl countries
@@ -238,8 +238,8 @@ class BasicBot(
 
     def run(self):
 
-        header = u'{{TNT|Wikimedia CEE Spring 2019 navbar}}\n\n'
-        header += u'{{Wikimedia CEE Spring 2019/Statistics/Header}}\n\n'
+        header = u'{{TNT|Wikimedia CEE Spring 2020 navbar}}\n\n'
+        header += u'{{Wikimedia CEE Spring 2020/Statistics/Header}}\n\n'
         #header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
         header += u"Last update: '''~~~~~'''.\n\n"
         footer = u''
@@ -537,7 +537,7 @@ class BasicBot(
             if self.getOption('testpickle'):
                 pywikibot.output('PICKLING LOAD at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             try:
-                with open('masti/CEESpring2019.dat', 'rb') as datfile:
+                with open('masti/CEESpring2020.dat', 'rb') as datfile:
                     result = pickle.load(datfile)
             except (IOError, EOFError):
                 # no saved history exists yet, or history dump broken
@@ -552,7 +552,7 @@ class BasicBot(
         #save list as pickle file
         if self.getOption('testpickle'):
             pywikibot.output('PICKLING SAVE at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        with open('masti/CEESpring2019.dat', 'wb') as f:
+        with open('masti/CEESpring2020.dat', 'wb') as f:
             pickle.dump(artList, f, protocol=config.pickle_protocol)
 
 
@@ -562,7 +562,7 @@ class BasicBot(
         pywikibot.output(u'GETARTICLELIST artList:%s' % artList)
         #use pagegenerator to get articles linking to CEE templates
         #plwiki = pywikibot.Site('pl',fam='wikipedia')
-        #p = pywikibot.Page( plwiki, "Szablon:CEE Spring 2019" )
+        #p = pywikibot.Page( plwiki, "Szablon:CEE Spring 2020" )
         #while True:
         for p in self.generator:
             #p = t.toggleTalkPage()
@@ -738,7 +738,7 @@ class BasicBot(
             creator, creationDate = art.getCreator()
         except:
             return("'''UNKNOWN USER'''", "'''UNKNOWN DATE'''")
-        SpringStart =  datetime.strptime("2019-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
+        SpringStart =  datetime.strptime("2020-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         if self.newArticle(art):
             if self.getOption('test3'):
                 pywikibot.output(u'New art creator %s:%s (T:%s)' % (art.title(asLink=True,force_interwiki=True),creator,creationDate))
@@ -768,8 +768,8 @@ class BasicBot(
         except:
             pywikibot.output('EXCEPTION: newArticle')
             return(False)
-        SpringStart =  datetime.strptime("2019-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
-        SpringEnd = datetime.strptime("2019-06-01T00:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
+        SpringStart =  datetime.strptime("2020-03-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
+        SpringEnd = datetime.strptime("2020-06-01T00:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         return ( datetime.strptime(creationDate, "%Y-%m-%dT%H:%M:%SZ") > SpringStart )
 
 
