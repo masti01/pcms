@@ -220,7 +220,7 @@ class RefLink(object):
         # treat archive.org, archive.is
         pywikibot.output(u'ARCH:%s' % link)
         archived = False
-        archR = re.compile(ur'(?i)https?://[^/]*archive\.(org/web|is)/((?P<year>\d{4})\.?(?P<month>\d{2})\.?(?P<day>\d{2})-?(\d{6})?|[^/]*)/(?P<link>.*)')
+        archR = re.compile(r'(?i)https?://[^/]*archive\.(org/web|is)/((?P<year>\d{4})\.?(?P<month>\d{2})\.?(?P<day>\d{2})-?(\d{6})?|[^/]*)/(?P<link>.*)')
 
         match = archR.match(link)
         if match:
@@ -233,7 +233,7 @@ class RefLink(object):
 
     def unknownPublisher(self,link):
         #check if the site is archive site without original publisher info
-        archR = re.compile(ur'(?i)https?://[^/]*(webcitation|archive)\.(org/web|is)')
+        archR = re.compile(r'(?i)https?://[^/]*(webcitation|archive)\.(org|web|is)')
         return(archR.match(link))
 
 
@@ -323,9 +323,9 @@ class RefLink(object):
 
     def transformLink(self):
         #convert wrong characters
-        self.link = re.sub(ur'\|', '%7C', self.link)
-        #self.link = re.sub(ur'\[', '%5B', self.link)
-        #self.link = re.sub(ur'\]', '%5D', self.link)
+        self.link = re.sub(r'\|', '%7C', self.link)
+        #self.link = re.sub(r'\[', '%5B', self.link)
+        #self.link = re.sub(r'\]', '%5D', self.link)
 
     def refDead(self):
         """Dead link, tag it with a {{dead link}}."""
@@ -555,9 +555,9 @@ class ReferencesRobot(Bot):
 
         # Regex that match bare references
             if self.getOption('repair'):
-                self.linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s<]*?)[^\]\.])(\]|\]\.)?( [^<]*?<!-- Tytuł wygenerowany przez bota -->[ \t]*\])[ \t]*<\/ref>')
+                self.linksInRef = re.compile(r'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s<]*?)[^\]\.])(\]|\]\.)?( [^<]*?<!-- Tytuł wygenerowany przez bota -->[ \t]*\])[ \t]*<\/ref>')
             else:
-                self.linksInRef = re.compile(ur'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s<]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
+                self.linksInRef = re.compile(r'(?i)<ref(?P<name>[^>]*)>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s<]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
 
         # Regex to grasp content-type meta HTML tag in HTML source
         self.META_CONTENT = re.compile(br'(?i)<meta[^>]*content\-type[^>]*>')
@@ -620,7 +620,7 @@ class ReferencesRobot(Bot):
         #create list of valid params for {{lang}}
         #from [[Moduł:Lang/data]]
         langs = []
-        langR = re.compile(ur'\["(?P<lang>\w*)"]\s*=\s*?\{')
+        langR = re.compile(r'\["(?P<lang>\w*)"]\s*=\s*?\{')
 
         pywikibot.output('VALIDLANGS')
         source = pywikibot.Page(pywikibot.Site(),"Module:Lang/data")
