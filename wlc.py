@@ -1369,6 +1369,7 @@ ignorelist = [
     re.compile('.*[\./@]rzecz-pospolita\.com/wornie0\.php3'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]rzecz-pospolita\.com/zabie0\.php3'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]rzecz-pospolita\.com/zielence0\.php3'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]pressto\.amu\.edu\.pl'),  # bot rejected on site (masti, Four.mg)
 
 ]
 
