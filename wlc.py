@@ -1416,6 +1416,7 @@ ignorelist = [
     re.compile('.*[\./@]heraldry\.com\.ua/index\.php3?lang=U&context=info&id=920'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]jezowe\.biuletyn\.net/?bip=1&cid=143'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]swaid\.stat\.gov\.pl/Dashboards/Dane%20dla%20jednostki%20podzia%C5%82u%20terytorialnego\.aspx'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]alpha\.bn\.org\.pl'),  # bot rejected on site (masti)
 ]
 
 
