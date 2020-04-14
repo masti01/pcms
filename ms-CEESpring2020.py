@@ -244,15 +244,8 @@ class BasicBot(
 
     def run(self):
 
-        header = u'{{TNT|Wikimedia CEE Spring 2020 navbar}}\n\n'
-        header += u'{{Wikimedia CEE Spring 2020/Statistics/Header}}\n\n'
-        #header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
-        header += u"Last update: '''%s CET'''.\n\n" % datetime.now().strftime("%Y-%m-%d %H:%M:%S %Z")
-        footer = u''
-
         #load springList from previous run
         self.springList = self.loadArticleList()
-
 
         #generate dictionary of articles
         # article[pl:title] = pageobject
@@ -307,6 +300,12 @@ class BasicBot(
         self.createWomenAuthorsTable(self.springList) #generate results for pages about women
         self.createLengthTable(self.springList) #generate results for pages length
         self.createAuthorsArticles(self.springList) #generate list of articles per author/wiki
+
+        header = u'{{TNT|Wikimedia CEE Spring 2020 navbar}}\n\n'
+        header += u'{{Wikimedia CEE Spring 2020/Statistics/Header}}\n\n'
+        #header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
+        header += u"Last update: '''%s CET'''.\n\n" % datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        footer = u''
 
         self.generateOtherCountriesTable(self.otherCountriesList,self.getOption('outpage')+u'/Other countries',header,footer)
         self.generateResultCountryTable(self.countryTable,self.getOption('outpage'),header,footer)
