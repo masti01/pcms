@@ -66,6 +66,7 @@ docuReplacements = {
 }
 CEEtemplates = {'pl' : 'Szablon:CEE Spring 2020', 'az' : 'Şablon:Vikibahar 2020', 'ba' : 'Ҡалып:Вики-яҙ 2020', 'be' : 'Шаблон:CEE Spring 2020', 'be-tarask' : 'Шаблён:Артыкул ВікіВясны-2020', 'bg' : 'Шаблон:CEE Spring 2020', 'de' : 'Vorlage:CEE Spring 2020', 'eo':'Ŝablono:VikiPrintempo COE 2020', 'el' : 'Πρότυπο:CEE Spring 2020', 'et' : 'Mall:CEE Spring 2020', 'hr' : 'Predložak:CEE proljeće 2020.', 'hu':'Sablon:CEE Tavasz 2020', 'hy' : 'Կաղապար:CEE Spring 2020', 'ka' : 'თარგი:ვიკიგაზაფხული 2020', 'lv' : 'Veidne:CEE Spring 2020', 'lt' : 'Šablonas:VRE 2020', 'mk' : 'Шаблон:СИЕ Пролет 2020', 'myk':'Шаблон:СИЕ Пролет 2020', 'ro' : 'Format:Wikimedia CEE Spring 2020', 'ru' : 'Шаблон:Вики-весна 2020', 'sr' : 'Шаблон:ЦЕЕ пролеће 2020', 'tr' : 'Şablon:Vikibahar 2020', 'uk' : 'Шаблон:CEE Spring 2020' }
 countryList =[ u'Albania', u'Armenia', u'Austria', u'Azerbaijan', u'Bashkortostan', u'Belarus', u'Bosnia and Herzegovina', u'Bulgaria', u'Crimean Tatars', u'Don',  u'Croatia', u'Czechia', u'Erzia', u'Esperanto', u'Estonia', u'Georgia', u'Greece', u'Hungary', u'Kazakhstan', u'Kosovo', u'Latvia', u'Lithuania', u'North Macedonia', u'Malta', u'Montenegro', u'Poland', u'Romania and Moldova', u'Republic of Srpska', u'Russia', u'Serbia', u'Sorbia',  u'Slovakia', u'Slovenia', u'Tatarstan', u'Turkey', u'Ukraine', u'Other', u'Empty' ]
+languageCountry = { 'el':'Greece', 'eo':'Esperanto', 'myv':'Erzia', 'bg':'Bulgaria', 'et':'Estonia', 'az':'Azerbaijan', 'ru':'Russia', 'tr':'Turkey', 'lv':'Latvia', 'ro':'Romania and Moldova', 'pl':'Poland', 'hy':'Armenia', 'ba':'Bashkortostan', 'hr':'Croatia', 'de':'Germany', 'hu':'Hungary', 'sr':'Serbia', 'sq':'Albania', 'mk':'North Macedonia', 'sk':'Slovakia', 'mt':'Malta', 'be-tarask':'Belarus', 'uk':'Ukraine', 'sl':'Slovenia' }
 countryNames = {
 #pl countries
 'pl':{ 'Albania':'Albania', 'Austria':'Austria', 'Azerbejdżan':'Azerbaijan', 'Baszkortostan':'Bashkortostan', 'Białoruś':'Belarus', 'Bułgaria':'Bulgaria', 'Armenia':'Armenia', 'Bośnia i Hercegowina':'Bosnia and Herzegovina', 'Czarnogóra':'Montenegro', 'Erzja':'Erzia', 'Esperanto':'Esperanto', 'Estonia':'Estonia', 'Gruzja':'Georgia', 'Czechy':'Czechia', 'Chorwacja':'Croatia', 'Kosowo':'Kosovo', 'Tatarzy krymscy':'Crimean Tatars', 'Litwa':'Lithuania', 'Łotwa':'Latvia', 'Łużyce':'Sorbia', 'Malta':'Malta', 'Węgry':'Hungary', 'Macedonia Północna':'North Macedonia', 'Macedonia':'North Macedonia', 'Mołdawia':'Romania and Moldova', 'Polska':'Poland', 'Region doński':'Don', 'Rosja':'Russia', 'Rumunia':'Romania and Moldova', 'Republika Serbska':'Republic of Srpska', 'Serbia':'Serbia', 'Serbołużyczanie':'Sorbia', 'Słowacja':'Slovakia', 'Słowenia':'Slovenia', 'Turcja':'Turkey', 'Ukraina':'Ukraine', 'Grecja':'Greece', 'Kazachstan':'Kazakhstan', 'Tatarstan':'Tatarstan'},
@@ -963,6 +964,9 @@ class BasicBot(
                             newline += str(res[wiki][c])
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
+                        elif languageCountry[wiki] == c:
+                            newline += 'style="background-color:LightSlateGray" | — '
+
             # add row (wiki) total to table
             finalpage += u" || '''" + str(wikiTotal) + "'''" + newline + u" || '''" + str(wikiTotal) + "'''"
             finalpage += u' || [[' + locpagename + u'/Article list#'+ wiki + u'.wikipedia|' + wiki + u']]'
