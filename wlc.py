@@ -1289,7 +1289,7 @@ ignorelist = [
     re.compile('.*[\./@]academic\.oup\.com/bioscience/article/53/4/421/250384'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]academic\.oup\.com/bioscience/article/62/1/67/295711'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]academic\.oup\.com/bioscience/article/57/3/227/268444'),  # bot rejected on site (masti, Szoltys)
-    re.compile('.*[\./@]nssdc\.gsfc\.nasa\.gov/nmc/spacecraft/display\.action?id='),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]nssdc\.gsfc\.nasa\.gov/nmc/spacecraft/display\.action\?id='),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]geojournals\.pgi\.gov\.pl/pg/article/viewFile/16266/13503'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]hrubieszow-gmina\.pl/gmina/solectwa-soltysi'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]szukajwarchiwach\.pl'),  # bot rejected on site (masti, Szoltys)
