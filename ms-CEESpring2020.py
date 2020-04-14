@@ -247,7 +247,7 @@ class BasicBot(
         header = u'{{TNT|Wikimedia CEE Spring 2020 navbar}}\n\n'
         header += u'{{Wikimedia CEE Spring 2020/Statistics/Header}}\n\n'
         #header += u"Last update: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}} UTC</onlyinclude>'''.\n\n"
-        header += u"Last update: '''%s CET'''.\n\n" % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        header += u"Last update: '''%s CET'''.\n\n" % datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         footer = u''
 
         #load springList from previous run
