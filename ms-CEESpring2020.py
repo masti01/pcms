@@ -943,7 +943,7 @@ class BasicBot(
             wikiTotal = 0 # get the row total
             newline = '' # keep info for the table row
             for c in countryList:
-                newline += u' || '
+                #newline += u' || '
                 if u'Other' in c:
                     if self.getOption('test3'):
                          pywikibot.output(u'other:%s' % c)
@@ -954,17 +954,17 @@ class BasicBot(
                            if self.getOption('test3'):
                                pywikibot.output(u'country:%s ** otherCountry=%i+%i=%i' % (country,otherCountry,res[wiki][country],otherCountry+res[wiki][country]))
                            otherCountry += res[wiki][country]
-                    newline += str(otherCountry)
+                    newline += ' || ' + str(otherCountry)
                     wikiTotal += otherCountry # add to wiki total
                     countryTotals[c] += otherCountry
                 else:
                     if c in res[wiki].keys():
                         if res[wiki][c]:
-                            newline += str(res[wiki][c])
+                            newline += ' || '+ str(res[wiki][c])
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
                         elif languageCountry[wiki] == c:
-                            newline += 'style="background-color:LightSlateGray" | — '
+                            newline += '| style="background-color:LightSlateGray" | — '
 
             # add row (wiki) total to table
             finalpage += u" || '''" + str(wikiTotal) + "'''" + newline + u" || '''" + str(wikiTotal) + "'''"
