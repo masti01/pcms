@@ -930,11 +930,11 @@ class BasicBot(
         # generate table header
         finalpage += u'\n{| class="wikitable sortable" style="text-align: center;"'
         finalpage += u'\n|-'
-        finalpage += u'\n! wiki/country'
-        finalpage += u' !! Total'
+        finalpage += u'\n! {{Vert header|stp=1|Wiki / Country}}'
+        finalpage += u' !! {{Vert header|stp=1|Total}} '
         for c in countryList:
-            finalpage += u' !! ' + c
-        finalpage += u' !! Total !! wiki/country'
+            finalpage += u' !! {{Vert header|stp=1|%s}}' % c
+        finalpage += u' !! {{Vert header|stp=1|Total}} !! {{Vert header|stp=1|Wiki / Country}}'
         
         # generate table rows
         for wiki in res.keys():
