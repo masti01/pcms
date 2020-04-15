@@ -585,7 +585,7 @@ class BasicBot(
 
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('pl'):
+                    if lang not in ('eo'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
@@ -961,9 +961,13 @@ class BasicBot(
                     if c in res[wiki].keys():
                         if res[wiki][c]:
                             newline += ' || '+ str(res[wiki][c])
+                           if self.getOption('test3'):
+                               pywikibot.output(u'res[wiki]:%s' % res[wiki])
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
                         elif languageCountry[wiki] == c:
+                           if self.getOption('test3'):
+                               pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c)
                             newline += '| style="background-color:LightSlateGray" | — '
 
             # add row (wiki) total to table
