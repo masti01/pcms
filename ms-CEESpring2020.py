@@ -959,6 +959,8 @@ class BasicBot(
                     countryTotals[c] += otherCountry
                 else:
                     if c in res[wiki].keys():
+                        if self.getOption('test3'):
+                            pywikibot.output('c:%s, wiki:%s, res[wiki][c]:%s' % (c, wiki, res[wiki][c]))
                         if res[wiki][c]:
                             newline += ' || '+ str(res[wiki][c])
                             if self.getOption('test3'):
