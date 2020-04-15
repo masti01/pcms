@@ -962,13 +962,18 @@ class BasicBot(
                         if res[wiki][c]:
                             newline += ' || '+ str(res[wiki][c])
                             if self.getOption('test3'):
-                                pywikibot.output(u'res[wiki]:%s' % res[wiki])
+                                pywikibot.output(u'res[wiki][c]:%s' % res[wiki][c])
+                                pywikibot.output('NEWLINE:%s' % newline)
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
                         elif languageCountry[wiki] == c:
                             if self.getOption('test3'):
                                 pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
                             newline += '| style="background-color:LightSlateGray" | — '
+                        else:
+                            if self.getOption('test3'):
+                                pywikibot.output(u'Empty cell')
+                            newline += '||'
 
             # add row (wiki) total to table
             finalpage += u" || '''" + str(wikiTotal) + "'''" + newline + u" || '''" + str(wikiTotal) + "'''"
