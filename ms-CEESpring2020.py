@@ -959,6 +959,8 @@ class BasicBot(
                     wikiTotal += otherCountry # add to wiki total
                     countryTotals[c] += otherCountry
                 else:
+                    if self.getOption('test5'):
+                        pywikibot.output('c:%s, wiki:%s, res[wiki][c]:%s' % (c, wiki, res[wiki][c]))
                     if c in res[wiki].keys():
                         if self.getOption('test5'):
                             pywikibot.output('c:%s, wiki:%s, res[wiki][c]:%s' % (c, wiki, res[wiki][c]))
@@ -970,16 +972,15 @@ class BasicBot(
                                 pywikibot.output('NEWLINE:%s' % newline)
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
-                        """
-                        elif languageCountry[wiki] == c:
-                            if self.getOption('test5'):
-                                pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
-                            newline += '| style="background-color:LightSlateGray" | — '
-                        else:
-                            if self.getOption('test5'):
-                                pywikibot.output(u'Empty cell')
-                            newline += ' || '
-                        """
+                        
+                    elif languageCountry[wiki] == c:
+                        if self.getOption('test5'):
+                            pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
+                        newline += '| style="background-color:LightSlateGray" | — '
+                    else:
+                        if self.getOption('test5'):
+                            pywikibot.output(u'Empty cell')
+                        newline += ' || '
 
             # add row (wiki) total to table
             finalpage += u" || '''" + str(wikiTotal) + "'''" + newline + u" || '''" + str(wikiTotal) + "'''"
