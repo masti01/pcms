@@ -967,7 +967,7 @@ class BasicBot(
                             countryTotals[c] += res[wiki][c]
                         elif languageCountry[wiki] == c:
                             if self.getOption('test3'):
-                                pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c)
+                                pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
                             newline += '| style="background-color:LightSlateGray" | — '
 
             # add row (wiki) total to table
