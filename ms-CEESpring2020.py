@@ -962,7 +962,7 @@ class BasicBot(
                         if res[wiki][c]:
                             newline += ' || '+ str(res[wiki][c])
                             if self.getOption('test3'):
-                                pywikibot.output(u'res[%s][%s]:%s' % (wiki, c, res[wiki][c]))
+                                pywikibot.output(u'res[%s][%s]:%s - languageCountry[%s]:%s = %s' % (wiki, c, res[wiki][c], wiki,languageCountry[wiki], c))
                                 pywikibot.output('NEWLINE:%s' % newline)
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
