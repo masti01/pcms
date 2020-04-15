@@ -127,8 +127,7 @@ countryNames = {
 #mt countries
 'mt':{ 'Awstrija':'Austria', 'Slovakja':'Slovakia', 'Ċekja':'Czechia', 'Bożnija u Ħerżegovina':'Bosnia and Herzegovina', 'Greċja':'Greece', 'Polonja':'Poland', 'Albania':'Albania', 'Tararstan':'Tatarstan', 'Armenia':'Armenia', 'Azerbajġan':'Azerbaijan', },
 }
-#sk articles
-skArticles = ["Stob", "Staré kúpele Čifte chamam", "Vichren (chata)", "Hodinová veža (Plovdiv)", "Evanjelický kongregačný kostol (Plovdiv)", "Danov chălm", "Gara Lakatnik", "Pamätník Septemvrijci 1923", "Krasová vyvieračka Žitoľub", "Asenica", "Taksim tepe", "Džambaz tepe", "Mladežki chălm", "Bunardžik", "Orechovo (Čepelare)", "Dolen (Blagoevgrad)", "Chrám svätého Mikuláša (Dolen)", "Čierny kostol (Brašov)", "Chrám svätého Charalampésa (Plovdiv)", "Biela veža (Brašov)", "Brašovská pevnosť", "Čierna veža (Brašov)", "Katedrála Zosnutia Bohorodičky (Brašov)", "Chrám Zvestovania (Brašov)", "Kostol svätého Martina (Brašov)", "Rímskokatolícky kostol svätých Petra a Pavla (Brašov)", "Stará radnica (Brašov)", "Kostol Nanebovzatia Panny Márie (Valtice)", "Neorenesančná radnica (Valtice)", "Židovský cintorín v Černoviciach", "Kostol Povýšenia svätého Kríža (Černovice)", "Černovice (zámok)", "Židovský cintorín v Pacove", "Synagóga v Pacove", "Kostol svätého Michala archanjela (Pacov)", "Poštárska bašta (Brašov)", "Graftová bašta", "Tkáčska bašta", "Katarínina brána", "Františkánsky kostol (Brašov)", "Katedrála svätých Petra a Pavla (Konstanca)", "Bulharský chrám svätého Mikuláša (Konstanca)", "Kasíno (Konstanca)", "Kostol svätého Antona Padovského (Konstanca)", "Neologická synagóga (Brašov)", "Veľká mešita (Konstanca)", "Kostol svätého Václava (Pacov)", "Pacov (zámok)", "Kaplnka svätej Anny (Pacov)", "Kostol Ružencovej Panny Márie (Kranj)", "Hrad Kamen", "Janovský maják", "Kostol svätého Martina (Grywałd)", "Czorsztyn (hrad)", "Kostol svätého Jána Krstiteľa (Ribčev Laz)", "Kostol svätého Martina (Srednja vas v Bohinju)", "Kostol svätej Barbory (Pacov)", "Chrám svätého Mikuláša (Brašov)", "Lanárska bašta", "Kostol svätého Bartolomeja (Brašov)", "Ortodoxná synagóga (Brašov)", "Șcheiská brána", "Kováčska bašta", "Slovensko-rakúska štátna hranica", "Bitka o Náhorný Karabach (2016)", "Poľský podzemný štát", "Stanislav II. (Poľsko)", "Hajdúdorožská archieparchia", "Miškovecká eparchia", "Níreďházska eparchia", "Péter Fülöp Kocsis", "Ábel Antal Szocska", "Atanáz Orosz", "Verecký priesmyk", "Užocký priesmyk", "Jablonický priesmyk (Ukrajina)", "Jadrová elektráreň Akkuyu", "Ján VI. (Byzantská ríša)", "Monastier Pantanassa", "İsmet İnönü", "Veľké národné zhromaždenie", "Adnan Menderes", "Piotr Arkadievič Stolypin", "Nelly Řehořová", "Polostrov Hel", "Vysílač Hády", "Punkva", "Skalky (Drahanská vrchovina)", "Mezivrata", "Geografia Rumunska", "Ze světa islámu", "Štefan Bátori", "Národné zhromaždenie Azerbajdžanskej republiky", "Krzysztof Strzałka", "Tomasz Chłoń", "Radosław Zenderowski", "Andrzej Krawczyk", "Jan Komornicki", "Jerzy Korolec", "Zenon Kosiniak-Kamysz", "Andrzej Jagodziński", "Józef Gosławski", "Poľský inštitút v Bratislave", "Aleksander Kaczorowski", "Veľvyslanectvo Poľskej republiky v Bratislave", "Marian Grześczak", "Studeničné", "Jablunkovský incident", "Lomná (prítok Olše)", "Voľby do zastupiteľstiev obcí v ČR 2018", "Elizaveta Maximová", "Zoznam predsedov Poslaneckej snemovne Parlamentu Českej republiky", "Jaroslav Kubera", "Karolína Muchová", "Zoznam predsedov Senátu Parlamentu Českej republiky", "Linda Bartošová", "Kresťanská a demokratická únia – Československá strana ľudová", "Olomouc", "Senát Parlamentu Českej republiky", "Inna Puhajková", "Daniel Takáč", "Veľký Olomouc", "Nová Ulice", "Hodolany", "Bělidla", "Černovír (Olomouc)", "Droždín", "Hejčín", "Holice (Olomouc)", "Chomoutov", "Chválkovice", "Klášterní Hradisko", "Lazce (Olomouc)", "Lošov", "Nedvězí (Olomouc)", "Nemilany", "Neředín", "Nové Sady (Olomouc)", "Nový Svět (Olomouc)", "Pavlovičky", "Povel (Olomouc)", "Radíkov (Olomouc)", "Řepčín", "Slavonín", "Svatý Kopeček (Olomouc)" "Topolany (Olomouc)", "Týneček", "Olomouc-město", "Vrchný súd v Olomouci", "Vrchný súd v Prahe", "Armáda Českej republiky", "Flora Olomouc", "Bazilika Navštívenia Panny Márie (Svatý Kopeček)", "Vedecká knižnica v Olomouci", "Slovanské gymnázium", "Pevnosť mesta Olomouc", "Horní náměstí (Olomouc)", "Vláda Rakúskej republiky od 18. decembra 2017", "Jadrová elektráreň Temelín", "Thaleia Flora-Karavia",  "Melissanthi", "Ogtay Asadov", "Tatra 500 HB", "LIAZ 200", "LIAZ 300", "LIAZ 400", "Tatra 81", "Krstové kúpania", "Svätenie vody", "Prisťahovalectvo do Ruska", "Pionieri-hrdinovia", "Priehrada Desná"]
+
 
 class BasicBot(
     # Refer pywikobot.bot for generic bot classes
@@ -611,19 +610,6 @@ class BasicBot(
                         count += 1
             #break
         #get sk.wiki article list
-        """
-        if self.getOption('test'):
-            pywikibot.output(u'GET SK WIKI')
-        skwiki = pywikibot.Site('sk',fam='wikipedia')
-        lang = u'sk'
-        for skart in skArticles:
-            skpage = pywikibot.Page( skwiki, skart )
-            if skpage.exists():
-                artList.append(skpage)
-                if self.getOption('test'):
-                     pywikibot.output(u'#%i:%s:%s' % (count,lang,skpage.title()))
-                count += 1
-        """
         return(artList)
 
     def printArtList(self,artList):
