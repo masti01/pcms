@@ -953,7 +953,8 @@ class BasicBot(
                     for country in res[wiki]:
                        if country not in countryList and not country==u'':
                            if self.getOption('test5'):
-                               pywikibot.output(u'country:%s ** otherCountry=%i+%i=%i' % (country,otherCountry,res[wiki][country],otherCountry+res[wiki][country]))
+                               pywikibot.output(u'country:%s ** otherCountry=%i+%i=%i' % \
+                                   (country,otherCountry,res[wiki][country],otherCountry+res[wiki][country]))
                            otherCountry += res[wiki][country]
                     newline += ' || ' + str(otherCountry)
                     wikiTotal += otherCountry # add to wiki total
@@ -976,7 +977,7 @@ class BasicBot(
                     elif languageCountry[wiki] == c:
                         if self.getOption('test5'):
                             pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
-                        newline += '| style="background-color:LightSlateGray" | — '
+                        newline += '|| style="background-color:LightSlateGray" | — '
                     else:
                         if self.getOption('test5'):
                             pywikibot.output(u'Empty cell')
