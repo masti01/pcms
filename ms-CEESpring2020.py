@@ -960,7 +960,7 @@ class BasicBot(
                     countryTotals[c] += otherCountry
                 else:
                     if self.getOption('test5'):
-                        pywikibot.output('c:%s, wiki:%s, res[wiki][c]:%s' % (c, wiki, res[wiki][c]))
+                        pywikibot.output('c:%s, wiki:%s' % (c, wiki))
                     if c in res[wiki].keys():
                         if self.getOption('test5'):
                             pywikibot.output('c:%s, wiki:%s, res[wiki][c]:%s' % (c, wiki, res[wiki][c]))
