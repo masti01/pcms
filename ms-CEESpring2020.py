@@ -961,13 +961,13 @@ class BasicBot(
                     if c in res[wiki].keys():
                         if res[wiki][c]:
                             newline += ' || '+ str(res[wiki][c])
-                           if self.getOption('test3'):
-                               pywikibot.output(u'res[wiki]:%s' % res[wiki])
+                            if self.getOption('test3'):
+                                pywikibot.output(u'res[wiki]:%s' % res[wiki])
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
                         elif languageCountry[wiki] == c:
-                           if self.getOption('test3'):
-                               pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c)
+                            if self.getOption('test3'):
+                                pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c)
                             newline += '| style="background-color:LightSlateGray" | — '
 
             # add row (wiki) total to table
