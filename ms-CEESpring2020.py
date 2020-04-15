@@ -204,6 +204,7 @@ class BasicBot(
             'test2': False, # make verbose output
             'test3': False, # make verbose output
             'test4': False, # make verbose output
+            'test5': False, # make verbose output
             'testartinfo': False, # make verbose output
             'testwomen': False, # make verbose output for women table
             'testwomenauthors': False, # make verbose output for women authors table
@@ -945,13 +946,13 @@ class BasicBot(
             for c in countryList:
                 #newline += u' || '
                 if u'Other' in c:
-                    if self.getOption('test3'):
+                    if self.getOption('test5'):
                          pywikibot.output(u'other:%s' % c)
                          pywikibot.output(u'res[wiki]:%s' % res[wiki])
                     otherCountry = 0 # count other countries
                     for country in res[wiki]:
                        if country not in countryList and not country==u'':
-                           if self.getOption('test3'):
+                           if self.getOption('test5'):
                                pywikibot.output(u'country:%s ** otherCountry=%i+%i=%i' % (country,otherCountry,res[wiki][country],otherCountry+res[wiki][country]))
                            otherCountry += res[wiki][country]
                     newline += ' || ' + str(otherCountry)
@@ -959,23 +960,26 @@ class BasicBot(
                     countryTotals[c] += otherCountry
                 else:
                     if c in res[wiki].keys():
-                        if self.getOption('test3'):
+                        if self.getOption('test5'):
                             pywikibot.output('c:%s, wiki:%s, res[wiki][c]:%s' % (c, wiki, res[wiki][c]))
                         if res[wiki][c]:
                             newline += ' || '+ str(res[wiki][c])
-                            if self.getOption('test3'):
-                                pywikibot.output(u'res[%s][%s]:%s - languageCountry[%s]:%s = %s' % (wiki, c, res[wiki][c], wiki,languageCountry[wiki], c))
+                            if self.getOption('test5'):
+                                pywikibot.output(u'res[%s][%s]:%s - languageCountry[%s]:%s = %s' % \
+                                    (wiki, c, res[wiki][c], wiki,languageCountry[wiki], c))
                                 pywikibot.output('NEWLINE:%s' % newline)
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
+                        """
                         elif languageCountry[wiki] == c:
-                            if self.getOption('test3'):
+                            if self.getOption('test5'):
                                 pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
                             newline += '| style="background-color:LightSlateGray" | — '
                         else:
-                            if self.getOption('test3'):
+                            if self.getOption('test5'):
                                 pywikibot.output(u'Empty cell')
                             newline += ' || '
+                        """
 
             # add row (wiki) total to table
             finalpage += u" || '''" + str(wikiTotal) + "'''" + newline + u" || '''" + str(wikiTotal) + "'''"
