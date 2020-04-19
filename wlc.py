@@ -1455,6 +1455,7 @@ ignorelist = [
     re.compile('.*[\./@]tenisista\.com\.pl/ewolucja-sprzetu-tenisowego\.html'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]tenisista\.com\.pl/suzanne-lenglen\.html'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]tenisista\.com\.pl/zasady-gry-w-tenisa\.html'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2014/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
 ]
 
 
