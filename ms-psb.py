@@ -52,7 +52,7 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 import re
-import urllib2
+import urllib3
 import datetime
 
 # This is required for the text that is shown when you run this script
@@ -323,27 +323,27 @@ class BasicBot(
 
     def extractsection(self,page,section,level):
         # extract section of page returning it's content
-        sectionR = re.compile(ur'(?s)={'+str(level)+'}\s*?'+section+'\s*?={'+str(level)+'}(?P<text>.*?)\n={'+str(level)+'} ')
+        sectionR = re.compile(r'(?s)={'+str(level)+'}\s*?'+section+'\s*?={'+str(level)+'}(?P<text>.*?)\n={'+str(level)+'} ')
         if self.getOption('test'):
             pywikibot.output(u'(?s)={'+str(level)+'}\s*?'+section+'\s*?={'+str(level)+'}(?P<text>.*?)\n={'+str(level)+'} ')
         return(sectionR.search(page.text).group('text'))
 
-    def genpages(self,text,ns=0, rgx=ur'\[\[(?P<title>[^\|\]]*?)[\|\]]'):
+    def genpages(self,text,ns=0, rgx=r'\[\[(?P<title>[^\|\]]*?)[\|\]]'):
         #generate pages based on wikilinks in text
-        #titleR = re.compile(ur'\[\[(?P<title>[^\|\]]*?)[\|\]]')
+        #titleR = re.compile(r'\[\[(?P<title>[^\|\]]*?)[\|\]]')
         titleR = re.compile(rgx)
 
         for t in titleR.finditer(text):
-            title = re.sub(ur'  ',' ',t.group('title'))
+            title = re.sub(r'  ',' ',t.group('title'))
             page = pywikibot.Page(pywikibot.Site(),title)
             if page.namespace() == ns:
                 yield page,t
 
     def header(self):
-	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja '''~~~~~'''."
-	header += u"\n\nWszelkie uwagi proszę zgłaszać w [[Dyskusja wikipedysty:Masti|dyskusji operatora]]."
-	header += u"\n:<small>Znalezione artykuły proszę wpisywać w kolumnie ''Link''</small>"
-	header += u"\n:<small>Uwagi i komentarze kolumnie ''Uwagi''</small>"
+        header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja '''~~~~~'''."
+        header += u"\n\nWszelkie uwagi proszę zgłaszać w [[Dyskusja wikipedysty:Masti|dyskusji operatora]]."
+        header += u"\n:<small>Znalezione artykuły proszę wpisywać w kolumnie ''Link''</small>"
+        header += u"\n:<small>Uwagi i komentarze kolumnie ''Uwagi''</small>"
         header += u"\n:<small>Pozostałę kolumny są aktualizowane automatycznie i zmiany w nich nie zostaną zachowane</small>"
         header +=u'\n\n{| class="wikitable sortable" style="font-size:85%;"'
         header +=u'\n|-'
@@ -374,7 +374,7 @@ class BasicBot(
         reflinks = [] #initiate list
         count = 0
         for tpage in self.generator:
-	    count += 1
+            count += 1
             if self.getOption('test'):
                 pywikibot.output(u'[%s]Treating #%i: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), count, tpage.title()))
 
@@ -386,10 +386,16 @@ class BasicBot(
                 break
             if self.getOption('test'):
                 pywikibot.output(u'[%s][%i]L:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), count, tpage.title() ))
-            refs = self.treat(tpage) 
+            try:
+                refs = self.treat(tpage) 
+            except pywikibot.exceptions.MaxlagTimeoutError:
+                refs = None
+                pywikibot.output('[%s] MaxlagTimeoutError in [[%s]]' % \
+                    (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), tpage.title()))
             #if self.getOption('test'):
             #    pywikibot.output(refs)
-            reflinks.append(refs)
+            if refs:
+                reflinks.append(refs)
             self.resetCounters()
 
         """
@@ -432,7 +438,7 @@ class BasicBot(
             if self.getOption('labels'):
                 pywikibot.output(wdcontent['claims'].keys())
         except:
-            pywikibot.output('WikiData page do not exists')
+            pywikibot.output('WikiData page do not exists for: [[%s]]' % page.title())
             obj.wdexists = False
             return(obj)
 
@@ -470,9 +476,9 @@ class BasicBot(
     def treat(self, page):
         #treat all links on page
         if self.getOption('renew'):
-            linkR = ur'\|[ \d]*?\|\| *?\[\[(?P<title>[^\]]*)\]\]( *?\|\|.*?)*\|\| *(?P<description>.*)\|\|[ \t]*(?P<comment>.*)'
+            linkR = r'\|[ \d]*?\|\| *?\[\[(?P<title>[^\]]*)\]\]( *?\|\|.*?)*\|\| *(?P<description>.*)\|\|[ \t]*(?P<comment>.*)'
         else:
-            linkR = ur'# \[\[(?P<title>[^|\]]*?)(\|.*?)?\]\]\s*?(?P<description>.*)'
+            linkR = r'# \[\[(?P<title>[^|\]]*?)(\|.*?)?\]\]\s*?(?P<description>.*)'
         result = []
 
         text = page.text
@@ -486,7 +492,8 @@ class BasicBot(
             obj = Person()
             
             if self.getOption('test'):
-                pywikibot.output(u'Treat:[%s][%i][%i]:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), actionCounters['total'], count, p.title() ))
+                pywikibot.output(u'Treat:[%s][%i][%i]:%s' % \
+                    (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), actionCounters['total'], count, p.title() ))
             if not p.exists():
                 actionCounters['red'] += 1
             else:
@@ -505,7 +512,8 @@ class BasicBot(
                 obj.disambig = True
                 obj.title = pp.title()
                 if self.getOption('test'):
-                    pywikibot.output(u'Disambig:[%s][#%i]:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),actionCounters['disambigs'], pp.title() ))
+                    pywikibot.output(u'Disambig:[%s][#%i]:%s' % \
+                        (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),actionCounters['disambigs'], pp.title() ))
             else:
                 obj = self.getData(pp)
 
