@@ -2042,6 +2042,7 @@ class History(object):
                 self.historyDict = pickle.load(datfile)
         except (IOError, EOFError):
             # no saved history exists yet, or history dump broken
+            pywikibot.output('SKIPPING INITIAL LOAD OF DATA')
             self.historyDict = {}
 
     def log(self, url, error, containingPage, archiveURL):
