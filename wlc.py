@@ -2040,6 +2040,7 @@ class History(object):
         try:
             with open(self.datfilename, 'rb') as datfile:
                 self.historyDict = pickle.load(datfile)
+            pywikibot.output('DICTIONARY LOADED: %i elements' % len(self.historyDict.keys()))
         except (IOError, EOFError):
             # no saved history exists yet, or history dump broken
             pywikibot.output('SKIPPING INITIAL LOAD OF DATA')
