@@ -2044,6 +2044,7 @@ class History(object):
         except (IOError, EOFError):
             # no saved history exists yet, or history dump broken
             pywikibot.output('SKIPPING INITIAL LOAD OF DATA')
+            pywikibot.output('DICTIONARY ERROR: %i elements' % len(self.historyDict.keys()))
             self.historyDict = {}
 
     def log(self, url, error, containingPage, archiveURL):
