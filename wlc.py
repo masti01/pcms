@@ -130,7 +130,7 @@ except ImportError as e:
 import pywikibot
 
 from pywikibot import (
-    comms, i18n, config, pagegenerators, textlib, weblib, config2,
+    comms, i18n, config, pagegenerators, textlib, config2,
 )
 
 from pywikibot.bot import ExistingPageBot, SingleSiteBot
@@ -1457,6 +1457,25 @@ ignorelist = [
     re.compile('.*[\./@]tenisista\.com\.pl/zasady-gry-w-tenisa\.html'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2014/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]\.gum\.gov\.pl/ftp'),  # bot rejected on site (masti, Akoshina)
+    re.compile('.*[\./@]wcsp\.science\.kew\.org'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]blasonariosubalpino\.it'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]mapy\.zabytek\.gov\.pl/nid'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]atlasryb\.online/opis_ryby\.php\?id='),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]nike\.org\.pl/strona\.php\?p='),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/dioceses/country'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]rcin\.org\.pl/dlibra/show-content/publication/edition/31639\?id=31639'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]ossolineum\.pl/index\.php/aktualnosci/zbiory-lwowskie'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]ossolineum\.pl/index\.php/aktualnosci/historia-znio/dyrektorzy-znio'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/hierarchy/data/bishops-MAS\.htm'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/hierarchy/data/bishops-ST\.htm'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/hierarchy/data/officials-B\.htm'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/hierarchy/pope/G13\.htm'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/orders/018\.htm'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gcatholic\.org/orders/019\.htm'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]mks-mos\.bedzin\.pl'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]media\.metro\.net/riding_metro/bus_overview/images/803\.pdf'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]majdankrolewski\.pl/asp/pl_start\.asp\?typ=14&menu=6&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]bip\.sobkow\.pl/\?bip=1&cid=51&bsc=N'),  # bot rejected on site (masti, szoltys)
 
 ]
 
@@ -1557,9 +1576,9 @@ def citeArchivedLink(link, text):
 
         adapted from: m-removedeadlinktemplates.py
         """
-        citetempR = re.compile(ur'(?P<citetemplate>\{\{[cC]ytuj.*?\|[^}]*?\}\})')
-        urlfieldR = re.compile(ur'(url|tytuł)\s*?=(?P<url>[^\|\}]*)')
-        archfieldR = re.compile(ur'archiwum\s*?=\s*?(?P<arch>[^\|\}]*)')
+        citetempR = re.compile(r'(?P<citetemplate>\{\{[cC]ytuj.*?\|[^}]*?\}\})')
+        urlfieldR = re.compile(r'(url|tytuł)\s*?=(?P<url>[^\|\}]*)')
+        archfieldR = re.compile(r'archiwum\s*?=\s*?(?P<arch>[^\|\}]*)')
         archived = False
         
         cites = citetempR.finditer(text)
@@ -1619,8 +1638,8 @@ def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
     # Also remove text inside nowiki links etc.
     text = textlib.removeDisabledParts(text)
     #linkR = textlib.compileLinkR(withoutBracketed, onlyBracketed)
-    #linkR = re.compile(ur'(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s;<>\"\|\)]*))(?:[\]\s\.:;,<>\"\|\)])')
-    linkR = re.compile(ur'(?m)(?P<url>http[s]?:(\/\/[^\s\?]+?)(\??[^\s<\|\}\]]*))(?:[\]\s\.<\|\}])')
+    #linkR = re.compile(r'(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s;<>\"\|\)]*))(?:[\]\s\.:;,<>\"\|\)])')
+    linkR = re.compile(r'(?m)(?P<url>http[s]?:(\/\/[^\s\?]+?)(\??[^\s<\|\}\]]*))(?:[\]\s\.<\|\}])')
     for m in linkR.finditer(text):
         if m.group('url'):
             #pywikibot.output('URL to YIELD:%s' % m.group('url'))
@@ -2044,8 +2063,8 @@ class History(object):
         except (IOError, EOFError):
             # no saved history exists yet, or history dump broken
             pywikibot.output('SKIPPING INITIAL LOAD OF DATA')
-            pywikibot.output('DICTIONARY ERROR: %i elements' % len(self.historyDict.keys()))
-            self.historyDict = {}
+            #pywikibot.output('DICTIONARY ERROR: %i elements' % len(self.historyDict.keys()))
+            #self.historyDict = {}
 
     def log(self, url, error, containingPage, archiveURL):
         """Log an error report to a text file in the deadlinks subdirectory."""
