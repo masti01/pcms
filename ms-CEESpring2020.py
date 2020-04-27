@@ -963,10 +963,11 @@ class BasicBot(
                             wikiTotal += res[wiki][c] # add to wiki total
                             countryTotals[c] += res[wiki][c]
                         
-                    elif languageCountry[wiki] == c:
-                        if self.getOption('test5'):
-                            pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
-                        newline += '|| style="background-color:LightSlateGray" | — '
+                    elif wiki in languageCountry.keys(): 
+                        if languageCountry[wiki] == c:
+                            if self.getOption('test5'):
+                                pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
+                            newline += '|| style="background-color:LightSlateGray" | — '
                     else:
                         if self.getOption('test5'):
                             pywikibot.output(u'Empty cell')
