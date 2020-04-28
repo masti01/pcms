@@ -81,7 +81,7 @@ countryNames = {
 #bg countries
 'bg':{ 'Албания':'Albania', 'Австрия':'Austria', 'Азербайджан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Беларус':'Belarus', 'България':'Bulgaria', 'Армения':'Armenia', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'кримските татари':'Crimean Tatars', 'Донски регион':'Don', 'Ерзяни':'Erzia','ерзяни':'Erzia','Эрзя':'Erzia', 'Eсперанто':'Esperanto', 'Есперанто':'Esperanto', 'Естония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хърватия':'Croatia', 'Косово':'Kosovo', 'кримски татари':'Crimean Tatars', 'Кримски татари':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Унгария':'Hungary', 'Република Македония':'North Macedonia', 'Македония':'North Macedonia', 'Северна Македония':'North Macedonia', 'Молдова':'Romania and Moldova', 'Полша':'Poland', 'Русия':'Russia', 'Румъния и Молдова':'Romania and Moldova', 'Румъния':'Romania and Moldova', 'Черна гора':'Montenegro', 'Република Сръбска':'Republic of Srpska', 'Сърбия':'Serbia', 'Словакия':'Slovakia', 'Словения':'Slovenia', 'Лужичани (сорби)':'Sorbia', 'Турция':'Turkey', 'Украйна':'Ukraine', 'Гърция':'Greece', 'Казахстан':'Kazakhstan', 'Татарстан':'Tatarstan', 'Азербайджан‎':'Azerbaijan', 'лужичаните':'Sorbia', 'Малта':'Malta', 'ерзяните':'Erzia', 'есперанто':'Esperanto', },
 #de countries
-'de':{ 'Albanien':'Albania', 'Österreich':'Austria', 'Aserbaidschan':'Azerbaijan', 'Baschkortostan':'Bashkortostan', 'Weißrussland':'Belarus', 'Bulgarien':'Bulgaria', 'Armenien':'Armenia', 'Bosnien und Herzegowina':'Bosnia and Herzegovina', 'Don-Region':'Don', 'Ersja':'Erzia', 'Esperanto':'Esperanto', 'Estland':'Estonia', 'Georgien':'Georgia', 'Tschechien':'Czechia', 'Kroatien':'Croatia', 'Kosovo':'Kosovo', 'Krimtataren':'Crimean Tatars', 'Litauen':'Lithuania', 'Lettland':'Latvia', 'Ungarn':'Hungary', 'Mazedonien':'North Macedonia', 'Montenegro':'Montenegro', 'Moldau':'Romania and Moldova', 'Moldawien':'Romania and Moldova', 'Polen':'Poland', 'Russland':'Russia', 'Rumänien':'Romania and Moldova', 'Republik Moldau':'Romania and Moldova', 'Republika Srpska':'Republic of Srpska', 'Serbien':'Serbia', 'Slowakei':'Slovakia', 'Slowenien':'Slovenia', 'Türkei':'Turkey', 'Ukraine':'Ukraine', 'Griechenland':'Greece', 'Kasachstan':'Kazakhstan', 'Malta':'Malta', 'Sorbisches Siedlungsgebiet':'Sorbia', 'Nordmazedonien':'North Macedonia', 'Tatarstan':'Tatarstan', },
+'de':{ 'Albanien':'Albania', 'Österreich':'Austria', 'Aserbaidschan':'Azerbaijan', 'Baschkortostan':'Bashkortostan', 'Weißrussland':'Belarus', 'Bulgarien':'Bulgaria', 'Armenien':'Armenia', 'Bosnien und Herzegowina':'Bosnia and Herzegovina', 'Don-Region':'Don', 'Ersja':'Erzia', 'Esperanto':'Esperanto', 'Estland':'Estonia', 'Georgien':'Georgia', 'Tschechien':'Czechia', 'Kroatien':'Croatia', 'Kosovo':'Kosovo', 'Krimtataren':'Crimean Tatars', 'Litauen':'Lithuania', 'Lettland':'Latvia', 'Ungarn':'Hungary', 'Mazedonien':'North Macedonia', 'Montenegro':'Montenegro', 'Moldau':'Romania and Moldova', 'Moldawien':'Romania and Moldova', 'Polen':'Poland', 'Russland':'Russia', 'Rumänien':'Romania and Moldova', 'Republik Moldau':'Romania and Moldova', 'Republika Srpska':'Republic of Srpska', 'Serbien':'Serbia', 'Slowakei':'Slovakia', 'Slowenien':'Slovenia', 'Türkei':'Turkey', 'Ukraine':'Ukraine', 'Griechenland':'Greece', 'Kasachstan':'Kazakhstan', 'Malta':'Malta', 'Sorbisches Siedlungsgebiet':'Sorbia', 'Nordmazedonien':'North Macedonia', 'Tatarstan':'Tatarstan', 'die Republik Moldau':'Romania and Moldova', },
 #crh countries
 'crh':{ 'Arnavutlıq':'Albania', 'Avstriya':'Austria', 'Azerbaycan':'Azerbaijan', 'Başqırtistan':'Bashkortostan', 'Belarus':'Belarus', 'Bulğaristan':'Bulgaria', 'Ermenistan':'Armenia', 'Bosna ve Hersek':'Bosnia and Herzegovina', 'Esperanto':'Esperanto', 'Estoniya':'Estonia', 'Gürcistan':'Georgia', 'Çehiya':'Czechia', 'Hırvatistan':'Croatia', 'Kosovo':'Kosovo', 'Qırımtatarlar':'Crimean Tatars', 'Litvaniya':'Lithuania', 'Latviya':'Latvia', 'Macaristan':'Hungary', 'Makedoniya':'North Macedonia', 'Moldova':'Romania and Moldova', 'Lehistan':'Poland', 'Rusiye':'Russia', 'Romaniya':'Romania and Moldova', 'Sırb Cumhuriyeti':'Republic of Srpska', 'Sırbistan':'Serbia', 'Slovakiya':'Slovakia', 'Türkiye':'Turkey', 'Ukraina':'Ukraine', 'Yunanistan':'Greece', 'Qazahistan':'Kazakhstan', },
 #el countries
@@ -91,7 +91,7 @@ countryNames = {
 #eo countries
 'eo':{ 'Albanio':'Albania', 'Aŭstrio':'Austria', 'Azerbajĝano':'Azerbaijan', 'Baŝkirio':'Bashkortostan', 'Belorusio':'Belarus', 'Bulgario':'Bulgaria', 'Armenio':'Armenia', 'Bosnio kaj Hercegovino':'Bosnia and Herzegovina', 'Erzja':'Erzia', 'Esperantujo':'Esperanto', 'Esperanto':'Esperanto', 'Estonio':'Estonia', 'Kartvelio':'Georgia', 'Ĉeĥio':'Czechia', 'Kroatio':'Croatia', 'Kosovo':'Kosovo', 'Krimeo':'Crimean Tatars', 'Krime-tataroj':'Crimean Tatars', 'Litovio':'Lithuania', 'Latvio':'Latvia', 'Hungario':'Hungary', 'Makedonio':'North Macedonia', 'Moldava':'Romania and Moldova', 'Montenegro':'Montenegro', 'Pollando':'Poland', 'Rusio':'Russia', 'Rumanio':'Romania and Moldova', 'Serba Respubliko':'Republic of Srpska', 'Serbio':'Serbia', 'Slovakio':'Slovakia', 'Turkio':'Turkey', 'Ukrainio':'Ukraine', 'Grekio':'Greece', 'Kazaĥio':'Kazakhstan', 'Moldavio':'Romania and Moldova', 'Ukraino':'Ukraine', 'Slovenio':'Slovenia', },
 #hy countries
-'hy':{ 'Ալբանիա':'Albania', 'Ավստրիա':'Austria', 'Ադրբեջան':'Azerbaijan', 'Ադրբեջանական Հանրապետություն':'Azerbaijan', 'Բաշկորտոստան':'Bashkortostan', 'Բելառուս':'Belarus', 'Բուլղարիա':'Bulgaria', 'Հայաստան':'Armenia', 'Բոսնիա և Հերցեգովինա':'Bosnia and Herzegovina', 'Դոնի շրջան':'Don', 'Էսպերանտո':'Esperanto', 'Էստոնիա':'Estonia', 'Էրզիա':'Erzia', 'Վրաստան':'Georgia', 'Չեխիա':'Czechia', 'Խորվաթիա':'Croatia', 'Կոսովո':'Kosovo', 'Ղրիմի թաթարներ':'Crimean Tatars', 'Լիտվա':'Lithuania', 'Լատվիա':'Latvia', 'Հունգարիա':'Hungary', 'Հյուսիսային Մակեդոնիա':'North Macedonia', 'Մակեդոնիա':'North Macedonia', 'Մակեդոնիայի Հանրապետություն':'North Macedonia', 'Մոլդովա':'Romania and Moldova', 'Չեռնոգորիա':'Montenegro', 'Լեհաստան':'Poland', 'Ռուսաստան':'Russia', 'Ռումինիա և Մոլդովա':'Romania and Moldova', 'Ռումինիա/Մոլդովա':'Romania and Moldova', 'Ռումինիա':'Romania and Moldova', 'Սերբիայի Հանրապետություն':'Serbia', 'Սերբիա':'Serbia', 'Սլովակիա':'Slovakia', 'Թաթարստան':'Tatarstan', 'Թուրքիա':'Turkey', 'Ուկրաինա':'Ukraine', 'Հունաստան':'Greece', 'Ղազախստան':'Kazakhstan', 'Սլովենիա':'Slovenia', 'Մալթա':'Malta', },
+'hy':{ 'Ալբանիա':'Albania', 'Ավստրիա':'Austria', 'Ադրբեջան':'Azerbaijan', 'Ադրբեջանական Հանրապետություն':'Azerbaijan', 'Բաշկորտոստան':'Bashkortostan', 'Բելառուս':'Belarus', 'Բուլղարիա':'Bulgaria', 'Հայաստան':'Armenia', 'Բոսնիա և Հերցեգովինա':'Bosnia and Herzegovina', 'Դոնի շրջան':'Don', 'Էսպերանտո':'Esperanto', 'Էստոնիա':'Estonia', 'Էրզիա':'Erzia', 'Վրաստան':'Georgia', 'Չեխիա':'Czechia', 'Խորվաթիա':'Croatia', 'Կոսովո':'Kosovo', 'Ղրիմի թաթարներ':'Crimean Tatars', 'Լիտվա':'Lithuania', 'Լատվիա':'Latvia', 'Հունգարիա':'Hungary', 'Հյուսիսային Մակեդոնիա':'North Macedonia', 'Մակեդոնիա':'North Macedonia', 'Մակեդոնիայի Հանրապետություն':'North Macedonia', 'Մոլդովա':'Romania and Moldova', 'Չեռնոգորիա':'Montenegro', 'Լեհաստան':'Poland', 'Ռուսաստան':'Russia', 'Ռումինիա և Մոլդովա':'Romania and Moldova', 'Ռումինիա/Մոլդովա':'Romania and Moldova', 'Ռումինիա':'Romania and Moldova', 'Սերբիայի Հանրապետություն':'Serbia', 'Սերբիա':'Serbia', 'Սլովակիա':'Slovakia', 'Թաթարստան':'Tatarstan', 'Թուրքիա':'Turkey', 'Ուկրաինա':'Ukraine', 'Հունաստան':'Greece', 'Ղազախստան':'Kazakhstan', 'Սլովենիա':'Slovenia', 'Մալթա':'Malta', 'Լեհատան':'Poland', },
 #ka countries
 'ka':{ 'ალბანეთი':'Albania', 'ავსტრია':'Austria', 'აზერბაიჯანი':'Azerbaijan', 'ბაშკირეთი':'Bashkortostan', 'ბელარუსი':'Belarus', 'ბულგარეთი':'Bulgaria', 'სომხეთი':'Armenia', 'ბოსნია და ჰერცოგოვინა':'Bosnia and Herzegovina', 'ბოსნია და ჰერცეგოვინა':'Bosnia and Herzegovina', 'ესპერანტო':'Esperanto', 'ესტონეთი':'Estonia', 'ერზია':'Erzia', 'საქართველო':'Georgia', 'ჩეხეთი':'Czechia', 'ხორვატია':'Croatia', 'კოსოვო':'Kosovo', 'ყირიმელი თათრები':'Crimean Tatars', 'დონის რეგიონი':'Don', 'ლიტვა':'Lithuania', 'ლატვია':'Latvia', 'უნგრეთი':'Hungary', 'ჩრდილოეთი მაკედონია':'North Macedonia', 'ჩრდილოეთ მაკედონია':'North Macedonia', 'მაკედონია':'North Macedonia', 'მოლდოვა':'Romania and Moldova', 'რუმინეთი და მოლდოვა':'Romania and Moldova', 'პოლონეთი':'Poland', 'რუსეთის ფედერაცია':'Russia', 'რუსეთი':'Russia', 'რუმინეთი':'Romania and Moldova', 'სერბთა რესპუბლიკა':'Republic of Srpska', 'სერბეთი':'Serbia', 'სლოვაკეთი':'Slovakia', 'თურქეთი':'Turkey', 'უკრაინა':'Ukraine', 'საბერძნეთი':'Greece', 'ყაზახეთი':'Kazakhstan', },
 #lv countries
@@ -105,11 +105,11 @@ countryNames = {
 #ru countries
 'ru':{ 'Албания':'Albania', 'Австрия':'Austria', 'Азербайджан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Беларусь':'Belarus', 'Белоруссия':'Belarus', 'Болгария':'Bulgaria', 'Армения':'Armenia', 'Босния и Герцеговина':'Bosnia and Herzegovina', 'Эрзя':'Erzia', 'Эсперантида':'Esperanto', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Грузия':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово':'Kosovo', 'Крымские татары':'Crimean Tatars', 'Литва':'Lithuania', 'Латвия':'Latvia', 'Венгрия':'Hungary', 'Республика Македония':'North Macedonia', 'Македония':'North Macedonia', 'Северная Македония':'North Macedonia', 'Молдавия':'Romania and Moldova', 'Черногория':'Montenegro', 'Польша':'Poland', 'Россия':'Russia', 'Румыния':'Romania and Moldova', 'Сербская Республика':'Republic of Srpska', 'Республика Сербская':'Republic of Srpska', 'Сербия':'Serbia', 'Лужичане':'Sorbia', 'Словакия':'Slovakia', 'Словения':'Slovenia', 'Татарстан':'Tatarstan', 'Турция':'Turkey', 'Украина':'Ukraine', 'Греция':'Greece', 'Казахстан':'Kazakhstan', 'Мальта':'Malta', },
 #sq countries
-'sq':{ 'Shqipëria':'Albania', 'Shqipërisë':'Albania', 'Shqipëria':'Albania', 'Armenia':'Armenia', 'Armenisë':'Armenia', 'Armeni':'Armenia', 'Austria':'Austria', 'Austri':'Austria', 'Azerbajxhani':'Azerbaijan', 'Azerbajxhanit':'Azerbaijan', 'Azerbajxhan':'Azerbaijan', 'Bashkortostani':'Bashkortostan', 'Bjellorusi':'Belarus', 'Bjellorusia':'Belarus', 'Bosnja dhe Hercegovina':'Bosnia and Herzegovina', 'Bullgaria':'Bulgaria', 'Kroaci':'Croatia', 'Kroacia':'Croatia', 'Kroacisë':'Croatia', 'Republika Çeke':'Czechia', 'Esperanto':'Esperanto', 'Gjuha esperanto':'Esperanto', 'Estoni':'Estonia', 'Estonia':'Estonia', 'Gjeorgjia':'Georgia', 'Gjeorgjisë':'Georgia', 'Greqi':'Greece', 'Greqia':'Greece', 'Greqisë':'Greece', 'Hungaria':'Hungary', 'Hungari':'Hungary', 'Kazakistan':'Kazakhstan', 'Kazakistani':'Kazakhstan', 'Kazakistanin':'Kazakhstan', 'Kosovë':'Kosovo', 'Kosova':'Kosovo', 'Kosovës':'Kosovo', 'Letoni':'Latvia', 'Letonia':'Latvia', 'Lituania':'Lithuania', 'Maltë':'Malta', 'Maqedonisë':'North Macedonia', 'Maqedoni e Veriut':'North Macedonia', 'Polonia':'Poland', 'Polonisë':'Poland', 'Poloni':'Poland', 'Moldavia':'Romania and Moldova', 'Moldavinë':'Romania and Moldova', 'Rumania':'Romania and Moldova', 'Moldavi':'Romania and Moldova', 'Rumani':'Romania and Moldova', 'Rusia':'Russia', 'Rusisë':'Russia', 'Rusi':'Russia', 'Serbia':'Serbia', 'Serbi':'Serbia', 'Sllovakia':'Slovakia', 'Sllovaki':'Slovakia', 'Slloveni':'Slovenia', 'Turqia':'Turkey', 'Turqisë':'Turkey', 'Turqi':'Turkey', 'Ukraina':'Ukraine', 'Ukrainë':'Ukraine', 'Erzya':'Erzia', 'Bullgari':'Bulgaria', 'Bosnje dhe Hercegovinë':'Bosnia and Herzegovina',  },
+'sq':{ 'Shqipëria':'Albania', 'Shqipërisë':'Albania', 'Shqipëria':'Albania', 'Armenia':'Armenia', 'Armenisë':'Armenia', 'Armeni':'Armenia', 'Austria':'Austria', 'Austri':'Austria', 'Azerbajxhani':'Azerbaijan', 'Azerbajxhanit':'Azerbaijan', 'Azerbajxhan':'Azerbaijan', 'Bashkortostani':'Bashkortostan', 'Bjellorusi':'Belarus', 'Bjellorusia':'Belarus', 'Bosnja dhe Hercegovina':'Bosnia and Herzegovina', 'Bullgaria':'Bulgaria', 'Kroaci':'Croatia', 'Kroacia':'Croatia', 'Kroacisë':'Croatia', 'Republika Çeke':'Czechia', 'Esperanto':'Esperanto', 'Gjuha esperanto':'Esperanto', 'Estoni':'Estonia', 'Estonia':'Estonia', 'Gjeorgjia':'Georgia', 'Gjeorgjisë':'Georgia', 'Greqi':'Greece', 'Greqia':'Greece', 'Greqisë':'Greece', 'Hungaria':'Hungary', 'Hungari':'Hungary', 'Kazakistan':'Kazakhstan', 'Kazakistani':'Kazakhstan', 'Kazakistanin':'Kazakhstan', 'Kosovë':'Kosovo', 'Kosova':'Kosovo', 'Kosovës':'Kosovo', 'Letoni':'Latvia', 'Letonia':'Latvia', 'Lituania':'Lithuania', 'Maltë':'Malta', 'Maqedonisë':'North Macedonia', 'Maqedoni e Veriut':'North Macedonia', 'Polonia':'Poland', 'Polonisë':'Poland', 'Poloni':'Poland', 'Moldavia':'Romania and Moldova', 'Moldavinë':'Romania and Moldova', 'Rumania':'Romania and Moldova', 'Moldavi':'Romania and Moldova', 'Rumani':'Romania and Moldova', 'Rusia':'Russia', 'Rusisë':'Russia', 'Rusi':'Russia', 'Serbia':'Serbia', 'Serbi':'Serbia', 'Sllovakia':'Slovakia', 'Sllovaki':'Slovakia', 'Slloveni':'Slovenia', 'Turqia':'Turkey', 'Turqisë':'Turkey', 'Turqi':'Turkey', 'Ukraina':'Ukraine', 'Ukrainë':'Ukraine', 'Erzya':'Erzia', 'Bullgari':'Bulgaria', 'Bosnje dhe Hercegovinë':'Bosnia and Herzegovina', 'Bashkortostan':'Bashkortostan', },
 #sr countries
 'sr':{ 'Албанија':'Albania', 'Аустрија':'Austria', 'Атербејџан':'Azerbaijan', 'Азербејџан':'Azerbaijan', 'Башкортостан':'Bashkortostan', 'Белорусија':'Belarus', 'Бугарска':'Bulgaria', 'Јерменија':'Armenia', 'Босна':'Bosnia and Herzegovina', 'Босна и Херцеговина':'Bosnia and Herzegovina', 'Црна Гора':'Montenegro', 'Ерзја':'Erzia', 'Есперанто':'Esperanto', 'Естонија':'Estonia', 'Грузија':'Georgia', 'Чешка':'Czechia', 'Hrvatska':'Croatia', 'Хрватска':'Croatia', 'Република Косово':'Kosovo', 'Кримски Татари':'Crimean Tatars', 'Литванија':'Lithuania', 'Летонија':'Latvia', 'Мађарска':'Hungary', 'Северна Македонија':'North Macedonia', 'Македонија':'North Macedonia', 'Република Македонија':'North Macedonia', 'Молдавија':'Romania and Moldova', 'Пољска':'Poland', 'Руска Империја':'Russia', 'Rusija':'Russia', 'Русија':'Russia', 'Румунија':'Romania and Moldova', 'Република Српска':'Republic of Srpska', 'Србија':'Serbia', 'Словачка':'Slovakia', 'Словенија':'Slovenia', 'Турска':'Turkey', 'Украјина':'Ukraine', 'грчка':'Greece', 'Грчка':'Greece', 'Казахстан':'Kazakhstan', 'Grčka':'Greece', },
 #tt countries
-'tt':{ 'Албания':'Albania', 'Австрия':'Austria', 'Әзербайҗан':'Azerbaijan', 'Азәрбайҗан':'Azerbaijan', 'Башкортстан':'Bashkortostan', 'Белорусия':'Belarus', 'Беларусия':'Belarus', 'Болгария':'Bulgaria', 'Әрмәнстан':'Armenia', 'Босния һәм Герцоговина':'Bosnia and Herzegovina', 'Босния һәм Герцеговина':'Bosnia and Herzegovina', 'Эрзя':'Erzia', 'Эрзә':'Erzia', 'Ирзә':'Erzia', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Гөрҗистан':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово Җөмһүрияте':'Kosovo', 'Кырым татарлары':'Crimean Tatars', 'Литва':'Lithuania', 'Latviä':'Latvia', 'Маҗарстан':'Hungary', 'Македония Җөмһүрияте':'North Macedonia', 'Македония':'North Macedonia', 'Молдавия':'Romania and Moldova', 'Молдова':'Romania and Moldova', 'Польша':'Poland', 'РФ':'Russia', 'Русия':'Russia', 'Румыния':'Romania and Moldova', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Лужица':'Sorbia', 'Төркия':'Turkey', 'Украина':'Ukraine', 'Греция':'Greece', 'Казакъстан':'Kazakhstan', },
+'tt':{ 'Албания':'Albania', 'Австрия':'Austria', 'Әзербайҗан':'Azerbaijan', 'Азәрбайҗан':'Azerbaijan', 'Башкортстан':'Bashkortostan', 'Белорусия':'Belarus', 'Беларусия':'Belarus', 'Болгария':'Bulgaria', 'Әрмәнстан':'Armenia', 'Босния һәм Герцоговина':'Bosnia and Herzegovina', 'Босния һәм Герцеговина':'Bosnia and Herzegovina', 'Эрзя':'Erzia', 'Эрзә':'Erzia', 'Ирзә':'Erzia', 'Эсперанто':'Esperanto', 'Эстония':'Estonia', 'Гөрҗистан':'Georgia', 'Чехия':'Czechia', 'Хорватия':'Croatia', 'Косово Җөмһүрияте':'Kosovo', 'Кырым татарлары':'Crimean Tatars', 'Литва':'Lithuania', 'Latviä':'Latvia', 'Маҗарстан':'Hungary', 'Македония Җөмһүрияте':'North Macedonia', 'Македония':'North Macedonia', 'Молдавия':'Romania and Moldova', 'Молдова':'Romania and Moldova', 'Польша':'Poland', 'РФ':'Russia', 'Русия':'Russia', 'Румыния':'Romania and Moldova', 'Сербия':'Serbia', 'Словакия':'Slovakia', 'Лужица':'Sorbia', 'Төркия':'Turkey', 'Украина':'Ukraine', 'Греция':'Greece', 'Казакъстан':'Kazakhstan', 'Латвия':'Austria', },
 #tr countries
 'tr':{ 'Arnavutluk':'Albania', 'Avusturya':'Austria', 'Azerbaycan':'Azerbaijan', 'Başkurdistan':'Bashkortostan', 'Beyaz Rusya':'Belarus', 'Bulgaristan':'Bulgaria', 'Ermenistan':'Armenia', 'Bosna Hersek':'Bosnia and Herzegovina', 'Bosna-Hersek':'Bosnia and Herzegovina', 'Erzyanca':'Erzia', 'Erzya':'Erzia', 'Esperanto':'Esperanto', 'Estonya':'Estonia', 'Gürcistan':'Georgia', 'Çek Cumhuriyeti':'Czechia', 'Hırvatistan':'Croatia', 'Don Bölgesi':'Don', 'Kosova':'Kosovo', 'Kırım':'Crimean Tatars', 'Kırım Tatar':'Crimean Tatars', 'Kırım Tatarları':'Crimean Tatars', 'Litvanya':'Lithuania', 'Letonya':'Latvia', 'Macaristan':'Hungary', 'Malta':'Malta', 'Kuzey Makedonya':'North Macedonia', 'Makedonya Cumhuriyeti':'North Macedonia', 'Makedonya':'North Macedonia', 'Karadağ':'Montenegro', 'Moldova':'Romania and Moldova', 'Polonya':'Poland', 'Rusya':'Russia', 'СРСР':'Russia', 'Romanya':'Romania and Moldova', 'Sırp Cumhuriyeti':'Republic of Srpska', 'Sırbistan':'Serbia', 'Sorblar':'Sorbia', 'Slovakya':'Slovakia', 'Slovenya':'Slovenia', 'Türkiye':'Turkey', 'Ukrayna':'Ukraine', 'Yunanistan':'Greece', 'Kazakistan':'Kazakhstan', 'Tataristan':'Tatarstan', 'Sırbistan Cumhuriyeti':'Republic of Srpska',  },
 #uk countries
@@ -585,7 +585,7 @@ class BasicBot(
 
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('eo'):
+                    if lang not in ('tt'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
@@ -774,7 +774,7 @@ class BasicBot(
             title, params = t
             #print(title)
             #print(params)
-            tt = re.sub(ur'\[\[.*?:(.*?)\]\]', r'\1', title.title())
+            tt = re.sub(r'\[\[.*?:(.*?)\]\]', r'\1', title.title())
             if self.getOption('test2'):
                 pywikibot.output(u'tml:%s * %s * %s' % (title,tt,template) )
             if tt in template:
@@ -789,7 +789,7 @@ class BasicBot(
                     if lang == 'myv' and name == self.countryp['myv']:
                         value = re.sub(r"\'*\{\{Масторкоцт *\| *([^\}]*)[^\n]*",  r'\1', value)
                     else:
-                        value = re.sub(ur"\'*\[*([^\]\|\']*).*", r'\1', value)
+                        value = re.sub(r"\'*\[*([^\]\|\']*).*", r'\1', value)
                     if not named:
                         name = str(paramcount)
                     param[name] = value
@@ -837,7 +837,7 @@ class BasicBot(
         return parlist
 
     def lang(self,template):
-        return(re.sub(ur'\[\[(.*?):.*?\]\]',ur'\1',template))
+        return(re.sub(r'\[\[(.*?):.*?\]\]',r'\1',template))
 
     def genInterwiki(self,page):
         # yield interwiki sites generator
@@ -865,7 +865,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         finalpage = header
 
@@ -900,7 +900,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         finalpage = header
 
@@ -1016,7 +1016,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         finalpage = header
 
@@ -1091,7 +1091,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         finalpage = header
         itemcount = 0
@@ -1135,7 +1135,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         finalpage = header
         itemcount = 0
@@ -1184,7 +1184,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         csvpage = '<pre>'
         finalpage = header
@@ -1241,7 +1241,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         pagecounter = {}
         for p in res.keys():
@@ -1302,7 +1302,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         finalpage = header
         itemcount = 0
@@ -1364,7 +1364,7 @@ class BasicBot(
         Starting with header, ending with footer
         Output page is pagename
         """
-        locpagename = re.sub(ur'.*:','',pagename)
+        locpagename = re.sub(r'.*:','',pagename)
 
         finalpage = header
         
@@ -1475,7 +1475,7 @@ class BasicBot(
         @rtype: tuple
         """
         # TODO
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        paramR = re.compile(r'(?P<name>.*)=(?P<value>.*)')
         if '=' in param:
             match = paramR.search(param)
             named = True
