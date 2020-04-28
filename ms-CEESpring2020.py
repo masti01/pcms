@@ -968,6 +968,10 @@ class BasicBot(
                             if self.getOption('test5'):
                                 pywikibot.output(u'languageCountry[wiki]:%s = %s' % (languageCountry[wiki], c))
                             newline += '|| style="background-color:LightSlateGray" | — '
+                        else:
+                            if self.getOption('test5'):
+                                pywikibot.output(u'Empty cell')
+                            newline += ' || '
                     else:
                         if self.getOption('test5'):
                             pywikibot.output(u'Empty cell')
