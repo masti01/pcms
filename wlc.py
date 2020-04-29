@@ -2370,7 +2370,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                     pywikibot.warning('*** NO DATA received')
                     raise
                 finally:
-                    pywikibot.output(u'Saving history...')
+                    pywikibot.output(u'Saving history on thread error...')
                     bot.history.save()
 
 
