@@ -622,10 +622,10 @@ class BasicBot(
 
     def printArtInfo(self,artInfo):
         #test print of article list result
-        if self.getOption('testartinfo'):
-            pywikibot.output(u'***************************************')
-            pywikibot.output(u'**            artInfo                **')
-            pywikibot.output(u'***************************************')
+        #if self.getOption('testartinfo'):
+        #    pywikibot.output(u'***************************************')
+        #    pywikibot.output(u'**            artInfo                **')
+        #    pywikibot.output(u'***************************************')
         for l in artInfo.keys():
             for a in artInfo[l]:
                 if self.getOption('testartinfo'):
