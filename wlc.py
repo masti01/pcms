@@ -2369,9 +2369,9 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                 except request.data:
                     pywikibot.warning('*** NO DATA received')
                     raise
-                finally:
-                    pywikibot.output(u'Saving history on thread error...')
-                    bot.history.save()
+                #finally:
+                #    pywikibot.output(u'Saving history on thread error...')
+                #    bot.history.save()
 
 
 def RepeatPageGenerator():
