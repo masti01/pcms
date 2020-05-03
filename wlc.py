@@ -2359,7 +2359,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                 thread.setDaemon(True)
                 try:
                     thread.start()
-                except threading.ThreadError:
+                except (threading.ThreadError,thread.error):
                     pywikibot.warning(
                         "Can't start a new thread.\nPlease decrease "
                         "max_external_links in your user-config.py or use\n"
@@ -2369,9 +2369,9 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                 except request.data:
                     pywikibot.warning('*** NO DATA received')
                     raise
-                #finally:
-                #    pywikibot.output(u'Saving history on thread error...')
-                #    bot.history.save()
+                finally:
+                    pywikibot.output(u'Saving history on thread error...')
+                    self.history.save()
 
 
 def RepeatPageGenerator():
