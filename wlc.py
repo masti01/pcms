@@ -2339,6 +2339,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
         except:
             pass
 
+        self.killing = False
         for url in weblinksIn(text):
             ignoreUrl = False
             for ignoreR in ignorelist:
@@ -2371,7 +2372,9 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                     raise
                 finally:
                     pywikibot.output(u'Saving history on thread error...')
-                    self.history.save()
+                    if self.killing:
+                        self.history.save()
+                    self.killing = True
 
 
 def RepeatPageGenerator():
