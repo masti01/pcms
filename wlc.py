@@ -2377,6 +2377,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                     if not self.killing:
                         self.history.save()
                     self.killing = True
+                    return
 
 
 def RepeatPageGenerator():
