@@ -2341,7 +2341,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
         except:
             pass
 
-        self.killing = False
+        #self.killing = False
         for url in weblinksIn(text):
             ignoreUrl = False
             for ignoreR in ignorelist:
