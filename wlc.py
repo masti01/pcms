@@ -2374,7 +2374,7 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                     raise
                 finally:
                     pywikibot.output(u'Saving history on thread error...')
-                    if self.killing:
+                    if not self.killing:
                         self.history.save()
                     self.killing = True
 
