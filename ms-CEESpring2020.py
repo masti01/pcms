@@ -263,8 +263,9 @@ class BasicBot(
                 if self.getOption('test'):
                     pywikibot.output(aInfo)
             count += 1
-            if self.getOption('progress') and not count % 100:
-                pywikibot.output('[%i] Lang:%s Article:%s' % (count,aInfo['lang'],aInfo['title']))
+            if self.getOption('progress') and not count % 50:
+                pywikibot.output('[%s][%i] Lang:%s Article:%s' % \
+                    (datetime.now().strftime("%Y-%m-%d %H:%M:%S"),count,aInfo['lang'],aInfo['title']))
             #populate article list per language
             if aInfo['lang'] not in self.springList.keys():
                 self.springList[aInfo['lang']] = []
