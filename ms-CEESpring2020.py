@@ -126,6 +126,9 @@ countryNames = {
 'sl':{ 'Albanija':'Albania', 'Armenija':'Armenia', 'Avstrija':'Austria', 'Azerbajdžan':'Azerbaijan', 'Baškortostan':'Bashkortostan', 'Belorusija':'Belarus', 'Bolgarija':'Bulgaria', 'Bosna in Hercegovina':'Bosnia and Herzegovina', 'Češka':'Czechia', 'Črna gora':'Montenegro', 'Donska republika':'Don', 'Erzja':'Erzia', 'Esperanto':'Esperanto', 'Estonija':'Estonia', 'Grčija':'Greece', 'Gruzija':'Georgia', 'Hrvaška':'Croatia', 'Kazahstan':'Kazakhstan', 'Kosovo':'Kosovo', 'Krimski Tatar':'Crimean Tatars', 'Latvija':'Latvia', 'Litva':'Lithuania', 'Lužiška Srbija':'Sorbia', 'Madžarska':'Hungary', 'Malta':'Malta', 'Poljska':'Poland', 'Romunija':'Romania and Moldova', 'Rusija':'Russia', 'Severna Makedonija':'North Macedonia', 'Slovaška':'Slovakia', 'Srbija':'Serbia', 'Tatarstan':'Tatarstan', 'Turčija':'Turkey', 'Ukrajina':'Ukraine', 'Donska regija':'Don', 'Romunija in Moldavija':'Romania and Moldova', 'Republika srbska':'Republic of Srpska', 'Moldavija':'Romania and Moldova',  },
 #mt countries
 'mt':{ 'Awstrija':'Austria', 'Slovakja':'Slovakia', 'Ċekja':'Czechia', 'Bożnija u Ħerżegovina':'Bosnia and Herzegovina', 'Greċja':'Greece', 'Polonja':'Poland', 'Albania':'Albania', 'Tararstan':'Tatarstan', 'Armenia':'Armenia', 'Azerbajġan':'Azerbaijan', 'Baxkortostan':'Bashkortostan', 'Malta':'Malta', 'Belarus':'Belarus', 'Bożnija-Ħerzegovina':'Bosnia and Herzegovina', 'Sorbi':'Sorbia','Bulgarija':'Bulgaria', 'Tatar tal-Krimea':'Crimean Tatars', 'Maċedonja ta':'North Macedonia', 'Kosovo':'Kosovo', 'Albanija':'Albania', 'Turkija':'Turkey', 'Serbja':'Serbia', 'Montenegro':'Montenegro', 'BUlgarija':'Bulgaria', 'Ungerija':'Hungary', 'Estonja':'Estonia', 'Latvja':'Latvia', 'Litwanja':'Lithuania', 'Rumanija':'Romania and Moldova', 'Slovakkja':'Slovakia', 'Slovenja':'Slovenia', 'Kroazja':'Croatia', 'Don region':'Don','Erzya':'Erzia', 'Esperanto':'Esperanto', 'Estonja':'Estonia', 'Turkija':'Turkey', 'Ġeorġja':'Georgia', 'Każakistan':'Kazakhstan', 'Macedonja tat-Tramuntana':'North Macedonia', 'Ir-Repubblika ta’ Srpska':'Republic of Srpska', 'Rumanija u Moldova':'Romania and Moldova', 'Sorb':'Sorbia', 'Tatarstan':'Tatarstan', 'Ukrajna':'Ukraine', 'Federazzjoni Russa':'Russia', 'Armenja':'Armenia', 'Ażerbajġan':'Azerbaijan', 'Reġjun Don':'Don', 'Erżja':'Erzia', 'Repubblika Srpska':'Republic of Srpska',  },
+#sk countries
+'sk':{ 'Slovinsko':'Slovenia', 'Maďarsko':'Hungary', 'Rakúsko':'Austria', 'Rumunsko':'Romania and Moldova', 'Bosna a Hercegovina':'Bosnia and Herzegovina', 'Gruzínsko':'Georgia', 'Chorvátsko':'Croatia', 'Kazachstan':'Kazakhstan', 'Česko':'Czechia', 'Estónsko':'Estonia', 'Grécko':'Greece', 'Severné Macedónsko':'North Macedonia', 'Lotyšsko':'Latvia', 'Rusko':'Russia', 'Uhorsko':'Hungary', 'Moldavsko':'Romania and Moldova', 'Malta':'Malta', 'Esperanto':'Esperanto', 'Srbsko':'Serbia', 'Litva':'Lithuania', 'Ukrajina':'Ukraine', 'Bulharsko':'Bulgaria', 'Albánsko':'Albania', 'Poľsko':'Poland', 'Lužickí Srbi':'Sorbia', 'Kosovo':'Kosovo', 'Azerbajdžan':'Azerbaijan', 'Turecko':'Turkey', 'Baškirsko':'Bashkortostan',  },
+
 }
 
 
@@ -168,16 +171,16 @@ class BasicBot(
              'mk':0, 'mt':0, 'ro':0, 'ru':0, 'sk':0, 'sl':0, 'sq':0, 'sr':0, 'tt':0, 'tr':0, 'uk':0, 'hu':0}
     countryp = { 'pl':'kraj', 'az':'ölkə', 'ba':'ил', 'be':'краіна', 'be-tarask':'краіна', 'bg':'държава', 'de':'land', 'crh':'memleket', 'eo':'lando', 'el':'country', 'et':'maa', \
                  'myv':'мастор', 'hu':'ország', 'ka':'ქვეყანა', 'lv':'valsts', 'lt':'šalis', 'mk':'земја', 'mt':'pajjiż', 'myv':'мастор', 'ro':'țară', 'ru':'страна',\
-                 'sl':'država', 'sq':'country', 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր', 'kk':'ел',  }
+                 'sl':'država', 'sk':'Krajina', 'sq':'country', 'sr':'држава', 'tt':'ил', 'tr':'ülke', 'uk':'країна', 'hr':'zemlja', 'hy':'երկիր', 'kk':'ел',  }
     topicp = {'pl':'parametr', 'az':'qadınlar', 'ba':'тема', 'be':'тэма', 'be-tarask':'тэма', 'bg':'тема', 'de':'thema', 'crh':'mevzu', 'el':'topic', 'et':'teema', \
-             'eo':'temo', 'hu':'téma', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sl':'tema', 'sq':'topic', 'sr':'тема', \
+             'eo':'temo', 'hu':'téma', 'ka':'თემა', 'lv':'tēma', 'lt':'tema', 'mk':'тема', 'myv':'тема', 'ro':'secțiune', 'ru':'тема', 'sl':'tema', 'sk':'Parameter', 'sq':'topic', 'sr':'тема', \
              'tt':'тема', 'tr':'konu', 'uk':'тема', 'hr':'tema', 'hy':'Թուրքիա|թեմա', 'kk':'тақырып', }
     womenp = {'pl':'kobiety', 'az':'qadınlar', 'ba':'Ҡатын-ҡыҙҙар', 'be':'Жанчыны', 'be-tarask':'жанчыны', 'bg':'жени', 'de':'Frauen','el':'γυναίκες', 'et':'naised', \
-              'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sl':'Ženske', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
+              'ka':'ქალები', 'lv':'Sievietes','mk':'Жени', 'ro':'Femei', 'ru':'женщины', 'sl':'Ženske', 'sk':'Žena', 'sq':'Gratë', 'sr':'Жене', 'tt':'Хатын-кызлар', 'tr':'Kadın',\
                'uk':'жінки', 'hu':'nők', 'hr':'Žene', 'hy':'Կանայք'}
     userp = {'pl':'autor', 'az':'istifadəçi', 'ba':'ҡатнашыусы', 'be':'удзельнік', 'be-tarask':'удзельнік', 'bg':'потребител',\
              'de':'benutzer','crh':'qullanıcı','el':'user', 'et':'kasutaja', 'hu':'szerkesztő', 'myv':'сёрмадыця', 'eo':'uzanto', 'ka':'მომხმარებელი', 'lv':'dalībnieks', 'lt':'naudotojas',\
-             'mk':'корисник', 'mt':'utent', 'myv':'сёрмадыця', 'ro':'utilizator', 'ru':'участник', 'sl':'uporabnik', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', \
+             'mk':'корисник', 'mt':'utent', 'myv':'сёрмадыця', 'ro':'utilizator', 'ru':'участник', 'sl':'uporabnik', 'sk':'Redaktor', 'sq':'user', 'sr':'корисник', 'tt':'кулланучы', 'tr':'kullanıcı', \
               'uk':'користувач', 'hr':'suradnik', 'hy':'մասնակից', 'kk':'қатысушы',  }
 
     def __init__(self, generator, **kwargs):
@@ -588,7 +591,7 @@ class BasicBot(
 
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('kk'):
+                    if lang not in ('sk'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
@@ -1152,6 +1155,7 @@ class BasicBot(
         finalpage += u'\n!Articles'
 
         #ath = sorted(self.authors, reverse=True)
+        #ath = sorted(res['articles'], key=lambda x: (res['articles'][x]), reverse=True)
         ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
             if a == 'dummy':
