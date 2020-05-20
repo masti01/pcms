@@ -127,7 +127,7 @@ countryNames = {
 #mt countries
 'mt':{ 'Awstrija':'Austria', 'Slovakja':'Slovakia', 'Ċekja':'Czechia', 'Bożnija u Ħerżegovina':'Bosnia and Herzegovina', 'Greċja':'Greece', 'Polonja':'Poland', 'Albania':'Albania', 'Tararstan':'Tatarstan', 'Armenia':'Armenia', 'Azerbajġan':'Azerbaijan', 'Baxkortostan':'Bashkortostan', 'Malta':'Malta', 'Belarus':'Belarus', 'Bożnija-Ħerzegovina':'Bosnia and Herzegovina', 'Sorbi':'Sorbia','Bulgarija':'Bulgaria', 'Tatar tal-Krimea':'Crimean Tatars', 'Maċedonja ta':'North Macedonia', 'Kosovo':'Kosovo', 'Albanija':'Albania', 'Turkija':'Turkey', 'Serbja':'Serbia', 'Montenegro':'Montenegro', 'BUlgarija':'Bulgaria', 'Ungerija':'Hungary', 'Estonja':'Estonia', 'Latvja':'Latvia', 'Litwanja':'Lithuania', 'Rumanija':'Romania and Moldova', 'Slovakkja':'Slovakia', 'Slovenja':'Slovenia', 'Kroazja':'Croatia', 'Don region':'Don','Erzya':'Erzia', 'Esperanto':'Esperanto', 'Estonja':'Estonia', 'Turkija':'Turkey', 'Ġeorġja':'Georgia', 'Każakistan':'Kazakhstan', 'Macedonja tat-Tramuntana':'North Macedonia', 'Ir-Repubblika ta’ Srpska':'Republic of Srpska', 'Rumanija u Moldova':'Romania and Moldova', 'Sorb':'Sorbia', 'Tatarstan':'Tatarstan', 'Ukrajna':'Ukraine', 'Federazzjoni Russa':'Russia', 'Armenja':'Armenia', 'Ażerbajġan':'Azerbaijan', 'Reġjun Don':'Don', 'Erżja':'Erzia', 'Repubblika Srpska':'Republic of Srpska',  },
 #sk countries
-'sk':{ 'Slovinsko':'Slovenia', 'Maďarsko':'Hungary', 'Rakúsko':'Austria', 'Rumunsko':'Romania and Moldova', 'Bosna a Hercegovina':'Bosnia and Herzegovina', 'Gruzínsko':'Georgia', 'Chorvátsko':'Croatia', 'Kazachstan':'Kazakhstan', 'Česko':'Czechia', 'Estónsko':'Estonia', 'Grécko':'Greece', 'Severné Macedónsko':'North Macedonia', 'Lotyšsko':'Latvia', 'Rusko':'Russia', 'Uhorsko':'Hungary', 'Moldavsko':'Romania and Moldova', 'Malta':'Malta', 'Esperanto':'Esperanto', 'Srbsko':'Serbia', 'Litva':'Lithuania', 'Ukrajina':'Ukraine', 'Bulharsko':'Bulgaria', 'Albánsko':'Albania', 'Poľsko':'Poland', 'Lužickí Srbi':'Sorbia', 'Kosovo':'Kosovo', 'Azerbajdžan':'Azerbaijan', 'Turecko':'Turkey', 'Baškirsko':'Bashkortostan',  },
+'sk':{ 'Slovinsko':'Slovenia', 'Maďarsko':'Hungary', 'Rakúsko':'Austria', 'Rumunsko':'Romania and Moldova', 'Bosna a Hercegovina':'Bosnia and Herzegovina', 'Gruzínsko':'Georgia', 'Chorvátsko':'Croatia', 'Kazachstan':'Kazakhstan', 'Česko':'Czechia', 'Estónsko':'Estonia', 'Grécko':'Greece', 'Severné Macedónsko':'North Macedonia', 'Lotyšsko':'Latvia', 'Rusko':'Russia', 'Uhorsko':'Hungary', 'Moldavsko':'Romania and Moldova', 'Malta':'Malta', 'Esperanto':'Esperanto', 'Srbsko':'Serbia', 'Litva':'Lithuania', 'Ukrajina':'Ukraine', 'Bulharsko':'Bulgaria', 'Albánsko':'Albania', 'Poľsko':'Poland', 'Lužickí Srbi':'Sorbia', 'Kosovo':'Kosovo', 'Azerbajdžan':'Azerbaijan', 'Turecko':'Turkey', 'Baškirsko':'Bashkortostan', 'Arménsko':'Armenia', 'Bielorusko':'Belarus',  },
 
 }
 
@@ -1143,6 +1143,9 @@ class BasicBot(
         """
         locpagename = re.sub(r'.*:','',pagename)
 
+        if self.getOption('testwomenauthors'):
+            pywikibot.output(res)
+
         finalpage = header
         itemcount = 0
         artcount = 0
@@ -1155,8 +1158,8 @@ class BasicBot(
         finalpage += u'\n!Articles'
 
         #ath = sorted(self.authors, reverse=True)
-        #ath = sorted(res['articles'], key=lambda x: (res['articles'][x]), reverse=True)
-        ath = sorted(res, key=res.__getitem__, reverse=True)
+        ath = sorted(res, key=lambda x: (res[x]['count']), reverse=True)
+        #ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
             if a == 'dummy':
                 author = "'''unkown'''"
@@ -1201,8 +1204,8 @@ class BasicBot(
         #ath = sorted(self.authors, reverse=True)
         if self.getOption('testlength'):
             pywikibot.output(u'LengthPage:%s' % res)
-        ath = sorted(res, key=res.__getitem__, reverse=True)
-
+        #ath = sorted(res, key=res.__getitem__, reverse=True)
+        ath = sorted(res, key=lambda x: (res[x]['char']), reverse=True)
  
         finalpage += u'\n{| class="wikitable sortable"'
         finalpage += u'\n!#'
