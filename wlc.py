@@ -1476,7 +1476,46 @@ ignorelist = [
     re.compile('.*[\./@]media\.metro\.net/riding_metro/bus_overview/images/803\.pdf'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]majdankrolewski\.pl/asp/pl_start\.asp\?typ=14&menu=6&strona=1'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]bip\.sobkow\.pl/\?bip=1&cid=51&bsc=N'),  # bot rejected on site (masti, szoltys)
-
+    re.compile('.*[\./@]astronomynow\.com/news'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]atlaspsow\.online'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]climatebase\.ru/station'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]emporis\.com/buildings'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]emporis\.com/city'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]emporis\.com/statistics/tallest-buildings/country/100156/spain'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]emporis\.com/complex/100329/world-trade-center-new-york-city-ny-usa'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]comune\.sora\.fr\.it'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]lobzenica\.pl/asp/pl_start\.asp\?typ=14&menu=10&strona=1&sub=139&subsub=141&subsubsub=142'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]bielskpodlaski\.pl/asp/pl_start\.asp\?typ=14&sub=3&menu=15&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]jedlnia\.biuletyn\.net/\?bip=1&cid=1155'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gminaczarna\.pl/asp/pliki/download/statystyka_ludnosci_31-12-2017\.pdf'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]parafiapcim\.pl'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]grodziczno\.pl/asp/pl_start\.asp\?typ=14&sub=12&menu=26&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]academic\.oup\.com/jid/article/186/Supplement_1/S91/838964'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]teamusa\.org/USA-Wrestling/Features/2019/April/18/Coon-Nowry-Perkins-win-gold-at-Pan-Am-Championships-in-Buenos-Aires'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]pzd-srem\.pl/asp/pl_start\.asp\?typ=14&menu=1&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gminalancut\.pl/asp/pl_start\.asp\?typ=14&menu=475&strona=1&sub=425'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gminalancut\.pl/asp/pl_start\.asp\?typ=14&menu=28&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gminalancut\.pl/asp/pl_start\.asp\?typ=14&menu=93&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gminalancut\.pl/asp/pl_start\.asp\?typ=14&menu=87&strona=1&prywatnosc=tak'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]chybie\.pl/asp/pl_start\.asp\?typ=14&sub=2&menu=4&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]rcin\.org\.pl/dlibra/publication/edition/2236\?id=2236&from=publication'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]db\.ipc-services\.org/sdms/hira/web/competition/code/PG1994'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]radzymin\.pl/asp/pliki/0000_Aktualnosci_2016/program_rewitalizacji_gminy_radzymin_24-04-2017\.pdf'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]grodziczno\.pl/asp/pl_start\.asp\?typ=14&sub=12&menu=26&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]rymanow\.pl/asp/pl_start\.asp\?typ=14&menu=29&strona=1&sub=9'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]granowo\.pl/asp/pl_start\.asp\?typ=14&sub=14&menu=114&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]widawa\.pl/asp/pl_start\.asp\?typ=13&menu=1&artykul=231&akcja=artykul'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]bielskpodlaski\.pl/asp/pl_start\.asp\?typ=14&sub=3&menu=15&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]samborzec\.pl/asp/pl_start\.asp\?typ=14&sub=31&subsub=121&menu=162&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]samborzec\.pl/asp/pliki/pobierz/LPR_Samborzec_281008\.pdf'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]samborzec\.pl/asp/_pdf\.asp\?typ=14&sub=2&subsub=72&menu=87&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]samborzec\.pl/asp/pl_start\.asp\?typ=14&sub=2&subsub=72&menu=80&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]sosnowka\.pl/asp/pl_start\.asp\?typ=14&menu=11&strona=1&sub=10'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]zalesie\.pl/asp/pl_start\.asp\?typ=14&menu=31&strona=1'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2012/wp001\.html'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]gsemilia\.it/index\.php'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]murki\.pl/ppm\.skaly\.Mirachowo\.acs'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]mirassolandia\.sp\.gov\.br'),  # bot rejected on site (masti, szoltys)
 ]
 
 
@@ -2371,12 +2410,14 @@ class WeblinkCheckerRobot(SingleSiteBot, ExistingPageBot):
                     raise
                 except request.data:
                     pywikibot.warning('*** NO DATA received')
+                    pywikibot.output('*** NO DATA received')
                     raise
                 finally:
-                    pywikibot.output(u'Saving history on thread error...')
+                    pywikibot.output(u'Finally: Saving history on thread error...')
                     if not self.killing:
-                        self.history.save()
-                    self.killing = True
+                        pywikibot.output(u'Saving history on thread error...')
+                        #self.history.save()
+                        self.killing = True
                     return
 
 
