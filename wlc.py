@@ -2220,7 +2220,7 @@ class History(object):
     def save(self):
         """Save the .dat file to disk."""
         #test output
-        pywikibot.output('PICKLING at %s' % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        pywikibot.output('PICKLING %s records at %s' % (len(self.historyDict),datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         with open(self.datfilename, 'wb') as f:
             pickle.dump(self.historyDict, f, protocol=config.pickle_protocol)
 
