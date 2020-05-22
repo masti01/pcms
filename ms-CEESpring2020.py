@@ -214,6 +214,7 @@ class BasicBot(
             'testnewbie': False, # make verbose output for newbies
             'testlength': False, # make verbose output for article length
             'testpickle': False, # make verbose output for article list load/save
+            'testusername': False, # make verbose output for username found in template
             'testauthorwiki': False, # make verbose output for author/wiki 
             'testinterwiki': False, # make verbose output for interwiki 
             'short': False, # make short run
@@ -591,7 +592,7 @@ class BasicBot(
 
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('sk'):
+                    if lang not in ('hy'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
@@ -693,7 +694,7 @@ class BasicBot(
             #if not artParams['newarticle'] : 
             #if artParams['newarticle'] : 
             #    artParams['template']['user'] = creator
-            if not artParams['template']['user'] == 'dummy' : 
+            if not artParams['template']['user'] == 'UNKNOWN USER' : 
                 artParams['creator'] = artParams['template']['user']
 
             #print artParams
@@ -770,11 +771,22 @@ class BasicBot(
         SpringEnd = datetime.strptime("2020-06-01T00:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         return ( datetime.strptime(creationDate, "%Y-%m-%dT%H:%M:%SZ") > SpringStart )
 
+    def userName(self,text):
+        #extract username from template param value
+        uNameR = re.compile(r'(.*?\[\[).*?:(?P<username>[^\|\]]*?)[\|\]]')
+        if '[' in text:
+            uName = uNameR.match(text)
+            if uName:
+                return(uName.group('username'))
+            else:
+                return('')
+        else:
+            return(text)
 
     def getTemplateInfo(self,page,template,lang):
         param = {}
         #author, creationDate = self.getUpdater(page)
-        parlist = {'country':[],'user':'dummy','woman':False, 'nocountry':False}
+        parlist = {'country':[],'user':'UNKNOWN USER','woman':False, 'nocountry':False}
         #return dictionary with template params
         for t in page.templatesWithParams():
             title, params = t
@@ -788,7 +800,7 @@ class BasicBot(
                 countryDef = False # check if country defintion exists
                 parlist['woman'] = False
                 parlist['country'] = []
-                parlist['user'] = 'dummy'
+                parlist['user'] = 'UNKNOWN USER'
                 for p in params:
                     named, name, value = self.templateArg(p)
                     # strip square brackets from value
@@ -808,7 +820,9 @@ class BasicBot(
                             pywikibot.output(u'user:%s:%s' % (name,value))
                         #if lang in self.userp.keys() and value.lower().startswith(self.userp[lang].lower()):
                         #    parlist['user'] = value
-                        parlist['user'] = value
+                        parlist['user'] = self.userName(value)
+                        if self.getOption('testusername'):
+                            pywikibot.output('username:%s' % parlist['user'])
                     #check article about women
                     if lang in self.topicp.keys() and name.lower().startswith(self.topicp[lang].lower()):
                         if self.getOption('test2'):
@@ -1161,7 +1175,7 @@ class BasicBot(
         ath = sorted(res, key=lambda x: (res[x]['count']), reverse=True)
         #ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
-            if a == 'dummy':
+            if a == 'UNKNOWN USER' or a == '':
                 author = "'''unkown'''"
             else:
                 author =  a
