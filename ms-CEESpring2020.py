@@ -1175,8 +1175,8 @@ class BasicBot(
         ath = sorted(res, key=lambda x: (res[x]['count']), reverse=True)
         #ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
-            if a == 'UNKNOWN USER' or a == '':
-                author = "'''unkown'''"
+            if 'UNKNOWN USER' in a or a == '':
+                author = "'''unknown'''"
             else:
                 author =  a
             itemcount += 1
@@ -1346,7 +1346,7 @@ class BasicBot(
         ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
             itemcount += 1
-            if 'UNKNOWN USER' in a:
+            if 'UNKNOWN USER' in a or a = '':
                 finalpage += u'\n|-\n| %i. || %s || %i || ' % (itemcount,a,res[a])
             else:
                 finalpage += u'\n|-\n| %i. || [[user:%s|%s]] || %i || ' % (itemcount,a,a,res[a])
