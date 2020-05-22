@@ -1516,6 +1516,21 @@ ignorelist = [
     re.compile('.*[\./@]gsemilia\.it/index\.php'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]murki\.pl/ppm\.skaly\.Mirachowo\.acs'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]mirassolandia\.sp\.gov\.br'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]rejestry-notarialne\.pl/37'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]kinakh\.com\.ua/bio'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]relacjebiograficzne\.pl'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2019/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2019/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2012/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2012/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vp2014/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vp2014/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2014/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2014/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]bip\.jaworzno\.pl/Article/id,18060\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cbc\.ca/world/story/2006/06/07/france-pay\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]europe-politique\.eu/union-pour-l-europe\.htm'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]europe-politique\.eu'),  # bot rejected on site (masti, Elfhelm)
 ]
 
 
