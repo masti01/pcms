@@ -1346,7 +1346,7 @@ class BasicBot(
         ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
             itemcount += 1
-            if 'UNKNOWN USER' in a or a = '':
+            if 'UNKNOWN USER' in a or a == '':
                 finalpage += u'\n|-\n| %i. || %s || %i || ' % (itemcount,a,res[a])
             else:
                 finalpage += u'\n|-\n| %i. || [[user:%s|%s]] || %i || ' % (itemcount,a,a,res[a])
