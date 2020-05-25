@@ -217,6 +217,7 @@ class BasicBot(
             'testusername': False, # make verbose output for username found in template
             'testauthorwiki': False, # make verbose output for author/wiki 
             'testinterwiki': False, # make verbose output for interwiki 
+            'testtemplatearg': False, # make verbose output for interwiki 
             'short': False, # make short run
             'append': False, 
             'reset': False, # rebuild database from scratch
@@ -773,7 +774,9 @@ class BasicBot(
 
     def userName(self,text):
         #extract username from template param value
-        uNameR = re.compile(r'(.*?\[\[).*?:(?P<username>[^\|\]]*?)[\|\]]')
+        uNameR = re.compile(r'.*?:(?P<username>.*)')
+        if self.getOption('testusername'):
+            pywikibot.output('userName:%s' % text)
         if '[' in text:
             uName = uNameR.match(text)
             if uName:
@@ -822,7 +825,8 @@ class BasicBot(
                         #    parlist['user'] = value
                         parlist['user'] = self.userName(value)
                         if self.getOption('testusername'):
-                            pywikibot.output('username:%s' % parlist['user'])
+                            pywikibot.output('[[%s]] par value:%s' % (page.title(),value))
+                            pywikibot.output('[[%s]] username:%s' % (page.title(),parlist['user']))
                     #check article about women
                     if lang in self.topicp.keys() and name.lower().startswith(self.topicp[lang].lower()):
                         if self.getOption('test2'):
@@ -1511,9 +1515,9 @@ class BasicBot(
            name = None
            value = param
         #test
-        if self.getOption('test'):
+        if self.getOption('testtemplatearg'):
             pywikibot.output(u'name:%s:value:%s' % (name, value))
-        return named, name, value
+        return (named, name, value)
 
 def main(*args):
     """
