@@ -276,7 +276,8 @@ class BasicBot(
                 if aInfo['lang'] not in self.springList.keys():
                     self.springList[aInfo['lang']] = []
                 self.springList[aInfo['lang']].append(aInfo)
-               #populate authors list
+                #populate authors list
+                """
                 if aInfo['newarticle']:
                     user = aInfo['creator']
                     if self.getOption('testnewbie'):
@@ -293,6 +294,14 @@ class BasicBot(
                         self.authors[aInfo['template']['user']] = 1
                     else:
                         self.authors[aInfo['template']['user']] += 1
+                """
+                user = aInfo['creator']
+                if self.getOption('testnewbie'):
+                    pywikibot.output('NEWBIE CREATOR:%s' % user)
+                if aInfo['creator'] not in self.authors.keys():
+                    self.authors[aInfo['creator']] = 1
+                else:
+                    self.authors[aInfo['creator']] += 1
                 self.newbie(aInfo['lang'],user)
 
 
@@ -329,6 +338,8 @@ class BasicBot(
 
     def newbie(self,lang,user):
         #check if user is a newbie
+        if not user:
+            return(False)
         newbieLimit =  datetime.strptime("2019-12-20T12:00:00Z", "%Y-%m-%dT%H:%M:%SZ")
         if self.getOption('testnewbie'):
             pywikibot.output('NEWBIE:%s' % self.authorsData)
@@ -593,7 +604,7 @@ class BasicBot(
 
                 #test switch
                 if self.getOption('short'):
-                    if lang not in ('hy'):
+                    if lang not in ('pl'):
                          continue
 
                 self.templatesList[lang] = [i.title()]
@@ -680,6 +691,9 @@ class BasicBot(
             artParams['charcount'] = self.getArtLength(cleantext)
             artParams['wordcount'] = self.getWordCount(cleantext)
 
+            if self.getOption('test2'):
+                pywikibot.output('artParams[ArtInfo]:%s' % artParams)
+
             artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':False}
 
             if lang in self.templatesList.keys() and talk.exists():
@@ -689,14 +703,16 @@ class BasicBot(
                 artParams['template']['woman'] = woman
             if not len(artParams['template']['country']):
                 artParams['template']['nocountry'] = True
+            #if artParams['template']['user']:
+            #    creator = artParams['template']['user']
 
             if u'template' not in artParams.keys():
                 artParams['template'] = {u'country':[], 'user':creator, 'woman':woman, 'nocountry':True}
             #if not artParams['newarticle'] : 
             #if artParams['newarticle'] : 
             #    artParams['template']['user'] = creator
-            if not artParams['template']['user'] == 'UNKNOWN USER' : 
-                artParams['creator'] = artParams['template']['user']
+            #if not artParams['template']['user'] : 
+            #    artParams['creator'] = artParams['template']['user']
 
             #print artParams
             if self.getOption('test2'):
@@ -782,14 +798,16 @@ class BasicBot(
             if uName:
                 return(uName.group('username'))
             else:
-                return('')
+                return(None)
+        elif not len(text):
+            return(None)
         else:
             return(text)
 
     def getTemplateInfo(self,page,template,lang):
         param = {}
         #author, creationDate = self.getUpdater(page)
-        parlist = {'country':[],'user':'UNKNOWN USER','woman':False, 'nocountry':False}
+        parlist = {'country':[],'user':None,'woman':False, 'nocountry':False}
         #return dictionary with template params
         for t in page.templatesWithParams():
             title, params = t
@@ -803,7 +821,7 @@ class BasicBot(
                 countryDef = False # check if country defintion exists
                 parlist['woman'] = False
                 parlist['country'] = []
-                parlist['user'] = 'UNKNOWN USER'
+                parlist['user'] = None
                 for p in params:
                     named, name, value = self.templateArg(p)
                     # strip square brackets from value
@@ -1179,7 +1197,7 @@ class BasicBot(
         ath = sorted(res, key=lambda x: (res[x]['count']), reverse=True)
         #ath = sorted(res, key=res.__getitem__, reverse=True)
         for a in ath:
-            if 'UNKNOWN USER' in a or a == '':
+            if not a or 'UNKNOWN USER' in a or a == '':
                 author = "'''unknown'''"
             else:
                 author =  a
@@ -1448,6 +1466,8 @@ class BasicBot(
                     updartscount += 1
                     if i['template']['user']:
                         artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || ' % (updarts,i['lang'],i['title'],i['template']['user'])
+                    elif i['creator']:
+                        artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || ' % (updarts,i['lang'],i['title'],i['creator'])
                     else:
                         artLine = u'\n|-\n| %i. || [[:%s:%s]] || %s || ' % (updarts,i['lang'],i['title'],"'''unknown'''")
 
