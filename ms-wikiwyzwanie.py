@@ -251,7 +251,7 @@ class BasicBot(
 
     def countInterwiki(self,t):
         #count interwikis
-        siteR = re.compile(ur'(?m)^(?P<site>.*)wiki$')
+        siteR = re.compile(r'(?m)^(?P<site>.*)wiki$')
         if t in self.wikichallenge['articles'].keys():
             if self.getOption('test'):
                 pywikibot.output('INTERWIKI EXISTING [[%s]]:%i' % (t,self.wikichallenge['articles'][t]['interwiki']))
@@ -289,7 +289,7 @@ class BasicBot(
     
     def getDays(self,text):
         #return list of day sections from text
-        dayR = re.compile(ur'(?P<day>\n=+\s*?(?P<date>\d+\s*?(czerwca))\s*?=+(\n+#\s*?[^\n]*)*)')
+        dayR = re.compile(r'(?P<day>\n=+\s*?(?P<date>\d+\s*?(czerwca))\s*?=+(\n+#\s*?[^\n]*)*)')
         count = 0
         result = {}
         for d in dayR.finditer(text):
@@ -311,7 +311,7 @@ class BasicBot(
 
     def getArtsUsers(self,text):
         #return list of (art,user)
-        auR = re.compile(ur'#\s*?\[\[(?P<title>[^\|\]]*)[^\]]*\]\]\s*?[–-]\s*(?P<user>.*)')
+        auR = re.compile(r'#\s*?\[\[(?P<title>[^\|\]]*)[^\]]*\]\]\s*?[–-]\s*(?P<user>.*)')
         count = 0
         result = []
         #pywikibot.output(text)
@@ -347,7 +347,7 @@ class BasicBot(
             for s in sitelinks:
                 #if self.getOption('test'):
                 #    pywikibot.output(u'SL iw: %s' % d)
-                site = re.sub(ur'(.*)wiki$', ur'\1',s)
+                site = re.sub(r'(.*)wiki$', r'\1',s)
                 if site == u'be_x_old':
                     site = u'be-tarask'
                 ssite = pywikibot.Site(site,fam='wikipedia')
@@ -625,7 +625,7 @@ def templateArg(self, param):
         @rtype: tuple
         """
         # TODO
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        paramR = re.compile(r'(?P<name>.*)=(?P<value>.*)')
         if '=' in param:
             match = paramR.search(param)
             named = True
