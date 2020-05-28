@@ -1580,6 +1580,8 @@ ignorelist = [
     re.compile('.*[\./@]academic\.oup\.com/aob/article-abstract/72/6/607/2769155'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]journals\.indexcopernicus\.com/search/details\?id=16423'),  # bot rejected on site (masti, szoltys)
     re.compile('.*[\./@]journals\.indexcopernicus\.com/search/details\?id=3495'),  # bot rejected on site (masti, szoltys)
+    re.compile('.*[\./@]omulecki\.com'),  # bot rejected on site (masti, Cloefor)
+    re.compile('.*[\./@]zbigniewloskot\.pl'),  # bot rejected on site (masti, Ysska)
 ]
 
 
