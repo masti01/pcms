@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 Call:
-python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie 2019/Hasła" -outpage:"Wikipedia:Wikiwyzwanie 2019/Ranking" -pt:0 -summary:"Bot uaktualnia statystyki"
+python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie 2020/Hasła" -outpage:"Wikipedia:Wikiwyzwanie 2020/Ranking" -pt:0 -summary:"Bot uaktualnia statystyki"
 for test:
-python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie 2019/Hasła" -outpage:"Wikipedysta:MastiBot/test" -pt:0 -summary:"Bot uaktualnia statystyki" -reset -test -simulate -testdays -testinc -testweeks -testincdays -testiw -testchange
+python pwb.py masti/ms-wikiwyzwanie.py -page:"Wikipedia:Wikiwyzwanie 2020/Hasła" -outpage:"Wikipedysta:MastiBot/test" -pt:0 -summary:"Bot uaktualnia statystyki" -reset -test -simulate -testdays -testinc -testweeks -testincdays -testiw -testchange
 
 
 Use global -simulate option for test purposes. No changes to live wiki
@@ -157,7 +157,7 @@ class BasicBot(
 
     def run(self):
 
-        header = '{{Wikipedia:Wikiwyzwanie 2019/nawigacja}}\n\n'
+        header = '{{Wikipedia:Wikiwyzwanie 2020/nawigacja}}\n\n'
         header += "Ostatnia aktualizacja przez bota: '''~~~~~'''.\n"
         header += "*<small>'''Uwaga:''' aktualizacje codziennie po północy.</small>\n\n"
         header += "{{Spis treści}}\n\n"
@@ -371,7 +371,7 @@ class BasicBot(
             if self.getOption('testpickle'):
                 pywikibot.output('PICKLING LOAD at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             try:
-                with open('masti/wikiwyzwanie2019.dat', 'rb') as datfile:
+                with open('masti/wikiwyzwanie2020.dat', 'rb') as datfile:
                     self.wikichallenge = pickle.load(datfile)
             except (IOError, EOFError):
                 # no saved history exists yet, or history dump broken
@@ -386,7 +386,7 @@ class BasicBot(
         #save list as pickle file
         if self.getOption('testpickle'):
             pywikibot.output('PICKLING SAVE at %s' % datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        with open('masti/wikiwyzwanie2019.dat', 'wb') as f:
+        with open('masti/wikiwyzwanie2020.dat', 'wb') as f:
             pickle.dump(artList, f, protocol=config.pickle_protocol)
 
     def saveArticleList(self, res, pagename, header, footer):
