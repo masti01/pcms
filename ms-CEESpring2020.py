@@ -855,12 +855,16 @@ class BasicBot(
                     #check article about country
                     if lang in self.countryp.keys() and name.lower().startswith(self.countryp[lang].lower()):
                         if self.getOption('test2'):
-                            pywikibot.output(u'country:%s:%s' % (name,value))
+                            pywikibot.output(u'country:%s:%s:%i' % (name,value,len(value)))
                         if len(value)>0:
                             countryDef = True
                             if lang in countryNames.keys() and value in (countryNames[lang].keys()):
                                 countryEN = countryNames[lang][value]
+                                if self.getOption('test2'):
+                                    pywikibot.output(u'countryEN:%s (%s)' % (countryEN,value))
                                 if not countryEN in parlist['country']:
+                                    if self.getOption('test2'):
+                                        pywikibot.output(u'appending countryEN:%s' % countryEN)
                                     parlist['country'].append(countryEN)
                                     if lang not in self.pagesCount.keys():
                                         self.pagesCount[lang] = {}
@@ -870,6 +874,8 @@ class BasicBot(
                                         self.pagesCount[lang][countryEN] = 1
                             else:
                                 if not value in parlist['country']:
+                                    if self.getOption('test2'):
+                                        pywikibot.output(u'appending other country:%s' % value)
                                     parlist['country'].append(value)
                                     self.otherCountriesList[lang].append(value)
                     if self.getOption('test'):
