@@ -158,11 +158,10 @@ class BasicBot(
     def run(self):
 
         header = '{{Wikipedia:Wikiwyzwanie 2020/nawigacja}}\n\n'
+        header += "{{Wikipedia:Wikiwyzwanie 2020/Ranking/Uwaga}}\n\n"
         header += "Ostatnia aktualizacja przez bota: '''~~~~~'''.\n"
         header += "*<small>'''Uwaga:''' aktualizacje codziennie po północy.</small>\n\n"
         header += "{{Spis treści}}\n\n"
-
-        header += "\n\n{{Wikipedia:Wikiwyzwanie 2020/Ranking/Uwaga}}\n\n"
 
 
         footer = '\n\n== Zobacz też ==\n'
