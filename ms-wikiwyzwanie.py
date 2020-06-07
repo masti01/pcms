@@ -158,7 +158,7 @@ class BasicBot(
     def run(self):
 
         header = '{{Wikipedia:Wikiwyzwanie 2020/nawigacja}}\n\n'
-        header += "{{Wikipedia:Wikiwyzwanie 2020/Ranking/Uwaga}}\n\n"
+        header += "{{%s/Uwaga}}\n\n" % self.getOption('outpage')
         header += "Ostatnia aktualizacja przez bota: '''~~~~~'''.\n"
         header += "*<small>'''Uwaga:''' aktualizacje codziennie po północy.</small>\n\n"
         header += "{{Spis treści}}\n\n"
@@ -198,7 +198,7 @@ class BasicBot(
                 if t in self.wikichallenge['articles'].keys():
                     pywikibot.output('SKIPPING:[[%s]]' % t)
                     continue
-                interwiki = self.countInterwiki(t)
+                interwiki, wderror = self.countInterwiki(t)
                 if self.getOption('test'):
                     pywikibot.output('INTERWIKI [[%s]]:%s' % (t,interwiki))
 
@@ -209,6 +209,7 @@ class BasicBot(
                     'author':u, 
                     'points':self.points(interwiki), 
                     'interwiki':interwiki,
+                    'wderror':wderror,
                 }
 
         if self.getOption('test'):
@@ -259,37 +260,47 @@ class BasicBot(
         if t in self.wikichallenge['articles'].keys():
             if self.getOption('test'):
                 pywikibot.output('INTERWIKI EXISTING [[%s]]:%i' % (t,self.wikichallenge['articles '][t]['interwiki']))
-            return(self.wikichallenge['articles'][t]['interwiki'])
+            return(self.wikichallenge['articles'][t]['interwiki'],self.wikichallenge['articles'][t]['wderror'])
 
         iw = []
         page = pywikibot.Page( pywikibot.Site(), t )
         while page.isRedirectPage():
             page = page.getRedirectTarget()
-        try:
-            d = page.data_item()
-            pywikibot.output(u'WD: %s WIKI:%s' % (d.title(),page.title()) )
-            dataItem = d.get()
-            #pywikibot.output(u'DataItem:%s' % dataItem.keys()  )
-            sitelinks = dataItem['sitelinks']
-            if self.getOption('testiw'):
-                pywikibot.output('SITELINKS:%s' % sitelinks)
-            for s in sitelinks:
-                site = siteR.match(s)
-                if site:
-                    if not site.group('site') in ['pl','commons']:
-                        iw.append( s )
-                        if self.getOption('testiw'):
-                            pywikibot.output('SITELINKS adding site:%s' % s)
+        retry = 1 # retry count for WD
+        wderror = False
+        while retry:
+            try:
+                d = page.data_item()
+                pywikibot.output(u'WD: %s WIKI:%s' % (d.title(),page.title()) )
+                dataItem = d.get()
+                #pywikibot.output(u'DataItem:%s' % dataItem.keys()  )
+                sitelinks = dataItem['sitelinks']
+                if self.getOption('testiw'):
+                    pywikibot.output('SITELINKS:%s' % sitelinks)
+                for s in sitelinks:
+                    site = siteR.match(s)
+                    if site:
+                        if not site.group('site') in ['pl','commons']:
+                            iw.append( s )
+                            if self.getOption('testiw'):
+                                pywikibot.output('SITELINKS adding site:%s' % s)
+                retry = 0
+            except:
+                #pass
+                retry -= 1
+                if self.getOption('testiw'):
+                    pywikibot.output('WIKIDATA EXCEPTION:%s Retries left:%i' % (page.title(),retry))
+                if not retry:
+                    wderror = True
 
-                #print( iw)
-        except:
-            pass
-        return(len(iw))
+        return(len(iw),wderror)
+        """
         l = len(iw)
         if l:
             return(l-1)
         else:
             return(0)
+        """
     
     def getDays(self,text):
         #return list of day sections from text
@@ -408,20 +419,21 @@ class BasicBot(
         finalpage += u'\n! Tydzień'
         finalpage += u'\n! Interwiki'
         finalpage += u'\n! Punkty'
+        finalpage += u'\n! WD'
 
         count = 0
         for a in res['articles'].keys():
             count += 1
             finalpage += u'\n|-\n|'
-            finalpage += u'%i. || [[%s]] || [[Wikipedysta:%s|%s]] || {{L|%i}} || %s || %i || %i || %i' % (count, a,
+            finalpage += u'%i. || [[%s]] || [[Wikipedysta:%s|%s]] || {{L|%i}} || %s || %i || %i || %i || %s' % (count, a,
                res['articles'][a]['author'],
                res['articles'][a]['author'],
                res['articles'][a]['dayN'],
                res['articles'][a]['day'],
                res['articles'][a]['week'],
                res['articles'][a]['interwiki'],
-               res['articles'][a]['points'] )
-
+               res['articles'][a]['points'], 
+               '{{ikona|brak}}' if res['articles'][a]['wderror'] else '{{ikona|jest}}', )
 
         finalpage += u'\n|}'
         finalpage += footer
@@ -437,13 +449,13 @@ class BasicBot(
     def saveRemarkTemplate(self, pagename):
         # save remark message at self.getOption('outpage')/Uwaga
 
-        finalpage = "{{ambox
-| typ     = zawartość
-| grafika prawo = {{ikona|pompytanie|35}}
-| tekst   = Ze względu na wystepujące od kilku tygodni problemy z dostępem skryptów do [[Interfejs programowania aplikacji|interfejsu programistycznego (API)]] [[Wikidane|Wikidanych]] na stronie mogą występować błędy zliczania wyników. [[Wikipedysta:masti|Operator bota]] uruchamia go również ręcznie tak aby zweryfikować poprawność liczenia. Błędy dotyczą głównie haseł, którym zaliczono 0 punktów (skrypt otrzymuje pustą listę interwiki). Komentarze proszę zamieszczać na stronie [[Dyskusja Wikipedii:Wikiwyzwanie 2020/Ranking]].
-* <small> {{ikona|pompytanie}} po prawej oznacza, że ranking oczekuje na ręczną weryfikację.</small>
-}}
-"
+        finalpage = "{{ambox\n"
+        finalpage += "| typ     = zawartość\n"
+        finalpage += "| grafika prawo = {{ikona|pompytanie|35}}\n"
+        finalpage += "| tekst   = Ze względu na wystepujące od kilku tygodni problemy z dostępem skryptów do [[Interfejs programowania aplikacji|interfejsu programistycznego (API)]] [[Wikidane|Wikidanych]] na stronie mogą występować błędy zliczania wyników. [[Wikipedysta:masti|Operator bota]] uruchamia go również ręcznie tak aby zweryfikować poprawność liczenia. Błędy dotyczą głównie haseł, którym zaliczono 0 punktów (skrypt otrzymuje pustą listę interwiki). Komentarze proszę zamieszczać na stronie [[Dyskusja Wikipedii:Wikiwyzwanie 2020/Ranking]].\n"
+        finalpage += "* <small> {{ikona|pompytanie}} po prawej oznacza, że ranking oczekuje na ręczną weryfikację.</small>\n"
+        finalpage += "}}"
+
 
         outpage = pywikibot.Page(pywikibot.Site(), pagename)
         if self.getOption('test'):
