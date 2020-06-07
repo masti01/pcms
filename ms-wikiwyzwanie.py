@@ -162,6 +162,8 @@ class BasicBot(
         header += "*<small>'''Uwaga:''' aktualizacje codziennie po północy.</small>\n\n"
         header += "{{Spis treści}}\n\n"
 
+        header += "\n\n{{Wikipedia:Wikiwyzwanie 2020/Ranking/Uwaga}}\n\n"
+
 
         footer = '\n\n== Zobacz też ==\n'
         footer += '* [[%s/lista|Szczegółowa lista haseł i punktacji]]' % self.getOption('outpage')
@@ -252,9 +254,11 @@ class BasicBot(
     def countInterwiki(self,t):
         #count interwikis
         siteR = re.compile(r'(?m)^(?P<site>.*)wiki$')
+        if self.getOption('test'):
+            pywikibot.output('CHECKING INTERWIKI FOR:%s' % t)
         if t in self.wikichallenge['articles'].keys():
             if self.getOption('test'):
-                pywikibot.output('INTERWIKI EXISTING [[%s]]:%i' % (t,self.wikichallenge['articles'][t]['interwiki']))
+                pywikibot.output('INTERWIKI EXISTING [[%s]]:%i' % (t,self.wikichallenge['articles '][t]['interwiki']))
             return(self.wikichallenge['articles'][t]['interwiki'])
 
         iw = []
