@@ -185,6 +185,7 @@ class BasicBot(
 
         self.generateResultTable(self.wikichallenge,self.getOption('outpage'),header,footer)
         self.saveArticleList(self.wikichallenge,self.getOption('outpage')+'/lista',header,'')
+        self.saveRemarkTemplate(self.getOption('outpage')+'/Uwaga')
 
     def treat(self,page):
         """Load the given page, do some changes, and save it."""
@@ -432,6 +433,23 @@ class BasicBot(
         outpage.save(summary=self.getOption('summary'))
 
         return
+
+    def saveRemarkTemplate(self, pagename):
+        # save remark message at self.getOption('outpage')/Uwaga
+
+        finalpage = "{{ambox
+| typ     = zawartość
+| grafika prawo = {{ikona|pompytanie|35}}
+| tekst   = Ze względu na wystepujące od kilku tygodni problemy z dostępem skryptów do [[Interfejs programowania aplikacji|interfejsu programistycznego (API)]] [[Wikidane|Wikidanych]] na stronie mogą występować błędy zliczania wyników. [[Wikipedysta:masti|Operator bota]] uruchamia go również ręcznie tak aby zweryfikować poprawność liczenia. Błędy dotyczą głównie haseł, którym zaliczono 0 punktów (skrypt otrzymuje pustą listę interwiki). Komentarze proszę zamieszczać na stronie [[Dyskusja Wikipedii:Wikiwyzwanie 2020/Ranking]].
+* <small> {{ikona|pompytanie}} po prawej oznacza, że ranking oczekuje na ręczną weryfikację.</small>
+}}
+"
+
+        outpage = pywikibot.Page(pywikibot.Site(), pagename)
+        if self.getOption('test'):
+            pywikibot.output(u'RemarkTemplate:%s' % outpage.title())
+        outpage.text = finalpage
+        outpage.save(summary=self.getOption('summary'))
 
     def generateResultTable(self, res, pagename, header, footer):
         #generate main results page sorted daily 
