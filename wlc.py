@@ -1586,7 +1586,7 @@ ignorelist = [
     re.compile('.*[\./@]stat\.gov\.pl/broker/access'),  # bot rejected on site (masti, Stok)
     re.compile('.*[\./@]piotrdlubak\.com'),  # bot rejected on site (masti, Cloefor)
     re.compile('.*[\./@]lead\.org\.au/lanv1n2/lanv1n2-8\.html'),  # bot rejected on site (masti, CiaPan)
-    re.compile('.*[\./@]age.ne.jp/x/sas'),  # bot rejected on site (masti, Snoflaxe)
+    re.compile('.*[\./@]age\.ne\.jp/x/sas'),  # bot rejected on site (masti, Snoflaxe)
 
 ]
 
