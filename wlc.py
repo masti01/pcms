@@ -1585,6 +1585,7 @@ ignorelist = [
     re.compile('.*[\./@]stat\.gov\.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5670/21/1/1/1_miejscowosci_ludnosc_nsp2011\.xlsx'),  # bot rejected on site (masti)
     re.compile('.*[\./@]stat\.gov\.pl/broker/access'),  # bot rejected on site (masti, Stok)
     re.compile('.*[\./@]piotrdlubak\.com'),  # bot rejected on site (masti, Cloefor)
+    re.compile('.*[\./@]lead\.org\.au/lanv1n2/lanv1n2-8\.html'),  # bot rejected on site (masti, CiaPan)
 
 ]
 
