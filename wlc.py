@@ -1588,6 +1588,7 @@ ignorelist = [
     re.compile('.*[\./@]lead\.org\.au/lanv1n2/lanv1n2-8\.html'),  # bot rejected on site (masti, CiaPan)
     re.compile('.*[\./@]ciaaw\.org/atomic-weights\.htm'),  # bot rejected on site (masti, CiaPan)
     re.compile('.*[\./@]age\.ne\.jp/x/sas'),  # bot rejected on site (masti, Snoflaxe)
+    re.compile('.*[\./@]statistics\.gr/documents/20181/1210503/resident_population_census2011rev\.xls/956f8949-513b-45b3-8c02-74f5e8ff0230'),  # file exists (masti)
 
 
 ]
