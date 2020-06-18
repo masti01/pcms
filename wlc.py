@@ -1589,7 +1589,23 @@ ignorelist = [
     re.compile('.*[\./@]ciaaw\.org/atomic-weights\.htm'),  # bot rejected on site (masti, CiaPan)
     re.compile('.*[\./@]age\.ne\.jp/x/sas'),  # bot rejected on site (masti, Snoflaxe)
     re.compile('.*[\./@]statistics\.gr/documents/20181/1210503/resident_population_census2011rev\.xls/956f8949-513b-45b3-8c02-74f5e8ff0230'),  # file exists (masti)
-
+    re.compile('.*[\./@]cbc\.ca/news/entertainment/vancouver-actor-nabs-csi-role-1\.680212'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]ck-czestochowa\.pl/'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vp2019/wp001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]zbp\.pl/wydarzenia/archiwum/wydarzenia/2016/marzec/medale-kopernika-dla-srodowiska-naukowego'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]mrkoll\.se/person'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]bank\.gov\.ua/'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]coiu\.pl/media/download/Obywatelskie_inicjatywy_ustawodawcze_Solidarnosci_1980-1990\.pdf'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2007/w6p001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]raimondspauls\.lv/'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]nra\.lv/politika/128301-12-saeima-apstiprinata\.htm'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]lrs\.lt/sip/portal\.show\?p_r=119&p_k=1&p_t=167698'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]mazovia\.pl/patronaty--nagrody--odznaczenia/pro-masovia/osoby-i-podmioty-wyroznione-medalem-pro-masovia---lista/pro-masovia--2015-r/'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]partitodemocratico\.it/profile/stefano-bonaccini/'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]trybunal\.gov\.pl/o-trybunale/sedziowie-trybunalu-konstytucyjnego/art/2440-slawomira-wronkowska-jaskiewicz/'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]bip\.mazovia\.pl/samorzad/zarzad/uchwaly-zarzadu/uchwala,40669,15948319\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]lietuvosdiena\.lrytas\.lt/aktualijos/seimo-pirmininku-isrinktas-viktoras-pranckietis-20161114033033\.htm'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2006/w6p001\.html'),  # bot rejected on site (masti, Elfhelm)
 
 ]
 
