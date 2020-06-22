@@ -149,8 +149,8 @@ class BasicBot(
 
         text = page.text
         # get template for marking articles
-        t = re.search(ur'(?P<templatename>\{\{Wikiprojekt:Tygodnie tematyczne\/info.*?\}\})',text)
-        g = re.search(ur'\{\{Tydzień tematyczny\/szablony.*?grafika tygodnia\s*?=\s*?(?P<iconname>[^\|\n]*).*?\[\[Wikiprojekt:Tygodnie tematyczne\/(?P<weekname>[^\|]*).*?}}', text, flags=re.S)
+        t = re.search(r'(?P<templatename>\{\{Wikiprojekt:Tygodnie tematyczne\/info.*?\}\})',text)
+        g = re.search(r'\{\{Tydzień tematyczny\/szablony.*?grafika tygodnia\s*?=\s*?(?P<iconname>[^\|\n]*).*?\[\[Wikiprojekt:Tygodnie tematyczne\/(?P<weekname>[^\|]*).*?}}', text, flags=re.S)
         if self.getOption('test'):
             pywikibot.output(u't:%s' % t)
             pywikibot.output(u'g:%s' % g)
@@ -172,7 +172,7 @@ class BasicBot(
 
         #get articlenames to work on
         #get article section
-        t = re.search(ur'(?P<articlesection>=== Lista alfabetyczna.*?)== ',text,re.DOTALL)
+        t = re.search(r'(?P<articlesection>=== Lista alfabetyczna.*?)== ',text,re.DOTALL)
         articlesection = t.group('articlesection')
         #pywikibot.output(u'Articles:%s' % articlesection)
 
