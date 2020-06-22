@@ -180,6 +180,10 @@ ignorelist = [
     # bot rejected on the site, already archived
     re.compile(r'.*[\./@]web\.archive\.org(/.*)?'),
 
+    # ignore links to files like spreadsheets
+    re.compile(r'.*[\./@]\.xlsx?(/.*)?'),
+    re.compile(r'.*[\./@]\.docx?(/.*)?'),
+
     # Ignore links containing * in domain name
     # as they are intentionally fake
     re.compile(r'https?\:\/\/\*(/.*)?'),
