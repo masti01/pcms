@@ -6,7 +6,7 @@ Use global -simulate option for test purposes. No changes to live wiki
 will be done.
 
 Call: 
-	python pwb.py masti/m-tematicweek.py -page:"Wikiprojekt:Tygodnie tematyczne/Tydzień Artykułu Bhutańskiego" -pt:0 -log:"Tydzień Artykułu Bhutańskiego"
+        python pwb.py masti/m-tematicweek.py -page:"Wikiprojekt:Tygodnie tematyczne/Tydzień Artykułu Bhutańskiego" -pt:0 -log:"Tydzień Artykułu Bhutańskiego"
 
 The following parameters are supported:
 
@@ -134,7 +134,7 @@ class BasicBot(
     def run(self):
 
         # set up log page and load
-	logpage = pywikibot.Page(pywikibot.Site(), u'Wikipedysta:MastiBot/Tygodnie Tematyczne/zrobione')
+        logpage = pywikibot.Page(pywikibot.Site(), u'Wikipedysta:MastiBot/Tygodnie Tematyczne/zrobione')
         if not logpage.text:
             return
 
@@ -148,8 +148,8 @@ class BasicBot(
         """Load the given page, retrieve links to updated pages. Add template to talkpage if necessary"""
 
         text = page.text
-	# get template for marking articles
-	t = re.search(ur'(?P<templatename>\{\{Wikiprojekt:Tygodnie tematyczne\/info.*?\}\})',text)
+        # get template for marking articles
+        t = re.search(ur'(?P<templatename>\{\{Wikiprojekt:Tygodnie tematyczne\/info.*?\}\})',text)
         g = re.search(ur'\{\{Tydzień tematyczny\/szablony.*?grafika tygodnia\s*?=\s*?(?P<iconname>[^\|\n]*).*?\[\[Wikiprojekt:Tygodnie tematyczne\/(?P<weekname>[^\|]*).*?}}', text, flags=re.S)
         if self.getOption('test'):
             pywikibot.output(u't:%s' % t)
@@ -159,32 +159,32 @@ class BasicBot(
             return(False)
 
         if t:
-	    templatename = t.group('templatename')
+            templatename = t.group('templatename')
         if g:
-	    templatename = u'{{Wikiprojekt:Tygodnie tematyczne/info|' + g.group('weekname') + '|' + g.group('iconname') + u'}}'
+            templatename = u'{{Wikiprojekt:Tygodnie tematyczne/info|' + g.group('weekname') + '|' + g.group('iconname') + u'}}'
         if self.getOption('test'):
             pywikibot.output(u'templatename:%s' % templatename)
 
         pywikibot.output(u'Template:%s' % templatename)
 
-	# set summary for edits
-	summary = u'Bot dodaje szablon ' + templatename
+        # set summary for edits
+        summary = u'Bot dodaje szablon ' + templatename
 
         #get articlenames to work on
-	#get article section
-	t = re.search(ur'(?P<articlesection>=== Lista alfabetyczna.*?)== ',text,re.DOTALL)
-	articlesection = t.group('articlesection')
-	#pywikibot.output(u'Articles:%s' % articlesection)
+        #get article section
+        t = re.search(ur'(?P<articlesection>=== Lista alfabetyczna.*?)== ',text,re.DOTALL)
+        articlesection = t.group('articlesection')
+        #pywikibot.output(u'Articles:%s' % articlesection)
 
-	Rlink = re.compile(r'\[\[(?P<title>[^\]\|\[]*)(\|[^\]]*)?\]\]')
+        Rlink = re.compile(r'\[\[(?P<title>[^\]\|\[]*)(\|[^\]]*)?\]\]')
 
-	for match in Rlink.finditer(articlesection):
+        for match in Rlink.finditer(articlesection):
             try:
                 title = match.group('title')
                 title = title.replace("_", " ").strip(" ")
             except:
                 continue
-	    #pywikibot.output(u'Art:[[%s]]' % title)
+            #pywikibot.output(u'Art:[[%s]]' % title)
             artpage = pywikibot.Page(pywikibot.Site(), title)
 
             # follow redirects
@@ -205,15 +205,15 @@ class BasicBot(
             else:
                 pywikibot.output(u'Art:[[%s]] DOES NOT EXIST' % artpage.title())
                 continue
-	    #pywikibot.output(u'Art:[[%s]]>>>[[%s]]' % (title,workpage.title()))
+            #pywikibot.output(u'Art:[[%s]]>>>[[%s]]' % (title,workpage.title()))
             #load discussion Page
-	    worktext = workpage.text
+            worktext = workpage.text
             if worktext:
-	        #check if template exists
+                #check if template exists
                 if u'{{Wikiprojekt:Tygodnie tematyczne/info' in worktext or u'{{Wikiprojekt:Tygodnie tematyczne/info' in worktext:
-	            pywikibot.output(u'Art:[[%s]] not changed: template found' % workpage.title())
+                    pywikibot.output(u'Art:[[%s]] not changed: template found' % workpage.title())
                     continue
-	        else:
+                else:
                     pywikibot.output(u'Art:[[%s]] changed: template added' % workpage.title())
                     worktext = templatename + u'\n' + worktext
             else:
