@@ -277,14 +277,13 @@ class BasicBot(
         # check for page creator
         #creator, timestamp = tpage.getCreator()
         creator = tpage.oldest_revision.user
-        timestamp = unicode(tpage.oldest_revision.timestamp.strftime('%Y-%m-%d'))
+        timestamp = tpage.oldest_revision.timestamp.strftime('%Y-%m-%d')
         #test
         if self.getOption('test'):
             pywikibot.output(u'Creator:%s<<Timestamp %s' % (creator, timestamp))
 
         # check for last edit
-        #lastedit = unicode(tpage.latest_revision.timestamp.isoformat())
-        lastedit = unicode(tpage.latest_revision.timestamp.strftime('%Y-%m-%d'))
+        lastedit = tpage.latest_revision.timestamp.strftime('%Y-%m-%d')
         lastEditor = tpage.latest_revision.user
         #get numer of linking pages
         refsCount = self.linking(tpage)
