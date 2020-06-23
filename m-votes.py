@@ -789,7 +789,7 @@ class BasicBot(
         #header += u'        <p><center>***** Statystyki są w fazie eksperymentalnej. Wszelkie zauważone problemy proszę zgłaszać w <a href="http://pl.wikipedia.org/wiki/Dyskusja_wikipedysty:masti">dyskusji operatora.</a> *****</center>\n'
         #header += u'        </p>\n'
         # add creation time
-        header += u'        <p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
+        header += u'        <p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z') + u'</b></p>\n'
         header += u'\n'
         #header += u'        <p><center><FORM>\n'
         #header += u'        <INPUT TYPE="button" onClick="history.go(0)" VALUE="ODŚWIEŻ">\n'
@@ -1115,7 +1115,7 @@ class BasicBot(
                         
                         #output += u'        <tr>\n'
                         output += u'                <td><center>' + str(ranks[rowscount]) + u'.</center></td>'
-                        link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/' + self.getOption('KAmonth') + u'/' + wiki).encode('utf-8'))
+                        link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/' + self.getOption('KAmonth') + u'/' + wiki))
                         output += u'                <td><center><a href="' + link + u'">' + wiki + u'</a></center></td>'
                         output += u'                <td>' + str(z) + u'</td>'
                         output += u'                <td>' + str(p) + u'</td>'
@@ -1139,7 +1139,7 @@ class BasicBot(
             for p in results['PU']:
                 (wiki,error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Przyznawanie uprawnień/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Przyznawanie uprawnień/' + wiki))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,n,netto,percent,date) = counters
@@ -1164,7 +1164,7 @@ class BasicBot(
             for p in results['PDA']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Dobrych Artykułów/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Dobrych Artykułów/' + wiki))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (v, date) = counters
@@ -1186,7 +1186,7 @@ class BasicBot(
                 try:
                     (wiki,error, counters) = p
                     output += u'        <tr>\n'
-                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na Medal/' + wiki).encode('utf-8'))
+                    link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na Medal/' + wiki))
                     output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                     if not error:
                         (v, date) = counters
@@ -1208,7 +1208,7 @@ class BasicBot(
             for p in results['INM']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Ilustracji na Medal/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Ilustracji na Medal/' + wiki))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
@@ -1233,7 +1233,7 @@ class BasicBot(
             for p in results['LNM']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_List_na_Medal/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_List_na_Medal/' + wiki))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
@@ -1258,7 +1258,7 @@ class BasicBot(
             for p in results['PDGA']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_Grup_Artykułów/' + wiki).encode('utf-8'))
+                link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_Grup_Artykułów/' + wiki))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
@@ -1284,7 +1284,7 @@ class BasicBot(
         #test
         #pywikibot.output(u'Writing file: %s' % self.getOption('outpage'))
         rf= open(u'masti/html/'+self.getOption('outpage'),'w')
-        rf.write(output.encode('utf8'))
+        rf.write(output)
         rf.close()
         return
 
