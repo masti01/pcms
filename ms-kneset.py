@@ -51,7 +51,6 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 import re
-import urllib2
 import datetime
 
 # This is required for the text that is shown when you run this script
