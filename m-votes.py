@@ -44,7 +44,6 @@ from pywikibot.tools import issue_deprecation_warning
 
 import re
 import urllib
-import urllib2
 from datetime import datetime
 from time import strftime
 import difflib
@@ -151,7 +150,7 @@ class BasicBot(
         if PUvotesResult:
             voteResults['PU'] = PUvotesResult
             if self.getOption('test'):
-	        pywikibot.output(u'PUvotesResult: %s' % PUvotesResult)
+                pywikibot.output(u'PUvotesResult: %s' % PUvotesResult)
         
         PDAvotesResult = self.PDAvotes(u'Wikipedia:Propozycje do Dobrych Artykułów', u'PDA')
         if PDAvotesResult:
@@ -208,8 +207,8 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        kaR = re.compile(ur'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/' + self.getOption('KAmonth') + u'\/(?P<puname>.*)}}')
-        #kaR = re.compile(ur'\{\{\/(?P<puname>.*)}}')
+        kaR = re.compile(r'\{\{Wikipedia:Komitet Arbitrażowy\/Wybór członków\/' + self.getOption('KAmonth') + u'\/(?P<puname>.*)}}')
+        #kaR = re.compile(r'\{\{\/(?P<puname>.*)}}')
         if self.getOption('test'):
             pywikibot.output(u'kaR: %s' % kaR)
         kafound = False
@@ -217,7 +216,7 @@ class BasicBot(
         for ka in kalist:
             subpage = ka.group('puname').strip()
             #test
-	    #pywikibot.output(subpage)
+            #pywikibot.output(subpage)
             if not u'Całość' in subpage:
                kafound = True
                votesL.append(self.KASingleVote(subpage))
@@ -242,9 +241,9 @@ class BasicBot(
             pywikibot.output(u'Vote text:\n%s' % text)
 
         # vote counting regexp
-        forR = re.compile(ur'={4}\s*?Za:?\s*?={4}\n(?P<forvotes>.*?)={4}',re.S)
-        againstR = re.compile(ur'={4}\s*?Przeciw:?\s*?={4}\n(?P<againstvotes>.*?)={4}',re.S)
-        abstainR = re.compile(ur'={4}\s*?Wstrzymuję się:?\s*?={4}\n(?P<abstainvotes>.*?)={4}',re.S)
+        forR = re.compile(r'={4}\s*?Za:?\s*?={4}\n(?P<forvotes>.*?)={4}',re.S)
+        againstR = re.compile(r'={4}\s*?Przeciw:?\s*?={4}\n(?P<againstvotes>.*?)={4}',re.S)
+        abstainR = re.compile(r'={4}\s*?Wstrzymuję się:?\s*?={4}\n(?P<abstainvotes>.*?)={4}',re.S)
         try:
             # count For votes
             votesection = forR.search(text).group('forvotes')
@@ -295,7 +294,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        puR = re.compile(ur'\{\{(Wikipedia:Przyznawanie uprawnień)?\/(?P<puname>.*)}}')
+        puR = re.compile(r'\{\{(Wikipedia:Przyznawanie uprawnień)?\/(?P<puname>.*)}}')
         pufound = False
         pulist = puR.finditer(text)
         for pu in pulist:
@@ -321,7 +320,7 @@ class BasicBot(
 
         # find end of voting string
         try:
-            eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
+            eovR = re.compile(r'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
             if self.getOption('test'):
@@ -335,9 +334,9 @@ class BasicBot(
             pywikibot.output(u'Vote text:\n%s' % text)
 
         # vote counting regexp
-        forR = re.compile(ur'={4}\s*?Za\s*?={4}\n(?P<forvotes>.*?)={4}',re.S)
-        againstR = re.compile(ur'={4}\s*?Przeciw\s*?={4}\n(?P<againstvotes>.*?)={4}',re.S)
-        abstainR = re.compile(ur'={4}\s*?Wstrzymuję się\s*?={4}\n(?P<abstainvotes>.*?)={4}',re.S)
+        forR = re.compile(r'={4}\s*?Za\s*?={4}\n(?P<forvotes>.*?)={4}',re.S)
+        againstR = re.compile(r'={4}\s*?Przeciw\s*?={4}\n(?P<againstvotes>.*?)={4}',re.S)
+        abstainR = re.compile(r'={4}\s*?Wstrzymuję się\s*?={4}\n(?P<abstainvotes>.*?)={4}',re.S)
         try:
             # count For votes
             votesection = forR.search(text).group('forvotes')
@@ -376,8 +375,8 @@ class BasicBot(
         #count votes in list
         if self.getOption('test'):
             pywikibot.output(u'****CountVotes:' + voteslist)
-        #voteR = re.compile(ur'#(\s*?[^\s\n;#]+)')
-        voteR = re.compile(ur'^#[^:](?P<vote>[^\n]*)', re.M)
+        #voteR = re.compile(r'#(\s*?[^\s\n;#]+)')
+        voteR = re.compile(r'^#[^:](?P<vote>[^\n]*)', re.M)
         voteL = voteR.finditer(voteslist)
         count = 0
         for v in voteL:
@@ -398,7 +397,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        pdaR = re.compile(ur'\{\{(Wikipedia:Propozycje do Dobrych Artykułów|Wikipedia:Propozycje do Artykułów na Medal)?\/(?P<subpage>.*?)}}')
+        pdaR = re.compile(r'\{\{(Wikipedia:Propozycje do Dobrych Artykułów|Wikipedia:Propozycje do Artykułów na Medal)?\/(?P<subpage>.*?)}}')
         pdafound = False
         pdalist = pdaR.finditer(text)
         for pda in pdalist:
@@ -428,7 +427,7 @@ class BasicBot(
 
         # find end of voting string
         try:
-            eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
+            eovR = re.compile(r'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
             if self.getOption('test'):
@@ -442,7 +441,7 @@ class BasicBot(
             pywikibot.output(u'Vote text:\n%s' % text)
 
         # vote counting regexp
-        verR = re.compile(ur'(;|=+) *Sprawdzone przez[^\n]*?\n+(?P<verifiers>.*)', re.S)
+        verR = re.compile(r'(;|=+) *Sprawdzone przez[^\n]*?\n+(?P<verifiers>.*)', re.S)
         try:
             # count verifiers votes
             votesection = verR.search(text).group('verifiers')
@@ -468,7 +467,7 @@ class BasicBot(
         text = votespage.text
         if not text:
             return(None)
-        inmR = re.compile(ur'\{\{(Wikipedia:Propozycje do Ilustracji na Medal)?\/(?P<subpage>.*?)}}')
+        inmR = re.compile(r'\{\{(Wikipedia:Propozycje do Ilustracji na Medal)?\/(?P<subpage>.*?)}}')
         inmfound = False
         inmlist = inmR.finditer(text)
         for inm in inmlist:
@@ -494,7 +493,7 @@ class BasicBot(
 
         # find end of voting string
         try:
-            eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
+            eovR = re.compile(r'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
             if self.getOption('test'):
@@ -559,12 +558,12 @@ class BasicBot(
             return(None)
         #test
         #pywikibot.output(u'*** LNM:\n%s' % text)
-        lnmR = re.compile(ur'\{\{(Wikipedia:Propozycje do List na Medal)?\/(?P<subpage>.*?)}}')
+        lnmR = re.compile(r'\{\{(Wikipedia:Propozycje do List na Medal)?\/(?P<subpage>.*?)}}')
         lmfound = False
         lnmlist = lnmR.finditer(text)
         for lnm in lnmlist:
             subpage = lnm.group('subpage').strip()
-	    #test
+            #test
             #pywikibot.output(subpage)
             if (not subpage.startswith(u'przyznawanie')) and (not subpage.startswith(u'weryfikacja') ) :
                lnmfound = True
@@ -585,7 +584,7 @@ class BasicBot(
 
         # find end of voting string
         try:
-            eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
+            eovR = re.compile(r'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
             if self.getOption('test'):
@@ -662,7 +661,7 @@ class BasicBot(
 
         if self.getOption('test'):
             pywikibot.output(u'*** PDGA:\n%s' % text)
-        pdgaR = re.compile(ur'\{\{(Wikipedia:Propozycje do Grup Artykułów)?\/(?P<subpage>.*?)}}')
+        pdgaR = re.compile(r'\{\{(Wikipedia:Propozycje do Grup Artykułów)?\/(?P<subpage>.*?)}}')
         pdgafound = False
         pdgalist = pdgaR.finditer(text)
         for pdga in pdgalist:
@@ -688,7 +687,7 @@ class BasicBot(
 
         # find end of voting string
         try:
-            eovR = re.compile(ur'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
+            eovR = re.compile(r'\{\{Ramy czasowe zdarzenia.*?stop\s*?=\s*?(?P<eofv>.*?)\|')
             endofvotinglist = eovR.search(text)
             endofvoting = endofvotinglist.group('eofv').strip()
             if self.getOption('test'):
@@ -754,71 +753,71 @@ class BasicBot(
         #prepare main page header
         header = u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n'
         header += u'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl" dir="ltr">\n'
-        header += u'	<head>\n'
-        header += u'		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n'
-        header += u'		<title>Głosowania - tools.wikimedia.pl</title>\n'
-        header += u'		<link rel="stylesheet" type="text/css" href="/~masti/modern.css" />\n'
-        #header += u'		<style type="text/css">\n'
+        header += u'        <head>\n'
+        header += u'                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n'
+        header += u'                <title>Głosowania - tools.wikimedia.pl</title>\n'
+        header += u'                <link rel="stylesheet" type="text/css" href="/~masti/modern.css" />\n'
+        #header += u'                <style type="text/css">\n'
         #header += u'table.wikitable td, table.wikitable th {\n'
-        #header += u'	padding: 5px;\n'
+        #header += u'        padding: 5px;\n'
         #header += u'}\n'
         #header += u'table.wikitable tr:nth-child(odd) {\n'
-        #header += u'	background-color: #F9F9F9;\n'
+        #header += u'        background-color: #F9F9F9;\n'
         #header += u'}\n'
-        #header += u'		</style>\n'
-        header += u'	</head>\n'
+        #header += u'                </style>\n'
+        header += u'        </head>\n'
         header += u'<body>\n'
         header += u'\n'
-        header += u'	<!-- heading -->\n'
-        header += u'	<div id="mw_header">\n'
-        header += u'		<h1 id="firstHeading">Głosowania</h1>\n'
-        header += u'	</div>\n'
+        header += u'        <!-- heading -->\n'
+        header += u'        <div id="mw_header">\n'
+        header += u'                <h1 id="firstHeading">Głosowania</h1>\n'
+        header += u'        </div>\n'
         header += u'\n'
-        header += u'	<div id="mw_main">\n'
-        header += u'	<div id="mw_contentwrapper">\n'
+        header += u'        <div id="mw_main">\n'
+        header += u'        <div id="mw_contentwrapper">\n'
         header += u'\n'
-        header += u'	<!-- content -->\n'
-        header += u'	<div id="mw_content">\n'
+        header += u'        <!-- content -->\n'
+        header += u'        <div id="mw_content">\n'
         header += u'\n'
-        header += u'	<p>Rzeczywiste wyniki mogą się różnić od podanych poniżej (ktoś może nie mieć prawa głosu, zagłosować w nieprawidłowy sposób lub źle skomentować czyjś głos)! Strona jest aktualizowana co pięć minut.</p>\n'
-        header += u'	<p><small>Komunikat <i>nie można odczytać danych</i> pojawia się w dwóch przypadkach:\n'
-        header += u'		<ul>\n'
-        header += u'			<li>na liście głosowań jest podlinkowane przekierowanie, a nie strona głosowania,</li>\n'
-        header += u'			<li>domyślny układ głosowania został zmieniony (bot nie może znaleźć sekcji z głosami).</li>\n'
-        header += u'		</ul>\n'
-        header += u'	</small></p>\n'
-        #header += u'	<p><center>***** Statystyki są w fazie eksperymentalnej. Wszelkie zauważone problemy proszę zgłaszać w <a href="http://pl.wikipedia.org/wiki/Dyskusja_wikipedysty:masti">dyskusji operatora.</a> *****</center>\n'
-        #header += u'	</p>\n'
+        header += u'        <p>Rzeczywiste wyniki mogą się różnić od podanych poniżej (ktoś może nie mieć prawa głosu, zagłosować w nieprawidłowy sposób lub źle skomentować czyjś głos)! Strona jest aktualizowana co pięć minut.</p>\n'
+        header += u'        <p><small>Komunikat <i>nie można odczytać danych</i> pojawia się w dwóch przypadkach:\n'
+        header += u'                <ul>\n'
+        header += u'                        <li>na liście głosowań jest podlinkowane przekierowanie, a nie strona głosowania,</li>\n'
+        header += u'                        <li>domyślny układ głosowania został zmieniony (bot nie może znaleźć sekcji z głosami).</li>\n'
+        header += u'                </ul>\n'
+        header += u'        </small></p>\n'
+        #header += u'        <p><center>***** Statystyki są w fazie eksperymentalnej. Wszelkie zauważone problemy proszę zgłaszać w <a href="http://pl.wikipedia.org/wiki/Dyskusja_wikipedysty:masti">dyskusji operatora.</a> *****</center>\n'
+        #header += u'        </p>\n'
         # add creation time
-        header += u'	<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
+        header += u'        <p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
         header += u'\n'
-        #header += u'	<p><center><FORM>\n'
-        #header += u'	<INPUT TYPE="button" onClick="history.go(0)" VALUE="ODŚWIEŻ">\n'
-        #header += u'	</FORM>\n'
-        #header += u'	</center></p>\n'
+        #header += u'        <p><center><FORM>\n'
+        #header += u'        <INPUT TYPE="button" onClick="history.go(0)" VALUE="ODŚWIEŻ">\n'
+        #header += u'        </FORM>\n'
+        #header += u'        </center></p>\n'
         header += u'<center><b><a class="external text" href="http://tools.wikimedia.pl/~masti/' + self.getOption('outpage') + u'">ODŚWIEŻ</a></b></center>'
 
         return(header)
 
     def mainfooter(self):
         #prepare main page footer
-        footer = u'	</div><!-- mw_content -->\n'
-        footer += u'	</div><!-- mw_contentwrapper -->\n'
+        footer = u'        </div><!-- mw_content -->\n'
+        footer += u'        </div><!-- mw_contentwrapper -->\n'
         footer += u'\n'
-        footer += u'	</div><!-- main -->\n'
+        footer += u'        </div><!-- main -->\n'
         footer += u'\n'
-        footer += u'	<div class="mw_clear"></div>\n'
+        footer += u'        <div class="mw_clear"></div>\n'
         footer += u'\n'
-        footer += u'	<!-- personal portlet -->\n'
-        footer += u'	<div class="portlet" id="p-personal">\n'
-        footer += u'		<div class="pBody">\n'
-        footer += u'			<ul>\n'
-        footer += u'				<li><a href="http://pl.wikipedia.org">wiki</a></li>\n'
-        footer += u'				<li><a href="/">tools</a></li>\n'
-        footer += u'				<li><a href="/~masti/">masti</a></li>\n'
-        footer += u'			</ul>\n'
-        footer += u'		</div>\n'
-        footer += u'		</div>\n'
+        footer += u'        <!-- personal portlet -->\n'
+        footer += u'        <div class="portlet" id="p-personal">\n'
+        footer += u'                <div class="pBody">\n'
+        footer += u'                        <ul>\n'
+        footer += u'                                <li><a href="http://pl.wikipedia.org">wiki</a></li>\n'
+        footer += u'                                <li><a href="/">tools</a></li>\n'
+        footer += u'                                <li><a href="/~masti/">masti</a></li>\n'
+        footer += u'                        </ul>\n'
+        footer += u'                </div>\n'
+        footer += u'                </div>\n'
         footer += u'<div class="stopka">layout by <a href="../~beau/">Beau</a></div>\n'
         footer += u'</body></html>\n'
 
@@ -829,28 +828,28 @@ class BasicBot(
         '''
 
     def KAheader(self):
-        header = u'	<h2><a name="ka"></a>Komitet Arbitrażowy</h2>\n'
-        header += u'	<p><div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/' + self.getOption('KAmonth') + u'" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'">Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'</a>.</i></p>\n'
+        header = u'        <h2><a name="ka"></a>Komitet Arbitrażowy</h2>\n'
+        header += u'        <p><div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitra%C5%BCowy/Wyb%C3%B3r_cz%C5%82onk%C3%B3w/' + self.getOption('KAmonth') + u'" title="Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'">Wikipedia:Komitet Arbitrażowy/Wybór członków/' + self.getOption('KAmonth') + u'</a>.</i></p>\n'
         header += u'<p>    Liczba miejsc do obsadzenia: %s</p></div>' % self.getOption('KAplaces')
 
         return(header)
 
     def KAtableheader(self):
-        header = u'	<table class="votestable">\n'
-        header += u'		<tr>\n'
-        header += u'			<th>Pozycja</th>\n'
-        header += u'			<th>wikipedysta</th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_neutral_vote.svg" class="image" title="Liczba głosów wstrzymuję się"><img alt="?" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/89/Symbol_neutral_vote.svg/15px-Symbol_neutral_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th>netto</th>\n'
-        header += u'			<th>%</th>\n'
-        header += u'		</tr>\n'
+        header = u'        <table class="votestable">\n'
+        header += u'                <tr>\n'
+        header += u'                        <th>Pozycja</th>\n'
+        header += u'                        <th>wikipedysta</th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_neutral_vote.svg" class="image" title="Liczba głosów wstrzymuję się"><img alt="?" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/89/Symbol_neutral_vote.svg/15px-Symbol_neutral_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th>netto</th>\n'
+        header += u'                        <th>%</th>\n'
+        header += u'                </tr>\n'
 
         return(header)
 
     def KAtablefooter(self):
-        footer = u'	</table>\n'
+        footer = u'        </table>\n'
 
         return(footer)
 
@@ -859,27 +858,27 @@ class BasicBot(
         '''
 
     def PUheader(self):
-        header = u'	<h2><a name="pu"></a>Przyznawanie uprawnień</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APrzyznawanie%20uprawnie%C5%84" title="Wikipedia:Przyznawanie uprawnień">Wikipedia:Przyznawanie uprawnień</a>.</i></div>\n'
+        header = u'        <h2><a name="pu"></a>Przyznawanie uprawnień</h2>\n'
+        header += u'        <div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APrzyznawanie%20uprawnie%C5%84" title="Wikipedia:Przyznawanie uprawnień">Wikipedia:Przyznawanie uprawnień</a>.</i></div>\n'
 
         return(header)
 
     def PUtableheader(self):
-        header = u'	<table class="wikitable vote">\n'
-        header += u'		<tr>\n'
-        header += u'			<th>wikipedysta</th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_neutral_vote.svg" class="image" title="Liczba głosów wstrzymuję się"><img alt="?" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/89/Symbol_neutral_vote.svg/15px-Symbol_neutral_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th>netto</th>\n'
-        header += u'			<th>%</th>\n'
-        header += u'			<th>data zakończenia</th>\n'
-        header += u'		</tr>\n'
+        header = u'        <table class="wikitable vote">\n'
+        header += u'                <tr>\n'
+        header += u'                        <th>wikipedysta</th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_neutral_vote.svg" class="image" title="Liczba głosów wstrzymuję się"><img alt="?" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/89/Symbol_neutral_vote.svg/15px-Symbol_neutral_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th>netto</th>\n'
+        header += u'                        <th>%</th>\n'
+        header += u'                        <th>data zakończenia</th>\n'
+        header += u'                </tr>\n'
 
         return(header)
 
     def PUtablefooter(self):
-        footer = u'	</table>\n'
+        footer = u'        </table>\n'
 
         return(footer)
 
@@ -888,23 +887,23 @@ class BasicBot(
         '''
 
     def PDAheader(self):
-        header = u'	<h2><a name="pdda"></a>Propozycje do Dobrych Artykułów</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Dobrych%20Artyku%C5%82%C3%B3w" title="Wikipedia:Propozycje do Dobrych Artykułów">Wikipedia:Propozycje do Dobrych Artykułów</a>.</i></div>\n'
+        header = u'        <h2><a name="pdda"></a>Propozycje do Dobrych Artykułów</h2>\n'
+        header += u'        <div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Dobrych%20Artyku%C5%82%C3%B3w" title="Wikipedia:Propozycje do Dobrych Artykułów">Wikipedia:Propozycje do Dobrych Artykułów</a>.</i></div>\n'
 
         return(header)
 
     def PDAtableheader(self):
-	header = u'<table class="wikitable">\n'
-        header += u'		<tr>\n'
-        header += u'			<th>strona</th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:FlaggedRevs-2-1.svg" class="image" title="Liczba osób sprawdzających"><img alt="FlaggedRevs-2-1.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/52/FlaggedRevs-2-1.svg/18px-FlaggedRevs-2-1.svg.png" width="18" height="18"></a></th>\n'
-        header += u'			<th>data zakończenia</th>\n'
-        header += u'		</tr>\n'
+        header = u'<table class="wikitable">\n'
+        header += u'                <tr>\n'
+        header += u'                        <th>strona</th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:FlaggedRevs-2-1.svg" class="image" title="Liczba osób sprawdzających"><img alt="FlaggedRevs-2-1.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/52/FlaggedRevs-2-1.svg/18px-FlaggedRevs-2-1.svg.png" width="18" height="18"></a></th>\n'
+        header += u'                        <th>data zakończenia</th>\n'
+        header += u'                </tr>\n'
 
         return(header)
 
     def PDAtablefooter(self):
-        footer = u'	</table>\n'
+        footer = u'        </table>\n'
 
         return(footer)
 
@@ -913,23 +912,23 @@ class BasicBot(
     '''
 
     def PAMheader(self):
-        header = u'	<h2><a name="panm"></a>Propozycje do Artykułów na Medal</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Artyku%C5%82%C3%B3w%20na%20Medal" title="Wikipedia:Propozycje do Artykułów na Medal">Wikipedia:Propozycje do Artykułów na Medal</a>.</i></div>\n'
+        header = u'        <h2><a name="panm"></a>Propozycje do Artykułów na Medal</h2>\n'
+        header += u'        <div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Artyku%C5%82%C3%B3w%20na%20Medal" title="Wikipedia:Propozycje do Artykułów na Medal">Wikipedia:Propozycje do Artykułów na Medal</a>.</i></div>\n'
 
         return(header)
 
     def PAMtableheader(self):
-	header = u'<table class="wikitable">\n'
-        header += u'		<tr>\n'
-        header += u'			<th>strona</th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:FlaggedRevs-2-1.svg" class="image" title="Liczba osób sprawdzających"><img alt="FlaggedRevs-2-1.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/52/FlaggedRevs-2-1.svg/18px-FlaggedRevs-2-1.svg.png" width="18" height="18"></a></th>\n'
-        header += u'			<th>data zakończenia</th>\n'
-        header += u'		</tr>\n'
+        header = u'<table class="wikitable">\n'
+        header += u'                <tr>\n'
+        header += u'                        <th>strona</th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:FlaggedRevs-2-1.svg" class="image" title="Liczba osób sprawdzających"><img alt="FlaggedRevs-2-1.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/5/52/FlaggedRevs-2-1.svg/18px-FlaggedRevs-2-1.svg.png" width="18" height="18"></a></th>\n'
+        header += u'                        <th>data zakończenia</th>\n'
+        header += u'                </tr>\n'
 
         return(header)
 
     def PAMtablefooter(self):
-        footer = u'	</table>\n'
+        footer = u'        </table>\n'
 
         return(footer)
 
@@ -937,26 +936,26 @@ class BasicBot(
     INM section
     '''
     def INMheader(self):
-        header = u'	<h2><a name="gnm"></a>Propozycje do Ilustracji na Medal</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do Ilustracji%20na%20Medal" title="Wikipedia:Propozycje do Ilustracji na Medal">Wikipedia:Propozycje do Ilustracji na Medal</a>.</i></div>\n'
+        header = u'        <h2><a name="gnm"></a>Propozycje do Ilustracji na Medal</h2>\n'
+        header += u'        <div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do Ilustracji%20na%20Medal" title="Wikipedia:Propozycje do Ilustracji na Medal">Wikipedia:Propozycje do Ilustracji na Medal</a>.</i></div>\n'
 
         return(header)
 
     def INMtableheader(self):
-	header = u'<table class="wikitable">\n'
-        header += u'		<tr>\n'
-        header += u'			<th>strona</th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th>netto</th>\n'
-        header += u'			<th>%</th>\n'
-        header += u'			<th>data zakończenia</th>\n'
-        header += u'		</tr>'
+        header = u'<table class="wikitable">\n'
+        header += u'                <tr>\n'
+        header += u'                        <th>strona</th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th>netto</th>\n'
+        header += u'                        <th>%</th>\n'
+        header += u'                        <th>data zakończenia</th>\n'
+        header += u'                </tr>'
 
         return(header)
 
     def INMtablefooter(self):
-        footer = u'	</table>\n'
+        footer = u'        </table>\n'
 
         return(footer)
 
@@ -964,26 +963,26 @@ class BasicBot(
     LNM section
     '''
     def LNMheader(self):
-        header = u'	<h2><a name="plnm"></a>Propozycje do List na Medal</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20List%20na%20Medal" title="Wikipedia:Propozycje do List na Medal">Wikipedia:Propozycje do List na Medal</a>.</i></div>\n'
+        header = u'        <h2><a name="plnm"></a>Propozycje do List na Medal</h2>\n'
+        header += u'        <div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20List%20na%20Medal" title="Wikipedia:Propozycje do List na Medal">Wikipedia:Propozycje do List na Medal</a>.</i></div>\n'
 
         return(header)
 
     def LNMtableheader(self):
-	header = u'<table class="wikitable">\n'
-        header += u'		<tr>\n'
-        header += u'			<th>strona</th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th>netto</th>\n'
-        header += u'			<th>%</th>\n'
-        header += u'			<th>data zakończenia</th>\n'
-        header += u'		</tr>'
+        header = u'<table class="wikitable">\n'
+        header += u'                <tr>\n'
+        header += u'                        <th>strona</th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th>netto</th>\n'
+        header += u'                        <th>%</th>\n'
+        header += u'                        <th>data zakończenia</th>\n'
+        header += u'                </tr>'
 
         return(header)
 
     def LNMtablefooter(self):
-        footer = u'	</table>\n'
+        footer = u'        </table>\n'
 
         return(footer)
 
@@ -991,26 +990,26 @@ class BasicBot(
     PDGA section
     '''
     def PDGAheader(self):
-        header = u'	<h2><a name="plnm"></a>Propozycje do Grup Artykułów</h2>\n'
-        header += u'	<div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Grup%20Artyku%C5%82%C3%B3w" title="Wikipedia:Propozycje do Grup Artykułów">Wikipedia:Propozycje do Grup Artykułów</a>.</i></div>\n'
+        header = u'        <h2><a name="plnm"></a>Propozycje do Grup Artykułów</h2>\n'
+        header += u'        <div class="detail"><a href="//pl.wikipedia.org/wiki/Plik:Information_icon.svg" class="image" title="Information icon.svg"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/15px-Information_icon.svg.png" border="0" height="15" width="15"></a> <i>Zobacz więcej na osobnej stronie: <a href="//pl.wikipedia.org/wiki/Wikipedia%3APropozycje%20do%20Grup%20Artyku%C5%82%C3%B3w" title="Wikipedia:Propozycje do Grup Artykułów">Wikipedia:Propozycje do Grup Artykułów</a>.</i></div>\n'
 
         return(header)
 
     def PDGAtableheader(self):
-	header = u'<table class="wikitable">\n'
-        header += u'		<tr>\n'
-        header += u'			<th>strona</th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
-        header += u'			<th>netto</th>\n'
-        header += u'			<th>%</th>\n'
-        header += u'			<th>data zakończenia</th>\n'
-        header += u'		</tr>'
+        header = u'<table class="wikitable">\n'
+        header += u'                <tr>\n'
+        header += u'                        <th>strona</th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_support_vote.svg" class="image" title="Liczba głosów za"><img alt="+" src="//upload.wikimedia.org/wikipedia/commons/thumb/9/94/Symbol_support_vote.svg/15px-Symbol_support_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th><a href="//pl.wikipedia.org/wiki/Plik:Symbol_oppose_vote.svg" class="image" title="Liczba głosów przeciw"><img alt="-" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Symbol_oppose_vote.svg/15px-Symbol_oppose_vote.svg.png" border="0" height="15" width="15"></a></th>\n'
+        header += u'                        <th>netto</th>\n'
+        header += u'                        <th>%</th>\n'
+        header += u'                        <th>data zakończenia</th>\n'
+        header += u'                </tr>'
 
         return(header)
 
     def PDGAtablefooter(self):
-        footer = u'	</table>\n'
+        footer = u'        </table>\n'
 
         return(footer)
 
@@ -1106,27 +1105,27 @@ class BasicBot(
                     if not error:
                         if netto >= 0:
                             if ranks[rowscount] == lastrank and self.tied(ranks):
-                                output += u'	<tr class="tied">\n'
+                                output += u'        <tr class="tied">\n'
                             elif rowscount < int(self.getOption('KAplaces')):
-                                output += u'	<tr class="valid">\n'
+                                output += u'        <tr class="valid">\n'
                             else:
-                                output += u'	<tr>\n'
+                                output += u'        <tr>\n'
                         else:
-                            output += u'	<tr>\n'
+                            output += u'        <tr>\n'
                         
-                        #output += u'	<tr>\n'
-                        output += u'		<td><center>' + str(ranks[rowscount]) + u'.</center></td>'
+                        #output += u'        <tr>\n'
+                        output += u'                <td><center>' + str(ranks[rowscount]) + u'.</center></td>'
                         link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/' + self.getOption('KAmonth') + u'/' + wiki).encode('utf-8'))
-                        output += u'		<td><center><a href="' + link + u'">' + wiki + u'</a></center></td>'
-                        output += u'		<td>' + str(z) + u'</td>'
-                        output += u'		<td>' + str(p) + u'</td>'
-                        output += u'		<td>' + str(n) + u'</td>'
-                        output += u'		<td><b>' + str(netto) + u'</b></td>'
-                        output += u'		<td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
+                        output += u'                <td><center><a href="' + link + u'">' + wiki + u'</a></center></td>'
+                        output += u'                <td>' + str(z) + u'</td>'
+                        output += u'                <td>' + str(p) + u'</td>'
+                        output += u'                <td>' + str(n) + u'</td>'
+                        output += u'                <td><b>' + str(netto) + u'</b></td>'
+                        output += u'                <td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
                     else:
-                        output += u'	<tr class="invalid">\n'
-                        output += u'		<td colspan="6">nie można odczytać danych</td>\n'
-                    output += u'	</tr>\n'
+                        output += u'        <tr class="invalid">\n'
+                        output += u'                <td colspan="6">nie można odczytać danych</td>\n'
+                    output += u'        </tr>\n'
                     rowscount += 1
                 output += self.KAtablefooter()
             else:
@@ -1139,20 +1138,20 @@ class BasicBot(
             output += self.PUtableheader()
             for p in results['PU']:
                 (wiki,error, counters) = p
-                output += u'	<tr>\n'
+                output += u'        <tr>\n'
                 link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Przyznawanie uprawnień/' + wiki).encode('utf-8'))
-                output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
+                output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,n,netto,percent,date) = counters
-                    output += u'		<td>' + str(z) + u'</td>'
-                    output += u'		<td>' + str(p) + u'</td>'
-                    output += u'		<td>' + str(n) + u'</td>'
-                    output += u'		<td>' + str(netto) + u'</td>'
-                    output += u'		<td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
-                    output += u'		<td>' + date + u'</td>\n' 
+                    output += u'                <td>' + str(z) + u'</td>'
+                    output += u'                <td>' + str(p) + u'</td>'
+                    output += u'                <td>' + str(n) + u'</td>'
+                    output += u'                <td>' + str(netto) + u'</td>'
+                    output += u'                <td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
+                    output += u'                <td>' + date + u'</td>\n' 
                 else:
-                    output += u'		<td colspan="6" style="color:red">nie można odczytać danych</td>\n'
-                output += u'	</tr>\n'
+                    output += u'                <td colspan="6" style="color:red">nie można odczytać danych</td>\n'
+                output += u'        </tr>\n'
             output += self.PUtablefooter()
         else:
             output += u'\n<p>Aktualnie brak trwających głosowań.</p>\n'
@@ -1164,16 +1163,16 @@ class BasicBot(
             output += self.PDAtableheader()
             for p in results['PDA']:
                 (wiki, error, counters) = p
-                output += u'	<tr>\n'
+                output += u'        <tr>\n'
                 link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Dobrych Artykułów/' + wiki).encode('utf-8'))
-                output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
+                output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (v, date) = counters
-                    output += u'		<td>' + str(v) + u'</td>'
-                    output += u'		<td>' + date + u'</td>\n' 
+                    output += u'                <td>' + str(v) + u'</td>'
+                    output += u'                <td>' + date + u'</td>\n' 
                 else:
-                    output += u'		<td colspan="2" style="color:red">nie można odczytać danych</td>\n'
-                output += u'	</tr>\n'
+                    output += u'                <td colspan="2" style="color:red">nie można odczytać danych</td>\n'
+                output += u'        </tr>\n'
 
             output += self.PDAtablefooter()
         else:
@@ -1186,16 +1185,16 @@ class BasicBot(
             for p in results['PAM']:
                 try:
                     (wiki,error, counters) = p
-                    output += u'	<tr>\n'
+                    output += u'        <tr>\n'
                     link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na Medal/' + wiki).encode('utf-8'))
-                    output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
+                    output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                     if not error:
                         (v, date) = counters
-                        output += u'		<td>' + str(v) + u'</td>'
-                        output += u'		<td>' + date + u'</td>\n' 
+                        output += u'                <td>' + str(v) + u'</td>'
+                        output += u'                <td>' + date + u'</td>\n' 
                     else:
-                        output += u'		<td colspan="2" style="color:red">nie można odczytać danych</td>\n'
-                    output += u'	</tr>\n'
+                        output += u'                <td colspan="2" style="color:red">nie można odczytać danych</td>\n'
+                    output += u'        </tr>\n'
                 except:
                     pass
             output += self.PAMtablefooter()
@@ -1208,19 +1207,19 @@ class BasicBot(
             output += self.INMtableheader()
             for p in results['INM']:
                 (wiki, error, counters) = p
-                output += u'	<tr>\n'
+                output += u'        <tr>\n'
                 link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Ilustracji na Medal/' + wiki).encode('utf-8'))
-                output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
+                output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
-                    output += u'		<td>' + str(z) + u'</td>'
-                    output += u'		<td>' + str(p) + u'</td>'
-                    output += u'		<td>' + str(netto) + u'</td>'
-                    output += u'		<td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
-                    output += u'		<td>' + date + u'</td>\n' 
+                    output += u'                <td>' + str(z) + u'</td>'
+                    output += u'                <td>' + str(p) + u'</td>'
+                    output += u'                <td>' + str(netto) + u'</td>'
+                    output += u'                <td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
+                    output += u'                <td>' + date + u'</td>\n' 
                 else:
-                    output += u'		<td colspan="5" style="color:red">nie można odczytać danych</td>\n'
-                output += u'	</tr>\n'
+                    output += u'                <td colspan="5" style="color:red">nie można odczytać danych</td>\n'
+                output += u'        </tr>\n'
 
             output += self.INMtablefooter()
         else:
@@ -1233,19 +1232,19 @@ class BasicBot(
             output += self.LNMtableheader()
             for p in results['LNM']:
                 (wiki, error, counters) = p
-                output += u'	<tr>\n'
+                output += u'        <tr>\n'
                 link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_List_na_Medal/' + wiki).encode('utf-8'))
-                output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
+                output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
-                    output += u'		<td>' + str(z) + u'</td>'
-                    output += u'		<td>' + str(p) + u'</td>'
-                    output += u'		<td>' + str(netto) + u'</td>'
-                    output += u'		<td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
-                    output += u'		<td>' + date + u'</td>\n' 
+                    output += u'                <td>' + str(z) + u'</td>'
+                    output += u'                <td>' + str(p) + u'</td>'
+                    output += u'                <td>' + str(netto) + u'</td>'
+                    output += u'                <td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
+                    output += u'                <td>' + date + u'</td>\n' 
                 else:
-                    output += u'		<td colspan="5" style="color:red">nie można odczytać danych</td>\n'
-                output += u'	</tr>\n'
+                    output += u'                <td colspan="5" style="color:red">nie można odczytać danych</td>\n'
+                output += u'        </tr>\n'
 
             output += self.LNMtablefooter()
         else:
@@ -1258,19 +1257,19 @@ class BasicBot(
             output += self.PDGAtableheader()
             for p in results['PDGA']:
                 (wiki, error, counters) = p
-                output += u'	<tr>\n'
+                output += u'        <tr>\n'
                 link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_Grup_Artykułów/' + wiki).encode('utf-8'))
-                output += u'		<td><a href="' + link + u'">' + wiki + u'</a></td>'
+                output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
-                    output += u'		<td>' + str(z) + u'</td>'
-                    output += u'		<td>' + str(p) + u'</td>'
-                    output += u'		<td>' + str(netto) + u'</td>'
-                    output += u'		<td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
-                    output += u'		<td>' + date + u'</td>\n' 
+                    output += u'                <td>' + str(z) + u'</td>'
+                    output += u'                <td>' + str(p) + u'</td>'
+                    output += u'                <td>' + str(netto) + u'</td>'
+                    output += u'                <td>' + "{0:.2f}".format((percent*1000)/10.0) + u'</td>'
+                    output += u'                <td>' + date + u'</td>\n' 
                 else:
-                    output += u'		<td colspan="5" style="color:red">nie można odczytać danych</td>\n'
-                output += u'	</tr>\n'
+                    output += u'                <td colspan="5" style="color:red">nie można odczytać danych</td>\n'
+                output += u'        </tr>\n'
 
             output += self.PDGAtablefooter()
         else:
