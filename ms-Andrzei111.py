@@ -13,7 +13,7 @@ will be done.
 This bot creates a pages with links to tennis players.
 
 Call:
-	python pwb.py masti/ms-Andrzei111.py -page:"Wikipedysta:Andrzei111" -outpage:"Wikipedysta:Andrzei111/lista artykułów" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
+        python pwb.py masti/ms-Andrzei111.py -page:"Wikipedysta:Andrzei111" -outpage:"Wikipedysta:Andrzei111/lista artykułów" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
 
 The following parameters are supported:
 
@@ -51,7 +51,6 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 import re
-import urllib2
 import datetime
 
 # This is required for the text that is shown when you run this script
@@ -139,14 +138,14 @@ class BasicBot(
 
     def extractsection(self,page,section,level):
         # extract section of page returning it's content
-        sectionR = re.compile(ur'(?s)={'+str(level)+'}\s*?'+section+'\s*?={'+str(level)+'}(?P<text>.*?)\n={'+str(level)+'} ')
+        sectionR = re.compile(r'(?s)={'+str(level)+'}\s*?'+section+'\s*?={'+str(level)+'}(?P<text>.*?)\n={'+str(level)+'} ')
         if self.getOption('test'):
             pywikibot.output(u'(?s)={'+str(level)+'}\s*?'+section+'\s*?={'+str(level)+'}(?P<text>.*?)\n={'+str(level)+'} ')
         return(sectionR.search(page.text).group('text'))
 
     def genpages(self,text):
         #generate pages based on wikilinks in text
-        titleR = re.compile(ur'\[\[(?P<title>[^\|\]]*?)[\|\]]')
+        titleR = re.compile(r'\[\[(?P<title>[^\|\]]*?)[\|\]]')
         for t in titleR.finditer(text):
             page = pywikibot.Page(pywikibot.Site(),t.group('title'))
             yield page
@@ -154,8 +153,8 @@ class BasicBot(
 
     def run(self):
 
-	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+        header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+        header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
         header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
         header +=u'\n|-'
         header +=u'\n!Nr'
@@ -171,7 +170,7 @@ class BasicBot(
         reflinks = [] #initiate list
         gencount = 0
         for tpage in self.generator:
-	    gencount += 1
+            gencount += 1
             if self.getOption('test'):
                 pywikibot.output(u'Treating #%i: %s' % (gencount, tpage.title()))
 
@@ -281,7 +280,7 @@ class BasicBot(
     def shortTitle(self, t):
         """ return text without part in parentheses"""
         if u'(' in t:
-            shR = re.compile(ur'(?P<short>.*?) \(')
+            shR = re.compile(r'(?P<short>.*?) \(')
             match = shR.search(t)
             return (match.group("short").strip())
         else:
@@ -314,7 +313,7 @@ class BasicBot(
             value: value of param
         @rtype: tuple
         """
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        paramR = re.compile(r'(?P<name>.*)=(?P<value>.*)')
         if '=' in param:
             match = paramR.search(param)
             named = True
