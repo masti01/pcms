@@ -8,12 +8,12 @@ whatever way you want.
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
 Call:
-	python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" \
-		-summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
-	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
-		-summary:"Bot uaktualnia tabelę" -text:"http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*" -ns:0 -regex
-	python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
-		-summary:"Bot uaktualnia tabelę" -text:"(?P<result>http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*)" -ns:0 -regex
+        python pwb.py masti/ms-contains.py -catr:"Posłowie do Knesetu" -outpage:"Wikipedysta:Andrzei111/Izrael/bez Kneset" \
+                -summary:"Bot uaktualnia tabelę" -text:"{{Kneset" -negative
+        python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
+                -summary:"Bot uaktualnia tabelę" -text:"http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*" -ns:0 -regex
+        python pwb.py masti/ms-contains.py -weblink:'isap.sejm.gov.pl' -outpage:"Wikipedysta:mastiBot/isap" \
+                -summary:"Bot uaktualnia tabelę" -text:"(?P<result>http://isap\.sejm\.gov\.pl/Download\?id=WD[^\s\]\|]*)" -ns:0 -regex
 The following parameters are supported:
 &params;
 -always           If used, the bot won't ask if it should file the message
@@ -154,7 +154,7 @@ class BasicBot(
         if not self.getOption('append'):
             if self.getOption('table'):
                 header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''."
-	        header += u"\n\nWszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
+                header += u"\n\nWszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]]."
                 if self.getOption('regex'):
                     header += '\n\nregex: <code><nowiki>\'%s\'</nowiki></code>\n' % self.getOption('text')
                 header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
@@ -164,7 +164,7 @@ class BasicBot(
                 header +=u'\n!Wyniki'
             else:
                 header = u"Ostatnia aktualizacja: '''<onlyinclude>{{#time: Y-m-d H:i|{{REVISIONTIMESTAMP}}}}</onlyinclude>'''.\n\n"
-	        header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
+                header += u"Wszelkie uwagi proszę zgłaszać w [[User talk:masti|dyskusji operatora]].\n\n"
                 if self.getOption('regex'):
                     header += '\n\nregex: <code><nowiki>\'%s\'</nowiki></code>\n' % self.getOption('text')
         else:
@@ -175,7 +175,7 @@ class BasicBot(
         duplicates = 0
         marked = 0
         for page in self.generator:
-	    pagecounter += 1
+            pagecounter += 1
             if self.getOption('test') or self.getOption('progress'):
                 pywikibot.output(u'[%s] Treating #%i (marked:%i, duplicates:%i): %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),pagecounter, marked, duplicates, page.title()))
             if page.title() in reflinks:
@@ -231,17 +231,17 @@ class BasicBot(
             if self.getOption('table'):
                 finalpage += u'\n|-\n| %s || ' % linenumber
                 if self.getOption('edit'):
-                    nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
+                    nakedtitle = re.sub(r'\[\[|\]\]',u'',title)
                     finalpage += u'{{Edytuj|%s|%s}}' % ( nakedtitle,nakedtitle)
                 else:
-                    finalpage += re.sub(ur'\[\[',u'[[:',title, count=1)
+                    finalpage += re.sub(r'\[\[',u'[[:',title, count=1)
                 finalpage += u' || '
             else:
                 if self.getOption('edit'):
-                    nakedtitle = re.sub(ur'\[\[|\]\]',u'',title)
+                    nakedtitle = re.sub(r'\[\[|\]\]',u'',title)
                     finalpage += u'\n:' + linenumber + ' {{Edytuj|' + nakedtitle + u'|' + nakedtitle + u'}}' 
                 else:
-                    finalpage += u'\n:' + linenumber + u' ' + re.sub(ur'\[\[',u'[[:',title, count=1)
+                    finalpage += u'\n:' + linenumber + u' ' + re.sub(r'\[\[',u'[[:',title, count=1)
             if self.getOption('regex') and self.getOption('cite') and not self.getOption('negative'):
                 if self.getOption('multi'):
                     #results are list
