@@ -6,7 +6,7 @@ import re
 import sys
 import pywikibot
 import codecs
-import urllib
+import urllib.parse
 from datetime import datetime
 from time import strftime
 
@@ -95,7 +95,7 @@ def header(lang):
     header += u'		<small>' + i18[lang]['refresh'] + u'</small><br />\n'
     header += u'		</p>\n'
     # add creation time
-    header += u'		<p>' + i18[lang]['lastupdate'] + u'<b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
+    header += u'		<p>' + i18[lang]['lastupdate'] + u'<b>' + strftime('%A %d %B %Y %X %Z') + u'</b></p>\n'
     header += u'\n'
     #
     header += u'                <center>\n'
@@ -162,12 +162,12 @@ def outputRow(logline,lang):
     except:
         return(None)
     # encode URLs for title and target
-    utitle = urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
+    utitle = urllib.parse.quote_plus((u'//' + lang + u'.wikipedia.org/wiki/' + atitle))
     #print utitle
     if atarget == u'':
         utarget = u''
     else:
-        utarget = urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
+        utarget = urllib.parse.quote_plus((u'//' + lang + u'.wikipedia.org/wiki/' + atarget))
     # create output
     result = u'\t\t\t<tr>\n'
     result += u'\t\t\t\t<td>' + anum +'</td>\n'
@@ -201,13 +201,13 @@ def linkcolor(page,lang):
 
     if page.exists():
        if page.isRedirectPage():
-           return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + page.title()).encode('UTF-8')) + u'" style="color:#308050">' + page.title() + u'</a>')
+           return(u'<a href="' + urllib.parse.quote_plus((u'//' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#308050">' + page.title() + u'</a>')
        elif page.isDisambig():
-           return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + page.title()).encode('UTF-8')) + u'" style="color:#800000">' + page.title() + u'</a>')
+           return(u'<a href="' + urllib.parse.quote_plus((u'//' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#800000">' + page.title() + u'</a>')
        else:
-           return(u'<a href="' + urllib.quote((u'//' + lang + u'.wikipedia.org/wiki/' + page.title()).encode('UTF-8')) + u'">' + page.title() + u'</a>')
+           return(u'<a href="' + urllib.parse.quote_plus((u'//' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'">' + page.title() + u'</a>')
     else:
-        return(u'<a href="//' + lang + u'.wikipedia.org/w/index.php?title=' + urllib.quote(page.title().encode('UTF-8')) + u'&action=edit&redlink=1" style="color:#CC2200">' + page.title() + u'</a>')
+        return(u'<a href="//' + lang + u'.wikipedia.org/w/index.php?title=' + urllib.parse.quote_plus(page.title()) + u'&action=edit&redlink=1" style="color:#CC2200">' + page.title() + u'</a>')
     
 
 def main(*args):
