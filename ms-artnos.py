@@ -4,7 +4,7 @@
 import re
 import pywikibot
 import codecs
-import urllib
+import urllib.parse
 from datetime import datetime
 from time import strftime
 
@@ -37,7 +37,7 @@ def header():
     header += u'		<small>Strona uaktualniana co 5 minut. Wyświetlanie od najnowszych</small><br />\n'
     header += u'		</p>\n'
     # add creation time
-    header += u'		<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
+    header += u'		<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z') + u'</b></p>\n'
     header += u'\n'
     #
     header += u'                <center>\n'
@@ -88,11 +88,11 @@ def outputRow(logline):
     except:
         return(None)
     # encode URLs for title and target
-    utitle = urllib.quote((u'//pl.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
+    utitle = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/' + atitle))
     if atarget == u'':
         utarget = u''
     else:
-        utarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
+        utarget = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/' + atarget))
     # create output
     result = u'\t\t\t<tr>\n'
     result += u'\t\t\t\t<td>' + anum +'</td>\n'
@@ -135,8 +135,8 @@ def outputRow(logline):
                 else:
                     tstyle = u' style="color:#CC2200">'
 
-    urlatitle = urllib.quote((u'//pl.wikipedia.org/wiki/' + atitle).encode('UTF-8'))
-    urlatarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
+    urlatitle = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/' + atitle))
+    urlatarget = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/' + atarget))
 
 
     #result += u'\t\t\t\t<td><a href="'+ utitle + u'">' + atitle + u'</a></td>\n'
@@ -157,7 +157,7 @@ def outputRow(logline):
         result += u'\t\t\t\t<td>BŁĄD PRZEKIEROWANIA</td>\n'
     else:
         redir = pywikibot.Page(pywikibot.Site(), atarget)
-        utarget = urllib.quote((u'//pl.wikipedia.org/wiki/' + atarget).encode('UTF-8'))
+        utarget = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/' + atarget))
         if redir.exists():
             result += u'\t\t\t\t<td><a href="'+ utarget + u'">' + atarget + u'</a></td>\n'
         else:
