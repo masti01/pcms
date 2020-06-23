@@ -138,21 +138,21 @@ class BasicBot(
 
         #prepare new page
         header = u"Poniżej znajduje się lista do " + str(self.getOption('maxlines')) + u" brakujących artykułów.\n\n"
-	header += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+        header += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+        header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
         header += u"\n\nBrakujące artykuły"
-	header += u"\n<small>"
-	header += u"\n*Legenda:"
-	header += u"\n*:'''#''' - Numer"
-	header += u"\n*:'''Hasło''' - Tytuł hasła"
-	header += u"\n*:'''Linki''' - Ilość linków do artykułu"
-	header += u"\n</small>\n"
+        header += u"\n<small>"
+        header += u"\n*Legenda:"
+        header += u"\n*:'''#''' - Numer"
+        header += u"\n*:'''Hasło''' - Tytuł hasła"
+        header += u"\n*:'''Linki''' - Ilość linków do artykułu"
+        header += u"\n</small>\n"
         header += u'{| class="wikitable sortable" style="font-size:85%;"\n|-\n!#\n!Hasło\n!Linki\n'
 
         reflinks = {}
         licznik = 0
         for page in self.generator:
-	    licznik += 1
+            licznik += 1
             if self.getOption('test'):
                 pywikibot.output(u'Treating #%i: %s' % (licznik, page.title()))
             if (self.getOption('negative') and not page.exists()) or (not self.getOption('negative') and page.exists()):
@@ -164,7 +164,7 @@ class BasicBot(
                 if self.getOption('test'):
                     pywikibot.output(u'SKIPPING Page :%s' % page.title() )
 
-	footer = u'\n|}\n'
+        footer = u'\n|}\n'
         footer += u'Przetworzono: ' + str(licznik) + u' stron' 
 
         result = self.generateresultspage(reflinks,self.getOption('outpage'),header,footer)
@@ -260,7 +260,7 @@ def templateArg(self, param):
         @rtype: tuple
         """
         # TODO
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        paramR = re.compile(r'(?P<name>.*)=(?P<value>.*)')
         if '=' in param:
             match = paramR.search(param)
             named = True
