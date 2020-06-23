@@ -47,7 +47,7 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 
-import urllib
+import urllib.parse
 import datetime
 from time import strftime
 
@@ -148,8 +148,8 @@ class BasicBot(
         reviews168 = self.countReviews(currtime, 168)
 
         if self.getOption('test'):
-	    pywikibot.output(u'Results24: %s' % reviews24)
-	    pywikibot.output(u'Results168: %s' % reviews168)
+            pywikibot.output(u'Results24: %s' % reviews24)
+            pywikibot.output(u'Results168: %s' % reviews168)
 
         self.generateresultspage(reviews24,reviews168)
 
@@ -208,57 +208,57 @@ class BasicBot(
         # create main header
         header =u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n'
         header +=u'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl" dir="ltr">\n'
-        header +=u'	<head>\n'
-        header +=u'		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n'
-        header +=u'		<title>Statystyki redaktorów - tools.wikimedia.pl</title>\n'
-        header +=u'		<link rel="stylesheet" type="text/css" href="/~masti/modern.css" />\n'
-        header +=u'	</head>\n'
+        header +=u'        <head>\n'
+        header +=u'                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n'
+        header +=u'                <title>Statystyki redaktorów - tools.wikimedia.pl</title>\n'
+        header +=u'                <link rel="stylesheet" type="text/css" href="/~masti/modern.css" />\n'
+        header +=u'        </head>\n'
         header +=u'<body>\n'
         header +=u'\n'
-        header +=u'	<!-- heading -->\n'
-        header +=u'	<div id="mw_header">\n'
-        header +=u'		<h1 id="firstHeading">Statystyki redaktorów</h1>\n'
-        header +=u'	</div>\n'
+        header +=u'        <!-- heading -->\n'
+        header +=u'        <div id="mw_header">\n'
+        header +=u'                <h1 id="firstHeading">Statystyki redaktorów</h1>\n'
+        header +=u'        </div>\n'
         header +=u'\n'
-        header +=u'	<div id="mw_main">\n'
-        header +=u'	<div id="mw_contentwrapper">\n'
+        header +=u'        <div id="mw_main">\n'
+        header +=u'        <div id="mw_contentwrapper">\n'
         header +=u'\n'
-        header +=u'	<!-- content -->\n'
-        header +=u'	<div id="mw_content">\n'
+        header +=u'        <!-- content -->\n'
+        header +=u'        <div id="mw_content">\n'
         header +=u'\n'
-        header +=u'		<table class="infobox">\n'
-        header +=u'			<tr><th>Statystyki</th></tr>\n'
-        header +=u'			<tr><td><a href="#reviewers24h">Redaktorzy - 24h</a></td></tr>\n'
-        header +=u'			<tr><td><a href="#reviewers168h">Redaktorzy - 168h</a></td></tr>\n'
-        header +=u'		</table>\n'
-        header +=u'		<p>Strona przedstawia statystyki dotyczące działań redaktorów. Podsumowanie jest generowane na podstawie danych z ostatnich 24h i 7 dni (168h) . Strona jest aktualizowana co pięć minut.</p>\n'
+        header +=u'                <table class="infobox">\n'
+        header +=u'                        <tr><th>Statystyki</th></tr>\n'
+        header +=u'                        <tr><td><a href="#reviewers24h">Redaktorzy - 24h</a></td></tr>\n'
+        header +=u'                        <tr><td><a href="#reviewers168h">Redaktorzy - 168h</a></td></tr>\n'
+        header +=u'                </table>\n'
+        header +=u'                <p>Strona przedstawia statystyki dotyczące działań redaktorów. Podsumowanie jest generowane na podstawie danych z ostatnich 24h i 7 dni (168h) . Strona jest aktualizowana co pięć minut.</p>\n'
         # add creation time
-        header += u'	<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
+        header += u'        <p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z') + u'</b></p>\n'
         header += u'\n'
         header += u'<center><b><a class="external text" href="http://tools.wikimedia.pl/~masti/review.html">ODŚWIEŻ</a></b></center>\n'
         return(header)
 
     def mainfooter(self):
         # create main footer
-        footer = u'		</table>\n'
+        footer = u'                </table>\n'
         footer +=u'\n'
-        footer +=u'	</div><!-- mw_content -->\n'
-        footer +=u'	</div><!-- mw_contentwrapper -->\n'
+        footer +=u'        </div><!-- mw_content -->\n'
+        footer +=u'        </div><!-- mw_contentwrapper -->\n'
         footer +=u'\n'
-        footer +=u'	</div><!-- main -->\n'
+        footer +=u'        </div><!-- main -->\n'
         footer +=u'\n'
-        footer +=u'	<div class="mw_clear"></div>\n'
+        footer +=u'        <div class="mw_clear"></div>\n'
         footer +=u'\n'
-        footer +=u'	<!-- personal portlet -->\n'
-        footer +=u'	<div class="portlet" id="p-personal">\n'
-        footer +=u'		<div class="pBody">\n'
-        footer +=u'			<ul>\n'
-        footer +=u'				<li><a href="//pl.wikipedia.org">wiki</a></li>\n'
-        footer +=u'				<li><a href="/">tools</a></li>\n'
-        footer +=u'				<li><a href="/~masti/">masti</a></li>\n'
+        footer +=u'        <!-- personal portlet -->\n'
+        footer +=u'        <div class="portlet" id="p-personal">\n'
+        footer +=u'                <div class="pBody">\n'
+        footer +=u'                        <ul>\n'
+        footer +=u'                                <li><a href="//pl.wikipedia.org">wiki</a></li>\n'
+        footer +=u'                                <li><a href="/">tools</a></li>\n'
+        footer +=u'                                <li><a href="/~masti/">masti</a></li>\n'
         footer +=u'</ul>\n'
-        footer +=u'		</div>\n'
-        footer +=u'	</div>\n'
+        footer +=u'                </div>\n'
+        footer +=u'        </div>\n'
         footer +=u'<div class="stopka">layout by <a href="../~beau/">Beau</a></div>\n'
         footer +=u'</body></html>\n'
         footer +=u'\n'
@@ -266,24 +266,24 @@ class BasicBot(
 
     def reviewheader(self,hours):
         #create section header
-        header  =u'		<h2><a name="reviewers'+ str(hours) + u'h"></a>Najaktywniejsi redaktorzy w ostatnich ' + str(hours) + u'h</h2>\n'
-        header +=u'		<table class="wikitable sortable">\n'
-        header +=u'			<colgroup span="1"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
-        header +=u'			<tr>\n'
-        header +=u'				<th>Redaktor</th>\n'
-        header +=u'				<th>Oznaczeń</th>\n'
-        header +=u'				<th>Pierwsze</th>\n'
-        header +=u'				<th>Ponowne</th>\n'
-        header +=u'				<th>Wycofanie</th>\n'
-        header +=u'			</tr>\n'
+        header  =u'                <h2><a name="reviewers'+ str(hours) + u'h"></a>Najaktywniejsi redaktorzy w ostatnich ' + str(hours) + u'h</h2>\n'
+        header +=u'                <table class="wikitable sortable">\n'
+        header +=u'                        <colgroup span="1"></colgroup>\n'
+        header +=u'                        <colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
+        header +=u'                        <colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
+        header +=u'                        <colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
+        header +=u'                        <colgroup span="1" style="width: 20%; text-align: center"></colgroup>\n'
+        header +=u'                        <tr>\n'
+        header +=u'                                <th>Redaktor</th>\n'
+        header +=u'                                <th>Oznaczeń</th>\n'
+        header +=u'                                <th>Pierwsze</th>\n'
+        header +=u'                                <th>Ponowne</th>\n'
+        header +=u'                                <th>Wycofanie</th>\n'
+        header +=u'                        </tr>\n'
         return(header)
 
     def reviewfooter(self):
-        return(u'		</table>\n')
+        return(u'                </table>\n')
 
     def generatesection(self, reviews, hours):
         # generate one section with stats i.e.24h, 168h
@@ -295,7 +295,7 @@ class BasicBot(
                 pywikibot.output(u'%s->%s' % (i, reviews[i]))
             total, initial, other, unreview = reviews[i]
             output += u'\t\t\t<tr>\n'
-            link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i).encode('utf-8'))
+            link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i))
             output += u'\t\t\t\t<td><a href="' + link + u'">' + i + u'</a></td><td>' + str(total) + u'</td><td>' + str(initial) + u'</td><td>' + str(other) + u'</td><td>' + str(unreview) + u'</td>\n'
             output += u'\t\t\t</tr>\n'
         output += self.reviewfooter()
@@ -314,7 +314,7 @@ class BasicBot(
         #test
         #pywikibot.output(u'Writing file: %s' % self.getOption('outpage'))
         rf= open(u'masti/html/'+self.getOption('outpage'),'w')
-        rf.write(output.encode('utf8'))
+        rf.write(output)
         rf.close()
         return
 
