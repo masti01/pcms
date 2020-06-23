@@ -168,8 +168,8 @@ class BasicBot(
         #prepare new page
         # replace @@ with number of pages
         header = 'Lista linkujących do artykułów z listy na stronie [[Wikipedysta:Andrzei111/nazwiska z inicjałem]].\n\n'
-	header += "Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja przez bota: '''~~~~~'''. \n\n"
-	header += u'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
+        header += "Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja przez bota: '''~~~~~'''. \n\n"
+        header += u'Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n'
 
         header += '{| class="wikitable sortable"\n|-\n'
         header += '! Nr !! nazwa !! odwołania !! krótka nazwa !! odwołania\n|-\n'
