@@ -47,7 +47,7 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 
-import urllib
+import urllib.parse
 import datetime
 from time import strftime
 
@@ -148,9 +148,9 @@ class BasicBot(
         blockreasons = self.blockReasons(currtime,int(self.getOption('days')))
         blockadmins = self.blockStats(currtime,int(self.getOption('days')))
 
-	if self.getOption('test'):
+        if self.getOption('test'):
             pywikibot.output(u'Block Reasons: %s' % blockreasons)
-	    pywikibot.output(u'Block Stats: %s' % blockadmins)
+            pywikibot.output(u'Block Stats: %s' % blockadmins)
 
         self.generateresultspage(blockreasons,blockadmins)
 
@@ -233,57 +233,57 @@ class BasicBot(
         # create main header
         header =u'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n'
         header +=u'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl" dir="ltr">\n'
-        header +=u'	<head>\n'
-        header +=u'		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n'
-        header +=u'		<title>Statystyki blokad - ostatnie ' + self.getOption('days') + u'dni  - tools.wikimedia.pl</title>\n'
-        header +=u'		<link rel="stylesheet" type="text/css" href="/~masti/modern.css" />\n'
-        header +=u'	</head>\n'
+        header +=u'        <head>\n'
+        header +=u'                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\n'
+        header +=u'                <title>Statystyki blokad - ostatnie ' + self.getOption('days') + u'dni  - tools.wikimedia.pl</title>\n'
+        header +=u'                <link rel="stylesheet" type="text/css" href="/~masti/modern.css" />\n'
+        header +=u'        </head>\n'
         header +=u'<body>\n'
         header +=u'\n'
-        header +=u'	<!-- heading -->\n'
-        header +=u'	<div id="mw_header">\n'
-        header +=u'		<h1 id="firstHeading">Statystyki blokad - ostatnie ' + self.getOption('days') + u' dni</h1>\n'
-        header +=u'	</div>\n'
+        header +=u'        <!-- heading -->\n'
+        header +=u'        <div id="mw_header">\n'
+        header +=u'                <h1 id="firstHeading">Statystyki blokad - ostatnie ' + self.getOption('days') + u' dni</h1>\n'
+        header +=u'        </div>\n'
         header +=u'\n'
-        header +=u'	<div id="mw_main">\n'
-        header +=u'	<div id="mw_contentwrapper">\n'
+        header +=u'        <div id="mw_main">\n'
+        header +=u'        <div id="mw_contentwrapper">\n'
         header +=u'\n'
-        header +=u'	<!-- content -->\n'
-        header +=u'	<div id="mw_content">\n'
+        header +=u'        <!-- content -->\n'
+        header +=u'        <div id="mw_content">\n'
         header +=u'\n'
-        header +=u'		<table class="infobox">\n'
-        header +=u'			<tr><th>Statystyki</th></tr>\n'
-        header +=u'			<tr><td><a href="#blockreason">Blokady - uzasadnienia</a></td></tr>\n'
-        header +=u'			<tr><td><a href="#blockadmins">Blokady - administratorzy</a></td></tr>\n'
-        header +=u'		</table>\n'
-        header +=u'		<p>Strona przedstawia statystyki blokad. Podsumowanie jest generowane na podstawie danych z ostatnich ' + self.getOption('days') + u' dni. Strona jest aktualizowana raz dziennie (04:00).</p>\n'
+        header +=u'                <table class="infobox">\n'
+        header +=u'                        <tr><th>Statystyki</th></tr>\n'
+        header +=u'                        <tr><td><a href="#blockreason">Blokady - uzasadnienia</a></td></tr>\n'
+        header +=u'                        <tr><td><a href="#blockadmins">Blokady - administratorzy</a></td></tr>\n'
+        header +=u'                </table>\n'
+        header +=u'                <p>Strona przedstawia statystyki blokad. Podsumowanie jest generowane na podstawie danych z ostatnich ' + self.getOption('days') + u' dni. Strona jest aktualizowana raz dziennie (04:00).</p>\n'
         # add creation time
-        header += u'	<p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z').encode('UTF-8') + u'</b></p>\n'
+        header += u'        <p>Ostatnia aktualizacja: <b>' + strftime('%A %d %B %Y %X %Z') + u'</b></p>\n'
         header += u'\n'
         header += u'<center><b><a class="external text" href="http://tools.wikimedia.pl/~masti/blocks.html">ODŚWIEŻ</a></b></center>\n'
         return(header)
 
     def mainfooter(self):
         # create main footer
-        footer = u'		</table>\n'
+        footer = u'                </table>\n'
         footer +=u'\n'
-        footer +=u'	</div><!-- mw_content -->\n'
-        footer +=u'	</div><!-- mw_contentwrapper -->\n'
+        footer +=u'        </div><!-- mw_content -->\n'
+        footer +=u'        </div><!-- mw_contentwrapper -->\n'
         footer +=u'\n'
-        footer +=u'	</div><!-- main -->\n'
+        footer +=u'        </div><!-- main -->\n'
         footer +=u'\n'
-        footer +=u'	<div class="mw_clear"></div>\n'
+        footer +=u'        <div class="mw_clear"></div>\n'
         footer +=u'\n'
-        footer +=u'	<!-- personal portlet -->\n'
-        footer +=u'	<div class="portlet" id="p-personal">\n'
-        footer +=u'		<div class="pBody">\n'
-        footer +=u'			<ul>\n'
-        footer +=u'				<li><a href="//pl.wikipedia.org">wiki</a></li>\n'
-        footer +=u'				<li><a href="/">tools</a></li>\n'
-        footer +=u'				<li><a href="/~masti/">masti</a></li>\n'
+        footer +=u'        <!-- personal portlet -->\n'
+        footer +=u'        <div class="portlet" id="p-personal">\n'
+        footer +=u'                <div class="pBody">\n'
+        footer +=u'                        <ul>\n'
+        footer +=u'                                <li><a href="//pl.wikipedia.org">wiki</a></li>\n'
+        footer +=u'                                <li><a href="/">tools</a></li>\n'
+        footer +=u'                                <li><a href="/~masti/">masti</a></li>\n'
         footer +=u'</ul>\n'
-        footer +=u'		</div>\n'
-        footer +=u'	</div>\n'
+        footer +=u'                </div>\n'
+        footer +=u'        </div>\n'
         footer +=u'<div class="stopka">layout by <a href="../~beau/">Beau</a></div>\n'
         footer +=u'</body></html>\n'
         footer +=u'\n'
@@ -291,19 +291,19 @@ class BasicBot(
 
     def blockreasonheader(self,days):
         #create section header
-        header  =u'		<h2><a name="blockreason"></a>Blokady - uzasadnienia - ostatnie '+ str(days) + u' dni</h2>\n'
-        header +=u'		<table class="wikitable sortable" >\n'
-        header +=u'			<colgroup span="1" style="width: 5%"></colgroup>\n'
-        header +=u'			<colgroup span="1" style="text-align: left"></colgroup>\n'
-        header +=u'			<tr>\n'
-        header +=u'				<th>Liczba</th>\n'
-        header +=u'				<th>Powód</th>\n'	
-        header +=u'			</tr>\n'
+        header  =u'                <h2><a name="blockreason"></a>Blokady - uzasadnienia - ostatnie '+ str(days) + u' dni</h2>\n'
+        header +=u'                <table class="wikitable sortable" >\n'
+        header +=u'                        <colgroup span="1" style="width: 5%"></colgroup>\n'
+        header +=u'                        <colgroup span="1" style="text-align: left"></colgroup>\n'
+        header +=u'                        <tr>\n'
+        header +=u'                                <th>Liczba</th>\n'
+        header +=u'                                <th>Powód</th>\n'        
+        header +=u'                        </tr>\n'
         return(header)
 
     def blockreasonfooter(self):
-        footer  = u'		</table>\n'
-        footer += u'		<p>Jednorazowe uzasadnienia nie zostały pokazane.</p>\n'
+        footer  = u'                </table>\n'
+        footer += u'                <p>Jednorazowe uzasadnienia nie zostały pokazane.</p>\n'
         return(footer)
 
 
@@ -326,22 +326,22 @@ class BasicBot(
 
     def blockstatheader(self,days):
         #create section header
-        header  =u'		<h2><a name="blockadmins"></a>Blokady - administratorzy - ostatnie '+ str(days) + u' dni</h2>\n'
-        header +=u'		<table class="stats">\n'
-        header +=u'			<colgroup>\n'
-        header +=u'				<col style="width: 15%"/>\n'
-        header +=u'				<col style="width: 5%"/>\n'
-        header +=u'			</colgroup>\n'
-        header +=u'			<tr>\n'
-        header +=u'				<th>Administrator</th>\n'
-        header +=u'				<th>Liczba</th>\n'
-        header +=u'				<th>Udział</th>\n'	
-        header +=u'			</tr>\n'
+        header  =u'                <h2><a name="blockadmins"></a>Blokady - administratorzy - ostatnie '+ str(days) + u' dni</h2>\n'
+        header +=u'                <table class="stats">\n'
+        header +=u'                        <colgroup>\n'
+        header +=u'                                <col style="width: 15%"/>\n'
+        header +=u'                                <col style="width: 5%"/>\n'
+        header +=u'                        </colgroup>\n'
+        header +=u'                        <tr>\n'
+        header +=u'                                <th>Administrator</th>\n'
+        header +=u'                                <th>Liczba</th>\n'
+        header +=u'                                <th>Udział</th>\n'        
+        header +=u'                        </tr>\n'
         return(header)
 
     def blockstatfooter(self):
-        footer  = u'		</table>\n'
-        footer += u'		<p>Jednorazowe działania nie zostały pokazane.</p>\n'
+        footer  = u'                </table>\n'
+        footer += u'                <p>Jednorazowe działania nie zostały pokazane.</p>\n'
         return(footer)
 
     def generateblockstatsection(self, blocks, days):
@@ -360,13 +360,13 @@ class BasicBot(
             # skip single entries
             if blocks[i] < 2:
                 break
-            output += u'			<tr>\n'
-            link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i).encode('utf-8'))
-            output += u'				<td><a href="' + link + u'">' + i + u'</a></td>\n'
-            output += u'				<td>' + str(blocks[i]) + u'</td>\n'
+            output += u'                        <tr>\n'
+            link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i))
+            output += u'                                <td><a href="' + link + u'">' + i + u'</a></td>\n'
+            output += u'                                <td>' + str(blocks[i]) + u'</td>\n'
             percentage = u'{:3.4f}%'.format(blocks[i]/float(total)*100)
-            output += u'				<td><div style="width: ' + percentage + u';">' + percentage + u'</div></td>\n'
-            output += u'			</tr>\n'
+            output += u'                                <td><div style="width: ' + percentage + u';">' + percentage + u'</div></td>\n'
+            output += u'                        </tr>\n'
         output += self.blockreasonfooter()
         return(output)
 
@@ -384,7 +384,7 @@ class BasicBot(
         #test
         #pywikibot.output(u'Writing file: %s' % self.getOption('outpage'))
         rf= open(u'masti/html/'+self.getOption('outpage'),'w')
-        rf.write(output.encode('utf8'))
+        rf.write(output)
         rf.close()
         return
 
