@@ -13,7 +13,7 @@ will be done.
 This bot creates a pages with links to tennis players.
 
 Call:
-	python pwb.py masti/ms-kneset.py -transcludes:Kneset -outpage:"Wikipedysta:Andrzei111/Izrael/lista" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
+        python pwb.py masti/ms-kneset.py -transcludes:Kneset -outpage:"Wikipedysta:Andrzei111/Izrael/lista" -maxlines:10000 -ns:0 -summary:"Bot uaktualnia tabelę"
 
 The following parameters are supported:
 
@@ -139,8 +139,8 @@ class BasicBot(
 
     def run(self):
 
-	header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+        header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+        header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
         header +=u'\n{| class="wikitable sortable" style="font-size:85%;"'
         header +=u'\n|-'
         header +=u'\n!Nr'
@@ -157,7 +157,7 @@ class BasicBot(
         reflinks = [] #initiate list
         licznik = 0
         for tpage in self.generator:
-	    licznik += 1
+            licznik += 1
             if self.getOption('test'):
                 pywikibot.output(u'Treating #%i: %s' % (licznik, tpage.title()))
             refs = self.treat(tpage) # get (name, id, creator, lastedit)
@@ -246,7 +246,7 @@ class BasicBot(
         sTitle = self.shortTitle(tpage.title())
         if self.getOption('test'):
             pywikibot.output(u'sTitle:%s' % sTitle)
-	
+        
         # check for id & name(optional)
         for t in tpage.templatesWithParams():
             (tTitle,paramList) = t
@@ -305,7 +305,7 @@ class BasicBot(
     def shortTitle(self, t):
         """ return text without part in parentheses"""
         if u'(' in t:
-            shR = re.compile(ur'(?P<short>.*?) \(')
+            shR = re.compile(r'(?P<short>.*?) \(')
             match = shR.search(t)
             return (match.group("short").strip())
         else:
@@ -338,7 +338,7 @@ class BasicBot(
             value: value of param
         @rtype: tuple
         """
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        paramR = re.compile(r'(?P<name>.*)=(?P<value>.*)')
         if '=' in param:
             match = paramR.search(param)
             named = True
