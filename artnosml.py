@@ -201,7 +201,7 @@ def linkcolor(page,lang):
 
     if page.exists():
        if page.isRedirectPage():
-           return(u'<a href="' + urllib.parse.quote((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#308050">' + page.title() + u'</a>')
+           return(u'<a href="https://' + lang + u'.wikipedia.org/wiki/' + urllib.parse.quote(page.title()) + u'" style="color:#308050">' + page.title() + u'</a>')
        elif page.isDisambig():
            return(u'<a href="' + urllib.parse.quote((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#800000">' + page.title() + u'</a>')
        else:
