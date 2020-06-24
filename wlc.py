@@ -1610,6 +1610,7 @@ ignorelist = [
     re.compile('.*[\./@]bip\.mazovia\.pl/samorzad/zarzad/uchwaly-zarzadu/uchwala,40669,15948319\.html'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]lietuvosdiena\.lrytas\.lt/aktualijos/seimo-pirmininku-isrinktas-viktoras-pranckietis-20161114033033\.htm'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2006/w6p001\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]rzezawa\.pl'),  # bot rejected on site (masti)
 
 ]
 
