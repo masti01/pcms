@@ -303,7 +303,8 @@ class BasicBot(
 
     def generateresultspage(self,rev1, rev2):
 
-        output = self.mainheader()
+        output = u''
+        output += self.mainheader()
 
         output += self.generatesection(rev1,24)
         output += self.generatesection(rev2,168)
