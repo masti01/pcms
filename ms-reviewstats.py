@@ -47,7 +47,7 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 
-import urllib.parse
+import urllib
 import datetime
 from time import strftime
 
@@ -295,7 +295,7 @@ class BasicBot(
                 pywikibot.output(u'%s->%s' % (i, reviews[i]))
             total, initial, other, unreview = reviews[i]
             output += u'\t\t\t<tr>\n'
-            link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i))
+            link = urllib.quote((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i))
             output += u'\t\t\t\t<td><a href="' + link + u'">' + i + u'</a></td><td>' + str(total) + u'</td><td>' + str(initial) + u'</td><td>' + str(other) + u'</td><td>' + str(unreview) + u'</td>\n'
             output += u'\t\t\t</tr>\n'
         output += self.reviewfooter()
