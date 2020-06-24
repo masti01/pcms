@@ -162,12 +162,12 @@ def outputRow(logline,lang):
     except:
         return(None)
     # encode URLs for title and target
-    utitle = urllib.parse.quote_plus((u'https://' + lang + u'.wikipedia.org/wiki/' + atitle))
+    utitle = urllib.parse.quote((u'https://' + lang + u'.wikipedia.org/wiki/' + atitle))
     #print utitle
     if atarget == u'':
         utarget = u''
     else:
-        utarget = urllib.parse.quote_plus((u'https://' + lang + u'.wikipedia.org/wiki/' + atarget))
+        utarget = urllib.parse.quote((u'https://' + lang + u'.wikipedia.org/wiki/' + atarget))
     # create output
     result = u'\t\t\t<tr>\n'
     result += u'\t\t\t\t<td>' + anum +'</td>\n'
@@ -201,13 +201,13 @@ def linkcolor(page,lang):
 
     if page.exists():
        if page.isRedirectPage():
-           return(u'<a href="' + urllib.parse.quote_plus((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#308050">' + page.title() + u'</a>')
+           return(u'<a href="' + urllib.parse.quote((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#308050">' + page.title() + u'</a>')
        elif page.isDisambig():
-           return(u'<a href="' + urllib.parse.quote_plus((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#800000">' + page.title() + u'</a>')
+           return(u'<a href="' + urllib.parse.quote((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'" style="color:#800000">' + page.title() + u'</a>')
        else:
-           return(u'<a href="' + urllib.parse.quote_plus((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'">' + page.title() + u'</a>')
+           return(u'<a href="' + urllib.parse.quote((u'https://' + lang + u'.wikipedia.org/wiki/' + page.title())) + u'">' + page.title() + u'</a>')
     else:
-        return(u'<a href="https://' + lang + u'.wikipedia.org/w/index.php?title=' + urllib.parse.quote_plus(page.title()) + u'&action=edit&redlink=1" style="color:#CC2200">' + page.title() + u'</a>')
+        return(u'<a href="https://' + lang + u'.wikipedia.org/w/index.php?title=' + urllib.parse.quote(page.title()) + u'&action=edit&redlink=1" style="color:#CC2200">' + page.title() + u'</a>')
     
 
 def main(*args):
