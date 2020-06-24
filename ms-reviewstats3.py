@@ -313,9 +313,9 @@ class BasicBot(
 
         # write ready file
         #test
-        pywikibot.output(u'Writing file: %s' % self.getOption('outpage'))
-        pywikibot.output(output)
-        pywikibot.output('Type: %s' % type(output))
+        #pywikibot.output(u'Writing file: %s' % self.getOption('outpage'))
+        #pywikibot.output(output)
+        #pywikibot.output('Type: %s' % type(output))
         rf= open(u'masti/html/'+self.getOption('outpage'),'wb')
         rf.write(bytes(output, 'UTF-8'))
         rf.close()
