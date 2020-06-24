@@ -1116,7 +1116,7 @@ class BasicBot(
                         
                         #output += u'        <tr>\n'
                         output += u'                <td><center>' + str(ranks[rowscount]) + u'.</center></td>'
-                        link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/' + self.getOption('KAmonth') + u'/' + wiki).encode('UTF-8'))
+                        link = urllib.parse.quote((u'//pl.wikipedia.org/wiki/Wikipedia:Komitet_Arbitrażowy/Wybór_członków/' + self.getOption('KAmonth') + u'/' + wiki).encode('UTF-8'))
                         output += u'                <td><center><a href="' + link + u'">' + wiki + u'</a></center></td>'
                         output += u'                <td>' + str(z) + u'</td>'
                         output += u'                <td>' + str(p) + u'</td>'
@@ -1140,7 +1140,7 @@ class BasicBot(
             for p in results['PU']:
                 (wiki,error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedia:Przyznawanie uprawnień/' + wiki).encode('UTF-8'))
+                link = 'https://pl.wikipedia.org/wiki/' + urllib.parse.quote((u'Wikipedia:Przyznawanie uprawnień/' + wiki).encode('UTF-8'))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,n,netto,percent,date) = counters
@@ -1165,7 +1165,7 @@ class BasicBot(
             for p in results['PDA']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Dobrych Artykułów/' + wiki).encode('UTF-8'))
+                link = 'https://pl.wikipedia.org/wiki/' + urllib.parse.quote((u'Wikipedia:Propozycje do Dobrych Artykułów/' + wiki).encode('UTF-8'))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (v, date) = counters
@@ -1187,7 +1187,7 @@ class BasicBot(
                 try:
                     (wiki,error, counters) = p
                     output += u'        <tr>\n'
-                    link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Artykułów na Medal/' + wiki).encode('UTF-8'))
+                    link = 'https://pl.wikipedia.org/wiki/' + urllib.parse.quote((u'Wikipedia:Propozycje do Artykułów na Medal/' + wiki).encode('UTF-8'))
                     output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                     if not error:
                         (v, date) = counters
@@ -1209,7 +1209,7 @@ class BasicBot(
             for p in results['INM']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje do Ilustracji na Medal/' + wiki).encode('UTF-8'))
+                link = 'https://pl.wikipedia.org/wiki/' + urllib.parse.quote((u'Wikipedia:Propozycje do Ilustracji na Medal/' + wiki).encode('UTF-8'))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
@@ -1234,7 +1234,7 @@ class BasicBot(
             for p in results['LNM']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_List_na_Medal/' + wiki).encode('UTF-8'))
+                link = 'https://pl.wikipedia.org/wiki/' + urllib.parse.quote((u'Wikipedia:Propozycje_do_List_na_Medal/' + wiki).encode('UTF-8'))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
@@ -1259,7 +1259,7 @@ class BasicBot(
             for p in results['PDGA']:
                 (wiki, error, counters) = p
                 output += u'        <tr>\n'
-                link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedia:Propozycje_do_Grup_Artykułów/' + wiki).encode('UTF-8'))
+                link = 'https://pl.wikipedia.org/wiki/' + urllib.parse.quote((u'Wikipedia:Propozycje_do_Grup_Artykułów/' + wiki).encode('UTF-8'))
                 output += u'                <td><a href="' + link + u'">' + wiki + u'</a></td>'
                 if not error:
                     (z,p,netto,percent,date) = counters
