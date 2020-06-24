@@ -317,7 +317,7 @@ class BasicBot(
         pywikibot.output(output)
         pywikibot.output('Type: %s' % type(output))
         rf= open(u'masti/html/'+self.getOption('outpage'),'wb')
-        rf.write(output)
+        rf.write(bytes(output, 'UTF-8'))
         rf.close()
         return
 
