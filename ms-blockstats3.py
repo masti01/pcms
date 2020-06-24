@@ -361,7 +361,7 @@ class BasicBot(
             if blocks[i] < 2:
                 break
             output += u'                        <tr>\n'
-            link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i))
+            link = u'//pl.wikipedia.org/wiki/Wikipedysta:' + urllib.parse.quote(i)
             output += u'                                <td><a href="' + link + u'">' + i + u'</a></td>\n'
             output += u'                                <td>' + str(blocks[i]) + u'</td>\n'
             percentage = u'{:3.4f}%'.format(blocks[i]/float(total)*100)
