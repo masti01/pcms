@@ -375,7 +375,7 @@ class BasicBot(
             if deletes[i] < 2:
                 break
             output += u'                        <tr>\n'
-            link = urllib.parse.quote_plus((u'//pl.wikipedia.org/wiki/Wikipedysta:' + i))
+            link = u'//pl.wikipedia.org/wiki/Wikipedysta:' + urllib.parse.quote(i)
             output += u'                                <td><a href="' + link + u'">' + i + u'</a></td>\n'
             output += u'                                <td>' + str(deletes[i]) + u'</td>\n'
             percentage = u'{:3.4f}%'.format(deletes[i]/float(total)*100)
