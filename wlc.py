@@ -1611,6 +1611,26 @@ ignorelist = [
     re.compile('.*[\./@]lietuvosdiena\.lrytas\.lt/aktualijos/seimo-pirmininku-isrinktas-viktoras-pranckietis-20161114033033\.htm'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]cvk\.gov\.ua/pls/vnd2006/w6p001\.html'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]rzezawa\.pl'),  # bot rejected on site (masti)
+    re.compile('.*[\./@]mazovia\.pl'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]ipn\.gov\.pl/pl/aktualnosci/44090,Uroczystosc-wreczenia-odznaczen-panstwowych-Warszawa-13-grudnia-2017\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]bip\.umwp\.wrotapodlasia\.pl/wojewodztwo/oswiadczenia/oswiad_majo/oswiadczenia_majatkowe_od_2009/oswiadczenie-majatkowe-anna-naszkiewicz-4\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]portugal\.gov\.pt/pt/gc21/comunicacao/noticia\?i=elenco-completo-do-novo-governo'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]saeima\.lv/lv/aktualitates/saeimas-zinas/21757-saeima-apstiprina-deputata-pilnvaras-un-atjauno-mandatu-sesiem-deputatiem'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]13grudnia81\.pl/portal/sw/wolnytekst/9499'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]bip\.powiatboleslawiecki\.pl/oswiadczenia'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]dre\.pt/pdf2sdip/2009/02/040000000/0769107691\.pdf'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]canna\.pl/tuszyn/index\.php\?page=historia_kalendarium'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]gazeta-mlawska\.pl/aktualnosc-2186-wybory_do_rady_powiatu_mlawskiego__psl_ma_wiekszosc_\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]clubz\.bg/4341-kogo_prashtame_v_evropejskiq_parlament'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]13grudnia81\.pl/sw/wolnytekst/9499,dok\.html'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]president\.ee/en/estonia/decorations/bearers\.php\?id=1749'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]rus\.delfi\.ee/daily/estonia/centristskaya-frakciya-v-parlamente-po-chislennosti-teper-lish-tretya\.d\?id=64222901'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]forumakademickie\.pl/fa/2013/02/chalasinscy'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]lrs\.lt/datos/kovo11/signatarai/www_lrs\.signataras-p_asm_id=8\.htm'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]lrs\.lt/sip/portal\.show\?p_r=35299&p_k=1&p_a=498&p_asm_id=47839'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]vreme\.com/cms/view\.php\?id=346508'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]katalog\.bip\.ipn\.gov\.pl/informacje/18423'),  # bot rejected on site (masti, Elfhelm)
+
 
 ]
 
