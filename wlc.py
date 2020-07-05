@@ -1630,6 +1630,19 @@ ignorelist = [
     re.compile('.*[\./@]lrs\.lt/sip/portal\.show\?p_r=35299&p_k=1&p_a=498&p_asm_id=47839'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]vreme\.com/cms/view\.php\?id=346508'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]katalog\.bip\.ipn\.gov\.pl/informacje/18423'),  # bot rejected on site (masti, Elfhelm)
+    re.compile('.*[\./@]muzeumtg\.pl'),  # bot rejected on site (masti, Gabriel3)
+    re.compile('.*[\./@]ibiblio\.org/lighthouse/tallest\.htm ten'),  # bot rejected on site (masti, Janusz61)
+    re.compile('.*[\./@]allmusic\.com/album/r146898'),  # bot rejected on site (masti, Janusz61)
+    re.compile('.*[\./@]proszynski\.pl/Historia-a-11-4-\.html'),  # bot rejected on site (masti, Zwistun2010)
+    re.compile('.*[\./@]dre\.pt/application/dir/pdf1sdip/2013/01/01901/0000200147\.pdf'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]sztetl\.org\.pl/pl/miejscowosci/l/497-lodz/112-synagogi-domy-modlitwy-i-inne/86846-szczegolowy-spis-domow-modlitwy-w-lodzi'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]stat\.gov\.pl/obszary-tematyczne/ludnosc/ludnosc/powierzchnia-i-ludnosc-w-przekroju-terytorialnym-w-2019-roku,7,16\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]stat\.gov\.pl/cps/rde/xbcr/gus/LU_ludnosc_stan_struktura_31_12_2012\.pdf'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]stat\.gov\.pl/obszary-tematyczne/ludnosc/ludnosc/ludnosc-stan-i-struktura-w-przekroju-terytorialnym-stan-w-dniu-30-06-2019,6,26\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]stat\.gov\.pl/obszary-tematyczne/ludnosc/ludnosc/ludnosc-stan-i-struktura-ludnosci-oraz-ruch-naturalny-w-przekroju-terytorialnym-stan-w-dniu-31-12-2019,6,27\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]stat\.gov\.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5488/2/15/1/szkoly_wyzsze_i_ich_finanse_w_2018\.pdf'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]gryfice\.eu/gryfice\.eu-strona-archiwalna/zabytki\.html'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]neb\.de'),  # bot rejected on site (masti, Michozord)
 
 
 ]
@@ -2438,8 +2451,8 @@ class DeadLinkReportThread(threading.Thread):
                 # new code: use polish template
                 content += u'{{Martwy link dyskusja\n | link=' + errorReport + u'\n | IA=' + archiveMsg + u'\n}}'
 
-                comment = u'[[%s#%s|→]] %s' % \
-                          (talkPage.title(), caption, u'Robot zgłasza niedostępny link zewnętrzny')
+                comment = u'[[%s]] Robot zgłasza niedostępny link zewnętrzny:%s' % \
+                          (talkPage.title(), url)
                            #i18n.twtranslate(containingPage.site,
                            #                 'weblinkchecker-summary'))
                 try:
