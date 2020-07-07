@@ -1643,6 +1643,7 @@ ignorelist = [
     re.compile('.*[\./@]stat\.gov\.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5488/2/15/1/szkoly_wyzsze_i_ich_finanse_w_2018\.pdf'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]gryfice\.eu/gryfice\.eu-strona-archiwalna/zabytki\.html'),  # bot rejected on site (masti, Szoltys)
     re.compile('.*[\./@]neb\.de'),  # bot rejected on site (masti, Michozord)
+    re.compile('.*[\./@]biodiversitylibrary\.org'),  # bot rejected on site (masti)
 
 
 ]
