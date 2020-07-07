@@ -400,7 +400,7 @@ class DuplicateReferences(object):
         """Constructor."""
         # Match references
         self.REFS = re.compile(
-            r'(?i)<ref(?P<params>[^>/]*)>(?P<content>.*?)</ref>')
+            r'(?i)<ref(?P<params>[^>/]*)>(?P<content>.*?)\.?</ref>')
         self.NAMES = re.compile(
             r'(?i).*name\s*=\s*(?P<quote>"?)\s*(?P<name>.+)\s*(?P=quote).*')
         self.GROUPS = re.compile(
