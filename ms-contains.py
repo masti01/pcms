@@ -116,6 +116,7 @@ class BasicBot(
             'progress': False, # report progress
             'table': False, #present results in a table
             'nonempty': False, #show nonempty results only
+            'talk': False, #check on talk page
         })
 
         # call constructor of the super class
@@ -336,12 +337,18 @@ class BasicBot(
         #   success = False
         return(success)
  
-    def treat(self, page):
+    def treat(self, cpage):
         """
         Returns page title if param 'text' not in page
         """
 
-        #choose proer source - title or text
+        if self.getOption('talk'):
+            page = cpage.toggleTalkPage()
+        else:
+            page = cpage
+
+
+        #choose proper source - title or text
         if self.getOption('title'):
             source = page.title()
         else:
@@ -363,7 +370,7 @@ class BasicBot(
             match = resultR.search(source)
 
             if not match and self.getOption('negative'):
-                return(page.title(asLink=True,forceInterwiki=True, textlink=True))
+                return(cpage.title(asLink=True,forceInterwiki=True, textlink=True))
             elif match and not self.getOption('negative'):
                 if self.getOption('multi'):
                     #return all found results
@@ -372,12 +379,12 @@ class BasicBot(
                         #based on nonempty
                         if (self.getOption("nonempty") and len(r.group('result').strip())) or not self.getOption("nonempty"):
                             resultslist.append(r.group('result'))
-                    return(page.title(asLink=True,forceInterwiki=True, textlink=True),resultslist)
+                    return(cpage.title(asLink=True,forceInterwiki=True, textlink=True),resultslist)
                 else:
                     #return just first match
                     #based on nonempty
                     if (self.getOption("nonempty") and len(match.group('result').strip())) or not self.getOption("nonempty"):
-                        return(page.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
+                        return(cpage.title(asLink=True,forceInterwiki=True, textlink=True),match.group('result'))
             return(None)
             
         else:  
@@ -385,11 +392,11 @@ class BasicBot(
             if not isIn and self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('NEGATIVE:Text not found')
-                return(page.title(asLink=True,forceInterwiki=True, textlink=True))
+                return(cpage.title(asLink=True,forceInterwiki=True, textlink=True))
             if isIn and not self.getOption('negative'):
                 if self.getOption('test'):
                     pywikibot.output('POSITIVE:Text found')
-                return(page.title(asLink=True,forceInterwiki=True, textlink=True))
+                return(cpage.title(asLink=True,forceInterwiki=True, textlink=True))
             return(None)
 
     def listargs(self):
