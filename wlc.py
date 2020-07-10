@@ -184,6 +184,12 @@ ignorelist = [
     re.compile(r'.*[\./@]\.xlsx?(/.*)?'),
     re.compile(r'.*[\./@]\.docx?(/.*)?'),
 
+    # ignore wikimedia projects links
+    re.compile(r'.*[\./@]\.wikipedia\.org(/.*)?'),
+    re.compile(r'.*[\./@]\.wiktionary\.org(/.*)?'),
+    re.compile(r'.*[\./@]\.wikisource\.org(/.*)?'),
+    re.compile(r'.*[\./@]\.wikimedia\.org(/.*)?'),
+
     # Ignore links containing * in domain name
     # as they are intentionally fake
     re.compile(r'https?\:\/\/\*(/.*)?'),
