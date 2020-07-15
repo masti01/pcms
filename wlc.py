@@ -1651,6 +1651,9 @@ ignorelist = [
     re.compile('.*[\./@]neb\.de'),  # bot rejected on site (masti, Michozord)
     re.compile('.*[\./@]biodiversitylibrary\.org'),  # bot rejected on site (masti)
     re.compile('.*[\./@]ssweb\.seap\.minhap\.es'),  # slow site (masti)
+    re.compile('.*[\./@]canmore\.org\.uk'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]structurae\.net'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]wupperverband\.de'),  # bot rejected on site (masti, Four.mg)
 
 
 ]
