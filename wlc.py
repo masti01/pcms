@@ -1655,8 +1655,14 @@ ignorelist = [
     re.compile('.*[\./@]structurae\.net'),  # bot rejected on site (masti, Four.mg)
     re.compile('.*[\./@]wupperverband\.de'),  # bot rejected on site (masti, Four.mg)
     re.compile('.*[\./@]katalog\.bip\.ipn\.gov\.pl'),  # bot rejected on site (masti)
-
-
+    re\.compile('\.*[\./@]en\.jerusalem-patriarchate\.info/apostolic-succession'),  # bot rejected on site (masti, szoltys)
+    re\.compile('\.*[\./@]assaeroporti\.com/statistiche'),  # bot rejected on site (masti, szoltys)
+    re\.compile('\.*[\./@]geonames\.nga\.mil/gns/html'),  # bot rejected on site (masti, szoltys)
+    re\.compile('\.*[\./@]www\.biuletyn\.net/nt-bin/start\.asp\\?podmiot=zaklikow/&strona=14&typ=podmenu&typmenu=14&menu=7&id=31&str=1'),  # bot rejected on site (masti, szoltys)
+    re\.compile('\.*[\./@]stat\.gov\.pl/spisy-powszechne/nsp-2011/nsp-2011-wyniki/ludnosc-w-miejscowosciach-statystycznych-wedlug-ekonomicznych-grup-wieku-stan-w-dniu-31-03-2011-r-,21,1\.html'),  # bot rejected on site (masti, szoltys)
+    re\.compile('\.*[\./@]s2\.fbcdn\.pl/5/clubs/40695/data/docs/pomorzanka-statystyka-1955-2011\.pdf'),  # bot rejected on site (masti, szoltys)
+    re\.compile('\.*[\./@]lizakowski-photo\.art\.pl'),  # bot rejected on site (masti, Cloefor)
+    re\.compile('\.*[\./@]iwf.net/results/athletes/?athlete=artykov-izzat-1993-09-08&id=2770'),  # bot rejected on site (masti, BrakPomysłuNaNazwę)
 ]
 
 
