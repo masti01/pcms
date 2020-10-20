@@ -47,7 +47,6 @@ from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
 import re
-import urllib2
 import datetime
 
 
@@ -147,10 +146,10 @@ class BasicBot(
             headersum += u"Zobacz też: [[" + self.getOption('outpage') + u"|Statystykę szczegółowych linków]]\n\n"
             headerfull += u"Zobacz też: [[" + self.getOption('outpage') + u"/ogólne|Statystykę domen z największą liczbą martwych linków]]\n\n"
 
-	headerfull += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	headerfull += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
-	headersum += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
-	headersum += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+        headerfull += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+        headerfull += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+        headersum += u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+        headersum += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
         footer = u''
 
         deadlinksf = {} #full links
@@ -159,7 +158,7 @@ class BasicBot(
         deadlinkssuse = {} #summary links
         licznik = 0
         for page in self.generator:
-	    licznik += 1
+            licznik += 1
             if self.getOption('progress'):
                 pywikibot.output(u'[%s]Treating #%i: %s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),licznik, page.title()))
             refs = self.treat(page) # get list of weblinks
@@ -169,8 +168,8 @@ class BasicBot(
                 if ref in deadlinksf:
                    deadlinksf[ref] += 1
                    deadlinksfuse[ref] += rcount
-	        else:
-	           deadlinksf[ref] = 1
+                else:
+                   deadlinksf[ref] = 1
                    deadlinksfuse[ref] = rcount 
                 if self.getOption('test'):
                     pywikibot.output(u'%s - %i' % (ref,deadlinksf[ref]))
@@ -181,8 +180,8 @@ class BasicBot(
                 if ref in deadlinkss:
                    deadlinkss[ref] += 1
                    deadlinkssuse[ref] += rcount
-	        else:
-	           deadlinkss[ref] = 1
+                else:
+                   deadlinkss[ref] = 1
                    deadlinkssuse[ref] = rcount
                 if self.getOption('test'):
                     pywikibot.output(u'%s - %i' % (ref,deadlinkss[ref]))
@@ -203,26 +202,29 @@ class BasicBot(
     def getDomainStats(self,dl,dluse):
         deadlinksf = {}
         deadlinksfuse = {}
-        domainR = re.compile(ur'(?P<domain>https?://[^\/]*)')
+        domainR = re.compile(r'(?P<domain>https?://[^\/]*)')
 
         for l in dl.keys():
-            dom = domainR.match(l).group('domain')
-            if self.getOption('test'):
-                pywikibot.output('Domain:link:%s' % dom)
-            if dom in deadlinksf.keys():
-                deadlinksf[dom] += dl[l]
-                deadlinksfuse[dom] += dluse[l]
-            else:
-                deadlinksf[dom] = dl[l]
-                deadlinksfuse[dom] = dluse[l]
+            try:
+                dom = domainR.match(l).group('domain')
+                if self.getOption('test'):
+                    pywikibot.output('Domain:link:%s' % dom)
+                if dom in deadlinksf.keys():
+                    deadlinksf[dom] += dl[l]
+                    deadlinksfuse[dom] += dluse[l]
+                else:
+                    deadlinksf[dom] = dl[l]
+                    deadlinksfuse[dom] = dluse[l]
+            except:
+                pywikibot.output('Missing domain group in %s' % l)
 
         return(deadlinksf,deadlinksfuse)           
 
     def getRefsNumber(self,weblink,text):
         #find how many times link is referenced on the page
         # ref names including group
-        #refR = re.compile(ur'(?i)<ref (group *?= *?"?(?P<group>[^>"]*)"?)?(name *?= *?"?(?P<name>[^>"]*)"?)?>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s<]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
-        refR = re.compile(ur'(?im)<ref (group *?= *?"?(?P<group>[^>"]*)"?)?(name *?= *?"?(?P<name>[^>"]*)"?)?>.*?%s.*?<\/ref>' % re.escape(weblink).strip())
+        #refR = re.compile(r'(?i)<ref (group *?= *?"?(?P<group>[^>"]*)"?)?(name *?= *?"?(?P<name>[^>"]*)"?)?>\.?\[?(?P<url>http[s]?:(\/\/[^:\s\?]+?)(\??[^\s<]*?)[^\]\.])(\]|\]\.)?[ \t]*<\/ref>')
+        refR = re.compile(r'(?im)<ref (group *?= *?"?(?P<group>[^>"]*)"?)?(name *?= *?"?(?P<name>[^>"]*)"?)?>.*?%s.*?<\/ref>' % re.escape(weblink).strip())
 
         """
         opcje wywołania: <ref name="BVL2006" /> {{u|BVL2006}} {{r|BVL2006}}
@@ -237,7 +239,7 @@ class BasicBot(
                 if self.getOption('test'):
                     pywikibot.output('Treat:NamedRef:%s' % r.group('name'))
                 #template to catch note/ref with {{u}} or {{r}}
-                ruR = re.compile(ur'(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % re.escape(r.group('name').strip()))
+                ruR = re.compile(r'(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % re.escape(r.group('name').strip()))
                 if self.getOption('test'):
                     pywikibot.output('Treat:Regex:(?i)(?:{{[ur] *?(?:[^\|}]*\|)*|<ref *?name *?= *?\"?)(%s)(?:[^}\/]*}}|\"? \/>)' % re.escape(r.group('name').strip()))
                 match = ruR.findall(text)
@@ -261,9 +263,9 @@ class BasicBot(
         Creates a list of weblinks
         """
         refs = []
-        tempR = re.compile(ur'(?P<template>\{\{Martwy link dyskusja[^}]*?}}\n*?)')
-        #weblinkR = re.compile(ur'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
-        weblinkR = re.compile(ur'link *?= *?\*? (?P<weblink>[^\n ]*)')
+        tempR = re.compile(r'(?P<template>\{\{Martwy link dyskusja[^}]*?}}\n*?)')
+        #weblinkR = re.compile(r'link\s*?=\s*?\*?\s*?(?P<weblink>[^\n\(]*)')
+        weblinkR = re.compile(r'link *?= *?\*? (?P<weblink>[^\n ]*)')
         if self.getOption('test'):
             pywikibot.output(u'domains=False')
         links = u''
@@ -273,7 +275,7 @@ class BasicBot(
         for link in templs:
             template = link.group('template').strip()
             if self.getOption('test'):
-	        pywikibot.output(template)
+                pywikibot.output(template)
             try:
                 weblink = re.search(weblinkR,template).group('weblink').strip()
             except:
@@ -369,7 +371,7 @@ def templateArg(param):
             value: value of param
         @rtype: tuple
         """
-        paramR = re.compile(ur'(?P<name>.*)=(?P<value>.*)')
+        paramR = re.compile(r'(?P<name>.*)=(?P<value>.*)')
         if '=' in param:
             match = paramR.search(param)
             named = True
@@ -382,7 +384,7 @@ def templateArg(param):
         #test
         if self.getOption('test'):
             pywikibot.output(u'named:%s:name:%s:value:%s' % (named, name, value))
-        return named, name, value
+        return(named, name, value)
 
 def main(*args):
     """
@@ -429,10 +431,10 @@ def main(*args):
         # pass generator and private options to the bot
         bot = BasicBot(gen, **options)
         bot.run()  # guess what it does
-        return True
+        return(True)
     else:
         pywikibot.bot.suggest_help(missing_generator=True)
-        return False
+        return(False)
 
 if __name__ == '__main__':
     main()
