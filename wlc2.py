@@ -1754,7 +1754,8 @@ def weblinksIn(text, withoutBracketed=False, onlyBracketed=False):
                 yield m.group('url')
             else:
                 #test output
-                pywikibot.output('[%s] WebLinksIn: link skipped:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),m.group('url')))
+                #pywikibot.output('[%s] WebLinksIn: link skipped:%s' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),m.group('url')))
+                pass
         #else:
         #    yield m.group('urlb')
 
