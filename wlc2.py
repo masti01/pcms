@@ -2290,20 +2290,29 @@ class DeadLinkReportThread(threading.Thread):
                     content = ''
 
                 if archiveURL:
+                """
+                removed original code using i18n
                     archiveMsg = '\n' + \
                                  i18n.twtranslate(
                                      containingPage.site,
                                      'weblinkchecker-archive_msg',
                                      {'URL': archiveURL})
                 else:
+                """
+                     archiveMsg = archiveURL
+                else:
                     archiveMsg = ''
+
+
                 # The caption will default to "Dead link". But if there
                 # is already such a caption, we'll use "Dead link 2",
                 # "Dead link 3", etc.
-                caption = i18n.twtranslate(containingPage.site,
-                                           'weblinkchecker-caption')
+                #caption = i18n.twtranslate(containingPage.site,
+                #                           'weblinkchecker-caption')
+                caption = u'Martwy link'
                 i = 1
                 count = ''
+                """
                 # Check if there is already such a caption on
                 # the talk page.
                 while re.search('= *{0}{1} *='
@@ -2320,6 +2329,13 @@ class DeadLinkReportThread(threading.Thread):
                     talkPage.title(), caption,
                     i18n.twtranslate(containingPage.site,
                                      'weblinkchecker-summary'))
+                """
+                # new code: use polish template
+                content += u'{{Martwy link dyskusja\n | link=' + errorReport + u'\n | IA=' + archiveMsg + u'\n}}'
+
+                comment = u'[[%s]] Robot zgłasza niedostępny link zewnętrzny: %s' % \
+                          (talkPage.title(), url)
+
                 try:
                     talkPage.put(content, comment)
                 except pywikibot.SpamblacklistError as error:
