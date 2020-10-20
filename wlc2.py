@@ -2279,7 +2279,7 @@ class DeadLinkReportThread(threading.Thread):
                     '{lightaqua}** Reporting dead link on {}...{default}',
                     talkPage))
                 try:
-                    content = talkPage.get() + '\n\n\n'
+                    content = talkPage.get() + '\n'
                     if url in content:
                         pywikibot.output(color_format(
                             '{lightaqua}** Dead link seems to have '
