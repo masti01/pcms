@@ -2290,16 +2290,7 @@ class DeadLinkReportThread(threading.Thread):
                     content = ''
 
                 if archiveURL:
-                """
-                removed original code using i18n
-                    archiveMsg = '\n' + \
-                                 i18n.twtranslate(
-                                     containingPage.site,
-                                     'weblinkchecker-archive_msg',
-                                     {'URL': archiveURL})
-                else:
-                """
-                     archiveMsg = archiveURL
+                    archiveMsg = archiveURL
                 else:
                     archiveMsg = ''
 
