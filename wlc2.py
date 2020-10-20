@@ -2143,9 +2143,12 @@ class History:
         try:
             with open(self.datfilename, 'rb') as datfile:
                 self.historyDict = pickle.load(datfile)
+            pywikibot.output('DICTIONARY LOADED: %i elements' % len(self.historyDict.keys()))
         except (IOError, EOFError):
             # no saved history exists yet, or history dump broken
             self.historyDict = {}
+            pywikibot.output('SKIPPING INITIAL LOAD OF DATA')
+
 
     def log(self, url, error, containingPage, archiveURL):
         """Log an error report to a text file in the deadlinks subdirectory."""
@@ -2465,7 +2468,7 @@ def main(*args):
         if not genFactory.nopreload:
             # fetch at least 240 pages simultaneously from the wiki, but more
             # if a high thread number is set.
-            pageNumber = max(240, config.max_external_links * 2)
+            pageNumber = max(20, config.max_external_links * 2)
             pywikibot.output("Fetch %i pages." % pageNumber)
             gen = pagegenerators.PreloadingGenerator(gen, groupsize=pageNumber)
         gen = pagegenerators.RedirectFilterPageGenerator(gen)
