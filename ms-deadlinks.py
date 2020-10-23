@@ -654,6 +654,7 @@ class BasicBot(
             for ignoreR in spamfilter:
                 if ignoreR.match(i):
                     pywikibot.output("SPAM: ignoring link: [%s]" % i)
+                    continue
 
             itemcount += 1
             count = redirlist[i]
