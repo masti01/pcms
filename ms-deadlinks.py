@@ -48,6 +48,7 @@ from pywikibot.bot import (
 from pywikibot.tools import issue_deprecation_warning
 import re
 import datetime
+#import api
 
 
 # This is required for the text that is shown when you run this script
@@ -622,6 +623,11 @@ class BasicBot(
             #    pywikibot.output(u'Error in page %s' % page.title(asLink=True))
 
         return(refs)
+
+    def SpamCheck(self, url):
+        r = pywikibot.data.api.Request(parameters={'action': 'spamblacklist', 'url': url})
+        data = r.submit()
+        return(data['spamblacklist']['result']=='blacklisted')
         
 
     def generateresultspage(self, redirlist, redirlistuse, pagename, header, footer):
@@ -644,6 +650,7 @@ class BasicBot(
 
         res = sorted(redirlist, key=redirlist.__getitem__, reverse=True)
         itemcount = 0
+        pywikibot.output('res length:%i' % len(res))
         for i in res:
             # use only links with -includes if specified
             if self.getOption('includes'):
@@ -651,10 +658,14 @@ class BasicBot(
                     continue
 
             # check for spamlist entry
+            """
             for ignoreR in spamfilter:
                 if ignoreR.match(i):
                     pywikibot.output("SPAM: ignoring link: [%s]" % i)
                     continue
+            """
+            pywikibot.output('CALLING SPAMCHECK')
+            spam = self.SpamCheck(i)
 
             itemcount += 1
             count = redirlist[i]
@@ -666,7 +677,10 @@ class BasicBot(
             #finalpage += u'#' + i + u' ([{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u'])\n'
             if self.getOption('test'):
                 pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
-            finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
+            if spam:
+                finalpage += u'\n|-\n| ' + str(itemcount) + u' || <nowiki>' + i + u'</nowiki><s>SPAM</s> || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
+            else:
+                finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
             finalpage += u' || %i %s' % (redirlistuse[i],linksuffix)
             if itemcount > maxlines-1:
                 pywikibot.output(u'*** Breaking output loop ***')
