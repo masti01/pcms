@@ -678,7 +678,7 @@ class BasicBot(
             if self.getOption('test'):
                 pywikibot.output(u'(%d, %d) #%s (%s %s)' % (itemcount, len(finalpage), i, str(count), suffix))
             if spam:
-                finalpage += u'\n|-\n| ' + str(itemcount) + u' || <nowiki>' + i + u'</nowiki><s>SPAM</s> || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
+                finalpage += u'\n|-\n| ' + str(itemcount) + u' || <nowiki>' + i + u'</nowiki><sup>SPAM</sup> || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
             else:
                 finalpage += u'\n|-\n| ' + str(itemcount) + u' || ' + i + u' || style="width: 20%;" align="center" | [{{fullurl:Specjalna:Wyszukiwarka linków/|target=' + i + u'}} ' + str(count) + u' ' + suffix + u']'
             finalpage += u' || %i %s' % (redirlistuse[i],linksuffix)
