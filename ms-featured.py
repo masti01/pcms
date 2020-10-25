@@ -4,9 +4,9 @@
 An incomplete sample script by masti for creating statistics/listings pages
 Creates a list of articles from featured list
 Call:
-    python pwb.py masti/ms-featured.py -page:"Kategoria:Artykuły na medal" -outpage:"Wikipedia:Brakujące artykuły na medal z innych Wikipedii" -summary:"Bot aktualizuje listę"
+    python pwb.py masti/ms-featured.py -page:"Kategoria:Artykuły na Medal" -outpage:"Wikipedia:Brakujące artykuły na medal z innych Wikipedii" -summary:"Bot aktualizuje listę"
     python pwb.py masti/ms-featured.py -page:"Kategoria:Dobre artykuły" -good -outpage:"Wikipedia:Brakujące dobre artykuły z innych Wikipedii" -summary:"Bot aktualizuje listę"
-    python pwb.py masti/ms-featured.py -page:"Kategoria:Listy na medal" -lists -outpage:"Wikipedia:Brakujące listy na medal z innych Wikipedii" -summary:"Bot aktualizuje listę"
+    python pwb.py masti/ms-featured.py -page:"Kategoria:Listy na Medal" -lists -outpage:"Wikipedia:Brakujące listy na medal z innych Wikipedii" -summary:"Bot aktualizuje listę"
 
 Use global -simulate option for test purposes. No changes to live wiki
 will be done.
