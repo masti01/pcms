@@ -2094,11 +2094,11 @@ class LinkCheckThread(threading.Thread):
 
         if ok:
             if self.history.setLinkAlive(self.url):
-                pywikibot.output('*Link to {0} in [[{1}]] is back alive.'
-                                 .format(self.url, self.page.title()))
+                pywikibot.output('*[%s] Link to {0} in [[{1}]] is back alive.'
+                                 .format((datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), self.url, self.page.title()))
         else:
-            pywikibot.output('*[[{0}]] links to {1} - {2}.'
-                             .format(self.page.title(), self.url, message))
+            pywikibot.output('*[%s] [[{0}]] links to {1} - {2}.'
+                             .format((datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), self.page.title(), self.url, message))
             self.history.setLinkDead(self.url, message, self.page,
                                      config.weblink_dead_days)
 
