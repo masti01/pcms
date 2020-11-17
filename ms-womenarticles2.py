@@ -152,6 +152,7 @@ class BasicBot(
                 datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pagecounter, p.title()))
 
             pagecounter += 1
+            page = self.toMain(page)
             arts[p.title()] = self.treat(p)
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
@@ -174,7 +175,7 @@ class BasicBot(
         # NOTE: Here you can modify the text in whatever way you want. #
         ################################################################
 
-        page = self.toMain(page)
+
         #pywikibot.output("NAMESPACE %i" % page.namespace())
         sex = self.checkWomen(page)
         pywikibot.output("PŁEĆ:%s" % sex)
