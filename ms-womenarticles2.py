@@ -154,7 +154,7 @@ class BasicBot(
             pagecounter += 1
             arts[p.title()] = self.treat(p)
 
-        footer += u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
+        footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
 
         self.generateresultspage(arts, self.getOption('outpage'), header, footer)
 
