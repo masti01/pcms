@@ -150,13 +150,13 @@ class BasicBot(
             if self.getOption('test') or self.getOption('progress'):
                 pywikibot.output(u'[%s] Treating #%i: %s' % (
                 datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pagecounter, p.title()))
-                pagecounter += 1
 
+            pagecounter += 1
             arts[p.title()] = self.treat(p)
 
-        footer += u'\n\nPrzetworzono ' + str(counter) + u' stron'
+        footer += u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
 
-        self.generateresultspage(arts, self.getOption('outpage'), '', '')
+        self.generateresultspage(arts, self.getOption('outpage'), header, footer)
 
     def toMain(self, page):
         # return main namespace object
