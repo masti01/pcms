@@ -152,8 +152,8 @@ class BasicBot(
                 datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pagecounter, p.title()))
 
             pagecounter += 1
-            page = self.toMain(page)
-            arts[p.title()] = self.treat(p)
+            page = self.toMain(p)
+            arts[page.title()] = self.treat(page)
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
 
