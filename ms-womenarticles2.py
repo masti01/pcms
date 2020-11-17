@@ -87,7 +87,7 @@ class BasicBot(
         """
         # Add your own options to the bot and set their defaults
         # -always option is predefined by BaseBot class
-        self.available_options.update({
+        self.availableOptions.update({
             'replace': False,  # delete old text and write the new text
             'summary': None,  # your own bot summary
             'text': 'Test',  # add this text from option. 'Test' is default
