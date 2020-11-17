@@ -47,6 +47,7 @@ from pywikibot import pagegenerators
 from pywikibot.bot import (
     SingleSiteBot, ExistingPageBot, NoRedirectPageBot, AutomaticTWSummaryBot)
 from pywikibot.tools import issue_deprecation_warning
+import datetime
 
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
