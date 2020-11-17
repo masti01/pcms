@@ -160,7 +160,7 @@ class BasicBot(
         else:
             return page
 
-    def treat(self, page) -> None:
+    def treat(self, page):
         """Load the given page, do some changes, and save it."""
         text = page.text
 
