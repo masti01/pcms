@@ -147,12 +147,13 @@ class BasicBot(
         pagecounter = 0
 
         for p in self.generator:
+            page = self.toMain(p)
+
             if self.getOption('test') or self.getOption('progress'):
                 pywikibot.output(u'[%s] Treating #%i: %s' % (
-                datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pagecounter, p.title()))
+                datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pagecounter, page.title()))
 
             pagecounter += 1
-            page = self.toMain(p)
             arts[page.title()] = self.treat(page)
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
