@@ -139,6 +139,9 @@ class BasicBot(
         outputpage = self.getOption('outpage')
         pywikibot.output(u'OUTPUTPAGE:%s' % outputpage)
 
+        header = u"Ta strona jest okresowo uaktualniana przez [[Wikipedysta:MastiBot|MastiBota]]. Ostatnia aktualizacja ~~~~~. \n"
+        header += u"Wszelkie uwagi proszę zgłaszać w [[Dyskusja_Wikipedysty:Masti|dyskusji operatora]].\n\n"
+
         # create structure for output
         arts = {}
         pagecounter = 0
@@ -150,6 +153,8 @@ class BasicBot(
                 pagecounter += 1
 
             arts[p.title()] = self.treat(p)
+
+        footer += u'\n\nPrzetworzono ' + str(counter) + u' stron'
 
         self.generateresultspage(arts, self.getOption('outpage'), '', '')
 
