@@ -163,11 +163,14 @@ class BasicBot(
             if arts[page.title()] == "other":
                 gender += 1
 
+        genderPercent = gender/pagecount*100
+        womenPercent = woman/gender*100
+        otherPercent = (gender-woman)/gender*100
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
         footer += '\n\n== Statystyki =='
-        footer += '\n* Artykułów z określoną płcią: %i' % gender
-        footer += '\n:* Kobiety: %i (%i%%)' % (woman, woman/gender*100)
-        footer += '\n:* Pozostałe: %i (%i%%)' % (gender-woman, (gender-woman)/gender*100)
+        footer += '\n* Artykułów z określoną płcią: %i (%i%% ogółu)' % (gender, genderPercent)
+        footer += '\n:* Kobiety: %i (%i%%)' % (woman, womenPercent)
+        footer += '\n:* Pozostałe: %i (%i%%)' % (gender-woman, otherPercent)
 
 
         self.generateresultspage(arts, self.getOption('outpage'), header, footer, woman, gender)
