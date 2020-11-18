@@ -163,7 +163,7 @@ class BasicBot(
             if arts[page.title()] == "other":
                 gender += 1
 
-        genderPercent = gender/pagecount*100
+        genderPercent = gender/pagecounter*100
         womenPercent = woman/gender*100
         otherPercent = (gender-woman)/gender*100
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
