@@ -152,8 +152,8 @@ class BasicBot(
             page = self.toMain(p)
 
             if self.getOption('test') or self.getOption('progress'):
-                pywikibot.output(u'[%s] Treating #%i: %s' % (
-                datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pagecounter, page.title()))
+                pywikibot.output(u'[%s] Treating #%i: %s G:%s, W:%s' % (
+                datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), pagecounter, page.title(),gender,woman))
 
             pagecounter += 1
             arts[page.title()] = self.treat(page)
