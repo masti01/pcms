@@ -175,7 +175,7 @@ class BasicBot(
         footer += '\n:* Pozostałe: %i (%i%%)' % (gender-woman, otherPercent)
 
 
-        self.generateresultspage(arts, self.getOption('outpage'), header, footer, woman, gender)
+        self.generateresultspage(arts, self.getOption('outpage'), header, footer)
 
     def toMain(self, page):
         # return main namespace object
@@ -226,7 +226,7 @@ class BasicBot(
                 return ("other")
         return ("NO VALUE")
 
-    def generateresultspage(self, redirlist, pagename, header, footer, woman, gender):
+    def generateresultspage(self, redirlist, pagename, header, footer):
         """
         Generates results page from redirlist
         Starting with header, ending with footer
