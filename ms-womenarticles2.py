@@ -145,6 +145,8 @@ class BasicBot(
         # create structure for output
         arts = {}
         pagecounter = 0
+        gender = 0
+        woman = 0
 
         for p in self.generator:
             page = self.toMain(p)
@@ -155,10 +157,20 @@ class BasicBot(
 
             pagecounter += 1
             arts[page.title()] = self.treat(page)
+            if arts[page.title()] == "woman":
+                woman += 1
+                gender += 1
+            if arts[page.title()] == "other":
+                gender += 1
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
+        footer += '\n\n== Statystyki =='
+        footer += '\n* Artykułów z określoną płcią: %i' %s gender
+        footer += '\n:* Kobiety: %i (%i%%)' %s (woman, woman/gender*100)
+        footer += '\n:* Pozostałe: %i (%i%%)' %s (gender-woman, (gender-woman)/gender*100)
 
-        self.generateresultspage(arts, self.getOption('outpage'), header, footer)
+
+        self.generateresultspage(arts, self.getOption('outpage'), header, footer, woman, gender)
 
     def toMain(self, page):
         # return main namespace object
@@ -209,7 +221,7 @@ class BasicBot(
                 return ("other")
         return ("NO VALUE")
 
-    def generateresultspage(self, redirlist, pagename, header, footer):
+    def generateresultspage(self, redirlist, pagename, header, footer, woman, gender):
         """
         Generates results page from redirlist
         Starting with header, ending with footer
