@@ -145,8 +145,8 @@ class BasicBot(
         # create structure for output
         arts = {}
         pagecounter = 0
-        gender = 0
-        woman = 0
+        gender = 0.0
+        woman = 0.0
 
         for p in self.generator:
             page = self.toMain(p)
@@ -165,14 +165,14 @@ class BasicBot(
 
         genderPercent = gender/pagecounter*100
         womenPercent = woman/gender*100
-        otherPercent = (gender-woman)/gender*100
+        otherPercent = 100-womenPercent
         if self.getOption('test') or self.getOption('progress'):
             pywikibot.output('G:%s, W:%s, O:%s' % (genderPercent, womenPercent, otherPercent))
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
         footer += '\n\n== Statystyki =='
-        footer += '\n* Artykułów z określoną płcią: %i (%i%% ogółu)' % (gender, genderPercent)
-        footer += '\n:* Kobiety: %i (%i%%)' % (woman, womenPercent)
-        footer += '\n:* Pozostałe: %i (%i%%)' % (gender-woman, otherPercent)
+        footer += '\n* Artykułów z określoną płcią: %d (%d procent ogółu)' % (gender, genderPercent)
+        footer += '\n:* Kobiety: %d (%d procent)' % (woman, womenPercent)
+        footer += '\n:* Pozostałe: %d (%i procent)' % (gender-woman, otherPercent)
 
 
         self.generateresultspage(arts, self.getOption('outpage'), header, footer)
