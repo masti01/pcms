@@ -165,9 +165,9 @@ class BasicBot(
 
         footer = u'\n\nPrzetworzono ' + str(pagecounter) + u' stron'
         footer += '\n\n== Statystyki =='
-        footer += '\n* Artykułów z określoną płcią: %i' %s gender
-        footer += '\n:* Kobiety: %i (%i%%)' %s (woman, woman/gender*100)
-        footer += '\n:* Pozostałe: %i (%i%%)' %s (gender-woman, (gender-woman)/gender*100)
+        footer += '\n* Artykułów z określoną płcią: %i' % gender
+        footer += '\n:* Kobiety: %i (%i%%)' % (woman, woman/gender*100)
+        footer += '\n:* Pozostałe: %i (%i%%)' % (gender-woman, (gender-woman)/gender*100)
 
 
         self.generateresultspage(arts, self.getOption('outpage'), header, footer, woman, gender)
