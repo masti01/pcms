@@ -1624,8 +1624,13 @@ ignorelist = [
     re.compile('\.*[\./@]stat\.gov\.pl/spisy-powszechne/nsp-2011/nsp-2011-wyniki/ludnosc-w-miejscowosciach-statystycznych-wedlug-ekonomicznych-grup-wieku-stan-w-dniu-31-03-2011-r-,21,1\.html'),  # bot rejected on site (masti, szoltys)
     re.compile('\.*[\./@]www\.biuletyn\.net/nt-bin/start\.asp\\?podmiot=zaklikow/&strona=14&typ=podmenu&typmenu=14&menu=7&id=31&str=1'),  # bot rejected on site (masti, szoltys)
 # gcatholic.org
-
-
+    re.compile('.*[\./@]kpbc\.umk\.pl'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]friedensfahrt-museum\.de'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]opera\.lv'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]museum\.gov\.rw'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]reh4mat\.com/cbr/historia-zaopatrzenia-ortotycznego'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]structurae\.net/de'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]thames\.me\.uk/s00820\.htm'),  # bot rejected on site (masti, Four.mg)
 ]
 
 
