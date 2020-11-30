@@ -242,7 +242,8 @@ class RefLink(object):
         Return serwer name from url
         """
         pywikibot.output(u'PUB:%s' % link)
-        return(re.sub(r'.*:\/\/([^\/ ]*).*',r'\1',link))
+        #return(re.sub(r'.*:\/\/([^\/ ]*).*',r'\1',link))
+        return(re.sub(r'.*:\/\/(.*?\.)?([^\.]*?\.[^\.\/]*?)([/\s].*)','\2',link))
 
     def refTitle(self):
         """Return the <ref> with its new title."""
