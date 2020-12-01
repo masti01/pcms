@@ -1631,6 +1631,7 @@ ignorelist = [
     re.compile('.*[\./@]reh4mat\.com/cbr/historia-zaopatrzenia-ortotycznego'),  # bot rejected on site (masti, Four.mg)
     re.compile('.*[\./@]structurae\.net/de'),  # bot rejected on site (masti, Four.mg)
     re.compile('.*[\./@]thames\.me\.uk/s00820\.htm'),  # bot rejected on site (masti, Four.mg)
+    re.compile('.*[\./@]forecki\.pl'),  # bot rejected on site (masti, Cloefor)
 ]
 
 
