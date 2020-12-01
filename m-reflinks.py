@@ -244,7 +244,7 @@ class RefLink(object):
         pywikibot.output(u'PUB:%s' % link)
         #return(re.sub(r'.*:\/\/([^\/ ]*).*',r'\1',link))
         #return(re.sub(r'.*:\/\/(.*?\.)?([^\.]*?\.[^\.\/]*?)([/\s].*)','\2',link))
-        link = re.sub(r'(?m)(.*?:\/\/)(.*?\.)?(.*?)(\/.*)?$',r'\3',link)
+        link = re.sub(r'(?m)(.*:\/\/)([^\.]*?\.)?([^\.]*?\..*?)(\/|$)(.*)',r'\3',link)
         pywikibot.output(u'RESULT:%s' % link)
         return(link)
 
