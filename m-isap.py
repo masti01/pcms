@@ -214,7 +214,7 @@ class BasicBot(
         soup = BeautifulSoup(webpage, 'html.parser')
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
         first = True
-        for t in soup.find(id="collapse_11").find_all('a'):
+        for t in soup.find(id="collapse_12").find_all('a'):
             if first:
                 first = False
             else:
