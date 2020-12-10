@@ -199,7 +199,7 @@ class BasicBot(
             pywikibot.output('Title:%s' % soup.title.string)
 
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
-        ident = idR.search(soup.find(id="collapse_7").find('a').get('href'))
+        ident = idR.search(soup.find(id="collapse_8").find('a').get('href'))
 
         if self.getOption('test'):
             pywikibot.output('ID:%s' % ident.group('id'))
@@ -267,7 +267,11 @@ class BasicBot(
         for k in self.WUs.keys():
             if self.WUs[k]['toReplace']:
                 regex = "|".join(self.WUs[k]['toReplace'])
+                #if self.getOption('test'):
+                #    pywikibot.output('Regex:%s New:%s' % (regex, self.WUs[k]['newTemplate']))
                 text, count = re.subn(regex, self.WUs[k]['newTemplate'], text)
+                if self.getOption('test'):
+                    pywikibot.output('[%s] Relacements:%s' % (k,count))
                 if count:
                     self.WUs[k]['replacements'][page.title()] = count
                 replCount += count
@@ -314,7 +318,7 @@ class BasicBot(
             pywikibot.output('toReplace:%s' % self.WUs)
 
         # get pages transcluding {{Dziennik Ustaw}}
-        duTemplatePage = pywikibot.Page(pywikibot.Site(), 'Szablon:Dziennik Ustaw')
+        duTemplatePage = pywikibot.Page(pywikibot.Site(), 'Dziennik Ustaw', ns=10)
         count = 0
         rpages = 0  # fixed pages count
         rcount = 0  # replacements done
