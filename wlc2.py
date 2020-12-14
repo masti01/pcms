@@ -1632,9 +1632,9 @@ ignorelist = [
     re.compile('.*[\./@]structurae\.net/de'),  # bot rejected on site (masti, Four.mg)
     re.compile('.*[\./@]thames\.me\.uk/s00820\.htm'),  # bot rejected on site (masti, Four.mg)
     re.compile('.*[\./@]forecki\.pl'),  # bot rejected on site (masti, Cloefor)
-    re.compile('.*[\./@]encysol\.pl'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]olimpijski\.pl'),  # bot rejected on site (masti, Elfhelm)
     re.compile('.*[\./@]globalsecurity\.org/military/systems'),  # bot rejected on site (masti, Szoltys)
+    re.compile('.*[\./@]e-dziennik\.mswia\.gov\.pl/DUM_MSW'),  # bot rejected on site (masti, Elfhelm)
 ]
 
 
