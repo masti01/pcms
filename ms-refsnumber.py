@@ -52,7 +52,7 @@ import re
 import datetime
 import pickle
 from pywikibot import (
-    comms, i18n, config, pagegenerators, textlib, weblib, config2,
+    comms, i18n, config, pagegenerators, textlib, config2,
 )
 
 # This is required for the text that is shown when you run this script
@@ -270,7 +270,7 @@ class BasicBot(
 
             res.append({"long":longn,"refl":rplcount,"short":shortn,"refs":rpscount})
 
-        print res
+        print(res)
         return(res)
 
 def main(*args):
