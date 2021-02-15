@@ -169,6 +169,7 @@ ignorelist = [
     re.compile(r'.*[\./@]web\.archive\.org(/.*)?'),
     re.compile(r'.*[\./@]archive\.is(/.*)?'),
     re.compile(r'.*[\./@]archive\.vn(/.*)?'),
+    re.compile(r'.*[\./@]archive.li(/.*)?'),
 
 
     # ignore links to files like spreadsheets
