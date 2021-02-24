@@ -29,7 +29,8 @@ The following parameters are supported:
 # Distributed under the terms of the MIT license.
 #
 from __future__ import absolute_import, unicode_literals
-from bs4 import BeautifulSoup
+from beautifulsoup4 import BeautifulSoup
+# import BeautifulSoup
 import urllib2
 import difflib
 
@@ -187,9 +188,9 @@ class BasicBot(
             pywikibot.output('getInitialWebPage:%s' % quote_page)
         webpage = urllib2.urlopen(quote_page)
         if webpage:
-            print "webpage: %s" % webpage
+            pywikibot.output("webpage: %s" % webpage)
         else:
-            print "NO WEBPAGE"
+            pywikibot.output("NO WEBPAGE")
         if self.getOption('test'):
             pywikibot.output('webpage:%s' % webpage)
         soup = BeautifulSoup(webpage, 'html.parser')
@@ -199,7 +200,7 @@ class BasicBot(
             pywikibot.output('Title:%s' % soup.title.string)
 
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
-        ident = idR.search(soup.find(id="collapse_8").find('a').get('href'))
+        ident = idR.search(soup.find(id="collapse_10").find('a').get('href'))
 
         if self.getOption('test'):
             pywikibot.output('ID:%s' % ident.group('id'))
@@ -214,7 +215,7 @@ class BasicBot(
         soup = BeautifulSoup(webpage, 'html.parser')
         idR = re.compile(r'\/isap\.nsf\/DocDetails\.xsp\?id=WDU(?P<id>.*)')
         first = True
-        for t in soup.find(id="collapse_12").find_all('a'):
+        for t in soup.find(id="collapse_14").find_all('a'):
             if first:
                 first = False
             else:
