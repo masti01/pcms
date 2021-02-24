@@ -29,12 +29,11 @@ The following parameters are supported:
 # Distributed under the terms of the MIT license.
 #
 from __future__ import absolute_import, unicode_literals
-from beautifulsoup4 import BeautifulSoup
+from bs4 import BeautifulSoup
 # import BeautifulSoup
 import urllib2
 import difflib
 
-__version__ = '$Id: c1795dd2fb2de670c0b4bddb289ea9d13b1e9b3f $'
 #
 
 import pywikibot
