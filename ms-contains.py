@@ -359,6 +359,7 @@ class BasicBot(
 
         if self.getOption('nodisabled'):
             source = textlib.removeDisabledParts(source)
+            pywikibot.output(source)
 
         # new version
         if self.getOption('regex'):
