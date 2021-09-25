@@ -357,7 +357,7 @@ class BasicBot(
         else:
             source = page.text
 
-        if self.getOption('nodisable'):
+        if self.getOption('nodisabled'):
             source = textlib.removeDisabledParts(source)
 
         # new version
