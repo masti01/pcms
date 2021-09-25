@@ -358,7 +358,7 @@ class BasicBot(
             source = page.text
 
         if self.getOption('nodisabled'):
-            source = textlib.removeDisabledParts(source)
+            source = textlib.removeDisabledParts(source, tags={'comment', 'noinclude', 'nowiki', 'pre', 'syntaxhighlight'})
             pywikibot.output(source)
 
         # new version
