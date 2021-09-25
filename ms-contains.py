@@ -35,6 +35,7 @@ The following parameters are supported:
 -progress:        report progress
 -table:           present results in table
 -nonempty:        show nonempty results only
+-nodisabled:      remove disabled parts as per textlib.py
 """
 #
 # (C) Pywikibot team, 2006-2016
@@ -54,6 +55,7 @@ from pywikibot.bot import (
 from pywikibot.tools import issue_deprecation_warning
 import re
 import datetime
+from pywikibot import textlib
 
 # This is required for the text that is shown when you run this script
 # with the parameter -help.
@@ -117,6 +119,7 @@ class BasicBot(
             'table': False, #present results in a table
             'nonempty': False, #show nonempty results only
             'talk': False, #check on talk page
+            'nodisabled': False, #remove disabled parts as per textlib.py
         })
 
         # call constructor of the super class
@@ -353,6 +356,9 @@ class BasicBot(
             source = page.title()
         else:
             source = page.text
+
+        if self.getOption('nodisable'):
+            source = textlib.removeDisabledParts(source)
 
         # new version
         if self.getOption('regex'):
